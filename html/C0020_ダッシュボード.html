@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta	charset="utf-8">
+		<meta	http-equiv="X-UA-Compatible"	content="IE=edge">
+		<meta	name="viewport"	content="width=device-width,	initial-scale=1">
+		
+		<title>C0020_ダッシュボード</title>
+		<link	href="css/bootstrap.min.css"	rel="stylesheet">
+		<link href="css/C0020_ダッシュボード.css" rel="stylesheet">
+</head>
+
+	<body>
+	
+	
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">物品売上管理システム</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<li><a href="#">ダッシュボード</a></li>
+				<li><a href="#">売上登録</a></li>
+				<li><a href="#">売上検索</a></li>
+				<li><a href="#">アカウント登録</a></li>
+				<li><a href="#">アカウント検索</a></li>
+			</ul>
+			
+			 <ul class="nav navbar-nav navbar-right">
+				<li><a href="#">ログアウト</a></li>
+				<li class="dropdown"></li>
+			</ul>
+			
+		</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+	
+	<div class="container-fluid">
+	
+	<h2>ダッシュボード</h2>
+	
+	<div class="center">
+	
+	<div class="row">
+	<div class="col-md-3">
+	<div class="panel panel-default" id="panel1">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+			 前月(5月)の収入合計</h4>
+		</div>
+		<div class="panel-body">
+			1,000,000円
+		</div>
+	</div>
+	</div>
+	
+	<div class="col-md-3">	
+	<div class="panel panel-default" id="panel2">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+			今月(6月)の売上合計</h4>
+		</div>
+		<div class="panel-body">
+			1,200,000円
+		</div>
+	</div>
+	</div>
+	
+	<div class="col-md-3">	
+	<div class="panel panel-default" id="panel2">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+			前月比</h4>
+		</div>
+		<div class="panel-body">
+			120.00%
+		</div>
+	</div>
+	</div>
+	
+	
+	</div>
+	</div><!--center-->
+	
+	</div><!--comtainer fluid-->
+	
+	<div class="container-fluid">
+		<table class="table">
+		<tr><th>No</th><th>販売日</th><th>商品カテゴリー</th><th>商品名</th><th>単価</th><th>個数</th><th>小計</th></tr>
+		
+		<tr><td class="right">1</td><td>2015/1/15</td><td>食料品</td><td>からあげ弁当</td>
+		<td>450</td><td>3</td><td>1,350</td></tr>
+		
+		<tr><td class="right">2</td><td>2015/1/15</td><td>食料品</td><td>あんぱん</td>
+		<td>120</td><td>10</td><td>1200</td></tr>
+		
+		<tr><td class="right">3</td><td>2015/1/15</td><td>飲料</td><td>コカコーラ500ml</td>
+		<td>130</td><td>5</td><td>650</td></tr>
+		
+		</table>
+	
+	</div><!--comtainer-fluid -->
+	
+	
+	
+	
+
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script	src="js/bootstrap.min.js"></script>
+	</body>
