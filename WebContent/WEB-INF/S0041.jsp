@@ -56,7 +56,7 @@
 	<c:forEach items="${form}" var="i">
 
 		<tr>
-			<td class="col-sm-2"><a class="btn btn-primary" href="S0042.html?id={i.id}" role="button">
+			<td class="col-sm-2"><a class="btn btn-primary" href="S0042.html?id=${i.id}" role="button">
 			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 編集</a>
 			<a class="btn btn-danger" href="S0044.html?id={i.id}" role="button">
 			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削除</a></td>
