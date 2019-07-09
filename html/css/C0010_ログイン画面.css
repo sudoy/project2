@@ -18,10 +18,11 @@ margin: -9px auto;
 
 }
 
-.btn.btn-primary{
+a.btn.btn-primary{
 width: 308px;
 height: 42px;
 margin: 0 auto;
+display-inline: block;
 
 }
 
