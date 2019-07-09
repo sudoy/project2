@@ -44,29 +44,32 @@
 
 <h1>アカウント編集</h1>
 
-<form class="form-horizontal" action="S0043_アカウント詳細編集確認.html" method="post">
+<form class="form-horizontal" action="S0043.html" method="post">
+
+	<input type="hidden"  name="id" value="${form.id}" >
+
 	<div class="form-group">
 	    <label for="text" class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
-	      <input type="text" class="form-control" placeholder="氏名" name="name" value="イチロー">
+	      <input type="text" class="form-control" placeholder="氏名" name="name" value="${form.name} ">
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-3 control-label">メールアドレス <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
-	      <input type="email" class="form-control" placeholder="メールアドレス" name ="mail" value="ichiro@sak.com">
+	      <input type="email" class="form-control" placeholder="メールアドレス" name ="mail" value="${form.mail}">
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label for="inputPassword3" class="col-sm-3 control-label">パスワード</label>
 	    <div class="col-sm-5">
-	      <input type="password" class="form-control"  name="password">
+	      <input type="password" class="form-control"  name="password" value="${form.password}">
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label for="inputPasswordCheck3" class="col-sm-3 control-label">パスワード(確認)</label>
 	    <div class="col-sm-5">
-	      <input type="password" class="form-control" name="check">
+	      <input type="password" class="form-control" name="check" value="${check}">
 	    </div>
 	</div>
 	<div class="form-group">
@@ -75,10 +78,10 @@
 
 		<div class="col-sm-9">
 		<label class="radio-inline">
-			<input type="radio" name="sales" value="1" checked="checked" > 権限なし
+			<input type="radio" name="sale" value="0" checked="checked" > 権限なし
 		</label>
 			<label class="radio-inline">
-			<input type="radio" name="sales" value="2" > 権限あり
+			<input type="radio" name="sale" value="1" > 権限あり
 		</label>
 		</div>
 	</div>
@@ -89,10 +92,10 @@
 
 		<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="account" value="1" checked="checked" > 権限なし
+				<input type="radio" name="account" value="0" checked="checked" > 権限なし
 			</label>
 				<label class="radio-inline">
-				<input type="radio" name="account" value="2" > 権限あり
+				<input type="radio" name="account" value="1" > 権限あり
 			</label>
 		</div>
 	</div>
@@ -103,7 +106,7 @@
 	     	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 更 新
 	     </button>
 
-	     <a type="button" class="btn btn-default" href="S0041_アカウント検索結果表示画面.html">キャンセル</a>
+	     <a type="button" class="btn btn-default" href="S0041.html">キャンセル</a>
 	   </div>
 	</div>
 </form>
