@@ -1,0 +1,49 @@
+@charset "utf-8";
+
+.container{
+	margin: 0 auto;
+}
+
+h1{
+	font-size: 35px;
+	text-align: left;
+	padding: 30px 0px 10px 60px;
+
+}
+
+th{
+	padding: 5px 20px 5px 5px;
+	text-align: right;
+	width: 30%;
+}
+table{
+	margin: 0 auto;
+	width: 100%;
+
+}
+td{
+	padding: 5px;
+	text-align: left;
+}
+
+
+.form-horizontal .control-label{
+	text-align: left;
+}
+
+#canto{
+	padding-left: 100px;
+}
+
+#remarks{
+	padding-top: 10px; 
+	vertical-align: top;
+}
+
+textarea.form-control {
+    resize: vertical;
+    height: 150px;
+}
+#right{
+	text-align: right;
+}
