@@ -1,12 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>売上登録|物品売上管理システム</title>
+		<title>売上登録確認|物品売上管理システム</title>
 		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/S0010_売上登録画面.css" rel="stylesheet">
+		<link href="css/S0011_売上登録確認画面.css" rel="stylesheet">
 	</head>
 	<body>
 
@@ -46,36 +47,36 @@
 </div><!-- /.container-fluid -->
 </nav>
 
-<h1>売上登録</h1>
+<h1>売上を登録してよろしいですか？</h1>
 
 <div class="container">
 
 
-<form class="form-horizontal" method="POST" action="S0011_売上登録確認画面.html">
+<form class="form-horizontal" method="POST" action="S0010_売上登録画面.html">
 	<table>
 
-	<tr><th>販売日 <span class="badge">必須</span></th>
+	<tr><th>販売日</th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" value="2015/01/15" placeholder="販売日">
+		<input type="text" class="form-control" value="2015/01/15" placeholder="販売日" disabled>
 		</div>
 		</td>
 	</tr>
 
-	<tr><th>担当 <span class="badge">必須</span></th>
+	<tr><th>担当</th>
 	<td><div class="col-md-8">
-		<select class="form-control">
-			<option>選択してください</option>
+		<select class="form-control" disabled>
+			<option>イチロー</option>
 			<option>イチロー</option>
 			<option>ダルビッシュ</option>
 			<option>4</option>
 			<option>5</option>
 		</select></div>
 	</td></tr>
-	<tr><th>商品カテゴリー <span class="badge">必須</span></th>
+	<tr><th>商品カテゴリー</th>
 	<td><div class="col-md-8">
-		<select class="form-control">
-			<option>選択してください</option>
+		<select class="form-control" disabled>
+			<option>食料品</option>
 			<option>食料品</option>
 			<option>日用品</option>
 			<option>4</option>
@@ -83,21 +84,25 @@
 		</select></div>
 	</td></tr>
 
-	<tr><th>商品名 <span class="badge">必須</span></th>
+	<tr><th>商品名</th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" placeholder="商品名">
+	<input class="form-control" type="text" placeholder="からあげ弁当" disabled>
 	</div></td></tr>
-	<tr><th>単価 <span class="badge">必須</span></th>
+	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="単価">
+	<input class="form-control" id="right" type="text" placeholder="540" disabled>
 	</div></td></tr>
-	<tr><th>個数 <span class="badge">必須</span></th>
+	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="個数">
+	<input class="form-control" id="right" type="text" placeholder="3" disabled>
+	</div></td></tr>
+	<tr><th>小計</th>
+	<td><div class="col-md-3">
+	<input class="form-control" id="right" type="text" placeholder="1,620" disabled>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="remarks" rows="3" placeholder="備考"></textarea>
+	<textarea class="form-control" id="detail" rows="3" placeholder="備考" disabled></textarea>
 	</div></td>
 	</tr>
 
@@ -107,7 +112,8 @@
 	<div class="form-group">
 
 		<button type="submit" class="btn btn-primary" id="entry">
-		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 登　録</button>
+		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
+		<a type="button" class="btn btn-default" href="S0010_売上登録画面.html">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>
