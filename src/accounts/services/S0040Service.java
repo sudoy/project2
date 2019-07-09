@@ -10,11 +10,12 @@ import java.util.Map;
 import javax.servlet.ServletException;
 
 import accounts.forms.S0040Form;
+import accounts.forms.S0041Form;
 import goods.utils.DBUtils;
 import goods.utils.HTMLUtils;
 
 public class S0040Service {
-	public List<S0040Form> service(S0040Form form) throws ServletException {
+	public List<S0041Form> service(S0040Form form) throws ServletException {
 
 		String name = form.getName();
 		String mail = form.getMail();
@@ -28,7 +29,7 @@ public class S0040Service {
 		String sql = null;
 		ResultSet rs = null;
 
-		List<S0040Form> list = new ArrayList<>();
+		List<S0041Form> list = new ArrayList<>();
 
 		try {
 			con = DBUtils.getConnection();
@@ -49,12 +50,12 @@ public class S0040Service {
 
 			while (rs.next()) {
 
-				int dbId = Integer.parseInt(rs.getString("account_id"));
+				String dbId = rs.getString("account_id");
 				String dbName = rs.getString("name");
 				String dbMail = rs.getString("mail");
 				String dbAuthority = rs.getString("authority");
 
-				S0040Form f = new S0040Form(dbId, dbName, dbMail, dbAuthority);
+				S0041Form f = new S0041Form(dbId, dbName, dbMail, dbAuthority);
 				list.add(f);
 			}
 			return list;

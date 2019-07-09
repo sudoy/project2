@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import accounts.forms.S0040Form;
+import accounts.forms.S0041Form;
 import accounts.services.S0040Service;
 
 @WebServlet("/S0040.html")
@@ -36,7 +37,7 @@ public class S0040 extends HttpServlet {
 
 		S0040Form form = new S0040Form(name, mail, sale, account);
 
-		List<S0040Form> list = new ArrayList<>();
+		List<S0041Form> list = new ArrayList<>();
 		S0040Service serv = new S0040Service();
 		list = serv.service(form);//Serviceで取得した一覧
 
