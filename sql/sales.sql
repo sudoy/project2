@@ -17,4 +17,4 @@ create table sales(
 
 insert into sales(sale_date, account_id, category_id, trade_name,
 unit_price, sale_number, note)
-values('2019-07-09', 1, 1, '‚©‚ç‚ ‚°•Ù“–', 450, 1, '¡“ú‚©‚ç‚ÌV¤•i');
+values('2019-07-09', 1, 1, 'ã‹ã‚‰ã‚ã’å¼å½“', 450, 1, 'ä»Šæ—¥ã‹ã‚‰ã®æ–°å•†å“');

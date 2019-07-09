@@ -6,4 +6,4 @@ create table categories(
 );
 
 insert into categories(category_id, category_name, active_flg)
-values(1, 'H—¿•i', 1);
+values(1, 'é£Ÿæ–™å“', 1);
