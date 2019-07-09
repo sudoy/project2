@@ -30,11 +30,11 @@
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li><a href="#">ダッシュボード</a></li>
-			<li><a href="#">売上登録</a></li>
+			<li><a href="C0020_ダッシュボード.html">ダッシュボード</a></li>
+			<li><a href="S0010_売上登録画面.html">売上登録</a></li>
 			<li class="active"><a href="#">売上検索 <span class="sr-only">(current)</span></a></li>
-			<li><a href="#">アカウント登録</a></li>
-			<li><a href="#">アカウント検索</a></li>
+			<li><a href="S0030_アカウント登録.html">アカウント登録</a></li>
+			<li><a href="S0040_アカウント検索条件入力画面.html">アカウント検索</a></li>
 		</ul>
 		
 		 <ul class="nav navbar-nav navbar-right">
@@ -51,7 +51,7 @@
 <div class="container">
 
 	
-<form class="form-horizontal" method="POST" action="index.html">
+<form class="form-horizontal" method="POST" action="S0023_売上詳細編集画面.html">
 	<table>
 
 	<tr><th>販売日</th>
@@ -89,12 +89,11 @@
 	<tr><th></th>
 	<td id="canto">
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary" id="touroku" onclick="location.href='index.html'">
+		<button type="submit" class="btn btn-primary" id="edit">
 		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 編　集</button>
-		<button type="submit" class="btn btn-danger" id="touroku" onclick="location.href='index.html'">
-		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削　除</button>
-		<button type="submit" class="btn btn-default" id="touroku" onclick="location.href='index.html'">
-		キャンセル</button>
+		<a type="button" class="btn btn-danger" id="delete" href="S0025_売上詳細削除確認画面.html">
+		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削　除</a>	
+		<a type="button" class="btn btn-default" id="cancel" href="S0021_売上検索結果一覧画面.html">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>
