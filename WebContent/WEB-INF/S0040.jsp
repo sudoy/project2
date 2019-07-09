@@ -43,7 +43,7 @@
 
 <h1>アカウント検索</h1>
 
-<form class="form-horizontal" action="S0041_アカウント検索結果表示画面.html" method="post">
+<form class="form-horizontal" action="S0040.html" method="post">
 	<div class="form-group">
 	    <label for="text" class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 部分一致 </span></label>
 	    <div class="col-sm-5">
@@ -61,13 +61,13 @@
 		<label  class="col-sm-3 control-label">売上登録権限</label>
 		<div class="col-sm-9">
 		<label class="radio-inline">
-			<input type="radio" name="sale" value="3" checked="checked" > 全て
+			<input type="radio" name="sale" value="all" checked="checked" > 全て
 		</label>
 		<label class="radio-inline">
-			<input type="radio" name="sale" value="1" > 権限なし
+			<input type="radio" name="sale" value="0" > 権限なし
 		</label>
 		<label class="radio-inline">
-			<input type="radio"  name="sale" value="2" > 権限あり
+			<input type="radio"  name="sale" value="1" > 権限あり
 		</label>
 		</div>
 	</div>
@@ -76,13 +76,13 @@
 		<label  class="col-sm-3 control-label">アカウント登録期限</label>
 		<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="account" value="3" checked="checked" > 全て
+				<input type="radio" name="account" value="all" checked="checked" > 全て
 			</label>
 			<label class="radio-inline">
-				<input type="radio" name="account" value="1" > 権限なし
+				<input type="radio" name="account" value="0" > 権限なし
 			</label>
 			<label class="radio-inline">
-				<input type="radio" name="account" value="2" > 権限あり
+				<input type="radio" name="account" value="1" > 権限あり
 			</label>
 		</div>
 	</div>
