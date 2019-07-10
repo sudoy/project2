@@ -38,14 +38,14 @@ public class S0040Service {
 			con = DBUtils.getConnection();
 			sql = "select account_id, name, mail, authority from accounts where 1 = 1";
 
-			if (!name.equals("")) {
+			if (!name.equals("")) {//nameが入力されている
 				sql += " and name like ?";
 			}
-			if (!mail.equals("")) {
+			if (!mail.equals("")) {//mailが入力されている
 				sql += " and mail = ?";
 			}
 
-			for (Map.Entry<String, String> entry : map.entrySet()) {
+			for (Map.Entry<String, String> entry : map.entrySet()) {//authorityの条件が1～3個入ってくる
 				sql += entry.getValue();
 			}
 
