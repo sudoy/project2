@@ -9,15 +9,13 @@ public class S0041Form {
 	private String sale;
 	private String account;
 
-	public S0041Form(String id, String name, String mail, String authority) {//引数の型が同じになってしまったのでintに
+	public S0041Form(String id, String name, String mail, String authority) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.mail = mail;
 		this.authority = authority;
 	}
-
-
 
 	public String getName() {
 		return name;

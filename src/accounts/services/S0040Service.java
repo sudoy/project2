@@ -22,6 +22,9 @@ public class S0040Service {
 		String sale = form.getSale();
 		String account = form.getAccount();
 
+		System.out.println("name:" + name);
+		System.out.println("mail:" + mail);
+
 		Map<String, String> map = HTMLUtils.formatAuthority(sale, account);
 
 		Connection con = null;
@@ -33,16 +36,41 @@ public class S0040Service {
 
 		try {
 			con = DBUtils.getConnection();
-			sql = "select account_id, name, mail, authority from accounts where name like ? and mail = ? ";
+			sql = "select account_id, name, mail, authority from accounts where 1 = 1";
 
-			for(Map.Entry<String, String> entry : map.entrySet()) {
-					sql += entry.getValue();
+			if (!name.equals("")) {
+				sql += " and name like ?";
+			}
+			if (!mail.equals("")) {
+				sql += " and mail = ?";
+			}
+
+//			sql += " and authority = ?";
+
+			for (Map.Entry<String, String> entry : map.entrySet()) {
+				sql += entry.getValue();
 			}
 
 			ps = con.prepareStatement(sql);
 
-			ps.setString(1, "%" + name + "%");
-			ps.setString(2, mail);
+			if (!name.equals("")) {//nameが入力されている
+				ps.setString(1, "%" + name + "%");
+				if(!mail.equals("")) {//mailが入力されている
+					ps.setString(2, mail);
+//					ps.setString(3, account + sale);
+				}
+//				else {//mailが入力されていない
+//					ps.setString(2, account + sale);
+//				}
+			}else {//nameが入力されていない
+				if(!mail.equals("")) {//mailが入力されている
+					ps.setString(1, mail);
+//					ps.setString(2, account + sale);
+				}
+//					else {//mailが入力されていない
+//					ps.setString(1, account + sale);
+//				}
+			}
 
 			System.out.println(ps);
 
@@ -53,7 +81,7 @@ public class S0040Service {
 				String dbId = rs.getString("account_id");
 				String dbName = rs.getString("name");
 				String dbMail = rs.getString("mail");
-				String dbAuthority = rs.getString("authority");
+				String dbAuthority = HTMLUtils.expressAuthority(rs.getString("authority"));
 
 				S0041Form f = new S0041Form(dbId, dbName, dbMail, dbAuthority);
 				list.add(f);
@@ -65,8 +93,6 @@ public class S0040Service {
 		} finally {
 			DBUtils.close(con, ps, rs);
 		}
-
-
 
 	}
 }

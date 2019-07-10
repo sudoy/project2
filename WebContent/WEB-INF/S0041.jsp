@@ -9,7 +9,7 @@
 
 		<title>アカウント検索結果一覧画面|物品管理システム</title>
 		<link	href="css/bootstrap.min.css"	rel="stylesheet">
-		<link href="css/S0041_アカウント検索結果一覧画面.css" rel="stylesheet">
+		<link href="css/S0041_アカウント検索結果表示画面.css" rel="stylesheet">
 </head>
 <body>
 

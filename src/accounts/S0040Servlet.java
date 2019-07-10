@@ -1,8 +1,11 @@
 package accounts;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,16 +38,59 @@ public class S0040Servlet extends HttpServlet {
 		String sale = req.getParameter("sale");
 		String account = req.getParameter("account");
 
+		HttpSession session = req.getSession();
+
 		S0040Form form = new S0040Form(name, mail, sale, account);
 
-		List<S0041Form> list = new ArrayList<>();
-		S0040Service serv = new S0040Service();
-		list = serv.service(form);//Serviceで取得した一覧
+		List<String> error = validate(form);
 
-		HttpSession session = req.getSession();
-		session.setAttribute("form", list);
+		if (error.size() == 0) {
 
-		getServletContext().getRequestDispatcher("/S0041.html").forward(req, resp);
+			List<S0041Form> list = new ArrayList<>();
+			S0040Service serv = new S0040Service();
+			list = serv.service(form);//Serviceで取得した一覧
+
+			session.setAttribute("form", list);//sessionに取得した一覧を格納
+
+			getServletContext().getRequestDispatcher("/S0041.html").forward(req, resp);
+		} else {
+			session.setAttribute("error", error);//sessionにエラーメッセージを格納
+			req.setAttribute("form", form);//初期表示用
+
+			getServletContext().getRequestDispatcher("/WEB-INF/S0040.jsp").forward(req, resp);//検索入力画面を再表示
+		}
+	}
+
+	private List<String> validate(S0040Form form) throws UnsupportedEncodingException {
+
+		List<String> error = new ArrayList<>();
+
+		//nameが入力されており且バイト数が21以上
+		if (!(form.getName().equals("")) &&
+				(21 <= form.getName().getBytes("UTF-8").length)) {
+			error.add("氏名の指定が長すぎます。");
+		}
+
+		//mailが入力されており且バイト数が101以上
+		if (!(form.getMail().equals("")) &&
+				(101 <= form.getMail().getBytes("UTF-8").length)) {//kigenが空じゃない時
+			error.add("メールアドレスの指定が長すぎます。");
+		}
+		//mailの形式チェック
+		//「＠」が含まれていること。先頭は「a-zA-Z0-9」で、2文字目以降はさらに「._-」の文字が許容される。
+		//「＠」以降は「a-zA-Z0-9._-」が1文字以上続き、必ず「.」が含まれていること
+		if (!(form.getMail().equals("")) &&
+				(101 >= form.getMail().getBytes("UTF-8").length)) {//mailが入力されており且101バイト以下
+			String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$";
+			Pattern pattern = Pattern.compile(mailFormat);
+			Matcher matcher = pattern.matcher(form.getMail());
+			if (matcher.find() == false) {
+				error.add("メールアドレスの形式が間違っています。");
+			}
+		}
+
+		return error;
+
 	}
 
 }

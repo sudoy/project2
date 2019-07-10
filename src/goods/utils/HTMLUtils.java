@@ -38,12 +38,12 @@ public class HTMLUtils {
 
 		}else{
 			if(account.equals("1")) {
-				map.put("authority1"," and authority = 010");
-				map.put("authority2"," or authority = 011");
+				map.put("authority1"," and authority = 10");
+				map.put("authority2"," or authority = 11");
 
 			}else if(account.equals("0")) {
-				map.put("authority1"," and authority = 00");
-				map.put("authority2"," or authority = 01");
+				map.put("authority1"," and authority = 0");
+				map.put("authority2"," or authority = 1");
 
 			}else {
 				map.put("authority","");
@@ -52,6 +52,10 @@ public class HTMLUtils {
 		}
 
 		return map;
+
+	}
+	public static String expressAuthority(String authority) {
+		return null;
 
 	}
 
