@@ -23,6 +23,7 @@ public class S0042Servlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
 		boolean login = true;
@@ -64,10 +65,10 @@ public class S0042Servlet extends HttpServlet {
 		boolean login = true;
 
 		//ログインチェック???
-		if (session.getAttribute("login") != null) {
-			login = (boolean) session.getAttribute("login");
+//		if (session.getAttribute("login") != null) {
+//			login = (boolean) session.getAttribute("login");
 
-		}
+//		}
 		if (login == false) {
 			session.setAttribute("error", "不正なアクセスです。");
 			//			resp.sendRedirect("S0010.html");
@@ -130,7 +131,7 @@ public class S0042Servlet extends HttpServlet {
 
 
 		//氏名必須入力チェック
-		if (name.equals("")) {
+		if (name.equals("") && name.contains("")) {
 			e.add("氏名を入力してください。");
 		}
 		//氏名長さチェック(21バイト以上でエラー)
@@ -154,7 +155,7 @@ public class S0042Servlet extends HttpServlet {
 			e.add("パスワードが長すぎます。");
 		}
 		//パスワード一致チェック
-		if (!password.equals("") && !password.equals("") && !password.equals(check)) {
+		if ((password.equals("") || check.equals("")) || !password.equals(check)) {
 			e.add("パスワードとパスワード(確認)が一致していません。");
 		}
 		//売上登録権限必須チェック
