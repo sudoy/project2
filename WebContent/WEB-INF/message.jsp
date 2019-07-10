@@ -5,7 +5,8 @@
 <div class="alert alert-success alert-dismissible" role="alert">
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">
 	&times;</span></button>
-	<h4><strong>完了しました！</strong></h4>
+	<h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+	<strong>完了しました！</strong></h4>
 	<ul>
 	 <li>${sessionScope.kousintouroku}</li>
 	 </ul>
@@ -17,7 +18,8 @@
 <div class="alert alert-danger alert-dismissible" role="alert">
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">
 	&times;</span></button>
-	<h4><strong>エラーが発生しました！</strong></h4>
+	<h4><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+	<strong>エラーが発生しました！</strong></h4>
 	<ul>
 	<c:forEach items="${sessionScope.error}" var="i">
 	<li>${i}</li>
