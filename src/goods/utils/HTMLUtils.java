@@ -55,7 +55,16 @@ public class HTMLUtils {
 
 	}
 	public static String expressAuthority(String authority) {
-		return null;
+		if(authority.equals("0")) {
+			return "権限なし";
+
+		}else if(authority.equals("1")) {
+			return "売上登録";
+		}else if(authority.equals("10")) {
+			return "アカウント登録";
+		}else {//11
+			return "売上登録/アカウント登録";
+		}
 
 	}
 
