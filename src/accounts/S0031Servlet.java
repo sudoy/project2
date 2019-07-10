@@ -3,7 +3,6 @@ package accounts;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import accounts.forms.S0031Form;
-import accounts.services.S0031Service;
 
 @WebServlet("/s0031.html")
 public class S0031Servlet extends HttpServlet {
@@ -43,21 +41,14 @@ public class S0031Servlet extends HttpServlet {
 		//エラーがある場合
 		if(error.size() != 0) {
 			// S0030.htmlを再表示
-			req.setAttribute("error", error);
+			session.setAttribute("error", error);
 			req.setAttribute("form", form);
 			getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp")
 				.forward(req, resp);
-			return;
+			session.removeAttribute("error");
+
+			getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp").forward(req, resp);
 		}
-
-		//メールアドレス重複確認
-		S0031Service service = new S0031Service();
-		List<S0031Form> list = (List<S0031Form>) service;
-
-		if(Arrays.asList(list).contains("mail")){
-			resp.sendRedirect("s0031.html");
-		}
-
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0031.jsp").forward(req, resp);
 
@@ -84,7 +75,6 @@ public class S0031Servlet extends HttpServlet {
 				(101 <= form.getMail().getBytes("UTF-8").length)) {
 			error.add("メールアドレスが長すぎます。");
 		}
-
 		if(password.equals("")) {
 			error.add("パスワードは必須入力です。");
 		}else if (!(form.getPassword().equals("")) &&
@@ -95,6 +85,8 @@ public class S0031Servlet extends HttpServlet {
 		if(!password.equals(check)) {
 			error.add("パスワードが異なります");
 		}
+
+
 
 		return error;
 

@@ -43,29 +43,7 @@
 
 <div class="container">
 
-<c:if test="${not empty complete}">
-<div class="alert alert-success alert-dismissible" role="alert">
-	<button type="submit" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	<h4><strong> 完了しました！</strong></h4>
-	<ul>
-		<c:forEach var="c" items="${complete}">
-			<li>${c}</li>
-		</c:forEach>
-	</ul>
-</div>
-</c:if>
-
-<c:if test="${not empty error}">
-<div class="alert alert-danger alert-dismissible background-pink" role="alert">
-	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	<h4><strong> エラーが発生しました！</strong></h4>
-	<ul>
-		<c:forEach var="e" items="${error}">
-			<li>${e}</li>
-		</c:forEach>
-	</ul>
-</div>
-</c:if>
+<jsp:include page="message.jsp"/>
 
 
 <h1>アカウント登録</h1>
@@ -74,25 +52,25 @@
 		<div class="form-group">
 		    <label for="text" class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 必須 </span></label>
 		    <div class="col-sm-5">
-		      <input type="text" class="form-control" placeholder="氏名" name="name">
+		      <input type="text" class="form-control" placeholder="氏名" name="name" value="${form.name}">
 		    </div>
 		</div>
 		<div class="form-group">
 		    <label for="inputEmail3" class="col-sm-3 control-label">メールアドレス <span class="badge badge-default"> 必須 </span></label>
 		    <div class="col-sm-5">
-		      <input type="email" class="form-control" placeholder="メールアドレス" name ="mail">
+		      <input type="email" class="form-control" placeholder="メールアドレス" name ="mail" value="${form.mail}">
 		    </div>
 		</div>
 		<div class="form-group">
 		    <label for="inputPassword3" class="col-sm-3 control-label">パスワード <span class="badge badge-default"> 必須 </span></label>
 		    <div class="col-sm-5">
-		      <input type="password" class="form-control" placeholder="パスワード" name="password">
+		      <input type="password" class="form-control" placeholder="パスワード" name="password" value="${form.password}">
 		    </div>
 		</div>
 		<div class="form-group">
 		    <label for="inputPasswordCheck3" class="col-sm-3 control-label">パスワード(確認) <span class="badge badge-default"> 必須 </span></label>
 		    <div class="col-sm-5">
-		      <input type="password" class="form-control" placeholder="パスワード(確認)" name="check">
+		      <input type="password" class="form-control" placeholder="パスワード(確認)" name="check" value="${form.check}">
 		    </div>
 		</div>
 		<div class="form-group">
@@ -101,10 +79,10 @@
 
 			<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="sale" value="0" checked="checked" > 権限なし
+				<input type="radio" name="sale" value="0" <c:if test="${form.sale.equals('0') }">checked</c:if> > 権限なし
 			</label>
 				<label class="radio-inline">
-				<input type="radio" name="sale" value="1" > 権限あり
+				<input type="radio" name="sale" value="1" <c:if test="${form.sale.equals('1')}">checked</c:if> > 権限あり
 			</label>
 			</div>
 		</div>
@@ -115,10 +93,10 @@
 
 			<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="account" value="0" checked="checked" > 権限なし
+				<input type="radio" name="account" value="0" <c:if test="${form.account.equals('0')}">checked</c:if>> 権限なし
 			</label>
 				<label class="radio-inline">
-				<input type="radio" name="account" value="1" > 権限あり
+				<input type="radio" name="account" value="1" <c:if test="${form.account.equals('1')}">checked</c:if>> 権限あり
 			</label>
 			</div>
 		</div>

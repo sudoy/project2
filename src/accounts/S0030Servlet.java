@@ -1,6 +1,7 @@
           package accounts;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import accounts.forms.S0030Form;
 import accounts.forms.S0031Form;
 import accounts.services.S0030Service;
+import accounts.services.S0031Service;
 
 @WebServlet("/s0030.html")
 public class S0030Servlet extends HttpServlet {
@@ -54,7 +56,21 @@ public class S0030Servlet extends HttpServlet {
 			S0030Service service = new S0030Service();
 			service.register(form);
 
-			req.setAttribute("complete", complete);
+
+
+
+			//メールアドレス重複確認
+			S0031Service service2 = new S0031Service();
+			boolean exist = service2.service(form);
+			//ここまでok
+
+			if(Arrays.asList(list).contains("form.mail")){
+
+				resp.sendRedirect("s0031.html");
+
+			}
+
+			session.setAttribute("complete", "登録しました");
 
 			// リダイレクト
 			resp.sendRedirect("s0030.html");
