@@ -50,7 +50,7 @@ public class S0040Servlet extends HttpServlet {
 			S0040Service serv = new S0040Service();
 			list = serv.service(form);//Serviceで取得した一覧
 
-			session.setAttribute("form", list);//sessionに取得した一覧を格納
+			session.setAttribute("S0041Form", list);//sessionに取得した一覧を格納
 
 			getServletContext().getRequestDispatcher("/S0041.html").forward(req, resp);
 		} else {
@@ -58,6 +58,8 @@ public class S0040Servlet extends HttpServlet {
 			req.setAttribute("form", form);//初期表示用
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0040.jsp").forward(req, resp);//検索入力画面を再表示
+
+			session.removeAttribute("error");
 		}
 	}
 
@@ -81,7 +83,10 @@ public class S0040Servlet extends HttpServlet {
 		//「＠」以降は「a-zA-Z0-9._-」が1文字以上続き、必ず「.」が含まれていること
 		if (!(form.getMail().equals("")) &&
 				(101 >= form.getMail().getBytes("UTF-8").length)) {//mailが入力されており且101バイト以下
-			String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$";
+			String mailFormat = "^(([0-9a-zA-Z!#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+(\\.[0-9a-zA-Z!#\\$%&"
+					+ "'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+)*)|(\"[^\"]*\"))"
+                    + "@[0-9a-zA-Z!#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+"
+                    + "(\\.[0-9a-zA-Z!#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+)*$";
 			Pattern pattern = Pattern.compile(mailFormat);
 			Matcher matcher = pattern.matcher(form.getMail());
 			if (matcher.find() == false) {

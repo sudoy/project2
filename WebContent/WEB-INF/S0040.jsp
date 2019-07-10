@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page import="goods.utils.HTMLUtils" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,13 +48,13 @@
 	<div class="form-group">
 	    <label for="text" class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 部分一致 </span></label>
 	    <div class="col-sm-5">
-	      <input type="text" class="form-control" placeholder="氏名" name="name" value="${name}">
+	      <input type="text" class="form-control" placeholder="氏名" name="name" value="${form.name}">
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-3 control-label">メールアドレス </label>
 	    <div class="col-sm-5">
-	      <input type="email" class="form-control" placeholder="メールアドレス" name ="mail" value="${mail}">
+	      <input type="email" class="form-control" placeholder="メールアドレス" name ="mail" value="${form.mail}">
 	    </div>
 	</div>
 
@@ -61,28 +62,28 @@
 		<label  class="col-sm-3 control-label">売上登録権限</label>
 		<div class="col-sm-9">
 		<label class="radio-inline">
-			<input type="radio" name="sale" value="all" checked="checked" > 全て
+			<input type="radio" name="sale" value="all" ${HTMLUtils.judgeSaleAuthority("all", form.sale)}> 全て
 		</label>
 		<label class="radio-inline">
-			<input type="radio" name="sale" value="0" > 権限なし
+			<input type="radio" name="sale" value="0" ${HTMLUtils.judgeSaleAuthority("0", form.sale)}> 権限なし
 		</label>
 		<label class="radio-inline">
-			<input type="radio"  name="sale" value="1" > 権限あり
+			<input type="radio"  name="sale" value="1" ${HTMLUtils.judgeSaleAuthority("1", form.sale)}> 権限あり
 		</label>
 		</div>
 	</div>
 
 	<div class="form-group">
-		<label  class="col-sm-3 control-label">アカウント登録期限</label>
+		<label  class="col-sm-3 control-label">アカウント登録権限</label>
 		<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="account" value="all" checked="checked" > 全て
+				<input type="radio" name="account" value="all" ${HTMLUtils.judgeAccountAuthority("all", form.account)}> 全て
 			</label>
 			<label class="radio-inline">
-				<input type="radio" name="account" value="0" > 権限なし
+				<input type="radio" name="account" value="0" ${HTMLUtils.judgeAccountAuthority("0", form.account)}> 権限なし
 			</label>
 			<label class="radio-inline">
-				<input type="radio" name="account" value="1" > 権限あり
+				<input type="radio" name="account" value="1" ${HTMLUtils.judgeAccountAuthority("1", form.account)}> 権限あり
 			</label>
 		</div>
 	</div>

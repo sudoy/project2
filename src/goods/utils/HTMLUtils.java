@@ -68,4 +68,30 @@ public class HTMLUtils {
 
 	}
 
+	public static String judgeAccountAuthority(String value1, String value2) {
+
+		if(value2.equals("")) {
+			value2 = "all";
+		}
+
+		if(value1.equals(value2)) {
+			return "checked";
+		}else {
+			return "";
+		}
+	}
+
+	public static String judgeSaleAuthority(String value1, String value2) {
+
+		if(value2.equals("")) {
+			value2 = "all";
+		}
+
+		if(value1.equals(value2)) {
+			return "checked";
+		}else {
+			return "";
+		}
+	}
+
 }
