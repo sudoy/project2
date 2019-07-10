@@ -1,6 +1,7 @@
 package accounts;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -36,6 +37,8 @@ public class S0042Servlet extends HttpServlet {
 			//			resp.sendRedirect("S0010.html");
 		}
 
+		//アカウント登録権限チェック(登録権限が無い場合はC0020_ダッシュボードへ遷移)
+
 		S0042Service service = new S0042Service();
 
 		S0042FormGet form = service.select(req.getParameter("id"));
@@ -58,8 +61,7 @@ public class S0042Servlet extends HttpServlet {
 		String account = req.getParameter("account");
 		String authority = req.getParameter("authority");
 
-
-		S0042FormPost form = new S0042FormPost(id, name, mail, password, check, sale, account,authority);
+		S0042FormPost form = new S0042FormPost(id, name, mail, password, check, sale, account, authority);
 
 		//入力チェック
 		List<String> error = validate(form);
@@ -73,13 +75,13 @@ public class S0042Servlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
 		} else {
 
-			//入力チェックがokだったらS0043.jspへ遷移
-			getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
+			//入力チェックをクリアすればS0043_アカウント詳細編集確認画面へ遷移
+			resp.sendRedirect("S0043.html");
 		}
 
 	}
 
-	private List<String> validate(S0042FormPost form) {
+	private List<String> validate(S0042FormPost form) throws UnsupportedEncodingException {//catch
 
 		List<String> e = new ArrayList<>();
 
@@ -90,37 +92,41 @@ public class S0042Servlet extends HttpServlet {
 		String sale = form.getSale();
 		String account = form.getAccount();
 
-		Pattern p = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
-		Matcher m = p.matcher(mail);
+		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$";
+		Pattern mailp = Pattern.compile(mailFormat);
+		Matcher mailm = mailp.matcher(mail);
+
+		//		 Pattern namep = Pattern.compile("^\\s");
+		//		 Matcher namem = namep.matcher(name);
 
 		//権限チェック アカウント登録権限のない場合はダッシュボードに遷移し、エラーを表示
 
 		//氏名必須入力チェック
 		if (name.equals("")) {
-			e.add("氏名を入力してください");
+			e.add("氏名を入力してください。");
 		}
-		//名前長さチェック(21文字以上でエラー)
-		if (name.length() >= 21) {
+		//氏名長さチェック(21バイト以上でエラー)
+		if (21 <= form.getName().getBytes("UTF-8").length) {
 			e.add("氏名が長すぎます。");
 		}
 		//メールアドレス必須入力チェック
 		if (mail.equals("")) {
 			e.add("メールアドレスを入力して下さい。");
 		}
-		//メールアドレス長さチェック(101文字以上でエラー)
-		if (mail.length() >= 101) {
+		//メールアドレス長さチェック(101バイト以上でエラー)
+		if (101 <= form.getMail().getBytes("UTF-8").length) {
 			e.add("メールアドレスが長すぎます。");
 		}
 		//メールアドレス形式チェック
-		if (m.find() == false) {
+		if (!mail.equals("") && mailm.find() == false) {
 			e.add("メールアドレスの形式が誤っています。");
 		}
-		//パスワード長さチェック(31文字以上)
-		if (password.length() >= 31) {
+		//パスワード長さチェック(31バイト以上)
+		if (31 <= form.getPassword().getBytes("UTF-8").length) {
 			e.add("パスワードが長すぎます。");
 		}
 		//パスワード一致チェック
-		if (password.equals(check)) {
+		if (!password.equals("") && !password.equals("") && !password.equals(check)) {
 			e.add("パスワードとパスワード(確認)が一致していません。");
 		}
 		//売上登録権限必須チェック
@@ -128,7 +134,7 @@ public class S0042Servlet extends HttpServlet {
 			e.add("売上登録権限を入力して下さい。");
 		}
 		//売上登録権限値チェック
-		if (!sale.equals("0") || !sale.equals("1")) {
+		if (!sale.equals("0") && !sale.equals("1")) {
 			e.add("売上登録権限に正しい値を入力してください。");
 		}
 		//アカウント登録権限必須チェック
@@ -136,7 +142,7 @@ public class S0042Servlet extends HttpServlet {
 			e.add("アカウント登録権限を入力してください。");
 		}
 		//アカウント登録権限値チェック
-		if (!sale.equals("0") || !sale.equals("1")) {
+		if (!sale.equals("0") && !sale.equals("1")) {
 			e.add("アカウント登録権限値に正しい値を入力して下さい。");
 		}
 		System.out.println(e.get(0));
