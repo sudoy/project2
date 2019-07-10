@@ -52,7 +52,7 @@ public class S0040Servlet extends HttpServlet {
 			if (list.size() == 0) {//2つ下のelseとほぼ同じことをしているのでまとめたい
 				error.add("検索結果はありません。");
 				session.setAttribute("error", error);//sessionにエラーメッセージを格納
-				req.setAttribute("form", form);//初期表示用
+				req.setAttribute("S0040Form", form);//初期表示用
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0040.jsp").forward(req, resp);//検索入力画面を再表示
 
@@ -66,7 +66,7 @@ public class S0040Servlet extends HttpServlet {
 			}
 		} else {
 			session.setAttribute("error", error);//sessionにエラーメッセージを格納
-			req.setAttribute("form", form);//初期表示用
+			req.setAttribute("S0040Form", form);//初期表示用
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0040.jsp").forward(req, resp);//検索入力画面を再表示
 

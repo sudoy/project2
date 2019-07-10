@@ -26,6 +26,8 @@
 
 	<h1>アカウント検索結果表示</h1>
 
+	<jsp:include page="message.jsp"/>
+
 	<table class="table">
 
 	<tr><th>操作</th><th>No</th><th>氏名</th><th>メールアドレス</th><th>権限</th></tr>
