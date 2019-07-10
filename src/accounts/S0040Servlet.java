@@ -16,7 +16,7 @@ import accounts.forms.S0041Form;
 import accounts.services.S0040Service;
 
 @WebServlet("/S0040.html")
-public class S0040 extends HttpServlet {
+public class S0040Servlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
