@@ -25,7 +25,43 @@ public class S0042Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession session = req.getSession();
-		boolean login = false;
+		boolean login = true;
+
+		//ログインチェック???
+//		if (session.getAttribute("login") != null) {
+//			login = (boolean) session.getAttribute("login");
+//
+//		}
+		if (login == false) {
+			session.setAttribute("error", "不正なアクセスです。");
+			//			resp.sendRedirect("S0010.html");
+		}
+
+		S0042Service service = new S0042Service();
+
+		S0042FormGet form = service.select(req.getParameter("id"));
+		req.setAttribute("form", form);
+
+		//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
+
+		String authority = form.getAuthority();
+
+		if(!authority.equals("10") && !authority.equals("11")){
+			resp.sendRedirect("C0020.html");
+
+		}
+
+
+		this.getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
+
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+
+		HttpSession session = req.getSession();
+		boolean login = true;
 
 		//ログインチェック???
 		if (session.getAttribute("login") != null) {
@@ -36,21 +72,6 @@ public class S0042Servlet extends HttpServlet {
 			session.setAttribute("error", "不正なアクセスです。");
 			//			resp.sendRedirect("S0010.html");
 		}
-
-		//アカウント登録権限チェック(登録権限が無い場合はC0020_ダッシュボードへ遷移)
-
-		S0042Service service = new S0042Service();
-
-		S0042FormGet form = service.select(req.getParameter("id"));
-		req.setAttribute("form", form);
-
-		this.getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
-
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
 
 		String id = req.getParameter("id");
 		String name = req.getParameter("name");
@@ -69,10 +90,12 @@ public class S0042Servlet extends HttpServlet {
 		//エラー時はS0042.jspを再表示
 		if (error.size() != 0) {
 
-			req.setAttribute("error", error);
-			req.setAttribute("form", form);
+			session.setAttribute("error", error);
+			session.setAttribute("form", form);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
+
+			session.removeAttribute("error");
 		} else {
 
 			//入力チェックをクリアすればS0043_アカウント詳細編集確認画面へ遷移
@@ -99,7 +122,12 @@ public class S0042Servlet extends HttpServlet {
 		//		 Pattern namep = Pattern.compile("^\\s");
 		//		 Matcher namem = namep.matcher(name);
 
-		//権限チェック アカウント登録権限のない場合はダッシュボードに遷移し、エラーを表示
+
+		//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
+
+
+		//ログインチェック
+
 
 		//氏名必須入力チェック
 		if (name.equals("")) {
@@ -145,7 +173,6 @@ public class S0042Servlet extends HttpServlet {
 		if (!sale.equals("0") && !sale.equals("1")) {
 			e.add("アカウント登録権限値に正しい値を入力して下さい。");
 		}
-		System.out.println(e.get(0));
 		return e;
 
 	}

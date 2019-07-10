@@ -3,11 +3,15 @@ package accounts.services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
+import accounts.forms.S0030Form;
+import accounts.forms.S0031Form;
 import goods.utils.DBUtils;
 
 public class S0031Service {
-	public String rs(){
+	public List<S0031Form> service(S0030Form form){
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -23,12 +27,17 @@ public class S0031Service {
 
 			// プレースホルダに値を設定
 			ps = con.prepareStatement(sql);
+
 			ps.setString(1, form.getName());
 
 			rs = ps.executeQuery();
 
-			rs.next();
-
+			List<S0031Form> list = new ArrayList<>();
+			while(rs.next()) {
+				S0031Form f = new S0031Form(sql);
+				list.add(f);
+				f.setMail(rs.getString("mail"));
+			}
 
 
 		}catch(Exception e){
@@ -36,6 +45,9 @@ public class S0031Service {
 		}finally{
 			DBUtils.close(con,ps, rs);
 		}
+		return list;
+
+
 
 	}
 }
