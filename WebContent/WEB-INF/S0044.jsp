@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
 	<meta charset="UTF-8">
 	<title>アカウント削除確認｜物品売上管理システム</title>
@@ -117,7 +116,5 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
-
 </body>
-</html>
+</html>>

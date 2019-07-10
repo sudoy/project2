@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,6 +43,27 @@
 </nav>
 	<div class="container">
 
+
+	<c:if test="${error != null && !error.equals('')}">
+	<div class="alert alert-danger alert-dismissible" role="alert">
+		<button type="button" class="close" data-dismiss="alert"
+			aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>
+
+		<strong>エラーが発生しました！</strong>
+
+		<ul>
+		<c:forEach var="e" items="${error}" varStatus="s" >
+			<li>${e}</li>
+		</c:forEach>
+		</ul>
+
+	</div>
+	</c:if>
+
+
+
 <h1>アカウント編集</h1>
 
 <form class="form-horizontal" action="S0043.html" method="post">
@@ -78,10 +100,14 @@
 
 		<div class="col-sm-9">
 		<label class="radio-inline">
-			<input type="radio" name="sale" value="0" checked="checked" > 権限なし
+			<input type="radio" name="sale" value="0"
+			<c:if test="${form.authority.equals('0') || form.authority.equals('10') }">checked</c:if>
+			  > 権限なし
 		</label>
 			<label class="radio-inline">
-			<input type="radio" name="sale" value="1" > 権限あり
+			<input type="radio" name="sale" value="1"
+			<c:if test="${form.authority.equals('1') || form.authority.equals('11') }">checked</c:if>
+			 > 権限あり
 		</label>
 		</div>
 	</div>
@@ -92,10 +118,14 @@
 
 		<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="account" value="0" checked="checked" > 権限なし
+				<input type="radio" name="account" value="0"
+				<c:if test="${form.authority.equals('0') || form.authority.equals('1') }">checked</c:if>
+				>権限なし
 			</label>
 				<label class="radio-inline">
-				<input type="radio" name="account" value="1" > 権限あり
+				<input type="radio" name="account" value="1"
+				<c:if test="${form.authority.equals('10') || form.authority.equals('11') }">checked</c:if>
+				 > 権限あり
 			</label>
 		</div>
 	</div>

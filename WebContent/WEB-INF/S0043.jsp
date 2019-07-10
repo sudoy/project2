@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,15 +27,15 @@
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li><a href="C0020_ダッシュボード.html">ダッシュボード</a></li>
-			<li><a href="S0010_売上登録画面.html">売上登録 <span class="sr-only">(current)</span></a></li>
-			<li><a href="S0020_売上検索条件入力画面.html">売上検索</a></li>
-			<li><a href="S0030_アカウント登録.html">アカウント登録</a></li>
+			<li><a href="C0020.html">ダッシュボード</a></li>
+			<li><a href="S0010.html">売上登録 <span class="sr-only">(current)</span></a></li>
+			<li><a href="S0020.html">売上検索</a></li>
+			<li><a href="S0030.html">アカウント登録</a></li>
 			<li  class="active"><a href="#">アカウント検索</a></li>
 		</ul>
 
 		 <ul class="nav navbar-nav navbar-right">
-			<li><a href="C0010_ログイン画面.html">ログアウト</a></li>
+			<li><a href="C0010.html">ログアウト</a></li>
 			<li class="dropdown"></li>
 		</ul>
 
@@ -45,7 +46,7 @@
 
 <h1>アカウントを編集してよろしいですか？</h1>
 
-<form class="form-horizontal" action="S0041_アカウント検索結果表示画面.html" method="post">
+<form class="form-horizontal" action="S0041.html" method="post">
 	<div class="form-group">
 	    <label for="text" class="col-sm-3 control-label">氏名</label>
 	    <div class="col-sm-5">
@@ -84,10 +85,14 @@
 		<label  class="col-sm-3 control-label">売上登録権限</label>
 		<div class="col-sm-9">
 		<label class="radio-inline">
-			<input type="radio"  name="sales" value="1" checked="checked"> 権限なし
+			<input type="radio"  name="sales" value="1"
+
+			 > 権限なし
 		</label>
 			<label class="radio-inline">
-			<input type="radio"  name="sales" value="2" > 権限あり
+			<input type="radio"  name="sales" value="2" >
+
+			権限あり
 		</label>
 		</div>
 	</div>
@@ -96,10 +101,14 @@
 		<label  class="col-sm-3 control-label">アカウント登録確認</label>
 		<div class="col-sm-9">
 		<label class="radio-inline">
-			<input type="radio" name="account" value="1" checked="checked" > 権限なし
+			<input type="radio" name="account" value="1"
+
+			  > 権限なし
 		</label>
 			<label class="radio-inline">
-			<input type="radio" name="account" value="2" > 権限あり
+			<input type="radio" name="account" value="2"
+
+			 > 権限あり
 		</label>
 		</div>
 	</div>
@@ -110,7 +119,7 @@
 	      <button type="submit" class="btn btn-primary">
 	      	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K
 	      </button>
-	      	<a type="button" class="btn btn-default" href="S0042_アカウント詳細編集.html">キャンセル</a>
+	      	<a type="button" class="btn btn-default" href="S0042.html">キャンセル</a>
 	    </div>
 	</div>
 </form>
