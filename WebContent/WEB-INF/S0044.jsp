@@ -43,6 +43,8 @@
 
 <h1>アカウントを削除してよろしいですか？</h1>
 <form class="form-horizontal"action="S0041.html" method="post">
+
+
 	<div class="form-group">
 	    <label for="text" class="col-sm-3 control-label">氏名</label>
 	    <div class="col-sm-5">

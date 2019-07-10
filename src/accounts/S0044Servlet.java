@@ -14,6 +14,10 @@ public class S0044Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+//		S0042Service service = new S0042Service();
+
+//		S0044Form form = service.select(req.getParameter("id"));
+//		req.setAttribute("form", form);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
 	}
