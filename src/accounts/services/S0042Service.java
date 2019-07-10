@@ -34,12 +34,9 @@ public class S0042Service {
 
 			ps.setString(1, num);
 
-			System.out.println(ps);
-
 			//SELECT命令の実行
 			rs = ps.executeQuery();
 
-			S0042FormGet list = null;
 
 			//結果セットの内容を出力(DBから抽出したデータ)
 			rs.next();
@@ -52,9 +49,7 @@ public class S0042Service {
 
 			S0042FormGet edit = new S0042FormGet(id, name, mail, password, authority);
 
-			list = edit;
-
-			return list;
+			return edit;
 
 		} catch (Exception e) {
 			e.printStackTrace();

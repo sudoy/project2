@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import accounts.forms.S0042FormGet;
 import accounts.forms.S0042FormPost;
@@ -21,6 +22,20 @@ public class S0042Servlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		HttpSession session = req.getSession();
+		boolean login = false;
+
+		//ログインチェック???
+		if(session.getAttribute("login") != null) {
+		login = (boolean) session.getAttribute("login");
+
+		}
+		if (login == false) {
+			session.setAttribute("error", "不正なアクセスです。");
+//			resp.sendRedirect("S0010.html");
+		}
+
 
 		S0042Service service = new S0042Service();
 
@@ -50,13 +65,18 @@ public class S0042Servlet extends HttpServlet {
 		List<String> error = validate(form);
 
 
+		//エラー時はS0042.jspを再表示
 		if (error.size() != 0 ) {
 
 			req.setAttribute("error", error);
 			req.setAttribute("form",form );
-			getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
+
+			resp.sendRedirect("S0042.html");
 			return;
 		}
+
+		//入力チェックがokだったらS0043.jspへ遷移
+		getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
 
 	}
 
@@ -74,14 +94,10 @@ public class S0042Servlet extends HttpServlet {
 		Pattern p = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$");
 		Matcher m = p.matcher(mail);
 
-		//ログインチェック 未ログインの場合はログイン画面に遷移し、エラーを表示
-
-
 
 
 		//権限チェック アカウント登録権限のない場合はダッシュボードに遷移し、エラーを表示
 
-		//e.add("不正なアクセスです。");
 		//氏名必須入力チェック
 		if(name.equals("")) {
 			e.add("氏名を入力してください");
