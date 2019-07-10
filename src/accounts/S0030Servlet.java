@@ -1,4 +1,4 @@
-package accounts;
+          package accounts;
 
 import java.io.IOException;
 
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import accounts.forms.S0030Form;
+import accounts.forms.S0031Form;
 import accounts.services.S0030Service;
 
 @WebServlet("/s0030.html")
@@ -26,8 +27,9 @@ public class S0030Servlet extends HttpServlet {
 		try {
 
 			HttpSession session = req.getSession();
-			String sale = (String) session.getAttribute("sale");
-			String account = (String) session.getAttribute("account");
+			S0031Form form2 = (S0031Form) session.getAttribute("form");
+			String sale = form2.getSale();
+			String account = form2.getAccount();
 			String authority = null;
 
 
@@ -43,14 +45,16 @@ public class S0030Servlet extends HttpServlet {
 
 			//フォームへ値をセット
 			S0030Form form = new S0030Form();
-			form.setName((String) session.getAttribute("name"));
-			form.setMail((String) session.getAttribute("mail"));
-			form.setPassword((String) session.getAttribute("password"));
+			form.setName(form2.getName());
+			form.setMail(form2.getMail());
+			form.setPassword(form2.getPassword());
 			form.setAuthority(authority);
 
 			// DBへ登録
 			S0030Service service = new S0030Service();
 			service.register(form);
+
+			req.setAttribute("complete", complete);
 
 			// リダイレクト
 			resp.sendRedirect("s0030.html");

@@ -31,6 +31,10 @@ public class S0031Form {
 		this.password = password;
 
 	}
+	public S0031Form(String mail) {
+		super();
+		this.mail = mail;
+	}
 	public String getCheck() {
 		return check;
 	}

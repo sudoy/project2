@@ -3,6 +3,7 @@ package accounts;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import accounts.forms.S0031Form;
 import accounts.services.S0031Service;
@@ -29,10 +31,11 @@ public class S0031Servlet extends HttpServlet {
 		String account = req.getParameter("account");
 
 		S0031Form form = new S0031Form(name, mail, password, check, sale, account);
-		req.setAttribute("form", form);
+//		req.setAttribute("form", form);
 
-//		HttpSession session = req.getSession();
-//		session.setAttribute("form", form);
+		HttpSession session = req.getSession();
+		session.setAttribute("form", form);
+
 
 		// バリデーションチェック
 		List<String> error = validate(form);
@@ -49,6 +52,11 @@ public class S0031Servlet extends HttpServlet {
 
 		//メールアドレス重複確認
 		S0031Service service = new S0031Service();
+		List<S0031Form> list = (List<S0031Form>) service;
+
+		if(Arrays.asList(list).contains("mail")){
+			resp.sendRedirect("s0031.html");
+		}
 
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0031.jsp").forward(req, resp);
