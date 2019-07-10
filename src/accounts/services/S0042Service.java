@@ -31,12 +31,11 @@ public class S0042Service {
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
 
-
 			ps.setString(1, num);
+
 
 			//SELECT命令の実行
 			rs = ps.executeQuery();
-
 
 			//結果セットの内容を出力(DBから抽出したデータ)
 			rs.next();

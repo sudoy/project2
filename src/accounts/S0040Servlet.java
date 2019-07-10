@@ -40,7 +40,7 @@ public class S0040Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-		S0040Form form = new S0040Form(name, mail, sale, account);
+		S0040Form form = new S0040Form(name, mail,sale, account);
 
 		List<String> error = validate(form);
 

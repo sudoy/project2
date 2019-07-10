@@ -26,15 +26,15 @@
 	<!-- Collect the nav links, forms, and other content for toggling -->
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
-			<li><a href="C0020_ダッシュボード.html">ダッシュボード</a></li>
-			<li><a href="S0010_売上登録画面.html">売上登録 <span class="sr-only">(current)</span></a></li>
-			<li><a href="S0020_売上検索条件入力画面.html">売上検索</a></li>
-			<li><a href="S0030_アカウント登録.html">アカウント登録</a></li>
+			<li><a href="C0020.html">ダッシュボード</a></li>
+			<li><a href="S0010.html">売上登録 <span class="sr-only">(current)</span></a></li>
+			<li><a href="S0020.html">売上検索</a></li>
+			<li><a href="S0030.html">アカウント登録</a></li>
 			<li  class="active"><a href="#">アカウント検索</a></li>
 		</ul>
 
 		 <ul class="nav navbar-nav navbar-right">
-			<li><a href="C0010_ログイン画面.html">ログアウト</a></li>
+			<li><a href="C0010.html">ログアウト</a></li>
 			<li class="dropdown"></li>
 		</ul>
 
@@ -66,9 +66,10 @@
 
 <h1>アカウント編集</h1>
 
-<form class="form-horizontal" action="S0043.html" method="post">
+<form class="form-horizontal" action="S0042.html" method="post">
 
 	<input type="hidden"  name="id" value="${form.id}" >
+	<input type="hidden"  name="authority" value="${form.authority}" >
 
 	<div class="form-group">
 	    <label for="text" class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 必須 </span></label>
