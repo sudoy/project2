@@ -28,7 +28,7 @@ public class S0030Servlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			String sale = (String) session.getAttribute("sale");
 			String account = (String) session.getAttribute("account");
-			String authority = null ;
+			String authority = null;
 
 
 			if(sale.equals("0") && account.equals("0")) {
@@ -47,7 +47,6 @@ public class S0030Servlet extends HttpServlet {
 			form.setMail((String) session.getAttribute("mail"));
 			form.setPassword((String) session.getAttribute("password"));
 			form.setAuthority(authority);
-
 
 			// DBへ登録
 			S0030Service service = new S0030Service();

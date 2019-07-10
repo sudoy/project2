@@ -7,6 +7,9 @@ public class S0031Form {
 	private String check;
 	private String sale;
 	private String account;
+	private String authority;
+
+
 
 	public S0031Form(String name, String mail, String password, String check, String sale, String account) {
 		super();
@@ -17,6 +20,15 @@ public class S0031Form {
 		this.sale = sale;
 		this.account = account;
 
+
+
+
+	}
+	public S0031Form(String name, String mail, String password) {
+		super();
+		this.name = name;
+		this.mail = mail;
+		this.password = password;
 
 	}
 	public String getCheck() {
@@ -55,5 +67,13 @@ public class S0031Form {
 	public void setAccount(String account) {
 		this.account = account;
 	}
+	public String getAuthority() {
+		return authority;
+	}
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
+
 
 }

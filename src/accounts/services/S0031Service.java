@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import goods.utils.DBUtils;
 
 public class S0031Service {
-	public ResultSet rs(){
+	public String rs(){
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -19,18 +19,23 @@ public class S0031Service {
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
 		//sql
-			sql = "SELECT mail from accounts";
+			sql = "SELECT mail From accounts WHERE mail = ?";
 
 			// プレースホルダに値を設定
 			ps = con.prepareStatement(sql);
+			ps.setString(1, form.getName());
 
 			rs = ps.executeQuery();
+
+			rs.next();
+
+
 
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
 			DBUtils.close(con,ps, rs);
 		}
-		return rs;
+
 	}
 }
