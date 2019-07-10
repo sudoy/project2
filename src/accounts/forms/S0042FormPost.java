@@ -9,9 +9,10 @@ public class S0042FormPost {
 	private String check;
 	private String sale;
 	private String account;
+	private String authority;
 
 	public S0042FormPost(String id, String name, String mail, String password, String check, String sale,
-			String account) {
+			String account, String authority) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -20,6 +21,7 @@ public class S0042FormPost {
 		this.check = check;
 		this.sale = sale;
 		this.account = account;
+		this.setAuthority(authority);
 	}
 
 	public String getId() {
@@ -76,6 +78,14 @@ public class S0042FormPost {
 
 	public void setAccount(String account) {
 		this.account = account;
+	}
+
+	public String getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(String authority) {
+		this.authority = authority;
 	}
 
 
