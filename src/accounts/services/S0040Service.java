@@ -45,8 +45,6 @@ public class S0040Service {
 				sql += " and mail = ?";
 			}
 
-//			sql += " and authority = ?";
-
 			for (Map.Entry<String, String> entry : map.entrySet()) {
 				sql += entry.getValue();
 			}
@@ -57,19 +55,11 @@ public class S0040Service {
 				ps.setString(1, "%" + name + "%");
 				if(!mail.equals("")) {//mailが入力されている
 					ps.setString(2, mail);
-//					ps.setString(3, account + sale);
 				}
-//				else {//mailが入力されていない
-//					ps.setString(2, account + sale);
-//				}
 			}else {//nameが入力されていない
 				if(!mail.equals("")) {//mailが入力されている
 					ps.setString(1, mail);
-//					ps.setString(2, account + sale);
 				}
-//					else {//mailが入力されていない
-//					ps.setString(1, account + sale);
-//				}
 			}
 
 			System.out.println(ps);

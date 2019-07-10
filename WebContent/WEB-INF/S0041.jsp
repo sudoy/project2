@@ -16,10 +16,10 @@
 	<jsp:include page="header.jsp">
 		<jsp:param name="bar"
 		value='<li><a href="C0020_ダッシュボード.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
-		<li><a href="S0010_売上登録画面.html">売上登録</a></li>
-		<li><a href="S0020_売上検索条件入力画面.html">売上検索</a></li>
-		<li><a href="S0030_アカウント登録.html">アカウント登録</a></li>
-		<li class="active"><a href="S0040_アカウント検索条件入力.html">アカウント検索</a></li>'/>
+		<li><a href="S0010.html">売上登録</a></li>
+		<li><a href="S0020.html">売上検索</a></li>
+		<li><a href="S0030.html">アカウント登録</a></li>
+		<li class="active"><a href="S0040.html">アカウント検索</a></li>'/>
 	</jsp:include>
 
 	<div class="container-fluid">
