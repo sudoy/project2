@@ -41,7 +41,7 @@
 
 
 <div class="container">
-
+${error}
 <h1>アカウント登録</h1>
 
 	<form class="form-horizontal" action="s0031.html" method="post">

@@ -5,19 +5,10 @@ public class S0030Form {
 	private String mail;
 	private String password;
 	private String authority;
-	private String sale;
-	private String account;
 
 
 
 
-
-	public String getSale() {
-		return sale;
-	}
-	public void setSale(String sale) {
-		this.sale = sale;
-	}
 	public String getAuthority() {
 		return authority;
 	}
@@ -26,12 +17,6 @@ public class S0030Form {
 	}
 	public String getName() {
 		return name;
-	}
-	public String getAccount() {
-		return account;
-	}
-	public void setAccount(String account) {
-		this.account = account;
 	}
 	public void setName(String name) {
 		this.name = name;
