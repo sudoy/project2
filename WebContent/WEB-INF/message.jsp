@@ -8,7 +8,7 @@
 	<h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 	<strong>完了しました！</strong></h4>
 	<ul>
-	 <li>${sessionScope.kousintouroku}</li>
+	 <li>${sessionScope.complete}</li>
 	 </ul>
 </div>
 </c:if>
