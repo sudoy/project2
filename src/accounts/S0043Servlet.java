@@ -75,6 +75,7 @@ public class S0043Servlet extends HttpServlet {
 				service.update(updateform);
 
 				session.removeAttribute("S0042Form");
+				session.setAttribute("update", "on");// 7/11 16:08追加
 
 				//更新完了後、S0041へ遷移
 				resp.sendRedirect("S0041.html");

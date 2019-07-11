@@ -84,9 +84,8 @@ public class S0040Servlet extends HttpServlet {
 				} else {
 
 					session.setAttribute("S0041Form", list);//sessionに取得した一覧を格納
-
+					session.setAttribute("S0040Form", form);//更新時の再表示用
 					getServletContext().getRequestDispatcher("/S0041.html").forward(req, resp);
-					//				session.removeAttribute("S0041Form");//送ったら削除
 				}
 			} else {
 				session.setAttribute("error", error);//sessionにエラーメッセージを格納

@@ -18,6 +18,7 @@ public class C0030Servlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		session.setAttribute("login", false);
 		session.removeAttribute("userinfo");
+		session.setAttribute("update", "off");
 		resp.sendRedirect("C0010.html");
 
 	}
