@@ -29,19 +29,19 @@
 
 <form class="form-horizontal" action="S0042.html" method="post">
 
-	<input type="hidden"  name="id" value="${form.id}" >
-	<input type="hidden"  name="authority" value="${form.authority}" >
+	<input type="hidden"  name="id" value="${S0042Form.id}" >
+	<input type="hidden"  name="authority" value="${S0042Form.authority}" >
 
 	<div class="form-group">
 	    <label for="text" class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
-	      <input type="text" class="form-control" placeholder="氏名" name="name" value="${form.name}">
+	      <input type="text" class="form-control" placeholder="氏名" name="name" value="${S0042Form.name}">
 	    </div>
 	</div>
 	<div class="form-group">
 	    <label for="inputEmail3" class="col-sm-3 control-label">メールアドレス <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
-	      <input type="email" class="form-control" placeholder="メールアドレス" name ="mail" value="${form.mail}">
+	      <input type="email" class="form-control" placeholder="メールアドレス" name ="mail" value="${S0042Form.mail}">
 	    </div>
 	</div>
 	<div class="form-group">
@@ -63,12 +63,12 @@
 		<div class="col-sm-9">
 		<label class="radio-inline">
 			<input type="radio" name="sale" value="0"
-			<c:if test="${form.authority.equals('0') || form.authority.equals('10') }">checked</c:if>
+			<c:if test="${S0042Form.authority.equals('0') || S0042Form.authority.equals('10') }">checked</c:if>
 			  > 権限なし
 		</label>
 			<label class="radio-inline">
 			<input type="radio" name="sale" value="1"
-			<c:if test="${form.authority.equals('1') || form.authority.equals('11') }">checked</c:if>
+			<c:if test="${S0042Form.authority.equals('1') || S0042Form.authority.equals('11') }">checked</c:if>
 			 > 権限あり
 		</label>
 		</div>
@@ -81,12 +81,12 @@
 		<div class="col-sm-9">
 			<label class="radio-inline">
 				<input type="radio" name="account" value="0"
-				<c:if test="${form.authority.equals('0') || form.authority.equals('1') }">checked</c:if>
+				<c:if test="${S0042Form.authority.equals('0') || S0042Form.authority.equals('1') }">checked</c:if>
 				>権限なし
 			</label>
 				<label class="radio-inline">
 				<input type="radio" name="account" value="1"
-				<c:if test="${form.authority.equals('10') || form.authority.equals('11') }">checked</c:if>
+				<c:if test="${S0042Form.authority.equals('10') || S0042Form.authority.equals('11') }">checked</c:if>
 				 >権限あり
 			</label>
 		</div>

@@ -41,7 +41,7 @@ public class S0042Servlet extends HttpServlet {
 		S0042Service service = new S0042Service();
 
 		S0042FormGet form = service.select(req.getParameter("id"));
-		req.setAttribute("form", form);
+		session.setAttribute("S0042Form", form);
 
 		//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
 //		String authority = form.getAuthority();
@@ -84,7 +84,7 @@ public class S0042Servlet extends HttpServlet {
 		S0042FormPost form = new S0042FormPost(id, name, mail, password, check, sale, account, authority);
 
 		//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
-		if(!authority.equals("10") && !authority.equals("11")){
+		if(!(authority.equals("10")) && !(authority.equals("11"))){
 			resp.sendRedirect("C0020.html");
 		}
 
@@ -95,7 +95,7 @@ public class S0042Servlet extends HttpServlet {
 		if (error.size() != 0) {
 
 			session.setAttribute("error", error);
-			session.setAttribute("form", form);
+			session.setAttribute("S0042Form", form);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
 
@@ -106,6 +106,7 @@ public class S0042Servlet extends HttpServlet {
 			session.setAttribute("S0042Form", form);
 			getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
 		}
+
 
 	}
 
