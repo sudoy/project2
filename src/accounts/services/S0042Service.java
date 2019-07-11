@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import accounts.forms.S0042FormGet;
 import goods.utils.DBUtils;
 
-
-
 public class S0042Service {
 
 	public S0042FormGet select(String num) {
@@ -58,6 +56,4 @@ public class S0042Service {
 		return null;
 
 	}
-
-
 }

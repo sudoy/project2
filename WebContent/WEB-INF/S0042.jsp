@@ -35,7 +35,7 @@
 	<div class="form-group">
 	    <label for="text" class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
-	      <input type="text" class="form-control" placeholder="氏名" name="name" value="${form.name} ">
+	      <input type="text" class="form-control" placeholder="氏名" name="name" value="${form.name}">
 	    </div>
 	</div>
 	<div class="form-group">
@@ -87,7 +87,7 @@
 				<label class="radio-inline">
 				<input type="radio" name="account" value="1"
 				<c:if test="${form.authority.equals('10') || form.authority.equals('11') }">checked</c:if>
-				 > 権限あり
+				 >権限あり
 			</label>
 		</div>
 	</div>

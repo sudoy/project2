@@ -35,7 +35,7 @@ public class S0042Servlet extends HttpServlet {
 //		}
 		if (login == false) {
 			session.setAttribute("error", "不正なアクセスです。");
-			//			resp.sendRedirect("S0010.html");
+			resp.sendRedirect("S0010.html");
 		}
 
 		S0042Service service = new S0042Service();
@@ -44,14 +44,12 @@ public class S0042Servlet extends HttpServlet {
 		req.setAttribute("form", form);
 
 		//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
-
 		String authority = form.getAuthority();
 
 		if(!authority.equals("10") && !authority.equals("11")){
 			resp.sendRedirect("C0020.html");
 
 		}
-
 
 		this.getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
 
@@ -85,6 +83,11 @@ public class S0042Servlet extends HttpServlet {
 
 		S0042FormPost form = new S0042FormPost(id, name, mail, password, check, sale, account, authority);
 
+		//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
+		if(!authority.equals("10") && !authority.equals("11")){
+			resp.sendRedirect("C0020.html");
+		}
+
 		//入力チェック
 		List<String> error = validate(form);
 
@@ -100,7 +103,8 @@ public class S0042Servlet extends HttpServlet {
 		} else {
 
 			//入力チェックをクリアすればS0043_アカウント詳細編集確認画面へ遷移
-			resp.sendRedirect("S0043.html");
+			req.setAttribute("S0042Form", form);
+			getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
 		}
 
 	}
@@ -116,18 +120,12 @@ public class S0042Servlet extends HttpServlet {
 		String sale = form.getSale();
 		String account = form.getAccount();
 
+//		System.out.print("b");
+//		System.out.print(name);
+
 		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$";
 		Pattern mailp = Pattern.compile(mailFormat);
 		Matcher mailm = mailp.matcher(mail);
-
-		//		 Pattern namep = Pattern.compile("^\\s");
-		//		 Matcher namem = namep.matcher(name);
-
-
-		//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
-
-
-		//ログインチェック
 
 
 		//氏名必須入力チェック
@@ -154,8 +152,8 @@ public class S0042Servlet extends HttpServlet {
 		if (31 <= form.getPassword().getBytes("UTF-8").length) {
 			e.add("パスワードが長すぎます。");
 		}
-		//パスワード一致チェック
-		if ((password.equals("") || check.equals("")) || !password.equals(check)) {
+		//パスワード一致チェック (未入力の場合は前のパスワードのまま)
+		if (!password.equals(check)) {
 			e.add("パスワードとパスワード(確認)が一致していません。");
 		}
 		//売上登録権限必須チェック
