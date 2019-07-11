@@ -26,32 +26,33 @@ public class S0042Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
-		boolean login = true;
+		boolean login = false;
 
-		//ログインチェック???
-//		if (session.getAttribute("login") != null) {
-//			login = (boolean) session.getAttribute("login");
-//
-//		}
-		if (login == false) {
-			session.setAttribute("error", "不正なアクセスです。");
-			resp.sendRedirect("S0010.html");
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
 		}
 
-		S0042Service service = new S0042Service();
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		} else {
 
-		S0042FormGet form = service.select(req.getParameter("id"));
-		session.setAttribute("S0042Form", form);
+			S0042Service service = new S0042Service();
 
-		//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
-//		String authority = form.getAuthority();
-//
-//		if(!authority.equals("10") && !authority.equals("11")){
-//			resp.sendRedirect("C0020.html");
-//
-//		}
+			S0042FormGet form = service.select(req.getParameter("id"));
+			session.setAttribute("S0042Form", form);
 
-		this.getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
+			//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
+			//			String authority = form.getAuthority();
+			//
+			//			if(!authority.equals("10") && !authority.equals("11")){
+			//				resp.sendRedirect("C0020.html");
+
+			//			}
+
+			this.getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
+		}
 
 	}
 
@@ -60,53 +61,53 @@ public class S0042Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
-		boolean login = true;
+		boolean login = false;
 
-		//ログインチェック???
-//		if (session.getAttribute("login") != null) {
-//			login = (boolean) session.getAttribute("login");
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
+		}
 
-//		}
 		if (login == false) {
-			session.setAttribute("error", "不正なアクセスです。");
-			//			resp.sendRedirect("S0010.html");
-		}
-
-		String id = req.getParameter("id");
-		String name = req.getParameter("name");
-		String mail = req.getParameter("mail");
-		String password = req.getParameter("password");
-		String check = req.getParameter("check");
-		String sale = req.getParameter("sale");
-		String account = req.getParameter("account");
-		String authority = req.getParameter("authority");
-
-		S0042FormPost form = new S0042FormPost(id, name, mail, password, check, sale, account, authority);
-
-		//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
-		if(!(authority.equals("10")) && !(authority.equals("11"))){
-			resp.sendRedirect("C0020.html");
-		}
-
-		//入力チェック
-		List<String> error = validate(form);
-
-		//エラー時はS0042.jspを再表示
-		if (error.size() != 0) {
-
-			session.setAttribute("error", error);
-			session.setAttribute("S0042Form", form);
-
-			getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
-
-			session.removeAttribute("error");
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
 		} else {
 
-			//入力チェックをクリアすればS0043_アカウント詳細編集確認画面へ遷移
-			session.setAttribute("S0042Form", form);
-			getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
-		}
+			String id = req.getParameter("id");
+			String name = req.getParameter("name");
+			String mail = req.getParameter("mail");
+			String password = req.getParameter("password");
+			String check = req.getParameter("check");
+			String sale = req.getParameter("sale");
+			String account = req.getParameter("account");
+			String authority = req.getParameter("authority");
 
+			S0042FormPost form = new S0042FormPost(id, name, mail, password, check, sale, account, authority);
+
+			//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
+			if (!(authority.equals("10")) && !(authority.equals("11"))) {
+				resp.sendRedirect("C0020.html");
+			}
+
+			//入力チェック
+			List<String> error = validate(form);
+
+			//エラー時はS0042.jspを再表示
+			if (error.size() != 0) {
+
+				session.setAttribute("error", error);
+				session.setAttribute("S0042Form", form);
+
+				getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
+
+				session.removeAttribute("error");
+			} else {
+
+				//入力チェックをクリアすればS0043_アカウント詳細編集確認画面へ遷移
+				session.setAttribute("S0042Form", form);
+				getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
+			}
+		}
 
 	}
 
@@ -121,13 +122,9 @@ public class S0042Servlet extends HttpServlet {
 		String sale = form.getSale();
 		String account = form.getAccount();
 
-//		System.out.print("b");
-//		System.out.print(name);
-
 		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$";
 		Pattern mailp = Pattern.compile(mailFormat);
 		Matcher mailm = mailp.matcher(mail);
-
 
 		//氏名必須入力チェック
 		if (name.equals("") && name.contains("")) {

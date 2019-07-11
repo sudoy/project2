@@ -3,14 +3,14 @@ package accounts.services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import accounts.forms.S0043FormUpdate;
+import accounts.forms.S0043Form;
 import goods.utils.DBUtils;
 
 public class S0043Service {
 
 
 	//データ更新
-	public void update(S0043FormUpdate form) {
+	public void update(S0043Form form) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -20,8 +20,9 @@ public class S0043Service {
 			//データベース接続
 			con = DBUtils.getConnection();
 
-			//SQL
-			sql = "update todo set name=?, mail=?, password=md5(?), deadline=? where authority = ?";//ここでMD5化
+			//SQL MD5化
+			sql = "update accounts set name=?, mail=?, password=md5(?), authority = ? "
+					+ "where account_id = ?";
 
 			//UPDATE命令の準備
 			ps = con.prepareStatement(sql);
@@ -31,6 +32,7 @@ public class S0043Service {
 			ps.setString(2, form.getMail());
 			ps.setString(3, form.getPassword());
 			ps.setString(4, form.getAuthority());
+			ps.setString(5, form.getId());
 
 			//UPDATE命令の実行
 			ps.executeUpdate();

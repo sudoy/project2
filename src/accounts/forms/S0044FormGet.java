@@ -1,30 +1,29 @@
 package accounts.forms;
 
-public class S0043FormUpdate {
+public class S0044FormGet {
 
-
+	private String id;
 	private String name;
 	private String mail;
 	private String password;
-	private String check;
-	private String sale;
-	private String account;
 	private String authority;
 
-	public S0043FormUpdate(String name, String mail, String password, String check, String sale, String account,
-			String authority) {
+	public S0044FormGet(String id, String name, String mail, String password, String authority) {
 		super();
-
+		this.id = id;
 		this.name = name;
 		this.mail = mail;
 		this.password = password;
-		this.check = check;
-		this.sale = sale;
-		this.account = account;
 		this.authority = authority;
 	}
 
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -50,30 +49,6 @@ public class S0043FormUpdate {
 		this.password = password;
 	}
 
-	public String getCheck() {
-		return check;
-	}
-
-	public void setCheck(String check) {
-		this.check = check;
-	}
-
-	public String getSale() {
-		return sale;
-	}
-
-	public void setSale(String sale) {
-		this.sale = sale;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
 	public String getAuthority() {
 		return authority;
 	}
@@ -81,7 +56,5 @@ public class S0043FormUpdate {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-
-
 
 }

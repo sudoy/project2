@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import accounts.forms.S0043FormUpdate;
+import accounts.forms.S0042FormPost;
+import accounts.forms.S0043Form;
 import accounts.services.S0043Service;
 
 @WebServlet("/S0043.html")
@@ -19,20 +20,21 @@ public class S0043Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
-		//		HttpSession session = req.getSession();
-		//		boolean login = true;
+		HttpSession session = req.getSession();
+		boolean login = false;
 
-		//ログインチェック???
-		//		if (session.getAttribute("login") != null) {
-		//			login = (boolean) session.getAttribute("login");
-		//
-		//		}
-		//		if (login == false) {
-		//			session.setAttribute("error", "不正なアクセスです。");
-		//				resp.sendRedirect("S0010.html");
-		//		}
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
+		}
 
-		getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		} else {
+
+			getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
+		}
 	}
 
 	@Override
@@ -40,35 +42,43 @@ public class S0043Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
-		boolean login = true;
+		boolean login = false;
 
-		String name = req.getParameter("name");
-		String mail = req.getParameter("mail");
-		String password = req.getParameter("password");
-		String check = req.getParameter("check");
-		String sale = req.getParameter("sale");
-		String account = req.getParameter("account");
-		String authority = req.getParameter("authority");
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
+		}
 
-		System.out.println("test");
-		System.out.println(name);
-
-		//ログインチェック
-		//権限チェック(権限がない場合はダッシュボードへ遷移)
-		if (!(authority.equals("10")) && !(authority.equals("11"))) {
-			resp.sendRedirect("C0020.html");
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
 		} else {
 
-			S0043FormUpdate form = new S0043FormUpdate(name, mail, password, check, sale, account, authority);
+			S0042FormPost form = (S0042FormPost) session.getAttribute("S0042Form");
 
-			//更新
-			S0043Service service = new S0043Service();
-			service.update(form);
+			String id = form.getId();
+			String name = form.getName();
+			String mail = form.getMail();
+			String password = form.getPassword();
+			String authority = form.getAuthority();
 
-			//	session.removeAttribute("S0042Form");
+			S0043Form updateform = new S0043Form(id, name, mail, password, authority);
 
-			//更新完了後、S0041へ遷移
-			resp.sendRedirect("S0041.html");
+			//ログインチェック
+			//権限チェック(権限がない場合はダッシュボードへ遷移)
+			if (!(authority.equals("10")) && !(authority.equals("11"))) {
+				resp.sendRedirect("C0020.html");
+			} else {
+
+				//更新
+				S0043Service service = new S0043Service();
+				service.update(updateform);
+
+				session.removeAttribute("S0042Form");
+
+				//更新完了後、S0041へ遷移
+				resp.sendRedirect("S0041.html");
+			}
 		}
 	}
 
