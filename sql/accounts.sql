@@ -11,4 +11,10 @@ create table accounts(
 );
 
 insert into accounts(name, mail, password, authority)
-values('テスト', 'test@test', 'test', 11);
+values('テスト', 'test@test.com', md5('test'), 11);
+
+insert into accounts(name, mail, password, authority)
+values('テスト2', 'mail@mail.com', md5('test'), 10);
+
+insert into accounts(name, mail, password, authority)
+values('test3', 'test3@test3.com', md5('test'), 0);

@@ -25,7 +25,7 @@ public class C0010Service {
 		try {
 			con = DBUtils.getConnection();
 			sql = "select account_id, name, mail, password, authority "
-					+ "from accounts where mail = ? and password = ?";//ここでSHA2()使えばよかった
+					+ "from accounts where mail = ? and password = md5(?)";//ここでSHA2()使えばよかった
 			ps = con.prepareStatement(sql);
 
 //			//入力されたパスワードをハッシュ化

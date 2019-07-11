@@ -11,23 +11,15 @@ public class C0010Form {
 	private String authority;
 
 
-//jspから取得したmailとpasswordをServiceに送るときに使う
+//jspから取得したmailとpasswordをServiceに送るときに使う（あと初期表示）
 	public C0010Form(String mail, String password) {
 		super();
 		this.mail = mail;
 		this.password = password;
 	}
 
-//	public C0010Form(String id, String name, String mail, String password, String authority) {
-//		super();
-//		this.id = id;
-//		this.name = name;
-//		this.mail = mail;
-//		this.password = password;
-//		this.authority = authority;
-//	}
 
-//ログイン状態も含む
+//ログイン状態 + ユーザー情報
 	public C0010Form(boolean login, String id, String name, String mail, String password, String authority) {
 		super();
 		this.login = login;
