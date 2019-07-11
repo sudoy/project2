@@ -55,47 +55,47 @@
 	<tr><th>販売日 <span class="badge">必須</span></th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" value="2015/01/15" placeholder="販売日">
+		<input type="text" class="form-control" value="2015/01/15" placeholder="販売日" name="saledate">
 		</div>
 		</td>
 	</tr>
 
 	<tr><th>担当 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
-		<select class="form-control">
-			<option>選択してください</option>
-			<option>イチロー</option>
-			<option>ダルビッシュ</option>
-			<option>4</option>
-			<option>5</option>
+		<select class="form-control" name="accountid">
+			<option >選択してください</option>
+			<option value="0">イチロー</option>
+			<option value="1">ダルビッシュ</option>
+			<option value="2">4</option>
+			<option value="3">5</option>
 		</select></div>
 	</td></tr>
 	<tr><th>商品カテゴリー <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
-		<select class="form-control">
+		<select class="form-control" name="categoryid">
 			<option>選択してください</option>
-			<option>食料品</option>
-			<option>日用品</option>
-			<option>4</option>
-			<option>5</option>
+			<option value="0">食料品</option>
+			<option value="1">日用品</option>
+			<option value="2">4</option>
+			<option value="3">5</option>
 		</select></div>
 	</td></tr>
 
 	<tr><th>商品名 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" placeholder="商品名">
+	<input class="form-control" type="text" placeholder="商品名" name="tradename">
 	</div></td></tr>
 	<tr><th>単価 <span class="badge">必須</span></th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="単価">
+	<input class="form-control" id="right" type="text" placeholder="単価" name="price">
 	</div></td></tr>
 	<tr><th>個数 <span class="badge">必須</span></th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="個数">
+	<input class="form-control" id="right" type="text" placeholder="個数" name="salenumber">
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="remarks" rows="3" placeholder="備考"></textarea>
+	<textarea class="form-control" id="remarks" rows="3" placeholder="備考" name="note"></textarea>
 	</div></td>
 	</tr>
 

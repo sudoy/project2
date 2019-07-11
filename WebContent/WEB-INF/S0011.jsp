@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -52,7 +54,7 @@
 <div class="container">
 
 
-<form class="form-horizontal" method="POST" action="S0010_売上登録画面.html">
+<form class="form-horizontal" method="POST" action="S0010.html">
 	<table>
 
 	<tr><th>販売日</th>
@@ -66,21 +68,19 @@
 	<tr><th>担当</th>
 	<td><div class="col-md-8">
 		<select class="form-control" disabled>
-			<option>イチロー</option>
-			<option>イチロー</option>
-			<option>ダルビッシュ</option>
-			<option>4</option>
-			<option>5</option>
+			<option <c:if test="${(saleform.accountid).equals('0')}">selected</c:if>>イチロー</option>
+			<option <c:if test="${(saleform.accountid).equals('1')}">selected</c:if>>ダルビッシュ</option>
+			<option <c:if test="${(saleform.accountid).equals('2')}">selected</c:if>>4</option>
+			<option <c:if test="${(saleform.accountid).equals('3')}">selected</c:if>>5</option>
 		</select></div>
 	</td></tr>
 	<tr><th>商品カテゴリー</th>
 	<td><div class="col-md-8">
 		<select class="form-control" disabled>
-			<option>食料品</option>
-			<option>食料品</option>
-			<option>日用品</option>
-			<option>4</option>
-			<option>5</option>
+			<option <c:if test="${saleform.categoryid.equals('0')}">selected</c:if>>食料品</option>
+			<option <c:if test="${saleform.categoryid.equals('1')}">selected</c:if>>日用品</option>
+			<option <c:if test="${saleform.categoryid.equals('2')}">selected</c:if>>4</option>
+			<option <c:if test="${saleform.categoryid.equals('3')}">selected</c:if>>5</option>
 		</select></div>
 	</td></tr>
 
@@ -113,7 +113,7 @@
 
 		<button type="submit" class="btn btn-primary" id="entry">
 		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
-		<a type="button" class="btn btn-default" href="S0010_売上登録画面.html">キャンセル</a>
+		<a type="button" class="btn btn-default" href="s0010.html">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>

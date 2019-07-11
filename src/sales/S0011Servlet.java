@@ -25,15 +25,24 @@ public class S0011Servlet extends HttpServlet {
 		String salenumber = req.getParameter("salenumber");
 		String note = req.getParameter("note");
 
+		System.out.println(categoryid);
 
-		S0010Form saleform = new S0010Form(saledate, accountid, categoryid, tradename, price, salenumber, note);
-
+		System.out.println(price);
 		//単価と個数をかけて小計をだす
-		int pricenum = Integer.parseInt(req.getParameter("price"));
-		int salenumbernum = Integer.parseInt(req.getParameter("price"));
+		int pricenum = Integer.parseInt(price);
+		int salenumbernum = Integer.parseInt(salenumber);
+
+
+		System.out.println(pricenum);
 
 		int total = pricenum * salenumbernum;
 		req.setAttribute("total", total);
+
+
+		S0010Form saleform = new S0010Form(saledate, accountid, categoryid, tradename, price, salenumber, note);
+
+
+
 
 		HttpSession session = req.getSession();
 		session.setAttribute("saleform", saleform);

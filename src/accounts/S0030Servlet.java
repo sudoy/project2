@@ -20,7 +20,7 @@ import accounts.services.S0031Service;
 public class S0030Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		req.setCharacterEncoding("UTF-8");
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp").forward(req, resp);
 	}
@@ -67,6 +67,7 @@ public class S0030Servlet extends HttpServlet {
 				session.setAttribute("error", error);
 				getServletContext().getRequestDispatcher("/WEB-INF/S0031.jsp").forward(req, resp);
 				session.removeAttribute("error");
+				session.removeAttribute("form");
 
 
 			}else {

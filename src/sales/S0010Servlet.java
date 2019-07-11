@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-
-
 @WebServlet("/s0010.html")
 public class S0010Servlet extends HttpServlet {
 @Override
