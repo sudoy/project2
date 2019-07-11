@@ -16,25 +16,24 @@
 		<div class="center">
 		<h2>物品売上管理システム</h2>
 
-		<form action="#" method="post">
+		<jsp:include page="message.jsp"/>
+
+		<form action="C0010.html" method="post">
 
 		<div class="form-group">
 			<label for="exampleInputEmail1"></label>
-			<input type="email" class=" form-control"  placeholder="メールアドレス">
+			<input type="email" class=" form-control" name="mail" placeholder="メールアドレス" value="${C0010Form.mail}">
 			<label for="exampleInputPassword1"></label>
-			<input type="password" class="form-control" placeholder="パスワード">
+			<input type="password" class="form-control" name="password" placeholder="パスワード">
 		</div>
 		<div class="form-group">
-		<a class="btn btn-primary" href="C0020_ダッシュボード.html" role="button">ログイン</a>
+		<button type="submit" class="btn btn-primary">ログイン</button>
 		</div>
 		</form>
-		<a href="S0045_パスワード再設定.html">パスワードを忘れた方はこちら</a>
+		<a href="S0045.html">パスワードを忘れた方はこちら</a>
 
 
 		</div>
-
-
-
 
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script	src="js/bootstrap.min.js"></script>

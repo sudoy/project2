@@ -1,4 +1,4 @@
-*{
+body{
 background-color: #f8f8f8;
 }
 
@@ -18,7 +18,7 @@ margin: -9px auto;
 
 }
 
-a.btn.btn-primary{
+.form-group button{
 width: 308px;
 height: 42px;
 margin: 0 auto;
@@ -29,4 +29,12 @@ display-inline: block;
 a{
 margin: 0 0 0 -110px;
 
+}
+
+.alert-dismissable, .alert-dismissible {
+	margin: 0 auto;
+    width: 50%;
+}
+.alert-dismissable li, .alert-dismissible li, .alert-dismissable h4 , .alert-dismissible h4{
+	text-align: left;
 }
