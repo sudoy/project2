@@ -11,11 +11,11 @@
 
 <jsp:include page="header.jsp">
 <jsp:param name="bar"
-		value='<li><a href="C0020_ダッシュボード.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
+		value='<li><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
 		<li><a href="S0010.html">売上登録</a></li>
 		<li><a href="S0020.html">売上検索</a></li>
-		<li class="active"><a href="#">アカウント登録</a></li>
-		<li><a href="S0040_アカウント検索条件入力.html">アカウント検索</a></li>'/>
+		<li class="active"><a href="S0030.html">アカウント登録</a></li>
+		<li><a href="S0040.html">アカウント検索</a></li>'/>
 </jsp:include>
 
 <div class="container">
@@ -25,7 +25,7 @@
 
 <h1>アカウント登録</h1>
 
-	<form class="form-horizontal" action="s0031.html" method="post">
+	<form class="form-horizontal" action="S0031.html" method="post">
 		<div class="form-group">
 		    <label for="text" class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 必須 </span></label>
 		    <div class="col-sm-5">
@@ -56,10 +56,10 @@
 
 			<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="sale" value="0" checked > 権限なし
+				<input type="radio" name="sale" value="0" <c:if test="${form.sale == '0'}">checked</c:if> checked > 権限なし
 			</label>
 				<label class="radio-inline">
-				<input type="radio" name="sale" value="1"> 権限あり
+				<input type="radio" name="sale" value="1" <c:if test="${form.sale == '0'}">checked</c:if>> 権限あり
 			</label>
 			</div>
 		</div>
@@ -69,10 +69,10 @@
 
 			<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="account" value="0"checked> 権限なし
+				<input type="radio" name="account" value="0" <c:if test="${form.account == '0'}">checked</c:if> checked> 権限なし
 			</label>
 				<label class="radio-inline">
-				<input type="radio" name="account" value="1"> 権限あり
+				<input type="radio" name="account" value="1" <c:if test="${form.account == '1'}">checked</c:if>> 権限あり
 			</label>
 			</div>
 		</div>

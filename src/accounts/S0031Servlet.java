@@ -14,43 +14,57 @@ import javax.servlet.http.HttpSession;
 
 import accounts.forms.S0031Form;
 
-@WebServlet("/s0031.html")
+@WebServlet("/S0031.html")
 public class S0031Servlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		req.setCharacterEncoding("UTF-8");
 
-		String name = req.getParameter("name");
-		String mail = req.getParameter("mail");
-		String password = req.getParameter("password");
-		String check = req.getParameter("check");
-		String sale = req.getParameter("sale");
-		String account = req.getParameter("account");
-
-		S0031Form form = new S0031Form(name, mail, password, check, sale, account);
-
-
+		//ログインチェック
 		HttpSession session = req.getSession();
-		session.setAttribute("form", form);
+		boolean login = false;
 
-
-		// バリデーションチェック
-		List<String> error = validate(form);
-
-		//エラーがある場合
-		if(error.size() != 0) {
-			// S0030.htmlを再表示
-			session.setAttribute("error", error);
-			req.setAttribute("form", form);
-			getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp")
-				.forward(req, resp);
-			session.removeAttribute("error");
-
-			getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp").forward(req, resp);
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
 		}
 
-		getServletContext().getRequestDispatcher("/WEB-INF/S0031.jsp").forward(req, resp);
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		} else {
+			String name = req.getParameter("name");
+			String mail = req.getParameter("mail");
+			String password = req.getParameter("password");
+			String check = req.getParameter("check");
+			String sale = req.getParameter("sale");
+			String account = req.getParameter("account");
+
+			S0031Form form = new S0031Form(name, mail, password, check, sale, account);
+
+
+			session = req.getSession();
+			session.setAttribute("form", form);
+
+
+			// バリデーションチェック
+			List<String> error = validate(form);
+
+			//エラーがある場合
+			if(error.size() != 0) {
+				// S0030.htmlを再表示
+				session.setAttribute("error", error);
+				req.setAttribute("form", form);
+				getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp")
+					.forward(req, resp);
+				session.removeAttribute("error");
+
+				getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp").forward(req, resp);
+			}
+
+			getServletContext().getRequestDispatcher("/WEB-INF/S0031.jsp").forward(req, resp);
+		}
 
 	}
 	private List<String> validate(S0031Form form) throws UnsupportedEncodingException {
@@ -85,8 +99,6 @@ public class S0031Servlet extends HttpServlet {
 		if(!password.equals(check)) {
 			error.add("パスワードが異なります");
 		}
-
-
 
 		return error;
 
