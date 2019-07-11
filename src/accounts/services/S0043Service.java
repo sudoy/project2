@@ -9,7 +9,7 @@ import goods.utils.DBUtils;
 public class S0043Service {
 
 
-	//データの更新
+	//データ更新
 	public void update(S0043FormUpdate form) {
 
 		Connection con = null;
@@ -21,7 +21,7 @@ public class S0043Service {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "update todo set name=?, mail=?, password=?, deadline=? where authority = ?";//ここでMD5化
+			sql = "update todo set name=?, mail=?, password=md5(?), deadline=? where authority = ?";//ここでMD5化
 
 			//UPDATE命令の準備
 			ps = con.prepareStatement(sql);

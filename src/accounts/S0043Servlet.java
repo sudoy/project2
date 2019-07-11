@@ -39,9 +39,6 @@ public class S0043Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
-		//ログインチェック
-		//権限チェック
-
 		String name = req.getParameter("name");
 		String mail = req.getParameter("mail");
 		String password = req.getParameter("password");
@@ -50,14 +47,22 @@ public class S0043Servlet extends HttpServlet {
 		String account = req.getParameter("account");
 		String authority = req.getParameter("authority");
 
+		System.out.println("test");
+		System.out.println(name);
+
+		//ログインチェック
+		//権限チェック(権限がない場合はダッシュボードへ遷移)
+		if(!authority.equals("10") && !authority.equals("11")) {
+			resp.sendRedirect("C0020.html");
+		}
+
 		S0043FormUpdate form = new S0043FormUpdate(name, mail, password, check, sale, account, authority);
 
 		//更新
 		S0043Service service = new S0043Service();
 		service.update(form);
 
-
-		//更新が完了したらS0041へ遷移
+		//更新完了後、S0041へ遷移
 		resp.sendRedirect("S0041.html");
 	}
 
