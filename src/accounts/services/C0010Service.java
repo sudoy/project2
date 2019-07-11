@@ -25,11 +25,8 @@ public class C0010Service {
 		try {
 			con = DBUtils.getConnection();
 			sql = "select account_id, name, mail, password, authority "
-					+ "from accounts where mail = ? and password = md5(?)";//ここでSHA2()使えばよかった
+					+ "from accounts where mail = ? and password = md5(?)";//ハッシュ化
 			ps = con.prepareStatement(sql);
-
-//			//入力されたパスワードをハッシュ化
-//			String hashPass = SHA2.getSHA256(form.getPass());
 
 			ps.setString(1, form.getMail());
 			ps.setString(2, form.getPassword());
