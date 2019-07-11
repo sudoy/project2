@@ -19,6 +19,7 @@ public class C0030Servlet extends HttpServlet {
 		session.setAttribute("login", false);
 		session.removeAttribute("userinfo");
 		session.setAttribute("update", "off");
+		session.removeAttribute("S0041Form");
 		resp.sendRedirect("C0010.html");
 
 	}

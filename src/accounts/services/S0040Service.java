@@ -22,9 +22,6 @@ public class S0040Service {
 		String sale = form.getSale();
 		String account = form.getAccount();
 
-		System.out.println("name:" + name);
-		System.out.println("mail:" + mail);
-
 		Map<String, String> map = HTMLUtils.formatAuthority(sale, account);
 
 		Connection con = null;
@@ -61,8 +58,6 @@ public class S0040Service {
 					ps.setString(1, mail);
 				}
 			}
-
-			System.out.println(ps);
 
 			rs = ps.executeQuery();
 
