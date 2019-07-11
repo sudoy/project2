@@ -63,8 +63,7 @@ public class S0042Servlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		boolean login = false;
 
-		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
-			//loginがtrue(ログイン状態にある)じゃないと入れないように
+		if (session.getAttribute("login") != null) {
 			login = (boolean) session.getAttribute("login");
 		}
 

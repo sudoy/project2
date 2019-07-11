@@ -30,6 +30,11 @@ public class S0044Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 
+		S0044Service service = new S0044Service();
+		service.delete();
+
+
+
 
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
