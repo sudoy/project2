@@ -26,7 +26,7 @@
 
 <h1>アカウントを編集してよろしいですか？</h1>
 
-<form class="form-horizontal" action="S0041.html" method="post">
+<form class="form-horizontal" action="S0043.html" method="post">
 
 	<input type="hidden"  name="id" value="${S0042Form.id}">
 	<input type="hidden"  name="authority" value="${S0042Form.authority}">
