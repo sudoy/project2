@@ -15,24 +15,46 @@ public class C0020Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
 		HttpSession session = req.getSession();
+		boolean login = false;
 
-		getServletContext().getRequestDispatcher("/WEB-INF/C0020.jsp").forward(req, resp);
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
+		}
 
-		session.removeAttribute("error");
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		} else {
+
+			getServletContext().getRequestDispatcher("/WEB-INF/C0020.jsp").forward(req, resp);
+
+			session.removeAttribute("error");
+		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
 		HttpSession session = req.getSession();
+		boolean login = false;
 
-		getServletContext().getRequestDispatcher("/WEB-INF/C0020.jsp").forward(req, resp);
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
+		}
 
-		session.removeAttribute("error");
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		} else {
+
+			getServletContext().getRequestDispatcher("/WEB-INF/C0020.jsp").forward(req, resp);
+
+			session.removeAttribute("error");
+		}
 
 	}
 
