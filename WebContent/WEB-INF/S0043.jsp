@@ -28,8 +28,8 @@
 
 <form class="form-horizontal" action="S0043.html" method="post">
 
-	<input type="hidden"  name="id" value="${S0042Form.id}">
-	<input type="hidden"  name="authority" value="${S0042Form.authority}">
+	<input type="hidden"  name="id" value="${S0042Form.id}.id}">
+	<input type="hidden"  name="authority" value="${S0042Form.id}.authority}">
 
 
 	<div class="form-group">
@@ -71,12 +71,12 @@
 		<div class="col-sm-9">
 		<label class="radio-inline">
 			<input type="radio"  name="sale" value="0"
-			<c:if test="${S0043Form.authority.equals('0') || S0042Form.authority.equals('10') }">checked</c:if>
+			<c:if test="${S0042Form.authority.equals('0') || S0042Form.authority.equals('10') }">checked</c:if>
 			 > 権限なし
 		</label>
 			<label class="radio-inline">
 			<input type="radio"  name="sale" value="1"
-			<c:if test="${S0043Form.authority.equals('1') || S0042Form.authority.equals('11') }">checked</c:if>
+			<c:if test="${S0042Form.authority.equals('1') ||S0042Form.authority.equals('11') }">checked</c:if>
 			>権限あり
 		</label>
 		</div>
@@ -104,7 +104,7 @@
 	      <button type="submit" class="btn btn-primary">
 	      	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K
 	      </button>
-	      	<a type="button" class="btn btn-default" href="S0042.html">キャンセル</a>
+	      	<a type="button" class="btn btn-default" href="S0043.html">キャンセル</a>
 	    </div>
 	</div>
 </form>

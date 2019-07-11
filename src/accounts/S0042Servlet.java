@@ -44,12 +44,12 @@ public class S0042Servlet extends HttpServlet {
 		req.setAttribute("form", form);
 
 		//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
-		String authority = form.getAuthority();
-
-		if(!authority.equals("10") && !authority.equals("11")){
-			resp.sendRedirect("C0020.html");
-
-		}
+//		String authority = form.getAuthority();
+//
+//		if(!authority.equals("10") && !authority.equals("11")){
+//			resp.sendRedirect("C0020.html");
+//
+//		}
 
 		this.getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
 
@@ -103,7 +103,7 @@ public class S0042Servlet extends HttpServlet {
 		} else {
 
 			//入力チェックをクリアすればS0043_アカウント詳細編集確認画面へ遷移
-			req.setAttribute("S0042Form", form);
+			session.setAttribute("S0042Form", form);
 			getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
 		}
 
