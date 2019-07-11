@@ -34,9 +34,11 @@ public class C0010Service {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				id = rs.getString("account_id");
 				name = rs.getString("name");
 				mail = rs.getString("mail");
 				password = rs.getString("password");
+				authority = rs.getString("authority");
 
 				if (mail != null && password != null) {
 					login = true;

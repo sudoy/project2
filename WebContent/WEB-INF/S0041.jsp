@@ -36,7 +36,7 @@
 
 		<tr>
 			<td class="col-sm-2">
-			<c:if test="${(i.authority == '売上登録/アカウント登録') || (i.authority == 'アカウント登録')}">
+			<c:if test="${(userinfo.authority == '10') || (userinfo.authority == '11')}">
 			<a class="btn btn-primary" href="S0042.html?id=${i.id}" role="button">
 			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 編集</a>
 			<a class="btn btn-danger" href="S0044.html?id=${i.id}" role="button">
