@@ -1,7 +1,8 @@
           package accounts;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,11 +53,8 @@ public class S0030Servlet extends HttpServlet {
 			form.setPassword(form2.getPassword());
 			form.setAuthority(authority);
 
-			// DBへ登録
-			S0030Service service = new S0030Service();
-			service.register(form);
 
-
+			List<String> error = new ArrayList<String>();
 
 
 			//メールアドレス重複確認
@@ -64,16 +62,26 @@ public class S0030Servlet extends HttpServlet {
 			boolean exist = service2.service(form);
 			//ここまでok
 
-			if(Arrays.asList(list).contains("form.mail")){
+			if(exist == false){
+				error.add("メールアドレスが重複しています。") ;
+				session.setAttribute("error", error);
+				getServletContext().getRequestDispatcher("/WEB-INF/S0031.jsp").forward(req, resp);
+				session.removeAttribute("error");
 
-				resp.sendRedirect("s0031.html");
 
+			}else {
+
+				// DBへ登録
+				S0030Service service = new S0030Service();
+				service.register(form);
+
+				session.removeAttribute("form");
+
+				session.setAttribute("complete", "登録しました");
+
+				getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp").forward(req, resp);
+				session.removeAttribute("complete");
 			}
-
-			session.setAttribute("complete", "登録しました");
-
-			// リダイレクト
-			resp.sendRedirect("s0030.html");
 
 		}catch(Exception e) {
 			e.printStackTrace();

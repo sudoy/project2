@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<title>アカウント登録｜物品売上管理システム</title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="float.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -79,24 +80,24 @@
 
 			<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="sale" value="0" <c:if test="${form.sale.equals('0') }">checked</c:if> > 権限なし
+				<input type="radio" name="sale" value="0" checked > 権限なし
 			</label>
 				<label class="radio-inline">
-				<input type="radio" name="sale" value="1" <c:if test="${form.sale.equals('1')}">checked</c:if> > 権限あり
+				<input type="radio" name="sale" value="1"> 権限あり
 			</label>
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label  class="col-sm-3 control-label">アカウント登録期限 <span class="badge badge-default">必須</span></label>
+			<label  class="col-sm-3 control-label,float">アカウント登録期限 <span class="badge badge-default">必須</span></label>
 
 
 			<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="account" value="0" <c:if test="${form.account.equals('0')}">checked</c:if>> 権限なし
+				<input type="radio" name="account" value="0"checked> 権限なし
 			</label>
 				<label class="radio-inline">
-				<input type="radio" name="account" value="1" <c:if test="${form.account.equals('1')}">checked</c:if>> 権限あり
+				<input type="radio" name="account" value="1"> 権限あり
 			</label>
 			</div>
 		</div>

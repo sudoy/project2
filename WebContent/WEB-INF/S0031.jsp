@@ -10,6 +10,7 @@
 </head>
 <body>
 
+
 <nav class="navbar navbar-default">
 <div class="container-fluid">
 	<!-- Brand and toggle get grouped for better mobile display -->
@@ -42,6 +43,10 @@
 </div><!-- /.container-fluid -->
 </nav>
 <div class="container">
+
+
+<jsp:include page="message.jsp"/>
+
 
 <h1>アカウントを登録してよろしいですか？</h1>
 

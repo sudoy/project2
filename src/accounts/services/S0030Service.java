@@ -21,7 +21,7 @@ public class S0030Service {
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
 		//sql
-			sql = "INSERT INTO accounts(name, mail, password, authority) VALUES (?,?,?,?)";
+			sql = "INSERT INTO accounts(name, mail, password, authority) VALUES (?,?,md5(?),?)";
 
 			// プレースホルダに値を設定
 			ps = con.prepareStatement(sql);

@@ -29,7 +29,7 @@ public class S0031Servlet extends HttpServlet {
 		String account = req.getParameter("account");
 
 		S0031Form form = new S0031Form(name, mail, password, check, sale, account);
-//		req.setAttribute("form", form);
+
 
 		HttpSession session = req.getSession();
 		session.setAttribute("form", form);

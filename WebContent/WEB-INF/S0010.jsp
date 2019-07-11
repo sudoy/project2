@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8 %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -10,9 +10,6 @@
 		<link href="css/S0010_売上登録画面.css" rel="stylesheet">
 	</head>
 	<body>
-
-
-
 
 
 <nav class="navbar navbar-default">
@@ -52,7 +49,7 @@
 <div class="container">
 
 
-<form class="form-horizontal" method="POST" action="S0011_売上登録確認画面.html">
+<form class="form-horizontal" method="POST" action="s0011.html">
 	<table>
 
 	<tr><th>販売日 <span class="badge">必須</span></th>

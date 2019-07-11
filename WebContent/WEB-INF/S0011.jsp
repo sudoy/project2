@@ -58,7 +58,7 @@
 	<tr><th>販売日</th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" value="2015/01/15" placeholder="販売日" disabled>
+		<input type="text" class="form-control" value="${saleform.saledate}" placeholder="販売日" disabled>
 		</div>
 		</td>
 	</tr>
@@ -86,23 +86,23 @@
 
 	<tr><th>商品名</th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" placeholder="からあげ弁当" disabled>
+	<input class="form-control" type="text" placeholder="${saleform.tradename}" disabled>
 	</div></td></tr>
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="540" disabled>
+	<input class="form-control" id="right" type="text" placeholder="${saleform.price}" disabled>
 	</div></td></tr>
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="3" disabled>
+	<input class="form-control" id="right" type="text" placeholder="${saleform.salenumber}" disabled>
 	</div></td></tr>
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="1,620" disabled>
+	<input class="form-control" id="right" type="text" placeholder="${total}" disabled>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="detail" rows="3" placeholder="備考" disabled></textarea>
+	<textarea class="form-control" id="detail" rows="3" placeholder="${saleform.note}" disabled></textarea>
 	</div></td>
 	</tr>
 

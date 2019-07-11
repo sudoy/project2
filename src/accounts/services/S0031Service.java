@@ -16,6 +16,8 @@ public class S0031Service {
 		ResultSet rs = null;
 		boolean exist = false;
 
+		String s = null;
+
 		try{
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
@@ -29,13 +31,18 @@ public class S0031Service {
 
 			rs = ps.executeQuery();
 
-			rs.next();
+			while(rs.next()) {
+				s = rs.getString("mail");
+			};
 
-			if(rs.getString("mail") == null) {
+
+			if(s == null){
 				exist = true;
 			}else {
 				exist = false;
 			}
+			System.out.println(rs.getString("mail"));
+
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
