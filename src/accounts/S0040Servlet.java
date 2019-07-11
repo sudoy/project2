@@ -118,14 +118,11 @@ public class S0040Servlet extends HttpServlet {
 		//「＠」が含まれていること。先頭は「a-zA-Z0-9」で、2文字目以降はさらに「._-」の文字が許容される。
 		//「＠」以降は「a-zA-Z0-9._-」が1文字以上続き、必ず「.」が含まれていること
 		if (!(form.getMail().equals("")) &&
-				(101 >= form.getMail().getBytes("UTF-8").length)) {//mailが入力されており且101バイト以下
-			String mailFormat = "^(([0-9a-zA-Z!#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+(\\.[0-9a-zA-Z!#\\$%&"
-					+ "'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+)*)|(\"[^\"]*\"))"
-					+ "@[0-9a-zA-Z!#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+"
-					+ "(\\.[0-9a-zA-Z!#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+)*$";
+				(form.getMail().getBytes("UTF-8").length) < 101) {//mailが入力されており且101バイトより小さい
+			String mailFormat = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
 			Pattern pattern = Pattern.compile(mailFormat);
 			Matcher matcher = pattern.matcher(form.getMail());
-			if (matcher.find() == false) {
+			if (!matcher.find()) {
 				error.add("メールアドレスの形式が間違っています。");
 			}
 		}

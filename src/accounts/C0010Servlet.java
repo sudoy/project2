@@ -23,12 +23,22 @@ public class C0010Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
 		HttpSession session = req.getSession();
+		boolean login = false;
 
-		getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//sessinが存在していればloginに取り出した値を代入
+			login = (boolean) session.getAttribute("login");
+		}
 
-		session.removeAttribute("error");
+		if (login == true) {//ログイン状態にあればダッシュボードに遷移
+			resp.sendRedirect("C0020.html");
+		} else {//ログイン状態になければログイン画面へ
+
+			getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);
+
+			session.removeAttribute("error");
+		}
 	}
 
 	@Override
@@ -95,10 +105,7 @@ public class C0010Servlet extends HttpServlet {
 		//「＠」以降は「a-zA-Z0-9._-」が1文字以上続き、必ず「.」が含まれていること
 		if (!(form.getMail().equals("")) &&
 				(101 >= form.getMail().getBytes("UTF-8").length)) {//mailが入力されており且101バイト以下
-			String mailFormat = "^(([0-9a-zA-Z!#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+(\\.[0-9a-zA-Z!#\\$%&"
-					+ "'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+)*)|(\"[^\"]*\"))"
-					+ "@[0-9a-zA-Z!#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+"
-					+ "(\\.[0-9a-zA-Z!#\\$%&'\\*\\+\\-/=\\?\\^_`\\{\\}\\|~]+)*$";
+			String mailFormat = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
 			Pattern pattern = Pattern.compile(mailFormat);
 			Matcher matcher = pattern.matcher(form.getMail());
 			if (matcher.find() == false) {
