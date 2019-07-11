@@ -16,6 +16,12 @@ public class S0042Service {
 		String sql = null;
 		ResultSet rs = null;
 
+		String id = null;
+		String name = null;
+		String mail = null;
+		String password = null;
+		String authority = null;
+
 		try {
 			//データベース接続
 			con = DBUtils.getConnection();
@@ -36,13 +42,15 @@ public class S0042Service {
 			rs = ps.executeQuery();
 
 			//結果セットの内容を出力(DBから抽出したデータ)
-			rs.next();
+			while(rs.next()) {
 
-			String id = rs.getString("account_id");
-			String name = rs.getString("name");
-			String mail = rs.getString("mail");
-			String password = rs.getString("password");
-			String authority = rs.getString("authority");
+			id = rs.getString("account_id");
+			name = rs.getString("name");
+			mail = rs.getString("mail");
+			password = rs.getString("password");
+			authority = rs.getString("authority");
+
+			}
 
 			S0042FormGet edit = new S0042FormGet(id, name, mail, password, authority);
 

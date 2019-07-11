@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import accounts.forms.S0043FormUpdate;
 import accounts.services.S0043Service;
@@ -32,12 +33,15 @@ public class S0043Servlet extends HttpServlet {
 //		}
 
 
-		getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
+		getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+
+		HttpSession session = req.getSession();
+		boolean login = true;
 
 		String name = req.getParameter("name");
 		String mail = req.getParameter("mail");
@@ -61,6 +65,8 @@ public class S0043Servlet extends HttpServlet {
 		//更新
 		S0043Service service = new S0043Service();
 		service.update(form);
+
+		session.removeAttribute("S0042Form");
 
 		//更新完了後、S0041へ遷移
 		resp.sendRedirect("S0041.html");
