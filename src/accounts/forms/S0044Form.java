@@ -1,6 +1,6 @@
 package accounts.forms;
 
-public class S0044FormGet {
+public class S0044Form {
 
 	private String id;
 	private String name;
@@ -8,7 +8,7 @@ public class S0044FormGet {
 	private String password;
 	private String authority;
 
-	public S0044FormGet(String id, String name, String mail, String password, String authority) {
+	public S0044Form(String id, String name, String mail, String password, String authority) {
 		super();
 		this.id = id;
 		this.name = name;

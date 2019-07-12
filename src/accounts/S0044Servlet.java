@@ -7,8 +7,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import accounts.forms.S0044FormGet;
+import accounts.forms.S0044Form;
 import accounts.services.S0044Service;
 
 @WebServlet("/S0044.html")
@@ -18,28 +19,55 @@ public class S0044Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
-		S0044Service service = new S0044Service();
+		HttpSession session = req.getSession();
+		boolean login = false;
 
-		S0044FormGet form = service.select(req.getParameter("id"));
-		req.setAttribute("S0044Form", form);
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
+		}
 
-		getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		} else {
+			S0044Service service = new S0044Service();
+
+			S0044Form form = service.select(req.getParameter("id"));
+			req.setAttribute("S0044Form", form);
+
+			getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
+		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+//		HttpSession session = req.getSession();
+//		boolean login = false;
+//
+//		if (session.getAttribute("login") != null) {
+//			login = (boolean) session.getAttribute("login");
+//		}
+//
+//		if (login == false) {
+//			session.setAttribute("error", "ログインしてください。");
+//			resp.sendRedirect("C0010.html");
+//		} else {
 
-		S0044Service service = new S0044Service();
-		service.delete();
+			String id = req.getParameter("id");
+			String name = req.getParameter("name");
+			String mail = req.getParameter("mail");
+			String password = req.getParameter("password");
+			String authority = req.getParameter("authority");
 
+			S0044Form deleteform = new S0044Form(id, name, mail, password, authority);
 
+			S0044Service service = new S0044Service();
+			service.delete(deleteform);
 
+//		}
 
-
-		getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
 	}
-
-
 
 }

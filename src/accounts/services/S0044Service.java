@@ -4,13 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import accounts.forms.S0044FormGet;
-import accounts.forms.S0044FormPost;
+import accounts.forms.S0044Form;
 import goods.utils.DBUtils;
 
 public class S0044Service {
 
-	public S0044FormGet select(String num) {
+	public S0044Form select(String num) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -53,7 +52,7 @@ public class S0044Service {
 
 			}
 
-			S0044FormGet list = new S0044FormGet(id, name, mail, password, authority);
+			S0044Form list = new S0044Form(id, name, mail, password, authority);
 
 			return list;
 
@@ -67,7 +66,7 @@ public class S0044Service {
 	}
 
 	//データの削除
-	public void delete(S0044FormPost form) {
+	public void delete(S0044Form form) {
 
 		Connection con = null;
 		PreparedStatement ps = null;

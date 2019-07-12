@@ -42,14 +42,10 @@ public class S0042Servlet extends HttpServlet {
 
 			S0042FormGet form = service.select(req.getParameter("id"));
 			session.setAttribute("S0042Form", form);
+			session.setAttribute("password", form.getPassword());
 
 			//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
-			//			String authority = form.getAuthority();
-			//
-			//			if(!authority.equals("10") && !authority.equals("11")){
 			//				resp.sendRedirect("C0020.html");
-
-			//			}
 
 			this.getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
 		}
@@ -80,22 +76,15 @@ public class S0042Servlet extends HttpServlet {
 			String sale =req.getParameter("sale");
 			String account = req.getParameter("account");
 
+			//saleとaccountを文字列結合した値をauthorityに入れることで権限の有無を判断
 			int authorityint  = Integer.parseInt(account + sale);
-
 			String authority = String.valueOf(authorityint);
-
-
-
-			System.out.println(sale);
-			System.out.println(account);
-			System.out.println(authority);
 
 			S0042FormPost form = new S0042FormPost(id, name, mail, password, check, sale, account, authority);
 
 			//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
-//			if (!(authority.equals("10")) && !(authority.equals("11"))) {
 //				resp.sendRedirect("C0020.html");
-//			}
+
 
 			//入力チェック
 			List<String> error = validate(form);

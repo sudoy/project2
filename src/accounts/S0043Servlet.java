@@ -61,24 +61,36 @@ public class S0043Servlet extends HttpServlet {
 			String password = form.getPassword();
 			String authority = form.getAuthority();
 
-			S0043Form updateform = new S0043Form(id, name, mail, password, authority);
+			System.out.println("テスト");
+			System.out.println(form.getPassword());
+			System.out.println("テスト");
 
-			//ログインチェック
+			S0043Form updateform;
+
+			if(password.equals("")) {
+				String oldpassword = (String) session.getAttribute("password");
+				updateform = new S0043Form(id, name, mail, oldpassword, authority);
+
+
+			}else{
+				updateform = new S0043Form(id, name, mail, password, authority);
+			}
+
+
 			//権限チェック(権限がない場合はダッシュボードへ遷移)
-			if (!(authority.equals("10")) && !(authority.equals("11"))) {
-				resp.sendRedirect("C0020.html");
-			} else {
+//				resp.sendRedirect("C0020.html");
 
 				//更新
 				S0043Service service = new S0043Service();
 				service.update(updateform);
 
 				session.removeAttribute("S0042Form");
+				session.removeAttribute("password");
 				session.setAttribute("update", "on");// 7/11 16:08追加
 
 				//更新完了後、S0041へ遷移
 				resp.sendRedirect("S0041.html");
-			}
+//			}
 		}
 	}
 
