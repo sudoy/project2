@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -24,6 +25,7 @@
 
 <div class="container">
 
+	<jsp:include page="message.jsp"/>
 
 <form class="form-horizontal" method="POST" action="S0020.html">
 	<table>
@@ -31,43 +33,41 @@
 	<tr><th>販売日</th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" value="販売日（検索開始日）" placeholder="販売日">
+		<input type="text" class="form-control" name="dateBegin" value="${S0020Form.dateBegin}" placeholder="販売日">
 		</div>
 		<div class="col-md-2">～</div>
 		<div class="col-md-3">
-		<input type="text" class="form-control" value="販売日（検索終了日）" placeholder="販売日">
+		<input type="text" class="form-control" name="dateEnd" value="${S0020Form.dateEnd}" placeholder="販売日">
 		</div>
 		</td>
 	</tr>
 
 	<tr><th>担当</th>
 	<td><div class="col-md-8">
-		<select class="form-control">
+		<select name="name" class="form-control">
 			<option>選択してください</option>
-			<option>イチロー</option>
-			<option>ダルビッシュ</option>
-			<option>4</option>
-			<option>5</option>
+			<c:forEach items="${allName}" var="i">
+				<option value="${i.accountName}">${i.accountName}</option>
+			</c:forEach>
 		</select></div>
 	</td></tr>
 	<tr><th>商品カテゴリー</th>
 	<td><div class="col-md-8">
-		<select class="form-control">
-			<option>選択してください</option>
-			<option>食料品</option>
-			<option>日用品</option>
-			<option>4</option>
-			<option>5</option>
-		</select></div>
+		<c:forEach items="${allCategory}" var="i">
+			<label class="checkbox-inline">
+			<input type="checkbox" name="categoryName" value="${i}"> ${i}
+			</label>
+		</c:forEach>
+	</div>
 	</td></tr>
 
 	<tr><th>商品名 <span class="badge">部分一致</span></th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" placeholder="商品名">
+	<input class="form-control" type="text" placeholder="商品名" name="tradeName" value="${S0020Form.tradeName}">
 	</div></td></tr>
 	<tr><th id="remarks">備考 <span class="badge">部分一致</span></th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="detail" rows="3" placeholder="備考"></textarea>
+	<textarea class="form-control" id="detail" rows="3" placeholder="備考" name="note">${S0020Form.note}</textarea>
 	</div></td>
 	</tr>
 
@@ -76,7 +76,7 @@
 	<td id="canto">
 	<div class="form-group">
 
-		<button type="submit" class="btn btn-primary" id="touroku">
+		<button type="submit" class="btn btn-primary">
 		<span class="glyphicon glyphicon-search" aria-hidden="true"></span> 検　索</button>
 		<input type="reset" class="btn btn-default" value="クリア">
 	</div>
