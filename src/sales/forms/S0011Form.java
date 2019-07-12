@@ -71,4 +71,12 @@ public class S0011Form {
 		this.note = note;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

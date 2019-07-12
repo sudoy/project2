@@ -3,18 +3,16 @@ package sales.services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 
 import goods.utils.DBUtils;
-import sales.forms.S0010Form;
 
 
 
 public class S0011Service {
-	public List<S0010Form> select() throws ServletException {
+
+	public String select2(String accountid) throws ServletException {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -27,24 +25,21 @@ public class S0011Service {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select account_id,name from accounts";
+			sql = "select name from accounts where account_id = ?";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
+			ps.setString(1, accountid);
 
 			//SELECT命令の実行
 			rs = ps.executeQuery();
 
-			List<S0010Form> accounts = new ArrayList<>();
 
-			while(rs.next()) {
-				S0010Form form = new S0010Form();
-				accounts.add(form);
 
-				form.setAccountid(rs.getString("account_id"));
-				form.setName(rs.getString("name"));
-			}
-			return accounts;
+			rs.next();
+			String name = rs.getString("name");
+
+			return name;
 
 		}catch(Exception e){
 			throw new ServletException(e);
@@ -53,6 +48,6 @@ public class S0011Service {
 			DBUtils.close(con, ps, rs);
 		}
 
-
 	}
+
 }

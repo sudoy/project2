@@ -53,12 +53,12 @@
 
 	<tr><th>商品カテゴリー <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
-		<label class="radio-inline">
-		<input type="radio" name="categoryid" value="1" <c:if test="${form.categoryid == '1'}">checked</c:if>> 食料品
-		</label></div>
+		<c:forEach items="${allCategory}" var="i">
+			<label class="radio-inline">
+			<input type="radio" name="categoryName" value="${i}"> ${i}
+			</label>
+		</c:forEach></div>
 	</td></tr>
-
-
 
 	<tr><th>商品名 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">

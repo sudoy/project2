@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import sales.forms.S0010Form;
 import sales.forms.S0011Form;
 import sales.services.S0010Service;
-import sales.services.S0011Service;
 
 
 @WebServlet("/S0010.html")
@@ -24,13 +23,17 @@ public class S0010Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		//accountsテーブルからaccount_idを取得
-		S0011Service service = new S0011Service();
+		S0010Service service = new S0010Service();
 		List<S0010Form> form = service.select();
+		HttpSession session = req.getSession();
 
-		req.setAttribute("accounts", form);
+		session.setAttribute("accounts", form);
+
+		List<String> categoryList = service.category();
+
+		session.setAttribute("allCategory", categoryList);
 
 		//メッセージが出ないように
-		HttpSession session = req.getSession();
 		session.removeAttribute("error");
 		session.removeAttribute("complete");
 
