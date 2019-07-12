@@ -77,16 +77,25 @@ public class S0042Servlet extends HttpServlet {
 			String mail = req.getParameter("mail");
 			String password = req.getParameter("password");
 			String check = req.getParameter("check");
-			String sale = req.getParameter("sale");
+			String sale =req.getParameter("sale");
 			String account = req.getParameter("account");
-			String authority = req.getParameter("authority");
+
+			int authorityint  = Integer.parseInt(account + sale);
+
+			String authority = String.valueOf(authorityint);
+
+
+
+			System.out.println(sale);
+			System.out.println(account);
+			System.out.println(authority);
 
 			S0042FormPost form = new S0042FormPost(id, name, mail, password, check, sale, account, authority);
 
 			//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
-			if (!(authority.equals("10")) && !(authority.equals("11"))) {
-				resp.sendRedirect("C0020.html");
-			}
+//			if (!(authority.equals("10")) && !(authority.equals("11"))) {
+//				resp.sendRedirect("C0020.html");
+//			}
 
 			//入力チェック
 			List<String> error = validate(form);
@@ -109,6 +118,7 @@ public class S0042Servlet extends HttpServlet {
 		}
 
 	}
+
 
 	private List<String> validate(S0042FormPost form) throws UnsupportedEncodingException {//catch
 
