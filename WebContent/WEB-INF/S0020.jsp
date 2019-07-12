@@ -25,7 +25,7 @@
 <div class="container">
 
 
-<form class="form-horizontal" method="POST" action="S0021_売上検索結果一覧画面.html">
+<form class="form-horizontal" method="POST" action="S0020.html">
 	<table>
 
 	<tr><th>販売日</th>
