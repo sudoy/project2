@@ -34,7 +34,7 @@
 	<tr><th>販売日 <span class="badge">必須</span></th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" placeholder="販売日" name="saledate"  value="${saleform.saledate}">
+		<input type="text" class="form-control" placeholder="販売日" name="saledate"  value="${form.saledate}">
 		</div>
 		</td>
 	</tr>
@@ -42,39 +42,39 @@
 	<tr><th>担当 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
 		<select class="form-control" name="accountid">
-			<option >選択してください</option>
-			<option value ="0" <c:if test="${(saleform.accountid).equals('0')}">selected</c:if>>イチロー</option>
-			<option value ="1" <c:if test="${(saleform.accountid).equals('1')}">selected</c:if>>ダルビッシュ</option>
-			<option value ="2" <c:if test="${(saleform.accountid).equals('2')}">selected</c:if>>4</option>
-			<option value ="3" <c:if test="${(saleform.accountid).equals('3')}">selected</c:if>>5</option>
-		</select></div>
-	</td></tr>
-	<tr><th>商品カテゴリー <span class="badge">必須</span></th>
-	<td><div class="col-md-8">
-		<select class="form-control" name="categoryid">
-			<option>選択してください</option>
-			<option value ="0" <c:if test="${saleform.categoryid.equals('0')}">selected</c:if>>食料品</option>
-			<option value ="1" <c:if test="${saleform.categoryid.equals('1')}">selected</c:if>>日用品</option>
-			<option value ="2" <c:if test="${saleform.categoryid.equals('2')}">selected</c:if>>4</option>
-			<option value ="3" <c:if test="${saleform.categoryid.equals('3')}">selected</c:if>>5</option>
+			<option value="0">選択してください</option>
+
+			<c:forEach items="${accounts}" var="i">
+				<option value ="${i.accountid}" <c:if test="${(form.accountid).equals('1')}">selected</c:if>>${i.name}</option>
+			</c:forEach>
+
 		</select></div>
 	</td></tr>
 
+	<tr><th>商品カテゴリー <span class="badge">必須</span></th>
+	<td><div class="col-md-8">
+		<label class="radio-inline">
+		<input type="radio" name="categoryid" value="1" <c:if test="${form.categoryid == '1'}">checked</c:if>> 食料品
+		</label></div>
+	</td></tr>
+
+
+
 	<tr><th>商品名 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" placeholder="商品名" name="tradename" value="${saleform.tradename}">
+	<input class="form-control" type="text" placeholder="商品名" name="tradename" value="${form.tradename}">
 	</div></td></tr>
 	<tr><th>単価 <span class="badge">必須</span></th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="単価" name="price" value="${saleform.price}">
+	<input class="form-control" id="right" type="text" placeholder="単価" name="price" value="${form.price}">
 	</div></td></tr>
 	<tr><th>個数 <span class="badge">必須</span></th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="個数" name="salenumber" value="${saleform.salenumber}">
+	<input class="form-control" id="right" type="text" placeholder="個数" name="salenumber" value="${form.salenumber}">
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="remarks" rows="3" placeholder="備考" name="note" value="${saleform.note}"></textarea>
+	<textarea class="form-control" id="remarks" rows="3" placeholder="備考" name="note">${form.note}</textarea>
 	</div></td>
 	</tr>
 

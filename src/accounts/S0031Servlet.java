@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -74,30 +76,50 @@ public class S0031Servlet extends HttpServlet {
 		String mail = form.getMail();
 		String password = form.getPassword();
 		String check = form.getCheck();
+		String sale = form.getSale();
+		String account = form.getAccount();
 
 
 		if(name.equals("")) {
-			error.add("氏名は必須入力です。") ;
+			error.add("氏名を入力して下さい。") ;
 		}else if (!(form.getName().equals("")) &&
 				(21 <= form.getName().getBytes("UTF-8").length)) {
 			error.add("氏名が長すぎます。");
 		}
 
 		if(mail.equals("")) {
-			error.add( "メールアドレスは必須入力です。");
-		}else if (!(form.getMail().equals("")) &&
-				(101 <= form.getMail().getBytes("UTF-8").length)) {
-			error.add("メールアドレスが長すぎます。");
+			error.add( "メールアドレスを入力して下さい。");
 		}
+
+		//mailの形式チェック
+		//「＠」が含まれていること。先頭は「a-zA-Z0-9」で、2文字目以降はさらに「._-」の文字が許容される。
+		//「＠」以降は「a-zA-Z0-9._-」が1文字以上続き、必ず「.」が含まれていること
+		if (!(form.getMail().equals("")) &&
+				(form.getMail().getBytes("UTF-8").length) < 101) {//mailが入力されており且101バイトより小さい
+			String mailFormat = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+			Pattern pattern = Pattern.compile(mailFormat);
+			Matcher matcher = pattern.matcher(form.getMail());
+			if (!matcher.find()) {
+				error.add("メールアドレスを入力して下さい。");
+			}
+		}
+
+
 		if(password.equals("")) {
-			error.add("パスワードは必須入力です。");
+			error.add("パスワードを入力して下さい。");
 		}else if (!(form.getPassword().equals("")) &&
-				(33 <= form.getPassword().getBytes("UTF-8").length)) {
+				(32 <= form.getPassword().getBytes("UTF-8").length)) {
 			error.add("パスワードが長すぎます。");
 		}
 
 		if(!password.equals(check)) {
-			error.add("パスワードが異なります");
+			error.add("パスワードとパスワード（確認）が一致していません。");
+		}
+		if (account == null || account.isEmpty()) {
+			error.add( "アカウント登録権限を入力して下さい。");
+		}
+		if (sale == null || sale.isEmpty()) {
+			error.add( "売上登録権限を入力して下さい。");
 		}
 
 		return error;

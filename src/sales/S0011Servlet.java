@@ -1,6 +1,7 @@
 package sales;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
-import sales.forms.S0010Form;
+import sales.forms.S0011Form;
 
 @WebServlet("/S0011.html")
 public class S0011Servlet extends HttpServlet {
@@ -30,27 +31,26 @@ public class S0011Servlet extends HttpServlet {
 		String price = req.getParameter("price");
 		String salenumber = req.getParameter("salenumber");
 		String note = req.getParameter("note");
-
-
-		S0010Form saleform = new S0010Form(saledate, accountid, categoryid, tradename, price, salenumber, note);
+		String name = req.getParameter("name");//ここ
+		S0011Form form = new S0011Form(saledate, accountid, categoryid, tradename, price, salenumber, note, name);
 
 
 		HttpSession session = req.getSession();
-		session.setAttribute("saleform", saleform);
-
+		session.setAttribute("form", form);
 
 		// バリデーションチェック
-		List<String> error = validate(saleform);
-
+		List<String> error = validate(form);
 
 		//エラーがある場合
 		if(error.size() != 0) {
 			// S0030.htmlを再表示
 			session.setAttribute("error", error);
-			req.setAttribute("saleform", saleform);
+			req.setAttribute("form", form);
 			getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp")
 				.forward(req, resp);
 			session.removeAttribute("error");
+
+
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S010.jsp").forward(req, resp);
 		}
@@ -62,65 +62,81 @@ public class S0011Servlet extends HttpServlet {
 		int total = pricenum * salenumbernum;
 		req.setAttribute("total", total);
 
+		//accountsテーブルからaccount_idを取得
+		req.setAttribute("accounts", form);
+
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0011.jsp").forward(req, resp);
-
 	}
 
-
-	private List<String> validate(S0010Form saleform) {
+	private List<String> validate(S0011Form form) throws UnsupportedEncodingException{
 		List<String> error = new ArrayList<String>();  //list add
 		//日付チェック
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		format.setLenient(false);
 
-		String saledate = saleform.getSaledate();
-		String accountid = saleform.getAccountid();
-		String categoryid = saleform.getCategoryid();
-		String tradename = saleform.getTradename();
-		String price = saleform.getPrice();
-		String salenumber = saleform.getSalenumber();
-
+		String saledate = form.getSaledate();
+		String accountid = form.getAccountid();
+		String categoryid = form.getCategoryid();
+		String tradename = form.getTradename();
+		String price = form.getPrice();
+		String salenumber = form.getSalenumber();
 
 
 		if(saledate.equals("")) {
-			error.add("販売日を入力してください。") ;
+			error.add("販売日を入力して下さい。") ;
 		}else {
 			try {
 			   format.parse(saledate);
 			} catch (ParseException | java.text.ParseException  e) {
-				error.add("販売日を正しく入力してください。") ;
+				error.add("販売日を正しく入力して下さい。") ;
 			}
 		}
+		if(accountid.equals("0")) {
+			error.add( "担当が未選択です。");
+		}
 
-		if(accountid.equals("")) {
-			error.add( "担当を選択してください。");
+		if (categoryid == null || categoryid.isEmpty()) {
+			error.add( "商品カテゴリーが未選択です。");
 		}
-		if(categoryid.equals("")) {
-			error.add("商品カテゴリーを選択してください。");
-		}
+
 		if(tradename.equals("")) {
-			error.add("商品名を入力してください。");
+			error.add("商品名を入力して下さい。");
 		}
+
 		if(price.equals("")) {
-			error.add("単価を入力してください。");
-		}else {
+			error.add("単価を入力して下さい。");
+		}else if (!(form.getPrice().equals("")) &&
+				(11 <= form.getPrice().getBytes("UTF-8").length)) {
+			error.add("単価が長すぎます。");
+		}else if(!price.equals("")){
 			//数字かどうか
 			try {
 				Integer.parseInt(price);
 			}catch(NumberFormatException e){
 				error.add("単価を正しく入力して下さい。");
 			}
+		}else if(Integer.parseInt(price) <= 0) {
+			error.add("単価を正しく入力して下さい。");
 		}
 
 		if(salenumber.equals("")) {
 			error.add("個数を入力してください。");
-		}else {
+		}else if (!(form.getSalenumber().equals("")) &&
+				(11 <= form.getSalenumber().getBytes("UTF-8").length)) {
+			error.add("個数が長すぎます。");
+		}else if(!price.equals("")) {
 			try {
 				Integer.parseInt(salenumber);
 			}catch(NumberFormatException e){
 				error.add("個数を正しく入力してください。");
 			}
+		}else if(Integer.parseInt(salenumber) <= 0) {
+			error.add("個数を正しく入力して下さい。");
+		}
+		if (!(form.getNote().equals("")) &&
+				(400 <= form.getNote().getBytes("UTF-8").length)) {
+			error.add("備考が長すぎます。");
 		}
 
 

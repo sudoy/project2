@@ -32,41 +32,48 @@
 	<tr><th>販売日</th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" value="${saleform.saledate}" placeholder="販売日" disabled>
+		<input type="text" class="form-control" value="${form.saledate}" placeholder="販売日" disabled>
 		</div>
 		</td>
 	</tr>
 
 	<tr><th>担当</th>
 	<td><div class="col-md-8">
-		<select class="form-control" disabled>
-			<option <c:if test="${(saleform.accountid).equals('0')}">selected</c:if>>イチロー</option>
-			<option <c:if test="${(saleform.accountid).equals('1')}">selected</c:if>>ダルビッシュ</option>
-			<option <c:if test="${(saleform.accountid).equals('2')}">selected</c:if>>4</option>
-			<option <c:if test="${(saleform.accountid).equals('3')}">selected</c:if>>5</option>
+		<select class="form-control" name="accountid" disabled>
+			<option>${form.name}</option>
 		</select></div>
 	</td></tr>
+
 	<tr><th>商品カテゴリー</th>
 	<td><div class="col-md-8">
-		<select class="form-control" disabled>
-			<option <c:if test="${saleform.categoryid.equals('0')}">selected</c:if>>食料品</option>
-			<option <c:if test="${saleform.categoryid.equals('1')}">selected</c:if>>日用品</option>
-			<option <c:if test="${saleform.categoryid.equals('2')}">selected</c:if>>4</option>
-			<option <c:if test="${saleform.categoryid.equals('3')}">selected</c:if>>5</option>
-		</select></div>
+		<label class="radio-inline">
+		<input type="radio" name="categoryid" disabled <c:if test="${form.categoryid == '1'}">checked</c:if>> 食料品
+		</label>
+		<label class="radio-inline">
+		<input type="radio" name="categoryid" disabled <c:if test="${form.categoryid == '2'}">checked</c:if>> 飲料
+		</label>
+		<label class="radio-inline">
+		<input type="radio" name="categoryid" disabled <c:if test="${form.categoryid == '3'}">checked</c:if>> 本・雑誌
+		</label><br>
+		<label class="radio-inline">
+		<input type="radio" name="categoryid" disabled <c:if test="${form.categoryid == '4'}">checked</c:if>> ギフトカード
+		</label>
+		<label class="radio-inline">
+		<input type="radio" name="categoryid" disabled <c:if test="${form.categoryid == '5'}">checked</c:if>> その他
+		</label></div>
 	</td></tr>
 
 	<tr><th>商品名</th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" placeholder="${saleform.tradename}" disabled>
+	<input class="form-control" type="text" placeholder="${form.tradename}" disabled>
 	</div></td></tr>
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="${saleform.price}" disabled>
+	<input class="form-control" id="right" type="text" placeholder="${form.price}" disabled>
 	</div></td></tr>
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="${saleform.salenumber}" disabled>
+	<input class="form-control" id="right" type="text" placeholder="${form.salenumber}" disabled>
 	</div></td></tr>
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
@@ -74,7 +81,7 @@
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="detail" rows="3" placeholder="${saleform.note}" disabled></textarea>
+	<textarea class="form-control" id="detail" rows="3" name="note" disabled>${form.note}</textarea>
 	</div></td>
 	</tr>
 

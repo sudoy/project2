@@ -52,11 +52,9 @@
 		</div>
 		<div class="form-group">
 			<label  class="col-sm-3 control-label">売上登録権限 <span class="badge badge-default"> 必須 </span></label>
-
-
 			<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="sale" value="0" <c:if test="${form.sale == '0'}">checked</c:if> checked > 権限なし
+				<input type="radio" name="sale" value="0" <c:if test="${form.sale == '0'}">checked</c:if>> 権限なし
 			</label>
 				<label class="radio-inline">
 				<input type="radio" name="sale" value="1" <c:if test="${form.sale == '0'}">checked</c:if>> 権限あり
@@ -69,7 +67,7 @@
 
 			<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="account" value="0" <c:if test="${form.account == '0'}">checked</c:if> checked> 権限なし
+				<input type="radio" name="account" value="0" <c:if test="${form.account == '0'}">checked</c:if>> 権限なし
 			</label>
 				<label class="radio-inline">
 				<input type="radio" name="account" value="1" <c:if test="${form.account == '1'}">checked</c:if>> 権限あり

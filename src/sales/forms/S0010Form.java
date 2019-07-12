@@ -1,6 +1,8 @@
 package sales.forms;
 
 public class S0010Form {
+	public  String name;
+
 	private String saledate;
 	private String accountid;
 	private String categoryid;
@@ -9,17 +11,11 @@ public class S0010Form {
 	private String salenumber;
 	private String note;
 
-
-	public S0010Form(String saledate, String accountid, String categoryid, String tradename, String price, String salenumber, String note) {
-		super();
-		this.saledate = saledate;
-		this.accountid = accountid;
-		this.categoryid = categoryid;
-		this.tradename = tradename;
-		this.price = price;
-		this.salenumber = salenumber;
-		this.note = note;
-
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getSaledate() {
@@ -64,7 +60,6 @@ public class S0010Form {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
 
 
 }

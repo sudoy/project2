@@ -36,7 +36,7 @@ td{
 }
 
 #remarks{
-	padding-top: 10px; 
+	padding-top: 10px;
 	vertical-align: top;
 }
 
@@ -46,4 +46,9 @@ textarea.form-control {
 }
 #right{
 	text-align: right;
+}
+
+/*ラジオボタン消す*/
+.none{
+   display: none;
 }
