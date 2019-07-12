@@ -7,6 +7,7 @@ public class S0043Form{
 	private String name;
 	private String mail;
 	private String password;
+	private String newpassword;
 	private String authority;
 
 	public S0043Form(String id, String name, String mail, String password,String authority) {
@@ -18,6 +19,19 @@ public class S0043Form{
 		this.password = password;
 		this.authority = authority;
 	}
+
+
+	public S0043Form(String id, String name, String mail, String password, String newpassword, String authority) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.mail = mail;
+		this.password = password;
+		this.newpassword = newpassword;
+		this.authority = authority;
+	}
+
+
 
 	public String getId() {
 		return id;
@@ -34,6 +48,16 @@ public class S0043Form{
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getNewpassword() {
+		return newpassword;
+	}
+
+
+	public void setNewpassword(String newpassword) {
+		this.newpassword = newpassword;
+	}
+
 
 	public String getMail() {
 		return mail;

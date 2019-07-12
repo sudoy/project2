@@ -1,14 +1,17 @@
 package accounts.forms;
 
-public class S0042FormGet {
+public class S0042Form {
 
 	private String id;
 	private String name;
 	private String mail;
 	private String password;
 	private String authority;
+	private String check;
+	private String sale;
+	private String account;
 
-	public S0042FormGet(String id, String name, String mail, String password, String authority) {
+	public S0042Form(String id, String name, String mail, String password, String authority) {
 		super();
 
 		this.id = id;
@@ -16,7 +19,45 @@ public class S0042FormGet {
 		this.mail = mail;
 		this.password = password;
 		this.authority = authority;
+	}
 
+	public S0042Form(String id, String name, String mail, String password, String check, String sale,
+			String account, String authority) {
+		super();
+
+		this.id = id;
+		this.name = name;
+		this.mail = mail;
+		this.password = password;
+		this.check = check;
+		this.sale = sale;
+		this.account = account;
+		this.setAuthority(authority);
+	}
+
+
+	public String getCheck() {
+		return check;
+	}
+
+	public void setCheck(String check) {
+		this.check = check;
+	}
+
+	public String getSale() {
+		return sale;
+	}
+
+	public void setSale(String sale) {
+		this.sale = sale;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	public String getId() {

@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import accounts.forms.S0042FormPost;
+import accounts.forms.C0010Form;
+import accounts.forms.S0042Form;
 import accounts.forms.S0043Form;
 import accounts.services.S0043Service;
 
@@ -33,7 +34,15 @@ public class S0043Servlet extends HttpServlet {
 			resp.sendRedirect("C0010.html");
 		} else {
 
-			getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
+			//権限チェック(権限が無い場合はダッシュボードへ遷移)
+			C0010Form checkaccount1 = (C0010Form) session.getAttribute("userinfo");
+
+			if (!checkaccount1.getAuthority().equals("10") && !checkaccount1.getAuthority().equals("11")) {
+				resp.sendRedirect("C0020.html");
+			} else {
+
+				getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
+			}
 		}
 	}
 
@@ -41,6 +50,7 @@ public class S0043Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
+		//ログインチェック
 		HttpSession session = req.getSession();
 		boolean login = false;
 
@@ -53,7 +63,14 @@ public class S0043Servlet extends HttpServlet {
 			resp.sendRedirect("C0010.html");
 		} else {
 
-			S0042FormPost form = (S0042FormPost) session.getAttribute("S0042Form");
+		//権限チェック(権限が無い場合はダッシュボードへ遷移)
+			C0010Form checkaccount2 = (C0010Form) session.getAttribute("userinfo");
+
+			if (!checkaccount2.getAuthority().equals("10") && !checkaccount2.getAuthority().equals("11")) {
+				resp.sendRedirect("C0020.html");
+			}
+
+			S0042Form form = (S0042Form) session.getAttribute("S0042Form");
 
 			String id = form.getId();
 			String name = form.getName();
@@ -61,36 +78,29 @@ public class S0043Servlet extends HttpServlet {
 			String password = form.getPassword();
 			String authority = form.getAuthority();
 
-			System.out.println("テスト");
-			System.out.println(form.getPassword());
-			System.out.println("テスト");
-
 			S0043Form updateform;
 
-			if(password.equals("")) {
+			//パスワードが未入力の場合は前のパスワードのまま更新(この時ハッシュ化はしない)
+			if (password.equals("")) {
 				String oldpassword = (String) session.getAttribute("password");
-				updateform = new S0043Form(id, name, mail, oldpassword, authority);
+				updateform = new S0043Form(id, name, mail, oldpassword, password, authority);
 
-
-			}else{
+			//パスワード入力時はそのまま更新
+			} else {
 				updateform = new S0043Form(id, name, mail, password, authority);
 			}
 
+			//更新
+			S0043Service service = new S0043Service();
+			service.update(updateform);
 
-			//権限チェック(権限がない場合はダッシュボードへ遷移)
-//				resp.sendRedirect("C0020.html");
+			session.removeAttribute("S0042Form");
+			session.removeAttribute("password");
+			session.setAttribute("update", "on");// 7/11 16:08追加
 
-				//更新
-				S0043Service service = new S0043Service();
-				service.update(updateform);
-
-				session.removeAttribute("S0042Form");
-				session.removeAttribute("password");
-				session.setAttribute("update", "on");// 7/11 16:08追加
-
-				//更新完了後、S0041へ遷移
-				resp.sendRedirect("S0041.html");
-//			}
+			//更新完了後、S0041へ遷移
+			resp.sendRedirect("S0041.html");
+			//			}
 		}
 	}
 

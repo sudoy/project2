@@ -63,7 +63,7 @@ public class C0010Servlet extends HttpServlet {
 
 			if (userinfo.isLogin() == true) {//mailとpassが正しければ（trueが返ってきていれば）
 				session.removeAttribute("error");
-				System.out.println(userinfo.getAuthority());
+//				System.out.println(userinfo.getAuthority());
 				session.setAttribute("userinfo", userinfo);
 				resp.sendRedirect("C0020.html");
 			} else {

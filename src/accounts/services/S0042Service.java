@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import accounts.forms.S0042FormGet;
+import accounts.forms.S0042Form;
 import goods.utils.DBUtils;
 
 public class S0042Service {
 
-	public S0042FormGet select(String num) {
+	public S0042Form select(String num) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -52,7 +52,7 @@ public class S0042Service {
 
 			}
 
-			S0042FormGet edit = new S0042FormGet(id, name, mail, password, authority);
+			S0042Form edit = new S0042Form(id, name, mail, password, authority);
 
 			return edit;
 

@@ -22,7 +22,7 @@
 	<div class="container">
 
 		<h1>アカウントを削除してよろしいですか？</h1>
-		<form class="form-horizontal" action="S0041.html" method="post">
+		<form class="form-horizontal" action="S0044.html" method="post">
 
 
 			<div class="form-group">

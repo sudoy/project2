@@ -34,7 +34,7 @@ public class S0044Servlet extends HttpServlet {
 			S0044Service service = new S0044Service();
 
 			S0044Form form = service.select(req.getParameter("id"));
-			req.setAttribute("S0044Form", form);
+			session.setAttribute("S0044Form", form);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
 		}
@@ -42,21 +42,24 @@ public class S0044Servlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 
-//		HttpSession session = req.getSession();
-//		boolean login = false;
-//
-//		if (session.getAttribute("login") != null) {
-//			login = (boolean) session.getAttribute("login");
-//		}
-//
-//		if (login == false) {
-//			session.setAttribute("error", "ログインしてください。");
-//			resp.sendRedirect("C0010.html");
-//		} else {
+		HttpSession session = req.getSession();
+		boolean login = false;
+
+		if (session.getAttribute("login") != null) {
+			login = (boolean) session.getAttribute("login");
+		}
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		} else {
 
 			String id = req.getParameter("id");
 			String name = req.getParameter("name");
+			System.out.println("テスト");
+			System.out.println(req.getParameter("name"));//null
+			System.out.println("テスト");
 			String mail = req.getParameter("mail");
 			String password = req.getParameter("password");
 			String authority = req.getParameter("authority");
@@ -66,7 +69,8 @@ public class S0044Servlet extends HttpServlet {
 			S0044Service service = new S0044Service();
 			service.delete(deleteform);
 
-//		}
+			resp.sendRedirect("S0041.html");
+		}
 
 	}
 

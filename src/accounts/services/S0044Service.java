@@ -91,7 +91,7 @@ public class S0044Service {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBUtils.close(con, ps, null);
+			DBUtils.close(con, ps);
 		}
 
 	}
