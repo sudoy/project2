@@ -67,6 +67,7 @@ public class S0020Service {
 				}
 				sql += ")";
 			}
+			sql += " order by s.sale_id asc";
 
 			ps = con.prepareStatement(sql);
 

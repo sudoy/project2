@@ -18,23 +18,50 @@ public class S0022Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+
 		HttpSession session = req.getSession();
+		boolean login = false;
 
-		String id = req.getParameter("id");
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
+		}
 
-		S0022Service serv = new S0022Service();
-		S0022Form form = serv.service(id);
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		} else {//以下ログイン状態にあるときの処理
+			String id = req.getParameter("id");
 
-		session.setAttribute("S0022Form", form);
+			S0022Service serv = new S0022Service();
+			S0022Form form = serv.service(id);
 
-		getServletContext().getRequestDispatcher("/WEB-INF/S0022.jsp").forward(req, resp);
+			session.setAttribute("S0022Form", form);
+
+			getServletContext().getRequestDispatcher("/WEB-INF/S0022.jsp").forward(req, resp);
+		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-		getServletContext().getRequestDispatcher("/WEB-INF/S0022.jsp").forward(req, resp);
+
+		HttpSession session = req.getSession();
+		boolean login = false;
+
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
+		}
+
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		} else {//以下ログイン状態にあるときの処理
+			req.setCharacterEncoding("UTF-8");
+			getServletContext().getRequestDispatcher("/WEB-INF/S0022.jsp").forward(req, resp);
+		}
 	}
 
 }

@@ -5,6 +5,15 @@ import java.util.Map;
 
 public class HTMLUtils {
 
+	public static String formatDate(String date) {
+
+		String slashDate = date;
+		if(date != null) {
+			slashDate = date.replace("-", "/");
+		}
+		return slashDate;
+	}
+
 	public static Map<String, String> formatAuthority(String sale, String account) {
 
 		Map<String, String> map = new HashMap<>();

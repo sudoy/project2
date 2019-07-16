@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page import="goods.utils.HTMLUtils" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -25,38 +26,38 @@
 <div class="container">
 
 
-<form class="form-horizontal" method="POST" action="S0023_売上詳細編集画面.html">
+<form class="form-horizontal" method="POST" action="S0023.html">
 	<table>
 
 	<tr><th>販売日</th>
 		<td>
 		<div class="col-md-3">
-		<p>2015/01/15</p>
+		<p>${HTMLUtils.formatDate(S0022Form.saleDate)}</p>
 		</div>
 		</td>
 	</tr>
 
 	<tr><th>担当</th>
-	<td><div class="col-md-8"><p>イチロー</P></div>
+	<td><div class="col-md-8"><p>${S0022Form.name}</P></div>
 	</td></tr>
 	<tr><th>商品カテゴリー</th>
-	<td><div class="col-md-8"><p>食料品</p></div>
+	<td><div class="col-md-8"><p>${S0022Form.categoryName}</p></div>
 	</td></tr>
 
 	<tr><th>商品名</th>
-	<td><div class="col-md-8"><p>からあげ弁当</p>
+	<td><div class="col-md-8"><p>${S0022Form.tradeName}</p>
 	</div></td></tr>
 	<tr><th>単価</th>
-	<td><div class="col-md-3"><p id="right">450</p>
+	<td><div class="col-md-3"><p id="right">${S0022Form.unitPrice}</p>
 	</div></td></tr>
 	<tr><th>個数</th>
-	<td><div class="col-md-3"><p id="right">3</p>
+	<td><div class="col-md-3"><p id="right">${S0022Form.saleNumber}</p>
 	</div></td></tr>
 	<tr><th>小計</th>
-	<td><div class="col-md-3">
+	<td><div class="col-md-3"><p id="right">${S0022Form.total}</p>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
-	<td><p>今日からの新商品</p></div></td>
+	<td><div><p>${S0022Form.note}</p></div></td>
 	</tr>
 
 
@@ -65,9 +66,9 @@
 	<div class="form-group">
 		<button type="submit" class="btn btn-primary" id="edit">
 		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 編　集</button>
-		<a type="button" class="btn btn-danger" id="delete" href="S0025_売上詳細削除確認画面.html">
+		<a type="button" class="btn btn-danger" id="delete" href="S0025.html">
 		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削　除</a>
-		<a type="button" class="btn btn-default" id="cancel" href="S0021_売上検索結果一覧画面.html">キャンセル</a>
+		<a type="button" class="btn btn-default" id="cancel" href="S0021.html">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>
