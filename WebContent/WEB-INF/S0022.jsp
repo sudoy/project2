@@ -54,7 +54,7 @@
 	<td><div class="col-md-3"><p id="right">${S0022Form.saleNumber}</p>
 	</div></td></tr>
 	<tr><th>小計</th>
-	<td><div class="col-md-3"><p id="right">${S0022Form.total}</p>
+	<td><div class="col-md-3"><p id="right">${HTMLUtils.formatTotal(S0022Form.total)}</p>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div><p>${S0022Form.note}</p></div></td>

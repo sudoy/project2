@@ -38,7 +38,7 @@
 	<tr><td class="col-sm-1"><a class="btn btn-primary" href="S0022.html?id=${i.saleId}" role="button">
 	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
 	<td class="right">${i.saleId}</td><td>${HTMLUtils.formatDate(i.saleDate)}</td><td>${i.staff}</td><td>${i.categoryName}</td><td>${i.productName}</td>
-	<td>${i.unitPrice}</td><td>${i.saleNumber}</td><td>${i.total}</td></tr>
+	<td>${i.unitPrice}</td><td>${i.saleNumber}</td><td>${HTMLUtils.formatTotal(i.total)}</td></tr>
 	</c:forEach>
 	</table>
 

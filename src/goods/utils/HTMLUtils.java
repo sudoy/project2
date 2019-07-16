@@ -1,17 +1,26 @@
 package goods.utils;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HTMLUtils {
 
-	public static String formatDate(String date) {
-
+	public static String formatDate(String date) {//日付の-を/に
 		String slashDate = date;
-		if(date != null) {
+		if (date != null) {
 			slashDate = date.replace("-", "/");
 		}
 		return slashDate;
+	}
+
+	public static String formatTotal(String total) {//totalをカンマ区切りに
+		if (total != null && !(total.equals(""))) {
+			NumberFormat nf = NumberFormat.getNumberInstance();
+			return nf.format(Integer.parseInt(total));
+		} else {
+			return total;
+		}
 	}
 
 	public static Map<String, String> formatAuthority(String sale, String account) {
@@ -133,7 +142,5 @@ public class HTMLUtils {
 			return "";
 		}
 	}
-
-
 
 }

@@ -59,7 +59,6 @@ public class S0022Servlet extends HttpServlet {
 			session.setAttribute("error", "ログインしてください。");
 			resp.sendRedirect("C0010.html");
 		} else {//以下ログイン状態にあるときの処理
-			req.setCharacterEncoding("UTF-8");
 			getServletContext().getRequestDispatcher("/WEB-INF/S0022.jsp").forward(req, resp);
 		}
 	}
