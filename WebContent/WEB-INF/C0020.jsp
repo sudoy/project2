@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -71,7 +72,7 @@
 	<div class="panel panel-default" id="panel1">
 		<div class="panel-heading">
 			<h2 class="panel-title">
-			 前月(5月)の収入合計</h2>
+			 前月(5月)の売上合計</h2>
 		</div>
 		<div class="panel-body">
 			1,000,000円
@@ -114,21 +115,14 @@
 
 		<div class="panel panel-default">
 		<!-- Default panel contents -->
-		<div class="panel-heading"><h2>今月のイチローさんの売上</h2></div>
+		<div class="panel-heading"><h2>今月の${userinfo.name}さんの売上</h2></div>
 
 		<table class="table">
 		<tr><th>No</th><th>販売日</th><th>商品カテゴリー</th><th>商品名</th><th>単価</th><th>個数</th><th>小計</th></tr>
-
-		<tr><td>1</td><td>2015/1/15</td><td>食料品</td><td>からあげ弁当</td>
-		<td>450</td><td>3</td><td>1,350</td></tr>
-
-		<tr><td>2</td><td>2015/1/15</td><td>食料品</td><td>あんぱん</td>
-		<td>120</td><td>10</td><td>1200</td></tr>
-
-		<tr><td>3</td><td>2015/1/15</td><td>飲料</td><td>コカコーラ500ml</td>
-		<td>130</td><td>5</td><td>650</td></tr>
-
-		<tr><td colspan="5"></td><td>合計</td><td>3,200</td></tr>
+		<c:forEach items="${C0020Form}" var="i">
+			<tr><td>${i.saleId}</td><td>${i.saleDate}</td><td>${i.categoryName}</td>
+			<td>${i.tradeName}</td><td>${i.unitPrice}</td><td>${i.saleNumber}</td><td>${i.total}</td></tr>
+		</c:forEach>
 
 		</table>
 		</div>
