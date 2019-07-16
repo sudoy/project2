@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -15,116 +19,107 @@
 
 	<jsp:include page="header.jsp">
 		<jsp:param name="bar"
-		value='<li><a href="C0020_ダッシュボード.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
+			value='<li><a href="C0020_ダッシュボード.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
 		<li><a href="S0010.html">売上登録</a></li>
 		<li class="active"><a href="S0020.html">売上検索</a></li>
 		<li><a href="S0030.html">アカウント登録</a></li>
-		<li><a href="S0040.html">アカウント検索</a></li>'/>
-		</jsp:include>
+		<li><a href="S0040.html">アカウント検索</a></li>' />
+	</jsp:include>
 
-		<div class="container">
+	<div class="container">
 
 		<h1>売上詳細編集</h1>
 
-			<form class="form-horizontal" method="POST"
-				action="S0024.html">
-				<table>
+		<form class="form-horizontal" method="POST" action="S0024.html">
+			<table>
 
-					<tr>
-						<th>販売日 <span class="badge">必須</span></th>
-						<td>
-							<div class="col-md-3">
-								<input type="text" class="form-control" value="2015/01/15"
-									placeholder="販売日">
-							</div>
-						</td>
-					</tr>
+				<tr>
+					<th>販売日 <span class="badge">必須</span></th>
+					<td>
+						<div class="col-md-3">
+							<input type="text" class="form-control" name="saledate"
+								value="" placeholder="販売日">
+						</div>
+					</td>
+				</tr>
 
-					<tr>
-						<th>担当 <span class="badge">必須</span></th>
-						<td><div class="col-md-8">
-								<select class="form-control">
-									<option>イチロー</option>
-									<option>イチロー</option>
-									<option>ダルビッシュ</option>
-									<option>4</option>
-									<option>5</option>
-								</select>
-							</div></td>
-					</tr>
-					<tr>
-						<th>商品カテゴリー <span class="badge">必須</span></th>
-						<td><div class="col-md-7">
+				<tr>
+					<th>担当 <span class="badge">必須</span></th>
+					<td><div class="col-md-8">
+							<select name="name" class="form-control">
+								<c:forEach items="${accounts}" var="i">
+									<option value="${i.accountid}"
+										${HTMLUtils.judgeStaffSelected(i.name, form.name)}>${i.name}</option>
+								</c:forEach>
+							</select>
+						</div></td>
+				</tr>
+				<tr><th>商品カテゴリー <span class="badge">必須</span></th>
+					<td><div class="col-md-7">
+							<c:forEach items="${allCategory}" var="i">
 								<label class="radio-inline"> <input type="radio"
-									name="inlineRadioOptions" value="1" checked> 食料品
-								</label> <label class="radio-inline"> <input type="radio"
-									name="inlineRadioOptions" value="2"> 飲料
-								</label> <label class="radio-inline"> <input type="radio"
-									name="inlineRadioOptions" value="3"> 雑誌
-								</label> <label class="radio-inline"> <input type="radio"
-									name="inlineRadioOptions" value="9"> 酒類
-								</label> <label class="radio-inline"> <input type="radio"
-									name="inlineRadioOptions" value="6"> 冷凍食品
-								</label> <label class="radio-inline"> <input type="radio"
-									name="inlineRadioOptions" value="10"> たばこ
-								</label> <label class="radio-inline"> <input
-									type="radio" name="inlineRadioOptions" value="5"> その他
+									name="categoryname" value="${i}"
+									${HTMLUtils.judgeCategoryChecked2(i, form.categoryname)}>
+									${i}
 								</label>
-							</div></td>
-					</tr>
+							</c:forEach>
+						</div></td>
+				</tr>
 
-					<tr>
-						<th>商品名 <span class="badge">必須</span></th>
-						<td><div class="col-md-8">
-								<input class="form-control" type="text" placeholder="商品"
-									value="からあげ弁当">
-							</div></td>
-					</tr>
-					<tr>
-						<th>単価 <span class="badge">必須</span></th>
-						<td><div class="col-md-3">
-								<input class="form-control" id="right" type="text"
-									placeholder="単価" value="450">
-							</div></td>
-					</tr>
-					<tr>
-						<th>個数 <span class="badge">必須</span></th>
-						<td><div class="col-md-3">
-								<input class="form-control" id="right" type="text"
-									placeholder="個数" value="3">
-							</div></td>
-					</tr>
-					<tr>
-						<th id="remarks">備考</th>
-						<td><div class="col-md-8">
-								<textarea class="form-control" id="detail" rows="3"
-									placeholder="備考">今日からの新商品</textarea>
-							</div></td>
-					</tr>
+				<tr>
+					<th>商品名 <span class="badge">必須</span></th>
+					<td><div class="col-md-8">
+							<input class="form-control" type="text" placeholder="商品"
+								name="tradename" value="">
+						</div></td>
+				</tr>
 
-
-					<tr>
-						<th></th>
-						<td id="canto">
-							<div class="form-group">
-
-								<button type="submit" class="btn btn-primary" id="touroku">
-									<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-									更 新
-								</button>
-								<a type="button" class="btn btn-default" id="cancel"
-									href="S0022.html">キャンセル</a>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</form>
-
-		</div>
-		<!--/container-->
+				<tr>
+					<th>単価 <span class="badge">必須</span></th>
+					<td><div class="col-md-3">
+							<input class="form-control" id="right" type="text"
+								name = "price" placeholder="単価" value="450">
+						</div></td>
+				</tr>
+				<tr>
+					<th>個数 <span class="badge">必須</span></th>
+					<td><div class="col-md-3">
+							<input class="form-control" id="right" type="text"
+								name="salenumber" placeholder="個数" value="3">
+						</div></td>
+				</tr>
+				<tr>
+					<th id="remarks">備考</th>
+					<td><div class="col-md-8">
+							<textarea class="form-control" id="detail" rows="3"
+								name="note" placeholder="備考">今日からの新商品</textarea>
+						</div></td>
+				</tr>
 
 
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script src="js/bootstrap.min.js"></script></body>
+				<tr>
+					<th></th>
+					<td id="canto">
+						<div class="form-group">
+
+							<button type="submit" class="btn btn-primary" id="touroku">
+								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+								更 新
+							</button>
+							<a type="button" class="btn btn-default" id="cancel"
+								href="S0022.html">キャンセル</a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</form>
+
+	</div>
+	<!--/container-->
+
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+</body>
 </html>

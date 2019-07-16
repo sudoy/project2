@@ -26,7 +26,6 @@ public class S0046Servlet extends HttpServlet {
 		//メール存在チェック(パラメーターで渡されたメールアドレスが存在しない場合はエラー)
 
 		String mail = req.getParameter("user");//受信メール内のURL末尾にあるメールアドレスの情報を取得?
-
 		session.setAttribute("receivedEmail",mail);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0046.jsp").forward(req, resp);

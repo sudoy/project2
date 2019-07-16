@@ -13,11 +13,17 @@ public class S0025Servlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+
+
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0025.jsp").forward(req, resp);
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+
+
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0025.jsp").forward(req, resp);
 

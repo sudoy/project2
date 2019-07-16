@@ -16,7 +16,7 @@ public class S0046Service {
 		String sql = null;
 		ResultSet rs = null;
 
-		String id = null;
+
 		String mail = null;
 
 		try {
@@ -26,7 +26,7 @@ public class S0046Service {
 			//SQL
 			sql = "select mail "
 					+ "from accounts "
-					+ "where account_id = ?";
+					+ "where male = ?";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
@@ -44,23 +44,15 @@ public class S0046Service {
 
 			}
 
-			S0046Form exist = new S0046Form(id,mail);
-
-
+			String existmail = new S0046Form(mail);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBUtils.close(con, ps, rs);
 		}
-		return form;
 
 	}
-
-
-
-
-
 
 	//パスワードの更新
 	public void updatepassword(S0046Form form) {

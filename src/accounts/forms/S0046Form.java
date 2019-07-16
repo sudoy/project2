@@ -15,9 +15,8 @@ public class S0046Form {
 		this.check = check;
 	}
 
-	public S0046Form(String id, String mail) {
+	public S0046Form(String mail) {
 		super();
-		this.id = id;
 		this.mail = mail;
 	}
 
