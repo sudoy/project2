@@ -105,7 +105,7 @@ public class S0043Servlet extends HttpServlet {
 
 			//更新完了後、S0041へ遷移(遷移先で成功メッセージを表示)
 			resp.sendRedirect("S0041.html");
-			session.removeAttribute("complete");//ここに入れるとメッセージが表示されなくなる
+
 		}
 	}
 
