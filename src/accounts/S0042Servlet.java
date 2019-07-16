@@ -109,11 +109,11 @@ public class S0042Servlet extends HttpServlet {
 
 					getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
 
-					//errorの値を取り除く
+					//errorメッセージ除去
 					session.removeAttribute("error");
 				} else {
 
-					//入力チェックをクリアすればS0043アカウント詳細編集確認画面へ遷移
+					//入力チェックをクリア後はS0043アカウント詳細編集確認画面へ遷移
 					session.setAttribute("S0042Form", form);
 					getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
 				}

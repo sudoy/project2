@@ -17,16 +17,17 @@
 		<h2>物品売上管理システム</h2>
 		<h3>新パスワード入力</h3>
 
-		<form action="#" method="post">
+		<form action="S0046.html" method="post">
+
 
 		<div class="form-group">
 			<label for="exampleInputPassword1"></label>
-			<input type="password" class=" form-control"  placeholder="新パスワード">
+			<input type="password" class=" form-control" name="password" value="${S0046Form.password}"  placeholder="新パスワード">
 			<label for="exampleInputPassword2"></label>
-			<input type="password" class="form-control" placeholder="新パスワード確認">
+			<input type="password" class="form-control" name="check" value="${S0046Form.check}" placeholder="新パスワード確認">
 		</div>
 		<div class="form-group">
-			<a class="btn btn-primary" href="C0010_ログイン画面.html" role="button">変更</a>
+			<button type="submit" class="btn btn-primary">変更</button>
 		</div>
 		</form>
 
@@ -40,4 +41,4 @@
 	<script	src="js/bootstrap.min.js"></script>
 	</body>
 
-</html>>
+</html>
