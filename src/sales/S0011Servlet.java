@@ -16,7 +16,9 @@ import javax.servlet.http.HttpSession;
 
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
+import sales.forms.S0010Form;
 import sales.forms.S0011Form;
+import sales.services.S0010Service;
 import sales.services.S0011Service;
 
 @WebServlet("/S0011.html")
@@ -58,7 +60,10 @@ public class S0011Servlet extends HttpServlet {
 			req.setAttribute("form", form);
 
 			//accountsテーブルからaccount_idを取得
-			req.setAttribute("accounts", form);
+			S0010Service s0010service = new S0010Service();
+			List<S0010Form> s0010form = s0010service.select();
+			session.setAttribute("accounts", s0010form);
+			req.setAttribute("accounts", s0010form);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
 
@@ -66,7 +71,6 @@ public class S0011Servlet extends HttpServlet {
 			session.removeAttribute("error");
 		}
 		//エラーがない場合
-
 
 
 		//小計をだす
@@ -103,7 +107,7 @@ public class S0011Servlet extends HttpServlet {
 				error.add("販売日を正しく入力して下さい。");
 			}
 		}
-		if (accountid.equals("0")) {
+		if (accountid.equals(" ")) {
 			error.add("担当が未選択です。");
 		}
 

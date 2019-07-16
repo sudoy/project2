@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ page import="goods.utils.HTMLUtils" %>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -45,7 +47,8 @@
 			<option value="0">選択してください</option>
 
 			<c:forEach items="${accounts}" var="i">
-				<option value ="${i.accountid}" <c:if test="${form.accountid == 'i'}">selected</c:if>>${i.name}</option>
+				<option value ="${i.accountid}"
+				 ${HTMLUtils.judgeStaffSelected(i.name, form.name)}>${i.name}</option>
 			</c:forEach>
 
 		</select></div>
@@ -55,7 +58,8 @@
 	<td><div class="col-md-8">
 		<c:forEach items="${allCategory}" var="i">
 			<label class="radio-inline">
-			<input type="radio" name="categoryid" value="${i}"> ${i}
+			<input type="radio" name="categoryid" value="${i}"
+			 ${HTMLUtils.judgeCategoryChecked2(i, form.categoryid)}> ${i}
 			</label>
 		</c:forEach></div>
 	</td></tr>

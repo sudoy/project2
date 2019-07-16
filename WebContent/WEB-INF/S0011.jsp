@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="goods.utils.HTMLUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -48,7 +49,8 @@
 	<td><div class="col-md-8">
 		<c:forEach items="${allCategory}" var="i">
 			<label class="radio-inline">
-			<input type="radio" name="categoryid" <c:if test="${form.categoryid == 'i'}">checked</c:if> disabled> ${i}
+			<input type="radio" name="categoryid" value="${i}"
+			${HTMLUtils.judgeCategoryChecked2(form.categoryid, i)} disabled> ${i}
 			</label>
 		</c:forEach></div>
 	</td></tr>
