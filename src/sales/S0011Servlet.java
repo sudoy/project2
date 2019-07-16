@@ -29,23 +29,32 @@ public class S0011Servlet extends HttpServlet {
 
 		String saledate = req.getParameter("saledate");
 		String accountid = req.getParameter("accountid");
-		String categoryid = req.getParameter("categoryid");
+		String categoryname = req.getParameter("categoryname");
 		String tradename = req.getParameter("tradename");
 		String price = req.getParameter("price");
 		String salenumber = req.getParameter("salenumber");
 		String note = req.getParameter("note");
 
+		String name = null;
+
 		S0011Service service = new S0011Service();
 
-		String name = service.select2(accountid);
+		//選択しているときのみDBからname呼び出し
+		System.out.println(accountid);
+		if(!accountid.equals("0")) {
+			name = service.select2(accountid);
+		}
+
+		S0010Service s0010service = new S0010Service();
+		String categoryid = s0010service.setCategoryid(categoryname);
 
 		System.out.println("い");
-		System.out.println(categoryid);
 		System.out.println("あ");
-		System.out.println(accountid);
 
 
-		S0011Form form = new S0011Form(saledate, accountid, categoryid, tradename, price, salenumber, note, name);
+
+		S0011Form form = new S0011Form(saledate, accountid, categoryid, categoryname, tradename, price,
+				salenumber, note, name);
 
 		HttpSession session = req.getSession();
 		session.setAttribute("form", form);
@@ -60,8 +69,8 @@ public class S0011Servlet extends HttpServlet {
 			req.setAttribute("form", form);
 
 			//accountsテーブルからaccount_idを取得
-			S0010Service s0010service = new S0010Service();
-			List<S0010Form> s0010form = s0010service.select();
+			S0010Service serv = new S0010Service();
+			List<S0010Form> s0010form = serv.select();
 			session.setAttribute("accounts", s0010form);
 			req.setAttribute("accounts", s0010form);
 
@@ -83,6 +92,7 @@ public class S0011Servlet extends HttpServlet {
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0011.jsp").forward(req, resp);
 
+
 	}
 
 	private List<String> validate(S0011Form form) throws UnsupportedEncodingException {
@@ -93,7 +103,7 @@ public class S0011Servlet extends HttpServlet {
 
 		String saledate = form.getSaledate();
 		String accountid = form.getAccountid();
-		String categoryid = form.getCategoryid();
+		String categoryname = form.getCategoryname();
 		String tradename = form.getTradename();
 		String price = form.getPrice();
 		String salenumber = form.getSalenumber();
@@ -107,11 +117,11 @@ public class S0011Servlet extends HttpServlet {
 				error.add("販売日を正しく入力して下さい。");
 			}
 		}
-		if (accountid.equals(" ")) {
+		if (accountid.equals("0")) {
 			error.add("担当が未選択です。");
 		}
 
-		if (categoryid == null || categoryid.isEmpty()) {
+		if (categoryname == null || categoryname.isEmpty()) {
 			error.add("商品カテゴリーが未選択です。");
 		}
 

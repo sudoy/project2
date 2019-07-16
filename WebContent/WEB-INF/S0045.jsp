@@ -17,15 +17,15 @@
 		<h2>物品売上管理システム</h2>
 		<h3>パスワード再設定</h3>
 
-		<form action="#" method="post">
+		<form action="S0045.html" method="post">
 
 		<div class="form-group">
 			<label for="exampleInputEmail1"></label>
-			<input type="email" class=" form-control"  placeholder="メールアドレス">
+			<input type="email" class=" form-control" name="mail" value=""  placeholder="メールアドレス">
 
 		</div>
 		<div class="form-group">
-			<a class="btn btn-primary" href="S0046_新パスワード入力.html" role="button">メール送信</a>
+			<button type="submit" class="btn btn-primary" >メール送信</button>
 		</div>
 		</form>
 
