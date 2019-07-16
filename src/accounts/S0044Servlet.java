@@ -98,7 +98,6 @@ public class S0044Servlet extends HttpServlet {
 
 				//削除完了後、S0041.jspに遷移
 				resp.sendRedirect("S0041.html");
-				session.removeAttribute("complete");//ここに入れるとメッセージが表示されなくなる
 			}
 		}
 
