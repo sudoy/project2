@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import accounts.forms.C0010Form;
 import sales.forms.S0010Form;
 import sales.forms.S0011Form;
 import sales.services.S0010Service;
@@ -22,25 +23,50 @@ public class S0010Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
-		//accountsテーブルからaccount_idを取得
-		S0010Service service = new S0010Service();
-		List<S0010Form> form = service.select();
+		//ログインチェック
 		HttpSession session = req.getSession();
+		boolean login = false;
 
-		session.setAttribute("accounts", form);
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
+		}
 
-		//商品カテゴリーの取得
-		List<String> categoryList = service.category();
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		} else {
 
-		session.setAttribute("allCategory", categoryList);
+			//権限チェック(権限が無い場合はダッシュボードへ遷移)
+			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-		//メッセージが出ないように
-		session.removeAttribute("error");
-		session.removeAttribute("complete");
+//					System.out.println(checkaccount1.getAuthority());
 
-		getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+				session.setAttribute("error", "不正なアクセスです。" );
+				resp.sendRedirect("C0020.html");
+			}else {
+				//accountsテーブルからaccount_idを取得
+				S0010Service service = new S0010Service();
+				List<S0010Form> form = service.select();
 
+				session.setAttribute("accounts", form);
+
+				//商品カテゴリーの取得
+				List<String> categoryList = service.category();
+
+				session.setAttribute("allCategory", categoryList);
+
+				//メッセージが出ないように
+				session.removeAttribute("error");
+				session.removeAttribute("complete");
+
+				getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+			}
+		}
 	}
+
+
 @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
