@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta	charset="utf-8">
-		<meta	http-equiv="X-UA-Compatible"	content="IE=edge">
+		<meta	http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta	name="viewport"	content="width=device-width,	initial-scale=1">
 
 		<title>パスワード再設定|物品管理システム</title>
@@ -12,6 +14,9 @@
 		<link href="css/S0045_パスワード再設定.css" rel="stylesheet">
 </head>
 	<body>
+	<div class="container" id="color">
+		<jsp:include page="message.jsp"/>
+
 
 		<div class="center">
 		<h2>物品売上管理システム</h2>
@@ -31,7 +36,7 @@
 
 
 		</div><!--center-->
-
+	</div>
 
 
 

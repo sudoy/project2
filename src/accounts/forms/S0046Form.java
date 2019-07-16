@@ -20,6 +20,7 @@ public class S0046Form {
 		this.mail = mail;
 	}
 
+
 	public String getId() {
 		return id;
 	}
