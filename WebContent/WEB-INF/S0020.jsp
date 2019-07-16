@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="goods.utils.HTMLUtils" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -45,9 +46,10 @@
 	<tr><th>担当</th>
 	<td><div class="col-md-8">
 		<select name="name" class="form-control">
-			<option>選択してください</option>
+			<option disabled <c:if test="${S0020Form.name == null}">selected</c:if>>
+			選択してください</option>
 			<c:forEach items="${allName}" var="i">
-				<option value="${i.accountName}">${i.accountName}</option>
+				<option value="${i.accountName}" ${HTMLUtils.judgeStaffSelected(i.accountName, S0020Form.name)}>${i.accountName}</option>
 			</c:forEach>
 		</select></div>
 	</td></tr>
@@ -55,7 +57,8 @@
 	<td><div class="col-md-8">
 		<c:forEach items="${allCategory}" var="i">
 			<label class="checkbox-inline">
-			<input type="checkbox" name="categoryName" value="${i}"> ${i}
+			<input type="checkbox" name="categoryName" value="${i}"
+			 ${HTMLUtils.judgeCategoryChecked(i, S0020Form.cateName)}> ${i}
 			</label>
 		</c:forEach>
 	</div>

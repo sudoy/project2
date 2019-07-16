@@ -46,6 +46,8 @@ public class S0020Servlet extends HttpServlet {
 			session.setAttribute("allName", staffList);
 			session.setAttribute("allCategory", categoryList);
 
+			session.removeAttribute("S0020Form");
+
 			getServletContext().getRequestDispatcher("/WEB-INF/S0020.jsp").forward(req, resp);
 		}
 	}
@@ -140,11 +142,9 @@ public class S0020Servlet extends HttpServlet {
 			int begin = Integer.parseInt(dateBegin.replace("/", ""));
 			int end = Integer.parseInt(dateEnd.replace("/", ""));
 			if((end - begin) < 0) {
-
+				error.add("販売日（検索開始日）が販売日（検索終了日）より後の日付となっています。");
 			}
 		}
-
-
 
 		return error;
 	}

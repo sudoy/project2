@@ -4,7 +4,7 @@ public class S0020Form {
 	private String dateBegin;
 	private String dateEnd;
 	private String name;
-	private String[] categoryId;
+	private String[] cateName;//categoryNameが重複したので
 	private String tradeName;
 	private String note;
 
@@ -21,13 +21,13 @@ public class S0020Form {
 	private String total;
 
 	//普通に使うやつ
-	public S0020Form(String dateBegin, String dateEnd, String name, String[] categoryId, String tradeName,
+	public S0020Form(String dateBegin, String dateEnd, String name, String[] cateName, String tradeName,
 			String note) {
 		super();
 		this.dateBegin = dateBegin;
 		this.dateEnd = dateEnd;
 		this.name = name;
-		this.categoryId = categoryId;
+		this.cateName = cateName;
 		this.tradeName = tradeName;
 		this.note = note;
 	}
@@ -87,11 +87,11 @@ public class S0020Form {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String[] getCategoryId() {
-		return categoryId;
+	public String[] getCateName() {
+		return cateName;
 	}
-	public void setCategoryId(String[] categoryId) {
-		this.categoryId = categoryId;
+	public void setCateName(String[] cateName) {
+		this.cateName = cateName;
 	}
 	public String getTradeName() {
 		return tradeName;

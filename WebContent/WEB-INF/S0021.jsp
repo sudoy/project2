@@ -34,9 +34,9 @@
 	<tr><th>操作</th><th>No</th><th>販売日</th><th>担当</th><th>商品カテゴリー</th><th>商品名</th><th>単価</th><th>個数</th><th>小計</th></tr>
 
 	<c:forEach items="${S0021Form}" var="i">
-	<tr><td class="col-sm-1"><a class="btn btn-primary" href="S0022.html?id=${i.id}" role="button">
+	<tr><td class="col-sm-1"><a class="btn btn-primary" href="S0022.html?id=${i.saleId}" role="button">
 	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
-	<td class="right">${i.id}</td><td>2015/1/15</td><td>${i.name}</td><td>${i.categoryName}</td><td>${i.tradeName}</td>
+	<td class="right">${i.saleId}</td><td>2015/1/15</td><td>${i.staff}</td><td>${i.categoryName}</td><td>${i.productName}</td>
 	<td>${i.unitPrice}</td><td>${i.saleNumber}</td><td>${i.total}</td></tr>
 	</c:forEach>
 	</table>

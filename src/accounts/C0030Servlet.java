@@ -16,10 +16,10 @@ public class C0030Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
+		session.invalidate();
+		session = req.getSession();
 		session.setAttribute("login", false);
-		session.removeAttribute("userinfo");
 		session.setAttribute("update", "off");
-		session.removeAttribute("S0041Form");
 		resp.sendRedirect("C0010.html");
 
 	}

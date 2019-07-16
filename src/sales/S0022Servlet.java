@@ -1,4 +1,4 @@
-package accounts;
+package sales;
 
 import java.io.IOException;
 
@@ -14,6 +14,10 @@ public class S0022Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		String id = req.getParameter("id");
+
+
+
 		getServletContext().getRequestDispatcher("/WEB-INF/S0022.jsp").forward(req, resp);
 	}
 
