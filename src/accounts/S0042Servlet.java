@@ -50,6 +50,7 @@ public class S0042Servlet extends HttpServlet {
 
 				S0042Service service = new S0042Service();
 
+				//アカウント情報の取得
 				S0042Form form = service.select(req.getParameter("id"));
 				session.setAttribute("S0042Form", form);
 				session.setAttribute("password", form.getPassword());
@@ -86,20 +87,16 @@ public class S0042Servlet extends HttpServlet {
 				String id = req.getParameter("id");
 				String name = req.getParameter("name");
 				String mail = req.getParameter("mail");
-				System.out.println(req.getParameter("mail"));
 				String password = req.getParameter("password");
 				String check = req.getParameter("check");
 				String sale = req.getParameter("sale");
 				String account = req.getParameter("account");
 
-				//saleとaccountを文字列結合した値をauthorityに入れることで権限の有無を判断
+				//saleとaccountの合計値をauthorityに入れることで権限の有無を判断
 				int authorityint = Integer.parseInt(account + sale);
 				String authority = String.valueOf(authorityint);
 
 				S0042Form form = new S0042Form(id, name, mail, password, check, sale, account, authority);
-
-				//ログインユーザーにアカウント登録権限がない場合はダッシュボードに遷移しエラーを表示
-				//				resp.sendRedirect("C0020.html");
 
 				//入力チェック
 				List<String> error = validate(form);
@@ -116,7 +113,7 @@ public class S0042Servlet extends HttpServlet {
 					session.removeAttribute("error");
 				} else {
 
-					//入力チェックをクリアすればS0043_アカウント詳細編集確認画面へ遷移
+					//入力チェックをクリアすればS0043アカウント詳細編集確認画面へ遷移
 					session.setAttribute("S0042Form", form);
 					getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
 				}

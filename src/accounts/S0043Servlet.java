@@ -96,11 +96,16 @@ public class S0043Servlet extends HttpServlet {
 
 			session.removeAttribute("S0042Form");
 			session.removeAttribute("password");
+
+			//データ更新後の検索画面にする
 			session.setAttribute("update", "on");// 7/11 16:08追加
 
-			//更新完了後、S0041へ遷移
+			//成功メッセージ
+			session.setAttribute("complete", "No" + updateform.getId() + "のアカウントを更新しました。");
+
+			//更新完了後、S0041へ遷移(遷移先で成功メッセージを表示)
 			resp.sendRedirect("S0041.html");
-			//			}
+			session.removeAttribute("complete");//ここに入れるとメッセージが表示されなくなる
 		}
 	}
 

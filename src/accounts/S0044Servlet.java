@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import accounts.forms.C0010Form;
 import accounts.forms.S0044Form;
 import accounts.services.S0044Service;
 
@@ -31,12 +32,22 @@ public class S0044Servlet extends HttpServlet {
 			session.setAttribute("error", "ログインしてください。");
 			resp.sendRedirect("C0010.html");
 		} else {
-			S0044Service service = new S0044Service();
 
-			S0044Form form = service.select(req.getParameter("id"));
-			session.setAttribute("S0044Form", form);
+			//権限チェック(権限が無い場合はダッシュボードへ遷移)
+			C0010Form checkaccount1 = (C0010Form) session.getAttribute("userinfo");
 
-			getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
+			if (!checkaccount1.getAuthority().equals("10") && !checkaccount1.getAuthority().equals("11")) {
+				resp.sendRedirect("C0020.html");
+			} else {
+
+				S0044Service service = new S0044Service();
+
+				//アカウント情報の取得
+				S0044Form form = service.select(req.getParameter("id"));
+				session.setAttribute("S0044Form", form);
+
+				getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
+			}
 		}
 	}
 
@@ -47,6 +58,7 @@ public class S0044Servlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		boolean login = false;
 
+		//ログインチェック
 		if (session.getAttribute("login") != null) {
 			login = (boolean) session.getAttribute("login");
 		}
@@ -55,21 +67,39 @@ public class S0044Servlet extends HttpServlet {
 			resp.sendRedirect("C0010.html");
 		} else {
 
-			String id = req.getParameter("id");
-			String name = req.getParameter("name");
-			System.out.println("テスト");
-			System.out.println(req.getParameter("name"));//null
-			System.out.println("テスト");
-			String mail = req.getParameter("mail");
-			String password = req.getParameter("password");
-			String authority = req.getParameter("authority");
+			//権限チェック(権限が無い場合はダッシュボードへ遷移)
+			C0010Form checkaccount2 = (C0010Form) session.getAttribute("userinfo");
 
-			S0044Form deleteform = new S0044Form(id, name, mail, password, authority);
+			if (!checkaccount2.getAuthority().equals("10") && !checkaccount2.getAuthority().equals("11")) {
+				resp.sendRedirect("C0020.html");
+			} else {
 
-			S0044Service service = new S0044Service();
-			service.delete(deleteform);
+				S0044Form form = (S0044Form) session.getAttribute("S0044Form");
 
-			resp.sendRedirect("S0041.html");
+				String id = form.getId();
+				String name = form.getName();
+				String mail = form.getMail();
+				String password = form.getPassword();
+				String authority = form.getAuthority();
+
+				S0044Form deleteform = new S0044Form(id, name, mail, password, authority);
+
+				//削除
+				S0044Service service = new S0044Service();
+				service.delete(deleteform);
+
+				//取得したアカウント情報を破棄
+				session.removeAttribute("S0044Form");
+				//データ削除後の検索画面にする
+				session.setAttribute("update", "on");//7/16 追加
+
+				//成功メッセージ
+				session.setAttribute("complete", "No" + deleteform.getId() + "のアカウントを削除しました。");
+
+				//削除完了後、S0041.jspに遷移
+				resp.sendRedirect("S0041.html");
+				session.removeAttribute("complete");//ここに入れるとメッセージが表示されなくなる
+			}
 		}
 
 	}
