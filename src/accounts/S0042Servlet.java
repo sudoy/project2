@@ -1,7 +1,7 @@
 package accounts;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -42,10 +42,10 @@ public class S0042Servlet extends HttpServlet {
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-//			System.out.println(checkaccount1.getAuthority());
+			//			System.out.println(checkaccount1.getAuthority());
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
-				session.setAttribute("error", "不正なアクセスです。" );
+				session.setAttribute("error", "不正なアクセスです。");
 				resp.sendRedirect("C0020.html");
 			} else {
 
@@ -82,7 +82,7 @@ public class S0042Servlet extends HttpServlet {
 			C0010Form checkauthority2 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority2.getAuthority().equals("10") && !checkauthority2.getAuthority().equals("11")) {
-				session.setAttribute("error", "不正なアクセスです。" );
+				session.setAttribute("error", "不正なアクセスです。");
 				resp.sendRedirect("C0020.html");
 			} else {
 
@@ -124,7 +124,7 @@ public class S0042Servlet extends HttpServlet {
 
 	}
 
-	private List<String> validate(S0042Form form){
+	private List<String> validate(S0042Form form) {
 
 		List<String> e = new ArrayList<>();
 
@@ -144,36 +144,27 @@ public class S0042Servlet extends HttpServlet {
 			e.add("氏名を入力してください。");
 		}
 		//氏名長さチェック(21バイト以上でエラー)
-		try {
-			if (21 <= form.getName().getBytes("UTF-8").length) {
-				e.add("氏名が長すぎます。");
-			}
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
+
+		if (21 <= form.getName().getBytes(StandardCharsets.UTF_8).length) {
+			e.add("氏名が長すぎます。");
 		}
+
 		//メールアドレス必須入力チェック
 		if (mail.equals("")) {
 			e.add("メールアドレスを入力して下さい。");
 		}
 		//メールアドレス長さチェック(101バイト以上でエラー)
-		try {
-			if (101 <= form.getMail().getBytes("UTF-8").length) {
-				e.add("メールアドレスが長すぎます。");
-			}
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
+		if (101 <= form.getMail().getBytes(StandardCharsets.UTF_8).length) {
+			e.add("メールアドレスが長すぎます。");
 		}
+
 		//メールアドレス形式チェック
 		if (!mail.equals("") && mailm.find() == false) {
 			e.add("メールアドレスの形式が誤っています。");
 		}
 		//パスワード長さチェック(31バイト以上)
-		try {
-			if (31 <= form.getPassword().getBytes("UTF-8").length) {
+		if (31 <= form.getPassword().getBytes(StandardCharsets.UTF_8).length) {
 				e.add("パスワードが長すぎます。");
-			}
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
 		}
 		//パスワード一致チェック (未入力の場合は前のパスワードのまま)
 		if (!password.equals(check)) {
@@ -192,7 +183,7 @@ public class S0042Servlet extends HttpServlet {
 			e.add("アカウント登録権限を入力してください。");
 		}
 		//アカウント登録権限値チェック
-		if (!sale.equals("0") && !sale.equals("1")) {
+		if (!account.equals("0") && !account.equals("1")) {
 			e.add("アカウント登録権限値に正しい値を入力して下さい。");
 		}
 		return e;
