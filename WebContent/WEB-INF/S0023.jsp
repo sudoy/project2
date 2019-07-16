@@ -54,7 +54,7 @@
 					</tr>
 					<tr>
 						<th>商品カテゴリー <span class="badge">必須</span></th>
-						<td><div class="col-md-8">
+						<td><div class="col-md-7">
 								<label class="radio-inline"> <input type="radio"
 									name="inlineRadioOptions" value="1" checked> 食料品
 								</label> <label class="radio-inline"> <input type="radio"
@@ -67,7 +67,7 @@
 									name="inlineRadioOptions" value="6"> 冷凍食品
 								</label> <label class="radio-inline"> <input type="radio"
 									name="inlineRadioOptions" value="10"> たばこ
-								</label><br> <label class="radio-inline"> <input
+								</label> <label class="radio-inline"> <input
 									type="radio" name="inlineRadioOptions" value="5"> その他
 								</label>
 							</div></td>

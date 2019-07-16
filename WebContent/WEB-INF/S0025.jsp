@@ -53,7 +53,7 @@
 				</tr>
 				<tr>
 					<th>商品カテゴリー</th>
-					<td><div class="col-md-8">
+					<td><div class="col-md-7">
 							<label class="radio-inline"> <input type="radio"
 								name="inlineRadioOptions" value="1" disabled checked>
 								食料品
@@ -67,7 +67,7 @@
 								name="inlineRadioOptions" value="6" disabled> 冷凍食品
 							</label> <label class="radio-inline"> <input type="radio"
 								name="inlineRadioOptions" value="10" disabled> たばこ
-							</label><br> <label class="radio-inline"> <input
+							</label><label class="radio-inline"> <input
 								type="radio" name="inlineRadioOptions" value="5" disabled>
 								その他
 							</label>

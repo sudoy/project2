@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="goods.utils.HTMLUtils" %>
 <!DOCTYPE html>
 <html lang="ja">
@@ -64,10 +65,12 @@
 	<tr><th></th>
 	<td id="canto">
 	<div class="form-group">
-		<button type="submit" class="btn btn-primary" id="edit">
-		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 編　集</button>
-		<a type="button" class="btn btn-danger" id="delete" href="S0025.html">
-		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削　除</a>
+		<c:if test="${(userinfo.authority == '10') || (userinfo.authority == '11')}">
+			<button type="submit" class="btn btn-primary" id="edit">
+			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 編　集</button>
+			<a type="button" class="btn btn-danger" id="delete" href="S0025.html">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削　除</a>
+		</c:if>
 		<a type="button" class="btn btn-default" id="cancel" href="S0021.html">キャンセル</a>
 	</div>
 	</td></tr>
