@@ -34,9 +34,14 @@ public class S0011Servlet extends HttpServlet {
 		String note = req.getParameter("note");
 
 		S0011Service service = new S0011Service();
+
 		String name = service.select2(accountid);
 
-		System.out.println(name);
+		System.out.println("い");
+		System.out.println(categoryid);
+		System.out.println("あ");
+		System.out.println(accountid);
+
 
 		S0011Form form = new S0011Form(saledate, accountid, categoryid, tradename, price, salenumber, note, name);
 
@@ -55,11 +60,14 @@ public class S0011Servlet extends HttpServlet {
 			//accountsテーブルからaccount_idを取得
 			req.setAttribute("accounts", form);
 
-			getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp")
-					.forward(req, resp);
+			getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+
+
 			session.removeAttribute("error");
 		}
 		//エラーがない場合
+
+
 
 		//小計をだす
 		int pricenum = Integer.parseInt(price);
@@ -67,10 +75,10 @@ public class S0011Servlet extends HttpServlet {
 		int total = pricenum * salenumbernum;
 		req.setAttribute("total", total);
 
-		//accountsテーブルからaccount_idを取得
-		req.setAttribute("accounts", form);
+
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0011.jsp").forward(req, resp);
+
 	}
 
 	private List<String> validate(S0011Form form) throws UnsupportedEncodingException {

@@ -100,10 +100,11 @@ public class S0010Service {
 
 			while(rs.next()) {
 				S0010Form form = new S0010Form();
-				accounts.add(form);
+
 
 				form.setAccountid(rs.getString("account_id"));
 				form.setName(rs.getString("name"));
+				accounts.add(form);
 			}
 			return accounts;
 

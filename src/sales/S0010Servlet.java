@@ -29,6 +29,7 @@ public class S0010Servlet extends HttpServlet {
 
 		session.setAttribute("accounts", form);
 
+		//商品カテゴリーの取得
 		List<String> categoryList = service.category();
 
 		session.setAttribute("allCategory", categoryList);
@@ -57,7 +58,7 @@ public class S0010Servlet extends HttpServlet {
 				form.setPrice(form2.getPrice());
 				form.setSalenumber(form2.getSalenumber());
 				form.setNote(form2.getNote());
-
+				form.setAccountid(form2.getAccountid());
 
 				// DBへ登録
 				S0010Service service = new S0010Service();

@@ -45,7 +45,7 @@
 			<option value="0">選択してください</option>
 
 			<c:forEach items="${accounts}" var="i">
-				<option value ="${i.accountid}" <c:if test="${(form.accountid).equals('1')}">selected</c:if>>${i.name}</option>
+				<option value ="${i.accountid}" <c:if test="${form.accountid == 'i'}">selected</c:if>>${i.name}</option>
 			</c:forEach>
 
 		</select></div>
@@ -55,7 +55,7 @@
 	<td><div class="col-md-8">
 		<c:forEach items="${allCategory}" var="i">
 			<label class="radio-inline">
-			<input type="radio" name="categoryName" value="${i}"> ${i}
+			<input type="radio" name="categoryid" value="${i}"> ${i}
 			</label>
 		</c:forEach></div>
 	</td></tr>

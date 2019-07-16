@@ -46,21 +46,11 @@
 
 	<tr><th>商品カテゴリー</th>
 	<td><div class="col-md-8">
-		<label class="radio-inline">
-		<input type="radio" name="categoryid" disabled <c:if test="${form.categoryid == '1'}">checked</c:if>> 食料品
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="categoryid" disabled <c:if test="${form.categoryid == '2'}">checked</c:if>> 飲料
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="categoryid" disabled <c:if test="${form.categoryid == '3'}">checked</c:if>> 本・雑誌
-		</label><br>
-		<label class="radio-inline">
-		<input type="radio" name="categoryid" disabled <c:if test="${form.categoryid == '4'}">checked</c:if>> ギフトカード
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="categoryid" disabled <c:if test="${form.categoryid == '5'}">checked</c:if>> その他
-		</label></div>
+		<c:forEach items="${allCategory}" var="i">
+			<label class="radio-inline">
+			<input type="radio" name="categoryid" <c:if test="${form.categoryid == 'i'}">checked</c:if> disabled> ${i}
+			</label>
+		</c:forEach></div>
 	</td></tr>
 
 	<tr><th>商品名</th>
