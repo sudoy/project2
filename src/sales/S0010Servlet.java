@@ -51,8 +51,8 @@ public class S0010Servlet extends HttpServlet {
 
 				//フォームへ値をセット
 				S0010Form form = new S0010Form();
+
 				form.setSaledate(form2.getSaledate());
-				form.setAccountid(form2.getAccountid());
 				form.setCategoryid(form2.getCategoryid());
 				form.setTradename(form2.getTradename());
 				form.setPrice(form2.getPrice());
@@ -60,20 +60,28 @@ public class S0010Servlet extends HttpServlet {
 				form.setNote(form2.getNote());
 				form.setAccountid(form2.getAccountid());
 
+
 				// DBへ登録
 				S0010Service service = new S0010Service();
+
 				service.register(form);
 
 				session.removeAttribute("form");
 
-				session.setAttribute("complete", "No99の売上を登録しました");
-
 				//accountsテーブルからaccount_idを取得
-				req.setAttribute("accounts", form);
+				S0010Service s0010service = new S0010Service();
+				List<S0010Form> s0010form = s0010service.select();
+				session.setAttribute("accounts", s0010form);
+				req.setAttribute("accounts", s0010form);
+
+				String saleid = service.Saleid();
+
+				session.setAttribute("complete", "No" + service.Saleid() + "の売上を登録しました");
 
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
 				session.removeAttribute("complete");
+
 
 		}catch(Exception e) {
 			e.printStackTrace();

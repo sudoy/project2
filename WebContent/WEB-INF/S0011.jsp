@@ -49,8 +49,8 @@
 	<td><div class="col-md-8">
 		<c:forEach items="${allCategory}" var="i">
 			<label class="radio-inline">
-			<input type="radio" name="categoryid" value="${i}"
-			${HTMLUtils.judgeCategoryChecked2(form.categoryid, i)} disabled> ${i}
+			<input type="radio" name="categoryname" value="${i}"
+			${HTMLUtils.judgeCategoryChecked2(form.categoryname, i)} disabled> ${i}
 			</label>
 		</c:forEach></div>
 	</td></tr>

@@ -10,7 +10,14 @@ public class S0010Form {
 	private String price;
 	private String salenumber;
 	private String note;
+	private String saleid;
 
+	public String getSaleid() {
+		return saleid;
+	}
+	public void setSaleid(String saleid) {
+		this.saleid = saleid;
+	}
 	public String getName() {
 		return name;
 	}

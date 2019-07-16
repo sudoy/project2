@@ -117,6 +117,81 @@ public class S0010Service {
 
 
 	}
+	public String setCategoryid(String categoryname) throws ServletException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+
+		try {
+			//データベース接続
+			con = DBUtils.getConnection();
+
+			//SQL
+			sql = "select category_id from categories where category_name = ?";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, categoryname);
+
+			//SELECT命令の実行
+			rs = ps.executeQuery();
+			String categoryid = null;
+
+
+			while(rs.next()) {
+				categoryid = rs.getString("category_id");
+			}
+			return categoryid;
+
+		}catch(Exception e){
+			throw new ServletException(e);
+
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+	}
+
+	public String Saleid(S0010Form form) throws ServletException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+
+		try {
+			//データベース接続
+			con = DBUtils.getConnection();
+
+			//SQL
+			sql = "select sale_id from sales where sale_date = ? and account_id = ? and trade_name= ?";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, form.getSaledate());
+			ps.setString(2, form.getAccountid());
+			ps.setString(3, form.getTradename());
+
+			//SELECT命令の実行
+			rs = ps.executeQuery();
+			String saleid = null;
+
+
+			while(rs.next()) {
+				saleid = rs.getString("sale_id");
+			}
+			return saleid;
+
+		}catch(Exception e){
+			throw new ServletException(e);
+
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+	}
 
 }
 
