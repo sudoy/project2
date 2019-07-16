@@ -74,9 +74,9 @@ public class S0010Servlet extends HttpServlet {
 				session.setAttribute("accounts", s0010form);
 				req.setAttribute("accounts", s0010form);
 
-				String saleid = service.Saleid();
 
-				session.setAttribute("complete", "No" + service.Saleid() + "の売上を登録しました");
+
+				session.setAttribute("complete", "No" + service.Saleid(form) + "の売上を登録しました");
 
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
