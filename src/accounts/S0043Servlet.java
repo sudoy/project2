@@ -35,9 +35,10 @@ public class S0043Servlet extends HttpServlet {
 		} else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
-			C0010Form checkaccount1 = (C0010Form) session.getAttribute("userinfo");
+			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-			if (!checkaccount1.getAuthority().equals("10") && !checkaccount1.getAuthority().equals("11")) {
+			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+				session.setAttribute("error", "不正なアクセスです。" );
 				resp.sendRedirect("C0020.html");
 			} else {
 
@@ -64,9 +65,10 @@ public class S0043Servlet extends HttpServlet {
 		} else {
 
 		//権限チェック(権限が無い場合はダッシュボードへ遷移)
-			C0010Form checkaccount2 = (C0010Form) session.getAttribute("userinfo");
+			C0010Form checkauthority2 = (C0010Form) session.getAttribute("userinfo");
 
-			if (!checkaccount2.getAuthority().equals("10") && !checkaccount2.getAuthority().equals("11")) {
+			if (!checkauthority2.getAuthority().equals("10") && !checkauthority2.getAuthority().equals("11")) {
+				session.setAttribute("error", "不正なアクセスです。" );
 				resp.sendRedirect("C0020.html");
 			}
 

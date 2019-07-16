@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import accounts.forms.S0046Form;
+import accounts.services.S0046Service;
 
 @WebServlet("/S0046.html")
 public class S0046Servlet extends HttpServlet {
@@ -21,10 +22,12 @@ public class S0046Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-		String mail = (String) session.getAttribute("mail");//どこかでsetAttribute
 
-		//メール存在チェック //登録してあるメールアドレスと一致するかどうか
+		//メール存在チェック(パラメーターで渡されたメールアドレスが存在しない場合はエラー)
 
+		String mail = req.getParameter("user");//受信メール内のURL末尾にあるメールアドレスの情報を取得?
+
+		session.setAttribute("receivedEmail",mail);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0046.jsp").forward(req, resp);
 
@@ -35,7 +38,7 @@ public class S0046Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-		String mail = (String) session.getAttribute("mail");
+		String mail = (String) session.getAttribute("receivedEmail");
 		String password = req.getParameter("password");
 		String check = req.getParameter("check");
 
@@ -55,18 +58,19 @@ public class S0046Servlet extends HttpServlet {
 			session.removeAttribute("error");
 		}else {
 
-			//
+			//入力チェック完了後パスワード更新
+			S0046Service service = new S0046Service();
+			service.updatepassword(form);
 
 
 			//パスワード更新後はC0010へ遷移
 			session.setAttribute("S0046Form", form);//?
 			getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);
 		}
-
 	}
 
 	//入力チェック
-	private List<String> validate(S0046Form form) throws UnsupportedEncodingException{
+	private List<String> validate(S0046Form form){
 
 		List<String> e = new ArrayList<>();
 
@@ -81,8 +85,12 @@ public class S0046Servlet extends HttpServlet {
 			e.add("パスワードを入力してください。");
 		}
 		//新パスワード長さチェック
-		if(31 <= password.getBytes("UTF-8").length) {
-			e.add("パスワードが長すぎます。");
+		try {
+			if(31 <= password.getBytes("UTF-8").length) {
+				e.add("パスワードが長すぎます。");
+			}
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
 		}
 		//新パスワード確認必須入力チェック
 		if(check.equals("")) {

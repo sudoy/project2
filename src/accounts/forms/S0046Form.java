@@ -2,6 +2,7 @@ package accounts.forms;
 
 public class S0046Form {
 
+	private String id;
 	private String mail;
 	private String password;
 	private String check;
@@ -12,6 +13,19 @@ public class S0046Form {
 		this.mail = mail;
 		this.password = password;
 		this.check = check;
+	}
+
+	public S0046Form(String id, String mail) {
+		super();
+		this.id = id;
+		this.mail = mail;
+	}
+
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getMail() {
 		return mail;

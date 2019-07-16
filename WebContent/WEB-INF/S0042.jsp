@@ -19,8 +19,10 @@
 		<li class="active"><a href="S0040.html">アカウント検索</a></li>' />
 	</jsp:include>
 
-
 	<div class="container">
+
+	<jsp:include page="message.jsp"/>
+
 
 		<h1>アカウント編集</h1>
 
