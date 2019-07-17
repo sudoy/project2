@@ -8,10 +8,6 @@ create table sales(
 	unit_price int not null,
 	sale_number int not null,
 	note text default null,
-	foreign key (account_id)
-	references accounts(account_id),
-	foreign key (category_id)
-	references categories(category_id)
 
 );
 
