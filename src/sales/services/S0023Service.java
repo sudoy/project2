@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import accounts.forms.S0042Form;
 import goods.utils.DBUtils;
 import sales.forms.S0023Form;
 
@@ -32,7 +31,7 @@ public class S0023Service {
 			//データベース接続
 			con = DBUtils.getConnection();
 
-			//SQL//全部一つのテーブルになったので
+			//SQL
 			sql = "select s.sale_id, s.sale_date, a.name, c.category_name, s.trade_name,"
 					+ " s.unit_price, s.sale_number, s.unit_price * s.sale_number as total , s.note"
 					+ " from sales s join categories c on s.category_id = c.category_id "
@@ -51,16 +50,19 @@ public class S0023Service {
 			while(rs.next()) {
 
 			id = rs.getString("sale_id");
+			saledate = rs.getString("saledate");
 			name = rs.getString("name");
-			mail = rs.getString("mail");
-			password = rs.getString("password");
-			authority = rs.getString("authority");
+			categoryname = rs.getString("category_name");
+			tradename = rs.getString("trade_name");
+			price = rs.getString("unit_price");
+			salenumber = rs.getString("sale_number");
+			note = rs.getString("note");
 
 			}
 
-			S0042Form edit = new S0042Form(id, name, mail, password, authority);
+			S0023Form form = new S0023Form(id, saledate, name, categoryname,tradename, price, salenumber, note);
 
-			return edit;
+			return form;
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -19,13 +19,15 @@ public class S0023Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
+		//ログインチェック
+		//権限チェック
 
 		S0023Service service = new S0023Service();
-
 		S0023Form form = service.select(req.getParameter("id"));
 
+		req.setAttribute("form", form);
 
-
+		getServletContext().getRequestDispatcher("/WEB-INF/S0023.jsp").forward(req, resp);
 
 
 
@@ -44,7 +46,7 @@ public class S0023Servlet extends HttpServlet {
 		String salenumber = req.getParameter("salenumber");
 		String note = req.getParameter("note");
 
-		S0023Form form = new S0023Form(saledate,name, categoryname, tradename, price, salenumber, note);
+		S0023Form form = new S0023Form(saledate, name, categoryname, tradename, price, salenumber, note);
 
 		session.setAttribute("S0023Form", form);
 

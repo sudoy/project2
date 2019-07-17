@@ -66,7 +66,7 @@
 	<td id="canto">
 	<div class="form-group">
 		<c:if test="${(userinfo.authority == '10') || (userinfo.authority == '11')}">
-			<a type="button" class="btn btn-primary" id="edit" href="S0025.html?id=${S0022Form.saleId}">
+			<a type="button" class="btn btn-primary" id="edit" href="S0024.html?id=${S0022Form.saleId}">
 			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 編　集</a>
 			<a type="button" class="btn btn-danger" id="delete" href="S0025.html">
 			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削　除</a>

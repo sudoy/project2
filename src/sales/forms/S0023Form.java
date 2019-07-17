@@ -11,12 +11,45 @@ public class S0023Form {
 	private String note;
 
 
-	public String getSaledate() {
-		return saledate;
+	public S0023Form(String id, String saledate, String name, String categoryname, String tradename, String price,
+			String salenumber, String note) {
+		super();
+
+		this.id = id;
+		this.saledate = saledate;
+		this.name = name;
+		this.categoryname = categoryname;
+		this.tradename = tradename;
+		this.price = price;
+		this.salenumber = salenumber;
+		this.note = note;
 	}
 
+	public S0023Form(String saledate, String name, String categoryname, String tradename, String price,
+			String salenumber, String note) {
+		super();
+		this.saledate = saledate;
+		this.name = name;
+		this.categoryname = categoryname;
+		this.tradename = tradename;
+		this.price = price;
+		this.salenumber = salenumber;
+		this.note = note;
+	}
+
+	private String id;
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 	public void setSaledate(String saledate) {
 		this.saledate = saledate;
+	}
+	public String getSaledate() {
+		return saledate;
 	}
 
 	public String getName() {
@@ -64,18 +97,6 @@ public class S0023Form {
 	}
 
 	public void setNote(String note) {
-		this.note = note;
-	}
-
-	public S0023Form(String saledate, String name, String categoryname, String tradename, String price,
-			String salenumber, String note) {
-		super();
-		this.saledate = saledate;
-		this.name = name;
-		this.categoryname = categoryname;
-		this.tradename = tradename;
-		this.price = price;
-		this.salenumber = salenumber;
 		this.note = note;
 	}
 
