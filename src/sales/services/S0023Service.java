@@ -49,14 +49,15 @@ public class S0023Service {
 			//結果セットの内容を出力(DBから抽出したデータ)
 			while(rs.next()) {
 
-			id = rs.getString("sale_id");
-			saledate = rs.getString("saledate");
-			name = rs.getString("name");
-			categoryname = rs.getString("category_name");
-			tradename = rs.getString("trade_name");
-			price = rs.getString("unit_price");
-			salenumber = rs.getString("sale_number");
-			note = rs.getString("note");
+			id = rs.getString("s.sale_id");
+			System.out.println(id);
+			saledate = rs.getString("s.sale_date");
+			name = rs.getString("a.name");
+			categoryname = rs.getString("c.category_name");
+			tradename = rs.getString("s.trade_name");
+			price = rs.getString("s.unit_price");
+			salenumber = rs.getString("s.sale_number");
+			note = rs.getString("s.note");
 
 			}
 
