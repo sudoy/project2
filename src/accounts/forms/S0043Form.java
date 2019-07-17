@@ -10,6 +10,7 @@ public class S0043Form{
 	private String newpassword;
 	private String authority;
 
+	//パスワード入力時
 	public S0043Form(String id, String name, String mail, String password,String authority) {
 		super();
 
@@ -20,13 +21,13 @@ public class S0043Form{
 		this.authority = authority;
 	}
 
-
-	public S0043Form(String id, String name, String mail, String password, String newpassword, String authority) {
+	//パスワード未入力時
+	public S0043Form(String id, String name, String mail, String oldpassword, String newpassword, String authority) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.mail = mail;
-		this.password = password;
+		this.password = oldpassword;
 		this.newpassword = newpassword;
 		this.authority = authority;
 	}

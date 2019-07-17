@@ -19,16 +19,14 @@ public class S0043Service {
 			//データベース接続
 			con = DBUtils.getConnection();
 
-			System.out.println(form.getNewpassword());
-
 
 			//パスワード未入力時はハッシュ化せずに更新
 				if(form.getNewpassword() == null) {
-				sql = "update accounts set name=?, mail=?, password = ?, authority = ? "
-						+ "where account_id = ?";
-				}else{
 				sql = "update accounts set name=?, mail=?, password = md5(?), authority = ? "
 						+ "where account_id = ?";
+				}else{
+				sql = "update accounts set name=?, mail=?, password = ?, authority = ? "
+							+ "where account_id = ?";
 				}
 
 

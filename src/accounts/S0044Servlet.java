@@ -44,7 +44,7 @@ public class S0044Servlet extends HttpServlet {
 
 				//アカウント情報の取得
 				S0044Form form = service.select(req.getParameter("id"));
-				session.setAttribute("S0044Form", form);//req
+				session.setAttribute("S0044Form", form);//reqに修正→sessionに戻した
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
 			}
@@ -74,15 +74,7 @@ public class S0044Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				S0044Form form = (S0044Form) session.getAttribute("S0044Form");
-
-				String id = form.getId();
-				String name = form.getName();
-				String mail = form.getMail();
-				String password = form.getPassword();
-				String authority = form.getAuthority();
-
-				S0044Form deleteform = new S0044Form(id, name, mail, password, authority);
+				S0044Form deleteform = (S0044Form) session.getAttribute("S0044Form");
 
 				//削除
 				S0044Service service = new S0044Service();
