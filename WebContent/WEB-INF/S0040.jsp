@@ -74,12 +74,12 @@
 	      <button type="submit" class="btn btn-primary">
 	      	<span class="glyphicon glyphicon-search" aria-hidden="true"></span> 検  索
 	      </button>
-	      <input type="reset" class="btn btn-default" value="クリア">
+	      <a class="btn btn-default" href="S0040.html?clear=clear">クリア</a>
 	    </div>
 	</div>
 </form>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/jquery-3.4.1.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
 </body>

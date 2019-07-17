@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import accounts.forms.S0040Form;
 import accounts.forms.S0041Form;
-import accounts.services.S0040Service;
+import accounts.services.S0041Service;
 
 @WebServlet("/S0041.html")
 public class S0041Servlet extends HttpServlet {
@@ -24,6 +24,7 @@ public class S0041Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -35,44 +36,27 @@ public class S0041Servlet extends HttpServlet {
 			resp.sendRedirect("C0010.html");
 		} else {
 
-			if (session.getAttribute("update").equals("on")) {//更新画面からの遷移ならば
-				S0040Form form = (S0040Form) session.getAttribute("S0040Form");//sessionから検索時に入力したデータを取得
-//				System.out.println("mail:" + form.getMail());
-//				System.out.println("name:" + form.getName());
-//				System.out.println("sale" + form.getSale());
-				List<S0041Form> list = new ArrayList<>();
-				S0040Service serv = new S0040Service();
-				list = serv.service(form);//S0040のサービスにぶち込んで一覧を取得
+			S0040Form form = (S0040Form) session.getAttribute("S0040Form");//sessionから検索時に入力したデータを取得
+
+			List<S0041Form> list = new ArrayList<>();
+			S0041Service serv = new S0041Service();
+			list = serv.service(form);//S0040のサービスにぶち込んで一覧を取得
+
+			if (list.size() == 0) {//検索結果なしの場合
+				error.add("検索結果はありません。");
+				session.setAttribute("error", error);//sessionにエラーメッセージを格納
+				//				session.setAttribute("S0040Form", form);//初期表示用
+
+				resp.sendRedirect("S0040.html");
+//				session.removeAttribute("error");//送ったら削除
+			} else {
+
 				session.setAttribute("S0041Form", list);//sessionに格納
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0041.jsp").forward(req, resp);//遷移
 				session.removeAttribute("complete");
-
-			} else {
-				getServletContext().getRequestDispatcher("/WEB-INF/S0041.jsp").forward(req, resp);
 			}
-		}
-	}
 
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-
-		HttpSession session = req.getSession();
-		boolean login = false;
-
-		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
-			//loginがtrue(ログイン状態にある)じゃないと入れないように
-			login = (boolean) session.getAttribute("login");
-		}
-
-		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
-			resp.sendRedirect("C0010.html");
-		} else {
-
-			getServletContext().getRequestDispatcher("/WEB-INF/S0041.jsp").forward(req, resp);
 		}
 	}
 
