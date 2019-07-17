@@ -38,20 +38,16 @@ public class S0011Servlet extends HttpServlet {
 		String name = null;
 
 		S0011Service service = new S0011Service();
-
 		//選択しているときのみDBからname呼び出し
-		System.out.println(accountid);
 		if(!accountid.equals("0")) {
 			name = service.select2(accountid);
 		}
 
+
+
+
 		S0010Service s0010service = new S0010Service();
 		String categoryid = s0010service.setCategoryid(categoryname);
-
-		System.out.println("い");
-		System.out.println("あ");
-
-
 
 		S0011Form form = new S0011Form(saledate, accountid, categoryid, categoryname, tradename, price,
 				salenumber, note, name);
@@ -95,11 +91,17 @@ public class S0011Servlet extends HttpServlet {
 
 	}
 
-	private List<String> validate(S0011Form form) throws UnsupportedEncodingException {
+	private List<String> validate(S0011Form form) throws UnsupportedEncodingException, ServletException {
 		List<String> error = new ArrayList<String>(); //list add
 		//日付チェック
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		format.setLenient(false);
+
+
+		S0011Service s0011service = new S0011Service();
+		boolean exist = s0011service.service(form);
+
+
 
 		String saledate = form.getSaledate();
 		String accountid = form.getAccountid();
@@ -107,6 +109,8 @@ public class S0011Servlet extends HttpServlet {
 		String tradename = form.getTradename();
 		String price = form.getPrice();
 		String salenumber = form.getSalenumber();
+		String note = form.getNote();
+
 
 		if (saledate.equals("")) {
 			error.add("販売日を入力して下さい。");
@@ -127,12 +131,13 @@ public class S0011Servlet extends HttpServlet {
 
 		if (tradename.equals("")) {
 			error.add("商品名を入力して下さい。");
+		}else if(101 <= tradename.length()) {
+			error.add("商品名が長すぎます。");
 		}
 
 		if (price.equals("")) {
 			error.add("単価を入力して下さい。");
-		} else if (!(form.getPrice().equals("")) &&
-				(11 <= form.getPrice().getBytes("UTF-8").length)) {
+		} else if (10 <= price.length()) {
 			error.add("単価が長すぎます。");
 		} else if (!price.equals("")) {
 			//数字かどうか
@@ -147,8 +152,7 @@ public class S0011Servlet extends HttpServlet {
 
 		if (salenumber.equals("")) {
 			error.add("個数を入力してください。");
-		} else if (!(form.getSalenumber().equals("")) &&
-				(11 <= form.getSalenumber().getBytes("UTF-8").length)) {
+		} else if (10 <= salenumber.length()) {
 			error.add("個数が長すぎます。");
 		} else if (!price.equals("")) {
 			try {
@@ -159,10 +163,16 @@ public class S0011Servlet extends HttpServlet {
 		} else if (Integer.parseInt(salenumber) <= 0) {
 			error.add("個数を正しく入力して下さい。");
 		}
-		if (!(form.getNote().equals("")) &&
-				(400 <= form.getNote().getBytes("UTF-8").length)) {
+		if (400 <= note.length()) {
 			error.add("備考が長すぎます。");
 		}
+		//account_idが存在しない場合
+		if(exist == true){
+			error.add("アカウントテーブルに存在しません。") ;
+		}
+
+
+
 
 		return error;
 

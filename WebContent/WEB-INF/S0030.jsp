@@ -57,7 +57,7 @@
 				<input type="radio" name="sale" value="0" <c:if test="${form.sale == '0'}">checked</c:if>> 権限なし
 			</label>
 				<label class="radio-inline">
-				<input type="radio" name="sale" value="1" <c:if test="${form.sale == '0'}">checked</c:if>> 権限あり
+				<input type="radio" name="sale" value="1" <c:if test="${form.sale == '1'}">checked</c:if>> 権限あり
 			</label>
 			</div>
 		</div>
@@ -85,7 +85,7 @@
 	</form>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-3.4.1.min.js"></script>
+	<script	src="js/bootstrap.min.js"></script>
 </body>
 </html>

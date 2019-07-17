@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.servlet.ServletException;
+
 import accounts.forms.S0030Form;
 import goods.utils.DBUtils;
 
@@ -30,7 +32,7 @@ public class S0030Service {
 			ps.setString(2, form.getMail());
 			ps.setString(3, form.getPassword());
 			ps.setString(4, form.getAuthority());
-			System.out.println(ps);
+
 
 			//select命令を実行
 			ps.executeUpdate();
@@ -42,6 +44,44 @@ public class S0030Service {
 			DBUtils.close(con,ps, rs);
 		}
 	}
+	public String Accountid(S0030Form form) throws ServletException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+
+		try {
+			//データベース接続
+			con = DBUtils.getConnection();
+
+			//SQL
+			sql = "select account_id from accounts where mail= ?";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, form.getMail());
+
+
+			//SELECT命令の実行
+			rs = ps.executeQuery();
+			String saleid = null;
+
+
+			while(rs.next()) {
+				saleid = rs.getString("account_id");
+			}
+			return saleid;
+
+		}catch(Exception e){
+			throw new ServletException(e);
+
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+	}
+
 }
 
 

@@ -35,12 +35,12 @@ public class S0010Servlet extends HttpServlet {
 		if (login == false) {
 			session.setAttribute("error", "ログインしてください。");
 			resp.sendRedirect("C0010.html");
-		} else {
+		}else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-//					System.out.println(checkaccount1.getAuthority());
+			//		System.out.println(checkaccount1.getAuthority());
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
 				session.setAttribute("error", "不正なアクセスです。" );

@@ -44,13 +44,14 @@ public class S0046Service {
 
 			}
 
-			String existmail = new S0046Form(mail);
+			S0046Form existmail = new S0046Form(mail);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBUtils.close(con, ps, rs);
 		}
+		return form;
 
 	}
 

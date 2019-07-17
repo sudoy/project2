@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import javax.servlet.ServletException;
 
 import goods.utils.DBUtils;
+import sales.forms.S0011Form;
 
 
 
@@ -47,6 +48,51 @@ public class S0011Service {
 		} finally {
 			DBUtils.close(con, ps, rs);
 		}
+
+	}
+	public boolean service(S0011Form form){
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+		boolean exist = false;
+
+		String s = null;
+
+		try{
+			//データベースの接続を確立
+			con = DBUtils.getConnection();
+		//sql
+			sql = "SELECT account_id From accounts WHERE account_id = ?";
+
+			// プレースホルダに値を設定
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, form.getAccountid());
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				s = rs.getString("account_id");
+			};
+
+
+			if(s == null){
+				exist = true;
+			}else {
+				exist = false;
+			}
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+
+			DBUtils.close(con,ps, rs);
+		}
+		return exist;
+
 
 	}
 

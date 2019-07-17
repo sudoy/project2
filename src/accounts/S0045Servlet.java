@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import accounts.services.S0045Service;
+
 @WebServlet("/S0045.html")
 public class S0045Servlet extends HttpServlet {
 
@@ -58,6 +60,8 @@ public class S0045Servlet extends HttpServlet {
 
 	private List<String> validate(S0045Form s0045form) throws UnsupportedEncodingException{
 		List<String> error = new ArrayList<String>();
+		S0045Service s0045service = new S0045Service();
+		boolean exist = s0045service.service(s0045form);
 
 
 		String mail = s0045form.getMail();
@@ -66,6 +70,11 @@ public class S0045Servlet extends HttpServlet {
 
 		if(mail.equals("")) {
 			error.add( "メールアドレスを入力して下さい。");
+		}else if(101 <= mail.length()) {
+			error.add("メールアドレスが長すぎます。");
+			//メールアドレスが存在しない場合
+		}else if(exist == true){
+			error.add("メールアドレスを正しく入力して下さい。") ;
 		}
 
 		//mailの形式チェック
@@ -77,9 +86,11 @@ public class S0045Servlet extends HttpServlet {
 			Pattern pattern = Pattern.compile(mailFormat);
 			Matcher matcher = pattern.matcher(s0045form.getMail());
 			if (!matcher.find()) {
-				error.add("メールアドレスを入力して下さい。");
+				error.add("メールアドレスを正しく入力して下さい。");
 			}
+
 		}
+
 
 		return error;
 

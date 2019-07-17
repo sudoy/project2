@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import accounts.forms.S0031Form;
+import accounts.S0045Form;
 import goods.utils.DBUtils;
 
-public class S0031Service {
-	public boolean service(S0031Form form){
+public class S0045Service {
+
+	public boolean service(S0045Form form){
 
 		Connection con = null;
 		PreparedStatement ps = null;

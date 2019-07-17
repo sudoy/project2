@@ -1,7 +1,6 @@
 package accounts;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +70,7 @@ public class S0046Servlet extends HttpServlet {
 	//入力チェック
 	private List<String> validate(S0046Form form){
 
-		List<String> e = new ArrayList<>();
+		List<String> error = new ArrayList<>();
 
 		String mail = form.getMail();
 		String password = form.getPassword();
@@ -81,25 +80,23 @@ public class S0046Servlet extends HttpServlet {
 
 		//新パスワード必須入力チェック
 		if(password.equals("")) {
-			e.add("パスワードを入力してください。");
+			error.add("パスワードを入力してください。");
 		}
 		//新パスワード長さチェック
-		try {
-			if(31 <= password.getBytes("UTF-8").length) {
-				e.add("パスワードが長すぎます。");
-			}
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
+
+		if(31 <= password.length()) {
+			error.add("パスワードが長すぎます。");
 		}
+
 		//新パスワード確認必須入力チェック
 		if(check.equals("")) {
-			e.add("確認用パスワードを入力してください");
+			error.add("確認用パスワードを入力してください");
 		}
 		//新パスワード一致チェック
 		if(!password.equals(check)) {
-			e.add("新パスワードとパスワード(確認)が一致していません。");
+			error.add("新パスワードとパスワード(確認)が一致していません。");
 		}
-		return e;
+		return error;
 	}
 
 }

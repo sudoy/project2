@@ -14,7 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import accounts.forms.C0010Form;
 import accounts.forms.S0031Form;
+import accounts.services.S0031Service;
 
 @WebServlet("/S0031.html")
 public class S0031Servlet extends HttpServlet {
@@ -36,41 +38,58 @@ public class S0031Servlet extends HttpServlet {
 			session.setAttribute("error", "ログインしてください。");
 			resp.sendRedirect("C0010.html");
 		} else {
-			String name = req.getParameter("name");
-			String mail = req.getParameter("mail");
-			String password = req.getParameter("password");
-			String check = req.getParameter("check");
-			String sale = req.getParameter("sale");
-			String account = req.getParameter("account");
 
-			S0031Form form = new S0031Form(name, mail, password, check, sale, account);
+			//権限チェック(権限が無い場合はダッシュボードへ遷移)
+			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
+
+			//		System.out.println(checkaccount1.getAuthority());
+
+			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+				session.setAttribute("error", "不正なアクセスです。" );
+				resp.sendRedirect("C0020.html");
+
+			}else {
+
+				String name = req.getParameter("name");
+				String mail = req.getParameter("mail");
+				String password = req.getParameter("password");
+				String check = req.getParameter("check");
+				String sale = req.getParameter("sale");
+				String account = req.getParameter("account");
+
+				S0031Form s0031form = new S0031Form(name, mail, password, check, sale, account);
+
+				//登録確認からキャンセル出戻った時にも使えるように
+				session = req.getSession();
+				session.setAttribute("form", s0031form);
 
 
-			session = req.getSession();
-			session.setAttribute("form", form);
+				// バリデーションチェック
+				List<String> error = validate(s0031form);
+
+				//エラーがある場合
+				if(error.size() != 0) {
+					// S0030.htmlを再表示
+					session.setAttribute("error", error);
+					getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp").forward(req, resp);
+					session.removeAttribute("error");
 
 
-			// バリデーションチェック
-			List<String> error = validate(form);
+				}else {
+					getServletContext().getRequestDispatcher("/WEB-INF/S0031.jsp").forward(req, resp);
+				}
 
-			//エラーがある場合
-			if(error.size() != 0) {
-				// S0030.htmlを再表示
-				session.setAttribute("error", error);
-				req.setAttribute("form", form);
-				getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp")
-					.forward(req, resp);
-				session.removeAttribute("error");
-
-				getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp").forward(req, resp);
 			}
 
-			getServletContext().getRequestDispatcher("/WEB-INF/S0031.jsp").forward(req, resp);
 		}
-
 	}
+
+
 	private List<String> validate(S0031Form form) throws UnsupportedEncodingException {
 		List<String> error = new ArrayList<String>();  //list add
+		//メールアドレス重複確認
+		S0031Service s0031service = new S0031Service();
+		boolean exist = s0031service.service(form);
 
 		String name = form.getName();
 		String mail = form.getMail();
@@ -82,13 +101,14 @@ public class S0031Servlet extends HttpServlet {
 
 		if(name.equals("")) {
 			error.add("氏名を入力して下さい。") ;
-		}else if (!(form.getName().equals("")) &&
-				(21 <= form.getName().getBytes("UTF-8").length)) {
+		}else if (21 <= name.length()) {
 			error.add("氏名が長すぎます。");
 		}
 
 		if(mail.equals("")) {
 			error.add( "メールアドレスを入力して下さい。");
+		}else if(101 <= mail.length()) {
+			error.add("メールアドレスが長すぎます。");
 		}
 
 		//mailの形式チェック
@@ -100,29 +120,43 @@ public class S0031Servlet extends HttpServlet {
 			Pattern pattern = Pattern.compile(mailFormat);
 			Matcher matcher = pattern.matcher(form.getMail());
 			if (!matcher.find()) {
-				error.add("メールアドレスを入力して下さい。");
+				error.add("メールアドレスを正しく入力して下さい。");
 			}
+		}
+		if(exist == false){
+			error.add("メールアドレスが既に登録されています。") ;
 		}
 
 
 		if(password.equals("")) {
 			error.add("パスワードを入力して下さい。");
-		}else if (!(form.getPassword().equals("")) &&
-				(32 <= form.getPassword().getBytes("UTF-8").length)) {
+
+		}else if (31 <= password.length()) {
 			error.add("パスワードが長すぎます。");
+		}
+
+		if(check.equals("")) {
+			error.add("パスワード（確認）を入力して下さい。");
 		}
 
 		if(!password.equals(check)) {
 			error.add("パスワードとパスワード（確認）が一致していません。");
 		}
-		if (account == null || account.isEmpty()) {
-			error.add( "アカウント登録権限を入力して下さい。");
-		}
+
 		if (sale == null || sale.isEmpty()) {
 			error.add( "売上登録権限を入力して下さい。");
+		}else if(!sale.contentEquals("0") && !sale.contentEquals("1")) {
+			error.add( "売上登録権限に正しい値を入力して下さい。");
+
+		}
+		if (account == null || account.isEmpty()) {
+			error.add( "アカウント登録権限を入力して下さい。");
+		}else if(!account.contentEquals("0") && !account.contentEquals("1")) {
+			error.add( "アカウント登録権限に正しい値を入力して下さい。");
 		}
 
 		return error;
 
 	}
+
 }

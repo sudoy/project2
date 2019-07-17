@@ -16,7 +16,7 @@
 	<body>
 	<div class="container" id="color">
 		<jsp:include page="message.jsp"/>
-
+	</div>
 
 		<div class="center">
 		<h2>物品売上管理システム</h2>
@@ -36,11 +36,10 @@
 
 
 		</div><!--center-->
-	</div>
 
 
 
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="js/jquery-3.4.1.min.js"></script>
 	<script	src="js/bootstrap.min.js"></script>
 	</body>
 
