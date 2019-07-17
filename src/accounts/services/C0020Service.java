@@ -119,11 +119,16 @@ public class C0020Service {
 		//前月の売上合計を取得
 		String lastMonth = returnTotal(lastMonthStartDay.toString(),lastMonthLastDay.toString());
 
+		System.out.println(thisMonth);
+		System.out.println(lastMonth);
+
 		//値が取得できたらparseInt
 		int thisMonthInt = 0;
 		int lastMonthInt = 0;
-		if(thisMonth != null && lastMonth != null) {
+		if(thisMonth != null) {
 			thisMonthInt = Integer.parseInt(thisMonth);
+		}
+		if(lastMonth != null) {
 			lastMonthInt = Integer.parseInt(lastMonth);
 		}
 

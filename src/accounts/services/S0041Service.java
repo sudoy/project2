@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 
@@ -14,7 +13,7 @@ import accounts.forms.S0041Form;
 import goods.utils.DBUtils;
 import goods.utils.HTMLUtils;
 
-public class S0040Service {
+public class S0041Service {
 	public List<S0041Form> service(S0040Form form) throws ServletException {
 
 		String name = form.getName();
@@ -22,7 +21,7 @@ public class S0040Service {
 		String sale = form.getSale();
 		String account = form.getAccount();
 
-		Map<String, String> map = HTMLUtils.formatAuthority(sale, account);
+		String authoritySQL = HTMLUtils.formatAuthority(sale, account);
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -42,19 +41,18 @@ public class S0040Service {
 				sql += " and mail = ?";
 			}
 
-			for (Map.Entry<String, String> entry : map.entrySet()) {//authorityの条件が1～3個入ってくる
-				sql += entry.getValue();
-			}
+			sql += authoritySQL;
 
 			ps = con.prepareStatement(sql);
+			System.out.println(ps);
 
 			if (!name.equals("")) {//nameが入力されている
 				ps.setString(1, "%" + name + "%");
-				if(!mail.equals("")) {//mailが入力されている
+				if (!mail.equals("")) {//mailが入力されている
 					ps.setString(2, mail);
 				}
-			}else {//nameが入力されていない
-				if(!mail.equals("")) {//mailが入力されている
+			} else {//nameが入力されていない
+				if (!mail.equals("")) {//mailが入力されている
 					ps.setString(1, mail);
 				}
 			}

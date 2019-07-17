@@ -25,17 +25,9 @@ public class S0023Form {
 		this.note = note;
 	}
 
-	public S0023Form(String saledate, String name, String categoryname, String tradename, String price,
-			String salenumber, String note) {
-		super();
-		this.saledate = saledate;
-		this.name = name;
-		this.categoryname = categoryname;
-		this.tradename = tradename;
-		this.price = price;
-		this.salenumber = salenumber;
-		this.note = note;
-	}
+
+
+
 
 	private String id;
 	public String getId() {

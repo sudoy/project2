@@ -3,6 +3,10 @@ package sales.services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
 
 import goods.utils.DBUtils;
 import sales.forms.S0023Form;
@@ -71,6 +75,47 @@ public class S0023Service {
 			DBUtils.close(con, ps, rs);
 		}
 		return null;
+
+	}
+	public List<S0023Form> selectaccount() throws ServletException {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+
+		try {
+			//データベース接続
+			con = DBUtils.getConnection();
+
+			//SQL
+			sql = "select account_id,name from accounts";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			//SELECT命令の実行
+			rs = ps.executeQuery();
+
+			List<S0023Form> accounts = new ArrayList<>();
+
+			while(rs.next()) {
+				S0023Form form = new S0023Form();
+
+				form.setId(rs.getString("account_id"));
+				form.setName(rs.getString("name"));
+				accounts.add(form);
+			}
+			return accounts;
+
+		}catch(Exception e){
+			throw new ServletException(e);
+
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+
 
 	}
 }
