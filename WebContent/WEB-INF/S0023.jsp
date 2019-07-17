@@ -57,20 +57,20 @@
 <div class="container">
 
 
-<form class="form-horizontal" method="POST" action="S0024.html">
+<form class="form-horizontal" method="POST" action="S0023.html">
 	<table>
 
 	<tr><th>販売日 <span class="badge">必須</span></th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" name="saledate" value="${S0023.saledate}" placeholder="販売日">
+		<input type="text" class="form-control" name="saledate" value="${S0023Form.saledate}" placeholder="販売日">
 		</div>
 		</td>
 	</tr>
 
 	<tr><th>担当 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
-		<select class="form-control" name="accountid">
+		<select class="form-control" name="name">
 			<option value="0">選択してください</option>
 
 			<c:forEach items="${accounts}" var="i">
@@ -82,45 +82,30 @@
 	</td></tr>
 
 	<tr><th>商品カテゴリー <span class="badge">必須</span></th>
-	<td><div class="col-md-7">
-		<label class="radio-inline">
-		<input type="radio" name="categoryname" value="1" checked> 食料品
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="categoryname" value="2"> 飲料
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="categoryname" value="3"> 雑誌
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="categoryname" value="9"> 酒類
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="categoryname" value="6"> 冷凍食品
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="categoryname" value="10"> たばこ
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="categoryname" value="5"> その他
-		</label></div>
+	<td><div class="col-md-8">
+		<c:forEach items="${S0023Form.categoryname}" var="i">
+			<label class="radio-inline">
+			<input type="radio" name="categoryname" value="${i}"
+			 ${HTMLUtils.judgeCategoryChecked2(i, form.categoryname)}> ${i}
+			</label>
+		</c:forEach></div>
 	</td></tr>
 
 	<tr><th>商品名 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" name="tradename" placeholder="商品" value="${S0023.tradename}">
+	<input class="form-control" type="text" name="tradename" placeholder="商品" value="${S0023Form.tradename}">
 	</div></td></tr>
 	<tr><th>単価 <span class="badge">必須</span></th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" name="price" placeholder="単価" value="${S0023.price}">
+	<input class="form-control" id="right" type="text" name="price" placeholder="単価" value="${S0023Form.price}">
 	</div></td></tr>
 	<tr><th>個数 <span class="badge">必須</span></th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" name="salenumber" placeholder="個数" value="${S0023.salenumber}">
+	<input class="form-control" id="right" type="text" name="salenumber" placeholder="個数" value="${S0023Form.salenumber}">
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="detail" rows="3" name="note" placeholder="備考">${S0023.note}</textarea>
+	<textarea class="form-control" id="detail" rows="3" name="note" placeholder="備考">${S0023Form.note}</textarea>
 	</div></td>
 	</tr>
 
@@ -131,7 +116,7 @@
 
 		<button type="submit" class="btn btn-primary" id="touroku">
 		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 更　新</button>
-		<a class="btn btn-default" id="cancel" href="S0022.html">キャンセル</a>
+		<a class="btn btn-default" id="cancel" href="S0022.html?id=${S0023Form.id}">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>

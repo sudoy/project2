@@ -1,6 +1,8 @@
 package sales;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 import sales.forms.S0023Form;
 import sales.services.S0023Service;
@@ -64,6 +68,10 @@ public class S0023Servlet extends HttpServlet {
 
 		List<String> e = new ArrayList<>();
 
+		//日付チェック
+		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		format.setLenient(false);
+
 		String saledate = form.getSaledate();
 		String name = form.getName();
 		String categoryname = form.getCategoryname();
@@ -77,11 +85,15 @@ public class S0023Servlet extends HttpServlet {
 			e.add("販売日を入力してください。");
 		}
 		//販売日形式チェック
-//		if() {
-			e.add("販売日を正しく入力して下さい。");
-//		}
+		if(!saledate.equals("")) {
+			try {
+				format.parse(saledate);
+			} catch (ParseException | java.text.ParseException pe) {
+				e.add("販売日を正しく入力して下さい。");
+			}
+		}
 		//担当必須入力チェック
-		if(name.equals("")) {
+		if(name.equals("0")) {
 			e.add("担当が未選択です。");
 		}
 		//商品カテゴリー必須入力チェック
@@ -97,13 +109,48 @@ public class S0023Servlet extends HttpServlet {
 			e.add("商品名が長すぎます。");
 		}
 		//単価必須入力チェック
-		//
-		//
-		//
-		//
+		if (price.equals("")) {
+			e.add("単価を入力して下さい。");
+		}
+		//単価長さチェック
+		if (10 <= price.length()) {
+			e.add("単価が長すぎます。");
+		//単価型式チェック
+		if (!price.equals("")) {
+			try {
+				Integer.parseInt(price);
+			} catch (NumberFormatException ne) {
+				e.add("単価を正しく入力して下さい。");
+			}
+		}
+		if (Integer.parseInt(price) <= 0) {
+			e.add("単価を正しく入力して下さい。");
+		}
+		//個数必須入力チェック
+		if(salenumber.equals("")) {
+			e.add("個数を入力して下さい。");
+		}
+		//個数形式チェック
+		if(!salenumber.equals("")) {
+			try {
+				Integer.parseInt(salenumber);
+			} catch (NumberFormatException ne) {
+				e.add("個数を正しく入力して下さい。");
+			}
+		}
+			e.add("個数を正しく入力して下さい。");
+		}
+		//個数長さチェック(10文字以上の時エラー)
+		if(10 <= salenumber.length()) {
 
+		}
+		//備考長さチェック(401文字以上の時エラー)
+		if(401<= note.length()) {
+			e.add("備考が長すぎます。");
 
-		return null;
+		}
+
+		return e;
 	}
 
 }
