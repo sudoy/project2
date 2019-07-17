@@ -36,10 +36,15 @@ public class C0020Servlet extends HttpServlet {
 			C0010Form userInfo = (C0010Form) session.getAttribute("userinfo");
 
 			//DBからなんやかんやして一覧を取得
+			String value = req.getParameter("value");
 			C0020Service serv = new C0020Service();
-			List<C0020Form> form = serv.service(userInfo.getMail());
+			List<C0020Form> form = serv.service(userInfo.getMail(), value);
 
 			session.setAttribute("C0020Form", form);
+
+			C0020Form variousForm = serv.returnVariousForm();//今月の売上合計、前月の売上合計、前月比を取得
+
+			req.setAttribute("variousForm", variousForm);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/C0020.jsp").forward(req, resp);
 
