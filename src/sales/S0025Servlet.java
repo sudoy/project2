@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import accounts.forms.C0010Form;
-import accounts.forms.S0025Form;
-import accounts.services.S0025Service;
+import sales.forms.S0025Form;
+import sales.services.S0025Service;
 
 @WebServlet("/S0025.html")
 public class S0025Servlet extends HttpServlet {

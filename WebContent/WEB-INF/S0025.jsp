@@ -42,15 +42,11 @@
 	<tr><th>担当</th>
 	<td><div class="col-md-8">
 		<select class="form-control"  disabled>
-			<option name="accountid">1</option>
 			<option>イチロー</option>
-			<option>ダルビッシュ</option>
-			<option>4</option>
-			<option>5</option>
 		</select></div>
 	</td></tr>
 	<tr><th>商品カテゴリー</th>
-	<td><div class="col-md-7" name="categoryid">
+	<td><div class="col-md-7">
 		<label class="radio-inline">
 		<input type="radio" name="inlineRadioOptions" value="1" disabled checked> 食料品
 		</label>
@@ -78,18 +74,23 @@
 	<td><div class="col-md-8">
 	<input name="tradename" class="form-control" type="text" placeholder="商品" value="からあげ弁当" disabled>
 	</div></td></tr>
+
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="単価" name="price" value="450" disabled>
+	<input class="form-
+	control" id="right" type="text" placeholder="単価" name="price" value="450" disabled>
 	</div></td></tr>
+
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
 	<input class="form-control" id="right" type="text" placeholder="個数" name="salenumber" value="3" disabled>
 	</div></td></tr>
+
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
 	<p  disabled>1,620</p>
 	</div></td></tr>
+
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
 	<textarea class="form-control" id="detail" rows="3" placeholder="備考" name="note" disabled>今日からの新商品</textarea>

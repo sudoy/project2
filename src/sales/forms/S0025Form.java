@@ -1,4 +1,4 @@
-package accounts.forms;
+package sales.forms;
 
 
 public class S0025Form {

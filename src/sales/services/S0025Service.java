@@ -1,4 +1,4 @@
-package accounts.services;
+package sales.services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,8 +6,8 @@ import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 
-import accounts.forms.S0025Form;
 import goods.utils.DBUtils;
+import sales.forms.S0025Form;
 
 public class S0025Service {
 	public String Saleid(S0025Form form) throws ServletException {
