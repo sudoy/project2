@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import accounts.forms.S0040Form;
-import accounts.forms.S0041Form;
-import accounts.services.S0040Service;
 
 @WebServlet("/S0040.html")
 public class S0040Servlet extends HttpServlet {
@@ -26,6 +24,7 @@ public class S0040Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -33,11 +32,19 @@ public class S0040Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
+			session.removeAttribute("error");//送ったら削除
 		} else {
+
+			if (req.getParameter("clear") != null) {//クリアボタンが押された場合
+				session.removeAttribute("S0040Form");
+				session.removeAttribute("error");
+			}
 			req.setCharacterEncoding("UTF-8");
 			getServletContext().getRequestDispatcher("/WEB-INF/S0040.jsp").forward(req, resp);
+
 		}
 	}
 
@@ -48,6 +55,7 @@ public class S0040Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -55,8 +63,10 @@ public class S0040Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
+			session.removeAttribute("error");//送ったら削除
 		} else {
 
 			String name = req.getParameter("name");
@@ -66,27 +76,15 @@ public class S0040Servlet extends HttpServlet {
 
 			S0040Form form = new S0040Form(name, mail, sale, account);
 
-			List<String> error = validate(form);
+			error = validate(form);
 
 			if (error.size() == 0) {
 
-				List<S0041Form> list = new ArrayList<>();
-				S0040Service serv = new S0040Service();
-				list = serv.service(form);//Serviceで取得した一覧
-				if (list.size() == 0) {//2つ下のelseとほぼ同じことをしているのでまとめたい
-					error.add("検索結果はありません。");
-					session.setAttribute("error", error);//sessionにエラーメッセージを格納
-					session.setAttribute("S0040Form", form);//初期表示用
+				session.setAttribute("S0040Form", form);//更新時の再表示用
+				resp.sendRedirect("S0041.html");//検索結果一覧画面へ
 
-					getServletContext().getRequestDispatcher("/WEB-INF/S0040.jsp").forward(req, resp);//検索入力画面を再表示
+				session.removeAttribute("error");//「検索結果はありません」を消す用
 
-					session.removeAttribute("error");//送ったら削除
-				} else {
-
-					session.setAttribute("S0041Form", list);//sessionに取得した一覧を格納
-					session.setAttribute("S0040Form", form);//更新時の再表示用
-					getServletContext().getRequestDispatcher("/S0041.html").forward(req, resp);
-				}
 			} else {
 				session.setAttribute("error", error);//sessionにエラーメッセージを格納
 				session.setAttribute("S0040Form", form);//初期表示用
