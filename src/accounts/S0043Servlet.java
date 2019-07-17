@@ -42,7 +42,7 @@ public class S0043Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
+				getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
 			}
 		}
 	}
@@ -99,8 +99,6 @@ public class S0043Servlet extends HttpServlet {
 			session.removeAttribute("S0042Form");
 			session.removeAttribute("password");
 
-			//データ更新後の検索画面にする
-			session.setAttribute("update", "on");// 7/11 16:08追加
 
 			//成功メッセージ
 			session.setAttribute("complete", "No" + updateform.getId() + "のアカウントを更新しました。");

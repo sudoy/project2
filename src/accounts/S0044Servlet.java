@@ -44,7 +44,7 @@ public class S0044Servlet extends HttpServlet {
 
 				//アカウント情報の取得
 				S0044Form form = service.select(req.getParameter("id"));
-				session.setAttribute("S0044Form", form);
+				session.setAttribute("S0044Form", form);//req
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
 			}
@@ -90,8 +90,6 @@ public class S0044Servlet extends HttpServlet {
 
 				//取得したアカウント情報を破棄
 				session.removeAttribute("S0044Form");
-				//データ削除後の検索画面にする
-				session.setAttribute("update", "on");//7/16 追加
 
 				//成功メッセージ
 				session.setAttribute("complete", "No" + deleteform.getId() + "のアカウントを削除しました。");

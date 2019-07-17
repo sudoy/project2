@@ -44,11 +44,11 @@ public class S0042Service {
 			//結果セットの内容を出力(DBから抽出したデータ)
 			while(rs.next()) {
 
-			id = rs.getString("account_id");
-			name = rs.getString("name");
-			mail = rs.getString("mail");
-			password = rs.getString("password");
-			authority = rs.getString("authority");
+				id = rs.getString("account_id");
+				name = rs.getString("name");
+				mail = rs.getString("mail");
+				password = rs.getString("password");
+				authority = rs.getString("authority");
 
 			}
 
