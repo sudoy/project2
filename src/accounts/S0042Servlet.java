@@ -1,7 +1,6 @@
 package accounts;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -42,7 +41,6 @@ public class S0042Servlet extends HttpServlet {
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-			//			System.out.println(checkaccount1.getAuthority());
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
 				session.setAttribute("error", "不正なアクセスです。");
@@ -106,7 +104,7 @@ public class S0042Servlet extends HttpServlet {
 				//エラー時はS0042.jspを再表示
 				if (error.size() != 0) {
 
-					session.setAttribute("error", error);
+					session.setAttribute("error", error);//session必要?
 					session.setAttribute("S0042Form", form);
 
 					getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
@@ -117,7 +115,7 @@ public class S0042Servlet extends HttpServlet {
 
 					//入力チェックをクリア後はS0043アカウント詳細編集確認画面へ遷移
 					session.setAttribute("S0042Form", form);
-					getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
+					resp.sendRedirect("S0043.html");//sendRedirect
 				}
 			}
 		}
@@ -143,9 +141,9 @@ public class S0042Servlet extends HttpServlet {
 		if (name.equals("")) {
 			e.add("氏名を入力してください。");
 		}
-		//氏名長さチェック(21バイト以上でエラー)
+		//氏名長さチェック(21文字以上でエラー)
 
-		if (21 <= form.getName().getBytes(StandardCharsets.UTF_8).length) {
+		if (21 <= form.getName().length()) {
 			e.add("氏名が長すぎます。");
 		}
 
@@ -153,8 +151,8 @@ public class S0042Servlet extends HttpServlet {
 		if (mail.equals("")) {
 			e.add("メールアドレスを入力して下さい。");
 		}
-		//メールアドレス長さチェック(101バイト以上でエラー)
-		if (101 <= form.getMail().getBytes(StandardCharsets.UTF_8).length) {
+		//メールアドレス長さチェック(101文字以上でエラー)
+		if (101 <= form.getMail().length()) {
 			e.add("メールアドレスが長すぎます。");
 		}
 
@@ -162,8 +160,8 @@ public class S0042Servlet extends HttpServlet {
 		if (!mail.equals("") && mailm.find() == false) {
 			e.add("メールアドレスの形式が誤っています。");
 		}
-		//パスワード長さチェック(31バイト以上)
-		if (31 <= form.getPassword().getBytes(StandardCharsets.UTF_8).length) {
+		//パスワード長さチェック(31文字以上でエラー)
+		if (31 <= form.getPassword().length()) {
 				e.add("パスワードが長すぎます。");
 		}
 		//パスワード一致チェック (未入力の場合は前のパスワードのまま)

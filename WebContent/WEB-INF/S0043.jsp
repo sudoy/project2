@@ -104,15 +104,15 @@
 	      <button type="submit" class="btn btn-primary">
 	      	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K
 	      </button>
-	      	<a type="button" class="btn btn-default" href="S0043.html">キャンセル</a>
+	      	<a  class="btn btn-default" href="S0042.html?id=${S0042Form.id}">キャンセル</a>
 	    </div>
 	</div>
 </form>
 </div>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script	src="js/bootstrap.min.js"></script>
 
 
 </body>
