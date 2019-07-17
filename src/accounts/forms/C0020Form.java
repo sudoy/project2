@@ -11,6 +11,20 @@ public class C0020Form {
 	private String saleNumber;
 	private String total;
 
+	private String yearMonth;
+	private String thisMonthTotal;
+	private String lastMonthTotal;
+	private String ratio;
+
+
+	public C0020Form(String yearMonth, String thisMonthTotal, String lastMonthTotal, String ratio) {
+		super();
+		this.yearMonth = yearMonth;
+		this.thisMonthTotal = thisMonthTotal;
+		this.lastMonthTotal = lastMonthTotal;
+		this.ratio = ratio;
+	}
+
 	public C0020Form(String saleId, String saleDate, String name, String categoryName, String tradeName,
 			String unitPrice, String saleNumber, String total) {
 		super();
@@ -71,6 +85,33 @@ public class C0020Form {
 	public void setTotal(String total) {
 		this.total = total;
 	}
+	public String getThisMonthTotal() {
+		return thisMonthTotal;
+	}
+	public void setThisMonthTotal(String thisMonthTotal) {
+		this.thisMonthTotal = thisMonthTotal;
+	}
+	public String getLastMonthTotal() {
+		return lastMonthTotal;
+	}
+	public void setLastMonthTotal(String lastMonthTotal) {
+		this.lastMonthTotal = lastMonthTotal;
+	}
+	public String getRatio() {
+		return ratio;
+	}
+	public void setRatio(String ratio) {
+		this.ratio = ratio;
+	}
+
+	public String getYearMonth() {
+		return yearMonth;
+	}
+
+	public void setYearMonth(String yearMonth) {
+		this.yearMonth = yearMonth;
+	}
+
 
 
 }

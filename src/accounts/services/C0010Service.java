@@ -40,7 +40,7 @@ public class C0010Service {
 				password = rs.getString("password");
 				authority = rs.getString("authority");
 
-				if (mail != null && password != null) {
+				if (mail != null && password != null) {//whileの中に入っている時点で値が取れてるということでは？
 					login = true;
 
 				}

@@ -63,7 +63,7 @@ public class C0010Servlet extends HttpServlet {
 
 			if (userinfo.isLogin() == true) {//mailとpassが正しければ（trueが返ってきていれば）
 				session.removeAttribute("error");
-//				System.out.println(userinfo.getAuthority());
+
 				session.setAttribute("userinfo", userinfo);
 				resp.sendRedirect("C0020.html");
 			} else {
@@ -98,7 +98,7 @@ public class C0010Servlet extends HttpServlet {
 		}
 		//mailが入力されており且バイト数が101以上
 		if (!(form.getMail().equals("")) &&
-				(101 <= form.getMail().getBytes("UTF-8").length)) {
+				(101 <= form.getMail().length())) {
 			error.add("メールアドレスが長すぎます。");
 		}
 		//mailの形式チェック

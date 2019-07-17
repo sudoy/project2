@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="goods.utils.HTMLUtils" %>
 <!DOCTYPE html>
 <html>
 
@@ -34,29 +35,29 @@
 	<nav aria-label="Page navigation">
 		<ul class="pagination">
 			<li>
-				<a href="#" aria-label="Previous">
+				<a href="C0020.html?value=-y1" aria-label="Previous">
 					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>前年
 				</a>
 			</li>
 			<li>
-				<a href="#" aria-label="Next">
+				<a href="C0020.html?value=-M1" aria-label="Next">
 					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>前月
 				</a>
 			</li>
 		</ul>
 	</nav>
 	</div>
-	<div class="col-md-4" id="mannaka"><h3>2018年5月</h3></div>
+	<div class="col-md-4" id="mannaka"><h3>${variousForm.yearMonth}</h3></div>
 	<div class="col-md-4" id="migi">
 	<nav aria-label="Page navigation">
 		<ul class="pagination">
 			<li>
-				<a href="#" aria-label="Previous">
+				<a href="C0020.html?value=M1" aria-label="Previous">
 					翌月<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 				</a>
 			</li>
 			<li>
-				<a href="#" aria-label="Next">
+				<a href="C0020.html?value=y1" aria-label="Next">
 					翌年<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 				</a>
 			</li>
@@ -75,7 +76,7 @@
 			 前月(5月)の売上合計</h2>
 		</div>
 		<div class="panel-body">
-			1,000,000円
+			${variousForm.lastMonthTotal}円
 		</div>
 	</div>
 	</div>
@@ -87,7 +88,7 @@
 			今月(6月)の売上合計</h2>
 		</div>
 		<div class="panel-body">
-			1,200,000円
+			${variousForm.thisMonthTotal}円
 		</div>
 	</div>
 	</div>
@@ -100,7 +101,7 @@
 		</div>
 		<div class="panel-body">
 		<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-			120.00%
+			${variousForm.ratio}%
 		</div>
 	</div>
 	</div>
@@ -120,7 +121,7 @@
 		<table class="table">
 		<tr><th>No</th><th>販売日</th><th>商品カテゴリー</th><th>商品名</th><th>単価</th><th>個数</th><th>小計</th></tr>
 		<c:forEach items="${C0020Form}" var="i">
-			<tr><td>${i.saleId}</td><td>${i.saleDate}</td><td>${i.categoryName}</td>
+			<tr><td>${i.saleId}</td><td>${HTMLUtils.formatDate(i.saleDate)}</td><td>${i.categoryName}</td>
 			<td>${i.tradeName}</td><td>${i.unitPrice}</td><td>${i.saleNumber}</td><td>${i.total}</td></tr>
 		</c:forEach>
 
