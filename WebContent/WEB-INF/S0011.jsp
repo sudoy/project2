@@ -84,7 +84,7 @@
 
 		<button type="submit" class="btn btn-primary" id="entry">
 		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
-		<a type="button" class="btn btn-default" href="S0010.html">キャンセル</a>
+		<a class="btn btn-default" href="S0010.html">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>

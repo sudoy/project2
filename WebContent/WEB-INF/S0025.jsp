@@ -77,8 +77,7 @@
 
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-
-	control" id="right" type="text" placeholder="単価" name="price" value="450" disabled>
+	<input class="form-control" id="right" type="text" placeholder="単価" name="price" value="450" disabled>
 	</div></td></tr>
 
 	<tr><th>個数</th>
@@ -88,7 +87,7 @@
 
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
-	<p  disabled>1,620</p>
+	<input class="form-control" id="right" value="1620"  disabled>
 	</div></td></tr>
 
 	<tr><th id="remarks">備考</th>

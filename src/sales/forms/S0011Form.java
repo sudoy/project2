@@ -5,7 +5,6 @@ public class S0011Form {
 	private String accountid;
 	private String categoryname;
 	private String categoryid;
-
 	private String tradename;
 	private String price;
 	private String salenumber;

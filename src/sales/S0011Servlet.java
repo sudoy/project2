@@ -38,13 +38,11 @@ public class S0011Servlet extends HttpServlet {
 		String name = null;
 
 		S0011Service service = new S0011Service();
-		//選択しているときのみDBからname呼び出し
+
+		//担当選択しているときのみDBからname呼び出し
 		if(!accountid.equals("0")) {
 			name = service.select2(accountid);
 		}
-
-
-
 
 		S0010Service s0010service = new S0010Service();
 		String categoryid = s0010service.setCategoryid(categoryname);
@@ -64,7 +62,7 @@ public class S0011Servlet extends HttpServlet {
 			session.setAttribute("error", error);
 			req.setAttribute("form", form);
 
-			//accountsテーブルからaccount_idを取得
+			//accountsテーブルから情報を取得
 			S0010Service serv = new S0010Service();
 			List<S0010Form> s0010form = serv.select();
 			session.setAttribute("accounts", s0010form);
@@ -166,7 +164,7 @@ public class S0011Servlet extends HttpServlet {
 		if (400 <= note.length()) {
 			error.add("備考が長すぎます。");
 		}
-		//account_idが存在しない場合
+		//account_idがテーブルに存在しない場合
 		if(exist == true){
 			error.add("アカウントテーブルに存在しません。") ;
 		}

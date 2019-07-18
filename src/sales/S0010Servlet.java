@@ -46,7 +46,7 @@ public class S0010Servlet extends HttpServlet {
 				session.setAttribute("error", "不正なアクセスです。" );
 				resp.sendRedirect("C0020.html");
 			}else {
-				//accountsテーブルからaccount_idを取得
+				//accountsテーブルから情報を取得
 				S0010Service service = new S0010Service();
 				List<S0010Form> form = service.select();
 
@@ -94,13 +94,11 @@ public class S0010Servlet extends HttpServlet {
 
 				session.removeAttribute("form");
 
-				//accountsテーブルからaccount_idを取得
+				//accountsテーブルから情報を取得
 				S0010Service s0010service = new S0010Service();
 				List<S0010Form> s0010form = s0010service.select();
 				session.setAttribute("accounts", s0010form);
 				req.setAttribute("accounts", s0010form);
-
-
 
 				session.setAttribute("complete", "No" + service.Saleid(form) + "の売上を登録しました");
 

@@ -2,7 +2,6 @@ package sales.forms;
 
 public class S0010Form {
 	public  String name;
-
 	private String saledate;
 	private String accountid;
 	private String categoryid;

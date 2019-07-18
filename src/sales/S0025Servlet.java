@@ -49,15 +49,14 @@ public class S0025Servlet extends HttpServlet {
 				String accountid = req.getParameter("accountid");
 				String tradename = req.getParameter("tradename");
 
+				System.out.println(tradename);
 
-				System.out.println(saledate);
+				S0025Form s0025form = new S0025Form(saledate, accountid, tradename);
 
-				S0025Form form = new S0025Form(saledate, accountid, tradename);
 
 				S0025Service s0025service = new S0025Service();
-				String saleid = s0025service.Saleid(form);
+				String saleid = s0025service.Saleid(s0025form);
 
-				System.out.println(saleid);
 
 //				S0025Form s0025form = (S0025Form) session.getAttribute("S0025Form");
 
