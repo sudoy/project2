@@ -81,7 +81,7 @@
 
 		<button type="submit" class="btn btn-primary">
 		<span class="glyphicon glyphicon-search" aria-hidden="true"></span> 検　索</button>
-		<input type="reset" class="btn btn-default" value="クリア">
+		<a class="btn btn-default" href="S0020.html?clear=clear">クリア</a>
 	</div>
 	</td></tr>
 	</table>

@@ -32,7 +32,8 @@ public class S0041Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {
 
@@ -40,15 +41,14 @@ public class S0041Servlet extends HttpServlet {
 
 			List<S0041Form> list = new ArrayList<>();
 			S0041Service serv = new S0041Service();
-			list = serv.service(form);//S0040のサービスにぶち込んで一覧を取得
+			list = serv.service(form);//formをS0041のサービスに渡して一覧を取得
 
 			if (list.size() == 0) {//検索結果なしの場合
 				error.add("検索結果はありません。");
 				session.setAttribute("error", error);//sessionにエラーメッセージを格納
-				//				session.setAttribute("S0040Form", form);//初期表示用
 
 				resp.sendRedirect("S0040.html");
-//				session.removeAttribute("error");//送ったら削除
+
 			} else {
 
 				session.setAttribute("S0041Form", list);//sessionに格納

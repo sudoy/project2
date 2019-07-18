@@ -26,6 +26,7 @@ public class S0020Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -33,7 +34,8 @@ public class S0020Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {//以下ログイン状態にあるときの処理
 
@@ -46,7 +48,10 @@ public class S0020Servlet extends HttpServlet {
 			session.setAttribute("allName", staffList);
 			session.setAttribute("allCategory", categoryList);
 
-			session.removeAttribute("S0020Form");
+			if (req.getParameter("clear") != null) {//クリアボタンが押された場合
+				session.removeAttribute("S0020Form");
+				session.removeAttribute("error");
+			}
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0020.jsp").forward(req, resp);
 		}
@@ -59,6 +64,7 @@ public class S0020Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -66,7 +72,8 @@ public class S0020Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {//以下ログイン状態にあるときの処理
 
@@ -79,27 +86,15 @@ public class S0020Servlet extends HttpServlet {
 
 			S0020Form form = new S0020Form(dateBegin, dateEnd, name, categoryName, tradeName, note);
 
-			List<String> error = validate(form);
+			error = validate(form);
 
 			if (error.size() == 0) {
 
-				List<S0020Form> list = new ArrayList<>();
-				S0020Service serv = new S0020Service();
-				list = serv.service(form);//Serviceで取得した一覧
-				if (list.size() == 0) {//2つ下のelseとほぼ同じことをしているのでまとめたい
-					error.add("検索結果はありません。");
-					session.setAttribute("error", error);//sessionにエラーメッセージを格納
-					session.setAttribute("S0020Form", form);//初期表示用
+				session.setAttribute("S0020Form", form);//更新時の再表示用
+				resp.sendRedirect("S0021.html");//検索結果一覧画面へ
 
-					getServletContext().getRequestDispatcher("/WEB-INF/S0020.jsp").forward(req, resp);//検索入力画面を再表示
+				session.removeAttribute("error");//「検索結果はありません」を消す用
 
-					session.removeAttribute("error");//送ったら削除
-				} else {
-
-					session.setAttribute("S0021Form", list);//sessionに取得した一覧を格納
-					session.setAttribute("S0020Form", form);//更新時の再表示用
-					getServletContext().getRequestDispatcher("/S0021.html").forward(req, resp);
-				}
 			} else {
 				session.setAttribute("error", error);//sessionにエラーメッセージを格納
 				session.setAttribute("S0020Form", form);//初期表示用
@@ -138,10 +133,10 @@ public class S0020Servlet extends HttpServlet {
 			}
 		}
 		//開始日 < 終了日になっているかチェック
-		if(!(dateBegin.equals("")) && !(dateEnd.equals(""))) {
+		if (!(dateBegin.equals("")) && !(dateEnd.equals(""))) {
 			int begin = Integer.parseInt(dateBegin.replace("/", ""));
 			int end = Integer.parseInt(dateEnd.replace("/", ""));
-			if((end - begin) < 0) {
+			if ((end - begin) < 0) {
 				error.add("販売日（検索開始日）が販売日（検索終了日）より後の日付となっています。");
 			}
 		}

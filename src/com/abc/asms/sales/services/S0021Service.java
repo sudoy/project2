@@ -10,9 +10,10 @@ import javax.servlet.ServletException;
 
 import com.abc.asms.goods.utils.DBUtils;
 import com.abc.asms.sales.forms.S0020Form;
+import com.abc.asms.sales.forms.S0021Form;
 
 public class S0021Service {
-	public List<S0020Form> service(S0020Form form) throws ServletException {
+	public List<S0021Form> service(S0020Form form) throws ServletException {
 
 		String dateBegin = form.getDateBegin();
 		String dateEnd = form.getDateEnd();
@@ -30,7 +31,7 @@ public class S0021Service {
 		String sql = null;
 		ResultSet rs = null;
 
-		List<S0020Form> list = new ArrayList<>();
+		List<S0021Form> list = new ArrayList<>();
 
 		try {
 			con = DBUtils.getConnection();
@@ -211,7 +212,7 @@ public class S0021Service {
 				String saleNumber = rs.getString("s.sale_number");
 				String total = rs.getString("total");
 
-				S0020Form f = new S0020Form(saleId, saleDate, staff, categoryName, productName,
+				S0021Form f = new S0021Form(saleId, saleDate, staff, categoryName, productName,
 						unitPrice, saleNumber, total);
 				list.add(f);
 			}
