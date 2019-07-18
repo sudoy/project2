@@ -30,8 +30,8 @@ public class S0025Service {
 
 			//SQL
 			sql = "select sale_id, sale_date, account_id, category_id, trade_name, unit_price, sale_number, note"
-					+ "from sales "
-					+ "where sale_id = ? "
+					+ "from sales"
+					+ "where sale_id = ?"
 					+ "order by sale_id";
 
 
