@@ -70,7 +70,7 @@ public class C0010Servlet extends HttpServlet {
 				error.add("メールアドレス、パスワードを正しく入力して下さい。");
 				session.setAttribute("error", error);
 
-				req.setAttribute("C0010Form", form);//初期表示用 このformはnameとmailのみ格納されている
+				req.setAttribute("C0010Form", form);//初期表示用 このformはmailとpasswordのみ格納されている
 				getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);
 				//エラーと成功メッセージのみ解放
 				session.removeAttribute("error");
@@ -78,7 +78,7 @@ public class C0010Servlet extends HttpServlet {
 			}
 		} else {//エラーが一つでもあれば
 			session.setAttribute("error", error);//sessionにエラーメッセージを格納
-			req.setAttribute("C0010Form", form);//初期表示用 このformはnameとmailのみ格納されている
+			req.setAttribute("C0010Form", form);//初期表示用 このformはmailとpasswordのみ格納されている
 
 			getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);//検索入力画面を再表示
 
