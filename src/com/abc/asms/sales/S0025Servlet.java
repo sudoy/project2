@@ -19,17 +19,43 @@ public class S0025Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
 		HttpSession session = req.getSession();
 
-		//渡されたidからアカウント情報の取得
-		S0025Service service = new S0025Service();
-		S0025Form form = service.select(req.getParameter("id"));
-		session.setAttribute("S0025Form", form);
+		//ログインチェック
+		boolean login = false;
+		if (session.getAttribute("login") != null) {
+			login = (boolean) session.getAttribute("login");
+		}
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		} else {
 
-		System.out.println(form.getSaledate());
+			//権限チェック(権限が無い場合はダッシュボードへ遷移)
+			C0010Form checkauthority2 = (C0010Form) session.getAttribute("userinfo");
 
-		getServletContext().getRequestDispatcher("/WEB-INF/S0025.jsp").forward(req, resp);
+			if (!checkauthority2.getAuthority().equals("10") && !checkauthority2.getAuthority().equals("11")) {
+				resp.sendRedirect("C0020.html");
+			} else {
+
+
+
+
+				//渡されたidからアカウント情報の取得
+				S0025Service service = new S0025Service();
+				S0025Form form = service.select(req.getParameter("id"));
+				session.setAttribute("S0025Form", form);
+
+				//小計をだす
+				int pricenum = Integer.parseInt(form.getUnitprice());
+				int salenumbernum = Integer.parseInt(form.getSalenumber());
+				int total = pricenum * salenumbernum;
+				req.setAttribute("total", total);
+
+
+				getServletContext().getRequestDispatcher("/WEB-INF/S0025.jsp").forward(req, resp);
+			}
+		}
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,30 +78,18 @@ public class S0025Servlet extends HttpServlet {
 			if (!checkauthority2.getAuthority().equals("10") && !checkauthority2.getAuthority().equals("11")) {
 				resp.sendRedirect("C0020.html");
 			} else {
-//				String saledate = req.getParameter("saledate");
-//				String accountid = req.getParameter("accountid");
-//				String tradename = req.getParameter("tradename");
-//
-//				System.out.println(tradename);
-//
-//				S0025Form s0025form = new S0025Form(saledate, accountid, tradename);
-//
-//
-//				S0025Service s0025service = new S0025Service();
-//				String saleid = s0025service.Saleid(s0025form);
 
-
-//				S0025Form s0025form = (S0025Form) session.getAttribute("S0025Form");
+				S0025Form s0025form = (S0025Form) session.getAttribute("S0025Form");
 
 				//削除
-//				S0025Service service = new S0025Service();
-//				service.delete(s0025form);
+				S0025Service service = new S0025Service();
+				service.delete(s0025form);
 
 				//取得したアカウント情報を破棄
 				session.removeAttribute("S0025Form");
 
 				//成功メッセージ
-				//session.setAttribute("complete", "No" + s0025form.getId() + "のアカウントを削除しました。");
+				session.setAttribute("complete", "No" + s0025form.getId() + "のアカウントを削除しました。");
 
 				//削除完了後、S0021.jspに遷移
 				resp.sendRedirect("S0021.html");

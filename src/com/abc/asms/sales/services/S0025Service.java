@@ -30,9 +30,9 @@ public class S0025Service {
 
 			//SQL
 			sql = "select sale_id, sale_date, account_id, category_id, trade_name, unit_price, sale_number, note"
-					+ "from sales"
-					+ "where sale_id = ?"
-					+ "order by sale_id";
+					+ " from sales"
+					+ " where sale_id = ?"
+					+ " order by sale_id";
 
 
 			//SELECT命令の準備
@@ -43,6 +43,7 @@ public class S0025Service {
 
 			//SELECT命令の実行
 			rs = ps.executeQuery();
+			System.out.println(rs);
 
 			//結果セットの内容を出力(DBから抽出したデータ)
 			while(rs.next()) {
@@ -56,11 +57,13 @@ public class S0025Service {
 				salenumber = rs.getString("sale_number");
 				note = rs.getString("note");
 
+				System.out.println(id);
+
 			}
 
-			S0025Form list = new S0025Form(id, saledate, accountid, categoryid, tradename, unitprice, salenumber, note);
+			S0025Form form = new S0025Form(id, saledate, accountid, categoryid, tradename, unitprice, salenumber, note);
 
-			return list;
+			return form;
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -83,7 +86,7 @@ public class S0025Service {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "delete from accounts where account_id = ?";
+			sql = "delete from sales where sale_id = ?";
 
 			//DELETE命令の準備
 			ps = con.prepareStatement(sql);

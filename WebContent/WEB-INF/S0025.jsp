@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -42,7 +44,7 @@
 	<tr><th>担当</th>
 	<td><div class="col-md-8">
 		<select class="form-control"  disabled>
-			<option>${S0025Form.accountid}</option>
+			<option>イチロー</option>
 		</select></div>
 	</td></tr>
 	<tr><th>商品カテゴリー</th>
@@ -77,7 +79,7 @@
 
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="単価" name="price" value="${S0025Form.price}" disabled>
+	<input class="form-control" id="right" type="text" placeholder="単価" name="price" value="${S0025Form.unitprice}" disabled>
 	</div></td></tr>
 
 	<tr><th>個数</th>
@@ -87,12 +89,12 @@
 
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" value="1620"  disabled>
+	<input class="form-control" id="right" value="${total}"  disabled>
 	</div></td></tr>
 
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="detail" rows="3" placeholder="備考" name="note" disabled>今日からの新商品</textarea>
+	<textarea class="form-control" id="detail" rows="3" placeholder="備考" name="${S0025Form.note}" disabled>今日からの新商品</textarea>
 	</div></td>
 	</tr>
 
