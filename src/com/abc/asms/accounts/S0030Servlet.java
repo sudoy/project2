@@ -20,8 +20,11 @@ import com.abc.asms.others.forms.C0010Form;
 public class S0030Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
+		//始めに消さないと売上登録確認から遷移してきたときにエラーになる。
+		session.removeAttribute("form");
+
+		req.setCharacterEncoding("UTF-8");
 		boolean login = false;
 		List<String> error = new ArrayList<>();
 
@@ -35,7 +38,6 @@ public class S0030Servlet extends HttpServlet {
 			error.add("ログインしてください。");
 			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
-			session.removeAttribute("error");
 
 		}else {
 
@@ -59,6 +61,7 @@ public class S0030Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
+		List<String> error = new ArrayList<>();
 
 		//ログインチェック
 		boolean login = false;
@@ -68,7 +71,8 @@ public class S0030Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {
 

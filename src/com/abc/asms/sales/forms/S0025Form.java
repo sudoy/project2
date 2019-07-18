@@ -6,6 +6,8 @@ public class S0025Form {
 	private String saledate;
 	private String accountid;
 	private String categoryid;
+	private String categoryname;
+
 	private String tradename;
 	private String unitprice;
 	private String salenumber;
@@ -14,7 +16,7 @@ public class S0025Form {
 
 
 	public S0025Form(String id, String saledate, String accountid, String categoryid, String tradename,
-			String unitprice, String salenumber, String note) {
+			String unitprice, String salenumber, String note, String categoryname) {
 		super();
 		this.id = id;
 		this.saledate = saledate;
@@ -24,8 +26,13 @@ public class S0025Form {
 		this.unitprice = unitprice;
 		this.salenumber = salenumber;
 		this.note = note;
-
+		this.categoryname =categoryname;
 	}
+
+
+
+
+
 
 
 	public String getId() {
@@ -96,6 +103,12 @@ public class S0025Form {
 	}
 	public void setTradename(String tradename) {
 		this.tradename = tradename;
+	}
+	public String getCategoryname() {
+		return categoryname;
+	}
+	public void setCategoryname(String categoryname) {
+		this.categoryname = categoryname;
 	}
 
 }

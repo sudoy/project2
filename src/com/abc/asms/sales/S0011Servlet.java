@@ -29,6 +29,8 @@ public class S0011Servlet extends HttpServlet {
 		//ログインチェック
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> loginerror = new ArrayList<>();
+
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -36,7 +38,8 @@ public class S0011Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			loginerror.add("ログインしてください。");
+			session.setAttribute("error", loginerror);
 			resp.sendRedirect("C0010.html");
 		}else {
 
@@ -69,13 +72,13 @@ public class S0011Servlet extends HttpServlet {
 				S0010Service s0010service = new S0010Service();
 				String categoryid = s0010service.setCategoryid(categoryname);
 
-				S0011Form form = new S0011Form(saledate, accountid, categoryid, categoryname, tradename, price,
+				S0011Form s0011form = new S0011Form(saledate, accountid, categoryid, categoryname, tradename, price,
 						salenumber, note, name);
 
-				session.setAttribute("form", form);
+				session.setAttribute("form", s0011form);
 
 				// バリデーションチェック
-				List<String> error = validate(form);
+				List<String> error = validate(s0011form);
 
 				//エラーがある場合
 				if (error.size() != 0) {
@@ -90,6 +93,7 @@ public class S0011Servlet extends HttpServlet {
 
 					getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
 					session.removeAttribute("error");
+					session.removeAttribute("form");
 				}
 				//エラーがない場合
 
@@ -103,6 +107,7 @@ public class S0011Servlet extends HttpServlet {
 
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0011.jsp").forward(req, resp);
+
 
 			}
 		}
