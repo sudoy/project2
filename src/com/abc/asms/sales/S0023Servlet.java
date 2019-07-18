@@ -106,7 +106,13 @@ public class S0023Servlet extends HttpServlet {
 				String salenumber = req.getParameter("salenumber");//個数
 				String note = req.getParameter("note");//備考
 
-				S0023Form form = new S0023Form(saledate, name, categoryname, tradename, price, salenumber, note);
+				int intprice = Integer.parseInt(price);
+				int intsalenumber = Integer.parseInt(salenumber);
+				int total = intprice * intsalenumber;
+
+				S0023Form form = new S0023Form(saledate, name, categoryname, tradename, price, salenumber, note, total);
+
+				System.out.println(form.getTotal());//0
 
 				session.setAttribute("S0023Form", form);//入力した値
 
@@ -126,7 +132,7 @@ public class S0023Servlet extends HttpServlet {
 					session.setAttribute("S0023Form", form);
 
 					//入力チェッククリア後、S0024に遷移
-					resp.sendRedirect("/WEB-INF/S0024.jsp");
+					resp.sendRedirect("S0024.html");
 				}
 
 			}

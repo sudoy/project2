@@ -10,10 +10,11 @@ public class S0023Form {
 	private String price;
 	private String salenumber;
 	private String note;
+	private int total;
 
 
 	public S0023Form(String saledate, String name, String categoryname, String tradename, String price,
-			String salenumber, String note) {
+			String salenumber, String note, int total) {
 		super();
 
 		this.saledate = saledate;
@@ -107,6 +108,14 @@ public class S0023Form {
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+	public int getTotal() {
+		return total;
+	}
+
+
+	public void setTotal(int total) {
+		this.total = total;
 	}
 
 

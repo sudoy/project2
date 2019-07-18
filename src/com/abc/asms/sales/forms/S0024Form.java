@@ -10,10 +10,19 @@ public class S0024Form {
 	private String price;
 	private String salenumber;
 	private String note;
+	private String total;
 
-	public S0024Form(String saleid, String saledate, String name, String categoryname, String tradename, String price,
+	public S0024Form(String saledate, String name, String categoryname, String tradename, String price,
 			String salenumber, String note) {
 
+	}
+
+	public String getTotal() {
+		return total;
+	}
+
+	public void setTotal(String total) {
+		this.total = total;
 	}
 
 	public String getSaleid() {

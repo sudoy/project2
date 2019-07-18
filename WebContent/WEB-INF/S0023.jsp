@@ -39,7 +39,7 @@
 	<tr><th>販売日 <span class="badge">必須</span></th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" name="saledate" value="${S0023Form.saledate}" placeholder="販売日">
+		<input type="text" class="form-control" name="saledate" value="${HTMLUtils.formatDate(S0023Form.saledate)}" placeholder="販売日">
 		</div>
 		</td>
 	</tr>
