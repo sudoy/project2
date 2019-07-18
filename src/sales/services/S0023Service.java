@@ -106,7 +106,10 @@ public class S0023Service {
 			while(rs.next()) {
 
 				 id = rs.getString("account_id");
+				 System.out.println(id);
 				 name = rs.getString("name");
+				 System.out.println(name);
+
 			}
 
 			S0023Form form = new S0023Form(id, name);

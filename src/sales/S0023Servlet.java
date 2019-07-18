@@ -36,10 +36,10 @@ public class S0023Servlet extends HttpServlet {
 		session.setAttribute("S0023Form", form);//前の画面の値を取得するためのもの
 
 		List<S0023Form> accounts = service.accounts();
-		session.setAttribute("accounts", accounts);//アカウントidと名前
+		session.setAttribute("accounts", accounts);//アカウント情報一覧(idとname)
 
 		List<String> categories = service.categories();
-		session.setAttribute("categories", categories);
+		session.setAttribute("categories", categories);//商品カテゴリー名一覧
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0023.jsp").forward(req, resp);
 
@@ -65,7 +65,7 @@ public class S0023Servlet extends HttpServlet {
 
 		S0023Form form = new S0023Form(saledate, name, categoryname, tradename, price, salenumber, note);
 
-		session.setAttribute("S0023Form", form);
+		session.setAttribute("S0023Form", form);//入力した値
 
 		//入力チェック
 		List<String> error = validate(form);

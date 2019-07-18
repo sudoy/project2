@@ -59,7 +59,7 @@
 
 	<tr><th>商品カテゴリー <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
-		<c:forEach items="${S0023Form.categoryname}" var="i">
+		<c:forEach items="${categories}" var="i">
 			<label class="radio-inline">
 			<input type="radio" name="categoryname" value="${i}"
 			 ${HTMLUtils.judgeCategoryChecked2(i, form.categoryname)}> ${i}
