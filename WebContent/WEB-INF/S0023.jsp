@@ -17,45 +17,20 @@
 	</head>
 	<body>
 
+	<jsp:include page="header.jsp">
+		<jsp:param name="bar"
+		value='<li><a href="C0020.html">ダッシュボード</a></li>
+		<li><a href="S0010.html">売上登録</a></li>
+		<li class="active"><a href="S0020.html">売上検索<span class="sr-only">(current)</span></a></li>
+		<li><a href="S0030.html">アカウント登録</a></li>
+		<li><a href="S0040.html">アカウント検索</a></li>'/>
+	</jsp:include>
 
+	<div class="container">
 
+	<h1>売上詳細編集</h1>
 
-
-<nav class="navbar navbar-default">
-<div class="container-fluid">
-	<!-- Brand and toggle get grouped for better mobile display -->
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand">物品売上管理システム</a>
-	</div>
-
-	<!-- Collect the nav links, forms, and other content for toggling -->
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<ul class="nav navbar-nav">
-			<li><a href="C0020.html">ダッシュボード</a></li>
-			<li><a href="S0010.html">売上登録</a></li>
-			<li class="active"><a href="#">売上検索 <span class="sr-only">(current)</span></a></li>
-			<li><a href="S0030.html">アカウント登録</a></li>
-			<li><a href="S0040.html">アカウント検索</a></li>
-		</ul>
-
-		 <ul class="nav navbar-nav navbar-right">
-			<li><a href="C0010.html">ログアウト</a></li>
-			<li class="dropdown"></li>
-		</ul>
-
-	</div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
-</nav>
-
-<h1>売上詳細編集</h1>
-
-<div class="container">
+	<jsp:include page="message.jsp"/>
 
 
 <form class="form-horizontal" method="POST" action="S0023.html">
@@ -72,11 +47,11 @@
 	<tr><th>担当 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
 		<select class="form-control" name="name">
-			<option value="0">選択してください</option>
-
+			<option disabled <c:if test="${S0023Form.name == null}">selected</c:if>>
+			選択してください</option>
 			<c:forEach items="${accounts}" var="i">
-				<option value ="${i.accountid}"
-				 ${HTMLUtils.judgeStaffSelected(i.name, form.name)}>${i.name}</option>
+				<option value ="${i.name}"
+				 ${HTMLUtils.judgeStaffSelected(i.name, S0023Form.name)}>${i.name}</option>
 			</c:forEach>
 
 		</select></div>

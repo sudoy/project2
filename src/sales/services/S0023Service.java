@@ -54,7 +54,6 @@ public class S0023Service {
 			while(rs.next()) {
 
 			id = rs.getString("s.sale_id");
-			System.out.println(id);
 			saledate = rs.getString("s.sale_date");
 			name = rs.getString("a.name");
 			categoryname = rs.getString("c.category_name");
@@ -77,12 +76,16 @@ public class S0023Service {
 		return null;
 
 	}
-	public List<S0023Form> selectaccount() throws ServletException {
+	//アカウント情報一覧取得
+	public List<S0023Form> accounts() throws ServletException {
 
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
+
+		String id =null;
+		String name = null;
 
 
 		try {
@@ -90,7 +93,7 @@ public class S0023Service {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select account_id,name from accounts";
+			sql = "select account_id, name from accounts";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
@@ -101,12 +104,15 @@ public class S0023Service {
 			List<S0023Form> accounts = new ArrayList<>();
 
 			while(rs.next()) {
-				S0023Form form = new S0023Form();
 
-				form.setId(rs.getString("account_id"));
-				form.setName(rs.getString("name"));
-				accounts.add(form);
+				 id = rs.getString("account_id");
+				 name = rs.getString("name");
 			}
+
+			S0023Form form = new S0023Form(id, name);
+
+			accounts.add(form);
+
 			return accounts;
 
 		}catch(Exception e){
@@ -116,6 +122,38 @@ public class S0023Service {
 			DBUtils.close(con, ps, rs);
 		}
 
+	}
+	//商品カテゴリー名一覧取得
+	public List<String> categories() throws ServletException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
 
+		String categoryName = null;
+
+		List<String> categories = new ArrayList<>();
+
+		try {
+			con = DBUtils.getConnection();
+			sql = "select category_name from categories";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+			categoryName = rs.getString("category_name");
+
+			}
+
+			categories.add(categoryName);
+
+			return categories;
+
+		} catch (Exception e) {
+			throw new ServletException(e);
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
 	}
 }
