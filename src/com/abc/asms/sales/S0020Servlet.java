@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,30 +112,34 @@ public class S0020Servlet extends HttpServlet {
 		String dateBegin = form.getDateBegin();
 		String dateEnd = form.getDateEnd();
 
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+//		String dateFormt = "yyyy-MM-dd";
+		LocalDate begin = null;
+		LocalDate end = null;
+
 		//販売日の形式チェック
 		//開始日のチェック
 		if (!(dateBegin.equals(""))) {//開始日が空じゃない時
 			try {
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-				dtf.format(LocalDate.parse(dateBegin, dtf));//ここで変換できればok
-			} catch (DateTimeParseException e) {
+				dateBegin = dateBegin.replace("/", "-");//ここで変換できればok
+				begin = LocalDate.parse(dateBegin);
+			} catch (Exception e) {
 				error.add("販売日（検索開始日）を正しく入力して下さい。");
 			}
 		}
 		//終了日のチェック
 		if (!(dateEnd.equals(""))) {//終了日が空じゃない時
 			try {
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-				dtf.format(LocalDate.parse(dateEnd, dtf));//ここで変換できればok
-			} catch (DateTimeParseException e) {
+				dateEnd = dateEnd.replace("/", "-");//ここで変換できればok
+				end = LocalDate.parse(dateBegin);
+			} catch (Exception e) {
 				error.add("販売日（検索終了日）を正しく入力して下さい。");
 			}
 		}
-		//開始日 < 終了日になっているかチェック
+		//開始日が終了日より前の日付になっているかチェック
 		if (!(dateBegin.equals("")) && !(dateEnd.equals(""))) {
-			int begin = Integer.parseInt(dateBegin.replace("/", ""));
-			int end = Integer.parseInt(dateEnd.replace("/", ""));
-			if ((end - begin) < 0) {
+			boolean isBefore = begin.isBefore(end);
+			if (isBefore == false) {
 				error.add("販売日（検索開始日）が販売日（検索終了日）より後の日付となっています。");
 			}
 		}
