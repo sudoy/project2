@@ -189,7 +189,7 @@ public class C0020Service {
 		try {
 			con = DBUtils.getConnection();
 			sql = "select sum(unit_price * sale_number) as total from sales where ? <="
-					+ " sale_date and sale_date <= ? where account_id = ? group by account_id";
+					+ " sale_date and sale_date <= ? and account_id = ? group by account_id";
 
 			ps = con.prepareStatement(sql);
 			ps.setString(1, startDay.toString());
