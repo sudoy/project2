@@ -28,7 +28,6 @@ public class S0022Service {
 			ps = con.prepareStatement(sql);
 			ps.setString(1, id);
 
-			System.out.println(ps);
 			rs = ps.executeQuery();
 
 			S0022Form sf = null;
