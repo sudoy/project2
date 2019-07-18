@@ -12,9 +12,15 @@ public class S0024Form {
 	private String note;
 	private String total;
 
-	public S0024Form(String saledate, String name, String categoryname, String tradename, String price,
+	public S0024Form(String saleid, String saledate, String tradename, String price,
 			String salenumber, String note) {
-
+		super();
+		this.saleid = saleid;
+		this.saledate = saledate;
+		this.tradename = tradename;
+		this.price = price;
+		this.salenumber = salenumber;
+		this.note = note;
 	}
 
 	public String getTotal() {

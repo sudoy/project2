@@ -52,9 +52,7 @@ public class S0023Servlet extends HttpServlet {
 				S0023Service service = new S0023Service();
 
 				S0023Form form = service.select(req.getParameter("id"));
-
-
-				session.setAttribute("S0023Form", form);//前の画面の値を取得するためのもの(編集前の売上情報)
+				session.setAttribute("S0023FormGet", form);//前の画面の値を表示させるためのもの(編集前の売上情報)
 
 				//58～62行はjspで一覧を出すためのもの
 				List<S0023Form> accounts = service.accounts();
@@ -73,11 +71,11 @@ public class S0023Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
-		//ログインチェック
 		HttpSession session = req.getSession();
 		boolean login = false;
 		List<String> error = new ArrayList<>();
 
+		//ログインチェック
 		if (session.getAttribute("login") != null) {
 			login = (boolean) session.getAttribute("login");
 		}
@@ -112,9 +110,6 @@ public class S0023Servlet extends HttpServlet {
 
 				S0023Form form = new S0023Form(saledate, name, categoryname, tradename, price, salenumber, note, total);
 
-				System.out.println(form.getTotal());//0
-
-				session.setAttribute("S0023Form", form);//入力した値
 
 				//入力チェック
 				error = validate(form);
@@ -129,7 +124,7 @@ public class S0023Servlet extends HttpServlet {
 					session.removeAttribute("error");//エラーメッセージ消去
 				} else {
 
-					session.setAttribute("S0023Form", form);
+					session.setAttribute("S0023FormPost", form);//入力した値
 
 					//入力チェッククリア後、S0024に遷移
 					resp.sendRedirect("S0024.html");

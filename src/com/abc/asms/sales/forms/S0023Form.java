@@ -24,6 +24,7 @@ public class S0023Form {
 		this.price = price;
 		this.salenumber = salenumber;
 		this.note = note;
+		this.total = total;
 	}
 
 

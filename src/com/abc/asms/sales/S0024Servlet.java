@@ -23,11 +23,11 @@ public class S0024Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
-		//ログインチェック
 		HttpSession session = req.getSession();
 		boolean login = false;
 		List<String> error = new ArrayList<>();
 
+		//ログインチェック
 		if (session.getAttribute("login") != null) {
 			login = (boolean) session.getAttribute("login");
 		}
@@ -58,12 +58,11 @@ public class S0024Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
-
-		//ログインチェック
 		HttpSession session = req.getSession();
 		boolean login = false;
 		List<String> error = new ArrayList<>();
 
+		//ログインチェック
 		if (session.getAttribute("login") != null) {
 			login = (boolean) session.getAttribute("login");
 		}
@@ -83,28 +82,30 @@ public class S0024Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				S0023Form form = (S0023Form) session.getAttribute("S0023Form");
+				S0023Form formid = (S0023Form) session.getAttribute("S0023FormGet");
+				S0023Form forminput = (S0023Form) session.getAttribute("S0023FormPost");
 
-				String saledate = form.getSaledate();
-				String name = form.getName();
-				String categoryname = form.getCategoryname();
-				String tradename = form.getTradename();
-				String price = form.getPrice();
-				String salenumber = form.getSalenumber();
-				String note = form.getNote();
+				String saleid = formid.getId();
+				System.out.println(saleid);
+				String saledate = forminput.getSaledate();
+				System.out.println(saledate);
+//				String name = form.getName();
+//				System.out.println(name);
+//				String categoryname = form.getCategoryname();
+				String tradename = forminput.getTradename();
+				String price = forminput.getPrice();
+				String salenumber = forminput.getSalenumber();
+				String note = forminput.getNote();
 
-//				int intprice = Integer.parseInt(price);
-//				int intsalenumber = Integer.parseInt(salenumber);
-//				String total = Integer.toString(intprice * intsalenumber);
-
-				S0024Form updateform = new S0024Form( saledate, name, categoryname, tradename, price, salenumber, note);
+				S0024Form updateform = new S0024Form( saleid, saledate, tradename, price, salenumber, note);
 
 				//更新
 				S0024Service service = new S0024Service();
+
 				service.update(updateform);
 
-				session.removeAttribute("S0023Form");
-				session.removeAttribute("password");
+				session.removeAttribute("S0023FormGet");
+				session.removeAttribute("S0023FormPost");
 
 				//成功メッセージ
 				session.setAttribute("complete", "No" + updateform.getSaleid() + "のアカウントを更新しました。");

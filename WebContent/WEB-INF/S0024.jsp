@@ -14,53 +14,29 @@
 	<body>
 
 
-
-
-
-<nav class="navbar navbar-default">
-<div class="container-fluid">
-	<!-- Brand and toggle get grouped for better mobile display -->
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand">物品売上管理システム</a>
-	</div>
-
-	<!-- Collect the nav links, forms, and other content for toggling -->
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-		<ul class="nav navbar-nav">
-			<li><a href="C0020_ダッシュボード.html">ダッシュボード</a></li>
-			<li><a href="S0010_売上登録画面.html">売上登録</a></li>
-			<li class="active"><a href="#">売上検索 <span class="sr-only">(current)</span></a></li>
-			<li><a href="S0030_アカウント登録.html">アカウント登録</a></li>
-			<li><a href="S0040_アカウント検索条件入力画面.html">アカウント検索</a></li>
-		</ul>
-
-		 <ul class="nav navbar-nav navbar-right">
-			<li><a href="C0010_ログイン画面.html">ログアウト</a></li>
-			<li class="dropdown"></li>
-		</ul>
-
-	</div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
-</nav>
+	<jsp:include page="header.jsp">
+		<jsp:param name="bar"
+		value='<li><a href="C0020.html">ダッシュボード</a></li>
+		<li><a href="S0010.html">売上登録</a></li>
+		<li class="active"><a href="S0020.html">売上検索<span class="sr-only">(current)</span></a></li>
+		<li><a href="S0030.html">アカウント登録</a></li>
+		<li><a href="S0040.html">アカウント検索</a></li>'/>
+	</jsp:include>
 
 <h1>売上を編集してよろしいですか？</h1>
 
 <div class="container">
 
+<jsp:include page="message.jsp"/>
 
-<form class="form-horizontal" method="POST" action="S0021.html">
+
+<form class="form-horizontal" method="POST" action="S0024.html">
 	<table>
 
 	<tr><th>販売日</th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" name="saledate" value="${S0023Form.saledate}" placeholder="販売日" disabled>
+		<input type="text" class="form-control" name="saledate" value="${S0023FormPost.saledate}" placeholder="販売日" disabled>
 		</div>
 		</td>
 	</tr>
@@ -68,37 +44,37 @@
 	<tr><th>担当</th>
 	<td><div class="col-md-8">
 		<select class="form-control" disabled>
-			<option>${S0023Form.name}</option>
+			<option>${S0023FormPost.name}</option>
 		</select></div>
 	</td></tr>
 
 	<tr><th>商品カテゴリー</th>
 	<td><div class="col-md-7">
 		<label class="radio-inline">
-		<input type="radio" name="categoryname" value="${S0023Form.categoryname}" disabled checked>${S0023Form.categoryname}
+		<input type="radio" name="categoryname" value="${S0023FormPost.categoryname}" disabled checked>${S0023FormPost.categoryname}
 		</label>
 		</div>
 	</td></tr>
 
 	<tr><th>商品名</th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" name="tradename" placeholder="商品" value="${S0023Form.tradename}" disabled>
+	<input class="form-control" type="text" name="tradename" placeholder="商品" value="${S0023FormPost.tradename}" disabled>
 	</div></td></tr>
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" name="price" placeholder="単価" value="${HTMLUtils.formatTotal(S0023Form.price)}" disabled>
+	<input class="form-control" id="right" type="text" name="price" placeholder="単価" value="${HTMLUtils.formatTotal(S0023FormPost.price)}" disabled>
 	</div></td></tr>
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" name="salenumber" placeholder="個数" value="${HTMLUtils.formatTotal(S0023Form.salenumber)}" disabled>
+	<input class="form-control" id="right" type="text" name="salenumber" placeholder="個数" value="${HTMLUtils.formatTotal(S0023FormPost.salenumber)}" disabled>
 	</div></td></tr>
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" name="total" placeholder="小計" value="${HTMLUtils.formatTotal(S0023Form.total)}" disabled>
+	<input class="form-control" id="right" type="text" name="total" placeholder="小計" value="${HTMLUtils.formatTotal(S0023FormPost.total)}" disabled>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="detail" rows="3" name="note" placeholder="備考" disabled>${S0023Form.note}</textarea>
+	<textarea class="form-control" id="detail" rows="3" name="note" placeholder="備考" disabled>${S0023FormPost.note}</textarea>
 	</div></td>
 	</tr>
 

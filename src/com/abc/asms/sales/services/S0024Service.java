@@ -19,20 +19,23 @@ public class S0024Service {
 			//データベース接続
 			con = DBUtils.getConnection();
 
-			sql = "update sales set saledate=?, name=?, categoryname = ?, tradename = ? "
-					+ "price = ?, salenumber = ?, note = ?,  where sale_id = ?";
+			sql = "update sales set sale_date=?, trade_name = ?, "
+					+ "unit_price = ?, sale_number = ?, note = ? where sale_id = ?";
 
 			//UPDATE命令の準備
 			ps = con.prepareStatement(sql);
 
 			//UPDATE命令にポストデータの内容をセット
 			ps.setString(1, form.getSaledate());
-			ps.setString(2, form.getName());
-			ps.setString(3, form.getCategoryname());
-			ps.setString(4, form.getTradename());
-			ps.setString(5, form.getPrice());
-			ps.setString(6, form.getSalenumber());
-			ps.setString(7, form.getNote());
+			ps.setString(2, form.getTradename());
+			ps.setString(3, form.getPrice());
+			ps.setString(4, form.getSalenumber());
+			ps.setString(5, form.getNote());
+			ps.setString(6, form.getSaleid());
+
+			System.out.println(form.getSaledate());
+			System.out.println(form.getCategoryname());
+			System.out.println( form.getPrice());
 
 			//UPDATE命令の実行
 			ps.executeUpdate();
