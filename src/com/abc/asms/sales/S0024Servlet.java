@@ -85,7 +85,6 @@ public class S0024Servlet extends HttpServlet {
 
 				S0023Form form = (S0023Form) session.getAttribute("S0023Form");
 
-				String saleid = form.getId();
 				String saledate = form.getSaledate();
 				String name = form.getName();
 				String categoryname = form.getCategoryname();
@@ -94,7 +93,11 @@ public class S0024Servlet extends HttpServlet {
 				String salenumber = form.getSalenumber();
 				String note = form.getNote();
 
-				S0024Form updateform = new S0024Form(saleid, saledate, name, categoryname, tradename, price, salenumber, note);
+//				int intprice = Integer.parseInt(price);
+//				int intsalenumber = Integer.parseInt(salenumber);
+//				String total = Integer.toString(intprice * intsalenumber);
+
+				S0024Form updateform = new S0024Form( saledate, name, categoryname, tradename, price, salenumber, note);
 
 				//更新
 				S0024Service service = new S0024Service();
