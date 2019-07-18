@@ -20,13 +20,12 @@ public class C0010Form {
 
 
 //ログイン状態 + ユーザー情報
-	public C0010Form(boolean login, String id, String name, String mail, String password, String authority) {
+	public C0010Form(boolean login, String id, String name, String mail, String authority) {
 		super();
 		this.login = login;
 		this.id = id;
 		this.name = name;
 		this.mail = mail;
-		this.password = password;
 		this.authority = authority;
 	}
 

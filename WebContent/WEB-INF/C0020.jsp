@@ -124,7 +124,7 @@
 			<tr><td>${i.saleId}</td><td>${HTMLUtils.formatDate(i.saleDate)}</td><td>${i.categoryName}</td>
 			<td>${i.tradeName}</td><td>${i.unitPrice}</td><td>${i.saleNumber}</td><td>${i.total}</td></tr>
 		</c:forEach>
-		<tr><td colspan="5"></td><td>合計</td><td>${variousForm.thisMonthTotal}</td></tr>
+		<tr><td colspan="5"></td><td>合計</td><td>${variousForm.individualTotal}</td></tr>
 
 		</table>
 		</div>
