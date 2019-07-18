@@ -2,6 +2,8 @@ package com.abc.asms.sales.forms;
 
 public class S0024Form {
 
+	private String accountid;
+	private String categoryid;
 	private String saleid;
 	private String saledate;
 	private String name;
@@ -12,15 +14,34 @@ public class S0024Form {
 	private String note;
 	private String total;
 
-	public S0024Form(String saleid, String saledate, String tradename, String price,
+	public S0024Form(String accountid,String categoryid, String saleid, String saledate, String tradename, String price,
 			String salenumber, String note) {
 		super();
+
+		this.accountid = accountid;
+		this.categoryid = categoryid;
 		this.saleid = saleid;
 		this.saledate = saledate;
 		this.tradename = tradename;
 		this.price = price;
 		this.salenumber = salenumber;
 		this.note = note;
+	}
+
+	public String getCategoryid() {
+		return categoryid;
+	}
+
+	public void setCategoryid(String categoryid) {
+		this.categoryid = categoryid;
+	}
+
+	public String getAccountid() {
+		return accountid;
+	}
+
+	public void setAccountid(String accountid) {
+		this.accountid = accountid;
 	}
 
 	public String getTotal() {

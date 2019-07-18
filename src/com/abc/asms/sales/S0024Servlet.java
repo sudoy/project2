@@ -86,21 +86,24 @@ public class S0024Servlet extends HttpServlet {
 				S0023Form forminput = (S0023Form) session.getAttribute("S0023FormPost");
 
 				String saleid = formid.getId();
-				System.out.println(saleid);
 				String saledate = forminput.getSaledate();
-				System.out.println(saledate);
-//				String name = form.getName();
-//				System.out.println(name);
-//				String categoryname = form.getCategoryname();
+				String name = forminput.getName();
+				String categoryname = forminput.getCategoryname();
 				String tradename = forminput.getTradename();
 				String price = forminput.getPrice();
 				String salenumber = forminput.getSalenumber();
 				String note = forminput.getNote();
 
-				S0024Form updateform = new S0024Form( saleid, saledate, tradename, price, salenumber, note);
+				//ここでnameをaccount_idに、categorynameをcategoryidに変換
+				S0024Service service = new S0024Service();
+
+				String accountid = service.selectid(name);
+				String categoryid = service.selectcategoryid(categoryname);
+
+
+				S0024Form updateform = new S0024Form( accountid, categoryid,  saleid, saledate, tradename, price, salenumber, note);
 
 				//更新
-				S0024Service service = new S0024Service();
 
 				service.update(updateform);
 

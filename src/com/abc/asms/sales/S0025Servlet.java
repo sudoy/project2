@@ -1,6 +1,7 @@
 package com.abc.asms.sales;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,13 +39,20 @@ public class S0025Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-
-
-
 				//渡されたidからアカウント情報の取得
 				S0025Service service = new S0025Service();
 				S0025Form form = service.select(req.getParameter("id"));
 				session.setAttribute("S0025Form", form);
+
+				//nameを取得
+				String name = service.select2(form.getAccountid());
+				req.setAttribute("name", name);
+
+				//商品カテゴリーの取得
+				List<String> categoryList = service.category();
+				req.setAttribute("allCategory", categoryList);
+
+
 
 				//小計をだす
 				int pricenum = Integer.parseInt(form.getUnitprice());

@@ -104,9 +104,11 @@ public class S0023Servlet extends HttpServlet {
 				String salenumber = req.getParameter("salenumber");//個数
 				String note = req.getParameter("note");//備考
 
-				int intprice = Integer.parseInt(price);
-				int intsalenumber = Integer.parseInt(salenumber);
-				int total = intprice * intsalenumber;
+
+					int intprice = Integer.parseInt(price);
+					int intsalenumber = Integer.parseInt(salenumber);
+					int total = intprice * intsalenumber;
+
 
 				S0023Form form = new S0023Form(saledate, name, categoryname, tradename, price, salenumber, note, total);
 
@@ -143,6 +145,11 @@ public class S0023Servlet extends HttpServlet {
 		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 		format.setLenient(false);
 
+		S0023Service service = new S0023Service();
+
+		boolean accountexist = service.accountexist(form);
+		boolean categoryexist = service.categoryexist(form);
+
 		String saledate = form.getSaledate();
 		String name = form.getName();
 		String categoryname = form.getCategoryname();
@@ -164,12 +171,18 @@ public class S0023Servlet extends HttpServlet {
 			}
 		}
 		//担当必須入力チェック
-		if (name.equals("0")) {
+		if (name == null) {
 			e.add("担当が未選択です。");
 		}
+		if(accountexist == true) {
+			e.add("アカウントテーブルに存在しません。");
+		}
 		//商品カテゴリー必須入力チェック
-		if (categoryname.equals("")) {
+		if (categoryname == null) {
 			e.add("商品カテゴリーが未選択です。");
+		}
+		if(categoryexist == true) {
+			e.add("商品カテゴリーテーブルに存在しません。");
 		}
 		//商品名必須入力チェック
 		if (categoryname.equals("")) {
