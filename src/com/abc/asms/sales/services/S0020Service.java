@@ -199,7 +199,7 @@ public class S0020Service {
 				}
 			}
 
-			System.out.println(ps);
+//			System.out.println(ps);
 
 			rs = ps.executeQuery();
 

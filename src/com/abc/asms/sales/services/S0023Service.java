@@ -13,7 +13,6 @@ import com.abc.asms.sales.forms.S0023Form;
 
 public class S0023Service {
 
-
 	public S0023Form select(String num) {
 
 		Connection con = null;
@@ -30,7 +29,6 @@ public class S0023Service {
 		String salenumber = null;
 		String note = null;
 
-
 		try {
 			//データベース接続
 			con = DBUtils.getConnection();
@@ -46,25 +44,24 @@ public class S0023Service {
 
 			ps.setString(1, num);
 
-
 			//SELECT命令の実行
 			rs = ps.executeQuery();
 
 			//結果セットの内容を出力(DBから抽出したデータ)
-			while(rs.next()) {
+			while (rs.next()) {
 
-			id = rs.getString("s.sale_id");
-			saledate = rs.getString("s.sale_date");
-			name = rs.getString("a.name");
-			categoryname = rs.getString("c.category_name");
-			tradename = rs.getString("s.trade_name");
-			price = rs.getString("s.unit_price");
-			salenumber = rs.getString("s.sale_number");
-			note = rs.getString("s.note");
+				id = rs.getString("s.sale_id");
+				saledate = rs.getString("s.sale_date");
+				name = rs.getString("a.name");
+				categoryname = rs.getString("c.category_name");
+				tradename = rs.getString("s.trade_name");
+				price = rs.getString("s.unit_price");
+				salenumber = rs.getString("s.sale_number");
+				note = rs.getString("s.note");
 
 			}
 
-			S0023Form form = new S0023Form(id, saledate, name, categoryname,tradename, price, salenumber, note);
+			S0023Form form = new S0023Form(id, saledate, name, categoryname, tradename, price, salenumber, note);
 
 			return form;
 
@@ -76,6 +73,7 @@ public class S0023Service {
 		return null;
 
 	}
+
 	//アカウント情報一覧取得
 	public List<S0023Form> accounts() throws ServletException {
 
@@ -84,9 +82,8 @@ public class S0023Service {
 		String sql = null;
 		ResultSet rs = null;
 
-		String id =null;
+		String id = null;
 		String name = null;
-
 
 		try {
 			//データベース接続
@@ -103,22 +100,20 @@ public class S0023Service {
 
 			List<S0023Form> accounts = new ArrayList<>();
 
-			while(rs.next()) {
+			while (rs.next()) {
 
-				 id = rs.getString("account_id");
-				 System.out.println(id);
-				 name = rs.getString("name");
-				 System.out.println(name);
+				id = rs.getString("account_id");
+				name = rs.getString("name");
+
+				S0023Form form = new S0023Form(id, name);
+
+				accounts.add(form);
 
 			}
 
-			S0023Form form = new S0023Form(id, name);
-
-			accounts.add(form);
-
 			return accounts;
 
-		}catch(Exception e){
+		} catch (Exception e) {
 			throw new ServletException(e);
 
 		} finally {
@@ -126,6 +121,7 @@ public class S0023Service {
 		}
 
 	}
+
 	//商品カテゴリー名一覧取得
 	public List<String> categories() throws ServletException {
 		Connection con = null;
@@ -145,11 +141,10 @@ public class S0023Service {
 
 			while (rs.next()) {
 
-			categoryName = rs.getString("category_name");
+				categoryName = rs.getString("category_name");
 
+				categories.add(categoryName);
 			}
-
-			categories.add(categoryName);
 
 			return categories;
 

@@ -1,6 +1,8 @@
 package com.abc.asms.accounts;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +24,7 @@ public class S0044Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -29,7 +32,8 @@ public class S0044Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {
 
@@ -37,6 +41,8 @@ public class S0044Servlet extends HttpServlet {
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+				error.add("不正なアクセスです。");
+				session.setAttribute("error", error);
 				resp.sendRedirect("C0020.html");
 			} else {
 
@@ -57,13 +63,15 @@ public class S0044Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		//ログインチェック
 		if (session.getAttribute("login") != null) {
 			login = (boolean) session.getAttribute("login");
 		}
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {
 
@@ -71,6 +79,8 @@ public class S0044Servlet extends HttpServlet {
 			C0010Form checkauthority2 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority2.getAuthority().equals("10") && !checkauthority2.getAuthority().equals("11")) {
+				error.add("不正なアクセスです。");
+				session.setAttribute("error", error);
 				resp.sendRedirect("C0020.html");
 			} else {
 

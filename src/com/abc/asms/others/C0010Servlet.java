@@ -45,45 +45,55 @@ public class C0010Servlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
 		HttpSession session = req.getSession();
+		boolean login = false;
 
-		String mail = req.getParameter("mail");
-		String password = req.getParameter("password");
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//sessinが存在していればloginに取り出した値を代入
+			login = (boolean) session.getAttribute("login");
+		}
 
-		C0010Form form = new C0010Form(mail, password);
+		if (login == true) {//ログイン状態にあればダッシュボードに遷移
+			resp.sendRedirect("C0020.html");
+		} else {//ログイン状態になければログイン画面へ
 
-		List<String> error = validate(form);
+			String mail = req.getParameter("mail");
+			String password = req.getParameter("password");
 
-		if (error.size() == 0) {//エラーが一つもなければ
+			C0010Form form = new C0010Form(mail, password);
 
-			C0010Service C0010s = new C0010Service();
-			C0010Form userinfo = C0010s.service(form);//ログイン状態（true or false）とログインした人のユーザー情報が返る
-			session.setAttribute("login", userinfo.isLogin());
+			List<String> error = validate(form);
 
-			if (userinfo.isLogin() == true) {//mailとpassが正しければ（trueが返ってきていれば）
-				session.removeAttribute("error");
+			if (error.size() == 0) {//エラーが一つもなければ
 
-				session.setAttribute("userinfo", userinfo);
-				resp.sendRedirect("C0020.html");
-			} else {
-				error.add("メールアドレス、パスワードを正しく入力して下さい。");
-				session.setAttribute("error", error);
+				C0010Service C0010s = new C0010Service();
+				C0010Form userinfo = C0010s.service(form);//ログイン状態（true or false）とログインした人のユーザー情報が返る
+				session.setAttribute("login", userinfo.isLogin());
 
+				if (userinfo.isLogin() == true) {//mailとpassが正しければ（trueが返ってきていれば）
+					session.removeAttribute("error");
+
+					session.setAttribute("userinfo", userinfo);
+					resp.sendRedirect("C0020.html");
+				} else {
+					error.add("メールアドレス、パスワードを正しく入力して下さい。");
+					session.setAttribute("error", error);
+
+					req.setAttribute("C0010Form", form);//初期表示用 このformはmailとpasswordのみ格納されている
+					getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);
+					//エラーと成功メッセージのみ解放
+					session.removeAttribute("error");
+
+				}
+			} else {//エラーが一つでもあれば
+				session.setAttribute("error", error);//sessionにエラーメッセージを格納
 				req.setAttribute("C0010Form", form);//初期表示用 このformはmailとpasswordのみ格納されている
-				getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);
-				//エラーと成功メッセージのみ解放
-				session.removeAttribute("error");
-				session.removeAttribute("complete");
+
+				getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);//検索入力画面を再表示
+
+				session.removeAttribute("error");//送ったら削除
+
 			}
-		} else {//エラーが一つでもあれば
-			session.setAttribute("error", error);//sessionにエラーメッセージを格納
-			req.setAttribute("C0010Form", form);//初期表示用 このformはmailとpasswordのみ格納されている
-
-			getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);//検索入力画面を再表示
-
-			session.removeAttribute("error");//送ったら削除
-
 		}
 
 	}
@@ -96,7 +106,7 @@ public class C0010Servlet extends HttpServlet {
 		if (form.getMail().equals("")) {
 			error.add("メールアドレスを入力して下さい。");
 		}
-		//mailが入力されており且バイト数が101以上
+		//mailが入力されており且文字数が101以上
 		if (!(form.getMail().equals("")) &&
 				(101 <= form.getMail().length())) {
 			error.add("メールアドレスが長すぎます。");
@@ -105,8 +115,8 @@ public class C0010Servlet extends HttpServlet {
 		//「＠」が含まれていること。先頭は「a-zA-Z0-9」で、2文字目以降はさらに「._-」の文字が許容される。
 		//「＠」以降は「a-zA-Z0-9._-」が1文字以上続き、必ず「.」が含まれていること
 		if (!(form.getMail().equals("")) &&
-				(101 >= form.getMail().getBytes("UTF-8").length)) {//mailが入力されており且101バイト以下
-			String mailFormat = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+				(101 >= form.getMail().length())) {//mailが入力されており且101文字以下
+			String mailFormat = "^\\w+([-_.]\\w+)*@\\w+([-_.]\\w+)*\\.\\w+([-_.]\\w+)*$";
 			Pattern pattern = Pattern.compile(mailFormat);
 			Matcher matcher = pattern.matcher(form.getMail());
 			if (matcher.find() == false) {
@@ -120,7 +130,7 @@ public class C0010Servlet extends HttpServlet {
 		}
 		//passowrdが入力されており且バイト数が31以上
 		if (!(form.getPassword().equals("")) &&
-				(31 <= form.getPassword().getBytes("UTF-8").length)) {
+				(31 <= form.getPassword().length())) {
 			error.add("パスワードが長すぎます。");
 		}
 
