@@ -1,6 +1,7 @@
 package com.abc.asms.others;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -35,21 +36,32 @@ public class C0020Servlet extends HttpServlet {
 
 			C0010Form userInfo = (C0010Form) session.getAttribute("userinfo");
 
-			//DBからなんやかんやして一覧を取得
 			String value = req.getParameter("value");
+			LocalDate today = null;
+			if (value == null) {//value==nullなら今日の日付を取得して代入
+				today = LocalDate.now();
+
+			} else {//value!=nullならsessionからtodayを取得して代入
+				today = (LocalDate) session.getAttribute("today");
+			}
+
+			//DBからなんやかんやして一覧を取得
+
 			C0020Service serv = new C0020Service();
-			List<C0020Form> form = serv.service(userInfo.getMail(), value);
+			List<C0020Form> form = serv.service(userInfo.getMail(), value, today);
 
 			session.setAttribute("C0020Form", form);
 
-			C0020Form variousForm = serv.returnVariousForm();//今月の売上合計、前月の売上合計、前月比を取得
+			C0020Form variousForm = serv.returnVariousForm(userInfo.getId());//今月の売上合計、前月の売上合計、前月比を取得
 
 			req.setAttribute("variousForm", variousForm);
+			session.setAttribute("today", C0020Service.today);//todayの値の保持
 
 			getServletContext().getRequestDispatcher("/WEB-INF/C0020.jsp").forward(req, resp);
 
 			session.removeAttribute("error");
 		}
+
 	}
 
 	@Override

@@ -19,7 +19,7 @@ public class C0010Service {
 		String id = null;
 		String name = null;
 		String mail = null;
-		String password = null;
+//		String password = null;
 		String authority = null;
 
 		try {
@@ -33,26 +33,22 @@ public class C0010Service {
 
 			rs = ps.executeQuery();
 
-			while (rs.next()) {
+			if (rs.next()) {
 				id = rs.getString("account_id");
 				name = rs.getString("name");
 				mail = rs.getString("mail");
-				password = rs.getString("password");
+//				password = rs.getString("password");//ここでpasswordだけ取得できないということはありえる…?ありえないなら消す
 				authority = rs.getString("authority");
 
-				if (mail != null && password != null) {//whileの中に入っている時点で値が取れてるということでは？
-					login = true;
-
-				}
+				login = true;//１件も取れていなければifの中に入らないのでloginはfalseのまま
 			}
-			f = new C0010Form(login, id, name, mail, password, authority);
+			f = new C0010Form(login, id, name, mail, authority);
 
 			return f;
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			login = false;
-			f = new C0010Form(login, id, name, form.getMail(), password, authority);//getMailは初期表示用
+			f = new C0010Form(login, id, name, mail, authority);//途中でExceptionが発生してしまったとき用
 			return f;
 		} finally {
 			DBUtils.close(con, ps, rs);
