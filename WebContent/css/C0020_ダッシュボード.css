@@ -56,3 +56,15 @@ th{
 #migi{
 text-align: right;
 }
+
+#up{
+	color: #5bd35b;
+}
+
+#down{
+	color: #ef4848;
+}
+
+#right{
+	text-align: right;
+}

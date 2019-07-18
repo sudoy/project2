@@ -52,7 +52,8 @@ public class C0020Servlet extends HttpServlet {
 
 			session.setAttribute("C0020Form", form);
 
-			C0020Form variousForm = serv.returnVariousForm(userInfo.getId());//今月の売上合計、前月の売上合計、前月比を取得
+			//年月、今月の売上合計、前月の売上合計、前月比、ログインしている人の今月の売上合計、今月、前月
+			C0020Form variousForm = serv.returnVariousForm(userInfo.getId());
 
 			req.setAttribute("variousForm", variousForm);
 			session.setAttribute("today", C0020Service.today);//todayの値の保持

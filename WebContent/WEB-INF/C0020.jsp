@@ -73,10 +73,10 @@
 	<div class="panel panel-default" id="panel1">
 		<div class="panel-heading">
 			<h2 class="panel-title">
-			 前月(5月)の売上合計</h2>
+			 前月(${variousForm.lastM})の売上合計</h2>
 		</div>
 		<div class="panel-body">
-			${variousForm.lastMonthTotal}円
+			${HTMLUtils.formatTotal(variousForm.lastMonthTotal)}円
 		</div>
 	</div>
 	</div>
@@ -85,10 +85,10 @@
 	<div class="panel panel-default" id="panel2">
 		<div class="panel-heading">
 			<h2 class="panel-title">
-			今月(6月)の売上合計</h2>
+			今月(${variousForm.thisM})の売上合計</h2>
 		</div>
 		<div class="panel-body">
-			${variousForm.thisMonthTotal}円
+			${HTMLUtils.formatTotal(variousForm.thisMonthTotal)}円
 		</div>
 	</div>
 	</div>
@@ -100,8 +100,20 @@
 			前月比</h2>
 		</div>
 		<div class="panel-body">
-		<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-			${variousForm.ratio}%
+
+		<c:if test="${Double.parseDouble(variousForm.ratio) < 100}">
+			<p id="down">
+				<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+				${variousForm.ratio}%
+			</p>
+		</c:if>
+		<c:if test="${100 <= Double.parseDouble(variousForm.ratio)}">
+			<p id="up">
+				<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+				${variousForm.ratio}%
+			</p>
+		</c:if>
+
 		</div>
 	</div>
 	</div>
@@ -121,10 +133,11 @@
 		<table class="table">
 		<tr><th>No</th><th>販売日</th><th>商品カテゴリー</th><th>商品名</th><th>単価</th><th>個数</th><th>小計</th></tr>
 		<c:forEach items="${C0020Form}" var="i">
-			<tr><td>${i.saleId}</td><td>${HTMLUtils.formatDate(i.saleDate)}</td><td>${i.categoryName}</td>
-			<td>${i.tradeName}</td><td>${i.unitPrice}</td><td>${i.saleNumber}</td><td>${i.total}</td></tr>
+			<tr><td id="right">${i.saleId}</td><td>${HTMLUtils.formatDate(i.saleDate)}</td><td>${i.categoryName}</td>
+			<td>${i.tradeName}</td><td id="right">${HTMLUtils.formatTotal(i.unitPrice)}</td>
+			<td id="right">${HTMLUtils.formatTotal(i.saleNumber)}</td><td id="right">${HTMLUtils.formatTotal(i.total)}</td></tr>
 		</c:forEach>
-		<tr><td colspan="5"></td><td>合計</td><td>${variousForm.individualTotal}</td></tr>
+		<tr><td colspan="5"></td><td id="right">合計</td><td id="right">${HTMLUtils.formatTotal(variousForm.individualTotal)}</td></tr>
 
 		</table>
 		</div>

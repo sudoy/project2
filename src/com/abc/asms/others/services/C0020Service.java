@@ -103,45 +103,50 @@ public class C0020Service {
 
 	}
 
-	public C0020Form returnVariousForm(String accountId) throws ServletException{
+	public C0020Form returnVariousForm(String accountId) throws ServletException {
 
-		//yy年MM月
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy年MM月");
-		String yearMonth = dtf.format(startDay);
+		//yy年M月
+		DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy年M月");
+		String yearMonth = dtf1.format(startDay);
 
 		//今月の売上合計を取得
-		String thisMonth = returnTotal(startDay.toString(),lastDay.toString());
+		String thisMonth = returnTotal(startDay.toString(), lastDay.toString());
 
 		LocalDate lastMonthStartDay = startDay.minusMonths(1);//前月の始まりの日
 		LocalDate lastMonthLastDay = startDay.minusDays(1);//前月の最終日
 		//前月の売上合計を取得
-		String lastMonth = returnTotal(lastMonthStartDay.toString(),lastMonthLastDay.toString());
+		String lastMonth = returnTotal(lastMonthStartDay.toString(), lastMonthLastDay.toString());
 
 		//今月の個人の売上合計を取得
-		String individualTotal = returnIndividualTotal(startDay.toString(),lastDay.toString(), accountId);
+		String individualTotal = returnIndividualTotal(startDay.toString(), lastDay.toString(), accountId);
 
 		//値が取得できたらparseInt
 		int thisMonthInt = 0;
 		int lastMonthInt = 0;
-		if(thisMonth != null) {
+		if (thisMonth != null) {
 			thisMonthInt = Integer.parseInt(thisMonth);
 		}
-		if(lastMonth != null) {
+		if (lastMonth != null) {
 			lastMonthInt = Integer.parseInt(lastMonth);
 		}
 
 		//前月比
 		double ratio = 0;
-		if(thisMonthInt != 0 && lastMonthInt != 0) {
-		 ratio = ((double)thisMonthInt / (double)lastMonthInt) * 100.0;
+		if (thisMonthInt != 0 && lastMonthInt != 0) {
+			ratio = ((double) thisMonthInt / (double) lastMonthInt) * 100.0;
 		}
 		String stringRatio = String.format("%.2f", ratio);//小数第２位までにする
 
+		DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("M月");
+		//今月の月
+		String thisM = dtf2.format(startDay);
+		//前月の月
+		String lastM = dtf2.format(lastMonthStartDay);
+
 		C0020Form variousList = new C0020Form(yearMonth, String.valueOf(thisMonthInt), String.valueOf(lastMonthInt),
-				stringRatio, individualTotal);
+				stringRatio, individualTotal, thisM, lastM);
 
 		return variousList;
-
 
 	}
 
@@ -195,8 +200,6 @@ public class C0020Service {
 			ps.setString(1, startDay.toString());
 			ps.setString(2, lastDay.toString());
 			ps.setString(3, accountId);
-
-			System.out.println(ps);
 
 			rs = ps.executeQuery();
 
