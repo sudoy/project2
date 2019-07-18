@@ -27,6 +27,7 @@ public class S0042Servlet extends HttpServlet {
 		//ログインチェック
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -34,16 +35,17 @@ public class S0042Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
-				session.setAttribute("error", "不正なアクセスです。");
+				error.add("不正なアクセスです。");
+				session.setAttribute("error", error);
 				resp.sendRedirect("C0020.html");
 			} else {
 
@@ -66,21 +68,25 @@ public class S0042Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {
 			login = (boolean) session.getAttribute("login");
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
+			session.removeAttribute("error");//送ったら削除
 		} else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority2 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority2.getAuthority().equals("10") && !checkauthority2.getAuthority().equals("11")) {
-				session.setAttribute("error", "不正なアクセスです。");
+				error.add("不正なアクセスです。");
+				session.setAttribute("error", error);
 				resp.sendRedirect("C0020.html");
 			} else {
 
@@ -99,7 +105,7 @@ public class S0042Servlet extends HttpServlet {
 				S0042Form form = new S0042Form(id, name, mail, password, check, sale, account, authority);
 
 				//入力チェック
-				List<String> error = validate(form);
+				error = validate(form);
 
 				//エラー時はS0042.jspを再表示
 				if (error.size() != 0) {

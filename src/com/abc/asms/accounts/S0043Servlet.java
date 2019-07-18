@@ -1,6 +1,8 @@
 package com.abc.asms.accounts;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +25,7 @@ public class S0043Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -30,7 +33,8 @@ public class S0043Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {
 
@@ -38,7 +42,8 @@ public class S0043Servlet extends HttpServlet {
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
-				session.setAttribute("error", "不正なアクセスです。" );
+				error.add("不正なアクセスです。");
+				session.setAttribute("error", error);
 				resp.sendRedirect("C0020.html");
 			} else {
 
@@ -54,57 +59,60 @@ public class S0043Servlet extends HttpServlet {
 		//ログインチェック
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {
 			login = (boolean) session.getAttribute("login");
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {
 
-		//権限チェック(権限が無い場合はダッシュボードへ遷移)
+			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority2 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority2.getAuthority().equals("10") && !checkauthority2.getAuthority().equals("11")) {
-				session.setAttribute("error", "不正なアクセスです。" );
+				error.add("不正なアクセスです。");
+				session.setAttribute("error", error);
 				resp.sendRedirect("C0020.html");
-			}
-
-			S0042Form form = (S0042Form) session.getAttribute("S0042Form");
-
-			String id = form.getId();
-			String name = form.getName();
-			String mail = form.getMail();
-			String password = form.getPassword();
-			String authority = form.getAuthority();
-
-			S0043Form updateform;
-
-			//パスワードが未入力の場合は前のパスワードのまま更新(この時ハッシュ化はしない)
-			if (password.equals("")) {
-				String oldpassword = (String) session.getAttribute("password");
-				updateform = new S0043Form(id, name, mail, oldpassword, password, authority);
-
-			//パスワード入力時はそのまま更新
 			} else {
-				updateform = new S0043Form(id, name, mail, password, authority);
+
+				S0042Form form = (S0042Form) session.getAttribute("S0042Form");
+
+				String id = form.getId();
+				String name = form.getName();
+				String mail = form.getMail();
+				String password = form.getPassword();
+				String authority = form.getAuthority();
+
+				S0043Form updateform;
+
+				//パスワードが未入力の場合は前のパスワードのまま更新(この時ハッシュ化はしない)
+				if (password.equals("")) {
+					String oldpassword = (String) session.getAttribute("password");
+					updateform = new S0043Form(id, name, mail, oldpassword, password, authority);
+
+					//パスワード入力時はそのまま更新
+				} else {
+					updateform = new S0043Form(id, name, mail, password, authority);
+				}
+
+				//更新
+				S0043Service service = new S0043Service();
+				service.update(updateform);
+
+				session.removeAttribute("S0042Form");
+				session.removeAttribute("password");
+
+				//成功メッセージ
+				session.setAttribute("complete", "No" + updateform.getId() + "のアカウントを更新しました。");
+
+				//更新完了後、S0041へ遷移(遷移先で成功メッセージを表示)
+				resp.sendRedirect("S0041.html");
 			}
-
-			//更新
-			S0043Service service = new S0043Service();
-			service.update(updateform);
-
-			session.removeAttribute("S0042Form");
-			session.removeAttribute("password");
-
-
-			//成功メッセージ
-			session.setAttribute("complete", "No" + updateform.getId() + "のアカウントを更新しました。");
-
-			//更新完了後、S0041へ遷移(遷移先で成功メッセージを表示)
-			resp.sendRedirect("S0041.html");
 
 		}
 	}
