@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.asms.others.forms.C0010Form;
 import com.abc.asms.sales.forms.S0010Form;
 import com.abc.asms.sales.forms.S0011Form;
 import com.abc.asms.sales.services.S0010Service;
@@ -25,67 +26,86 @@ public class S0011Servlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
-
-		String saledate = req.getParameter("saledate");
-		String accountid = req.getParameter("accountid");
-		String categoryname = req.getParameter("categoryname");
-		String tradename = req.getParameter("tradename");
-		String price = req.getParameter("price");
-		String salenumber = req.getParameter("salenumber");
-		String note = req.getParameter("note");
-
-		String name = null;
-
-		S0011Service service = new S0011Service();
-
-		//担当選択しているときのみDBからname呼び出し
-		if(!accountid.equals("0")) {
-			name = service.select2(accountid);
-		}
-
-		S0010Service s0010service = new S0010Service();
-		String categoryid = s0010service.setCategoryid(categoryname);
-
-		S0011Form form = new S0011Form(saledate, accountid, categoryid, categoryname, tradename, price,
-				salenumber, note, name);
-
+		//ログインチェック
 		HttpSession session = req.getSession();
-		session.setAttribute("form", form);
+		boolean login = false;
 
-		// バリデーションチェック
-		List<String> error = validate(form);
-
-		//エラーがある場合
-		if (error.size() != 0) {
-			// S0030.htmlを再表示
-			session.setAttribute("error", error);
-			req.setAttribute("form", form);
-
-			//accountsテーブルから情報を取得
-			S0010Service serv = new S0010Service();
-			List<S0010Form> s0010form = serv.select();
-			session.setAttribute("accounts", s0010form);
-			req.setAttribute("accounts", s0010form);
-
-			getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
-
-
-			session.removeAttribute("error");
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
 		}
-		//エラーがない場合
+
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		}else {
+
+			//権限チェック(権限が無い場合はダッシュボードへ遷移)
+			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
+
+			//		System.out.println(checkaccount1.getAuthority());
+
+			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+				session.setAttribute("error", "不正なアクセスです。" );
+				resp.sendRedirect("C0020.html");
+			}else {
+				String saledate = req.getParameter("saledate");
+				String accountid = req.getParameter("accountid");
+				String categoryname = req.getParameter("categoryname");
+				String tradename = req.getParameter("tradename");
+				String price = req.getParameter("price");
+				String salenumber = req.getParameter("salenumber");
+				String note = req.getParameter("note");
+
+				String name = null;
+
+				S0011Service service = new S0011Service();
+
+				//担当選択しているときのみDBからname呼び出し
+				if(!accountid.equals("0")) {
+					name = service.select2(accountid);
+				}
+
+				S0010Service s0010service = new S0010Service();
+				String categoryid = s0010service.setCategoryid(categoryname);
+
+				S0011Form form = new S0011Form(saledate, accountid, categoryid, categoryname, tradename, price,
+						salenumber, note, name);
+
+				session.setAttribute("form", form);
+
+				// バリデーションチェック
+				List<String> error = validate(form);
+
+				//エラーがある場合
+				if (error.size() != 0) {
+					// S0030.htmlを再表示
+					session.setAttribute("error", error);
+
+					//accountsテーブルから情報を取得
+					S0010Service serv = new S0010Service();
+					List<S0010Form> s0010form = serv.select();
+					session.setAttribute("accounts", s0010form);
+					req.setAttribute("accounts", s0010form);
+
+					getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+					session.removeAttribute("error");
+				}
+				//エラーがない場合
 
 
-		//小計をだす
-		int pricenum = Integer.parseInt(price);
-		int salenumbernum = Integer.parseInt(salenumber);
-		int total = pricenum * salenumbernum;
-		req.setAttribute("total", total);
+				//小計をだす
+				int pricenum = Integer.parseInt(price);
+				int salenumbernum = Integer.parseInt(salenumber);
+				int total = pricenum * salenumbernum;
+				req.setAttribute("total", total);
 
 
 
-		getServletContext().getRequestDispatcher("/WEB-INF/S0011.jsp").forward(req, resp);
+				getServletContext().getRequestDispatcher("/WEB-INF/S0011.jsp").forward(req, resp);
 
-
+			}
+		}
 	}
 
 	private List<String> validate(S0011Form form) throws UnsupportedEncodingException, ServletException {
@@ -96,7 +116,8 @@ public class S0011Servlet extends HttpServlet {
 
 
 		S0011Service s0011service = new S0011Service();
-		boolean exist = s0011service.service(form);
+		boolean exist = s0011service.service1(form);
+		boolean categorytable = s0011service.service2(form);
 
 
 
@@ -120,10 +141,20 @@ public class S0011Servlet extends HttpServlet {
 		}
 		if (accountid.equals("0")) {
 			error.add("担当が未選択です。");
+		}else {
+			//account_idがテーブルに存在しない場合
+			if(exist == true){
+				error.add("アカウントテーブルに存在しません。") ;
+			}
 		}
 
 		if (categoryname == null || categoryname.isEmpty()) {
 			error.add("商品カテゴリーが未選択です。");
+		}else {
+			//category_idがテーブルに存在しない場合
+			if(categorytable == true){
+				error.add("商品カテゴリーテーブルに存在しません。") ;
+			}
 		}
 
 		if (tradename.equals("")) {
@@ -163,10 +194,8 @@ public class S0011Servlet extends HttpServlet {
 		if (400 <= note.length()) {
 			error.add("備考が長すぎます。");
 		}
-		//account_idがテーブルに存在しない場合
-		if(exist == true){
-			error.add("アカウントテーブルに存在しません。") ;
-		}
+
+
 
 
 

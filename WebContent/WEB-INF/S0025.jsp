@@ -34,7 +34,7 @@
 	<tr><th>販売日</th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" value="2015/07/09" placeholder="販売日" name="saledate" disabled>
+		<input type="text" class="form-control" value="${S0025Form.saledate}" placeholder="販売日" name="saledate" disabled>
 		</div>
 		</td>
 	</tr>
@@ -42,7 +42,7 @@
 	<tr><th>担当</th>
 	<td><div class="col-md-8">
 		<select class="form-control"  disabled>
-			<option>イチロー</option>
+			<option>${S0025Form.accountid}</option>
 		</select></div>
 	</td></tr>
 	<tr><th>商品カテゴリー</th>
@@ -72,17 +72,17 @@
 
 	<tr><th>商品名</th>
 	<td><div class="col-md-8">
-	<input name="tradename" class="form-control" type="text" placeholder="商品" value="からあげ弁当" disabled>
+	<input name="tradename" class="form-control" type="text" placeholder="商品" value="${S0025Form.tradename}" disabled>
 	</div></td></tr>
 
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="単価" name="price" value="450" disabled>
+	<input class="form-control" id="right" type="text" placeholder="単価" name="price" value="${S0025Form.price}" disabled>
 	</div></td></tr>
 
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="個数" name="salenumber" value="3" disabled>
+	<input class="form-control" id="right" type="text" placeholder="個数" name="salenumber" value="${S0025Form.salenumber}" disabled>
 	</div></td></tr>
 
 	<tr><th>小計</th>

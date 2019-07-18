@@ -1,6 +1,8 @@
 package com.abc.asms.accounts;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +23,7 @@ public class S0030Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		//ログインチェック
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
@@ -29,8 +32,8 @@ public class S0030Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 			session.removeAttribute("error");
 

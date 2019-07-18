@@ -30,7 +30,6 @@ public class S0011Form {
 
 	public S0011Form(String saledate2, String accountid2, String categoryid2, String price2, String salenumber2,
 			String note2, String name2) {
-		// TODO 自動生成されたコンストラクター・スタブ
 	}
 
 	public String getSaledate() {

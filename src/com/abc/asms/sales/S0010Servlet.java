@@ -1,6 +1,7 @@
 package com.abc.asms.sales;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import com.abc.asms.others.forms.C0010Form;
 import com.abc.asms.sales.forms.S0010Form;
 import com.abc.asms.sales.forms.S0011Form;
 import com.abc.asms.sales.services.S0010Service;
+import com.abc.asms.sales.services.S0011Service;
 
 
 @WebServlet("/S0010.html")
@@ -50,7 +52,7 @@ public class S0010Servlet extends HttpServlet {
 				S0010Service service = new S0010Service();
 				List<S0010Form> form = service.select();
 
-				session.setAttribute("accounts", form);
+				req.setAttribute("accounts", form);
 
 				//商品カテゴリーの取得
 				List<String> categoryList = service.category();
@@ -70,46 +72,93 @@ public class S0010Servlet extends HttpServlet {
 @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+
+		//ログインチェック
 		HttpSession session = req.getSession();
+		boolean login = false;
 
-		try {
-				S0011Form form2 = (S0011Form) session.getAttribute("form");
-
-				//フォームへ値をセット
-				S0010Form form = new S0010Form();
-
-				form.setSaledate(form2.getSaledate());
-				form.setCategoryid(form2.getCategoryid());
-				form.setTradename(form2.getTradename());
-				form.setPrice(form2.getPrice());
-				form.setSalenumber(form2.getSalenumber());
-				form.setNote(form2.getNote());
-				form.setAccountid(form2.getAccountid());
-
-
-				// DBへ登録
-				S0010Service service = new S0010Service();
-
-				service.register(form);
-
-				session.removeAttribute("form");
-
-				//accountsテーブルから情報を取得
-				S0010Service s0010service = new S0010Service();
-				List<S0010Form> s0010form = s0010service.select();
-				session.setAttribute("accounts", s0010form);
-				req.setAttribute("accounts", s0010form);
-
-				session.setAttribute("complete", "No" + service.Saleid(form) + "の売上を登録しました");
-
-
-				getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
-				session.removeAttribute("complete");
-
-
-		}catch(Exception e) {
-			e.printStackTrace();
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
 		}
 
+		if (login == false) {
+			session.setAttribute("error", "ログインしてください。");
+			resp.sendRedirect("C0010.html");
+		}else {
+
+			//権限チェック(権限が無い場合はダッシュボードへ遷移)
+			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
+
+			//		System.out.println(checkaccount1.getAuthority());
+
+			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+				session.setAttribute("error", "不正なアクセスです。" );
+				resp.sendRedirect("C0020.html");
+			}else {
+				try {
+					S0011Form s0011form = (S0011Form) session.getAttribute("form");
+
+					//フォームへ値をセット
+					S0010Form s0010form = new S0010Form();
+
+					s0010form.setSaledate(s0011form.getSaledate());
+					s0010form.setCategoryid(s0011form.getCategoryid());
+					s0010form.setTradename(s0011form.getTradename());
+					s0010form.setPrice(s0011form.getPrice());
+					s0010form.setSalenumber(s0011form.getSalenumber());
+					s0010form.setNote(s0011form.getNote());
+					s0010form.setAccountid(s0011form.getAccountid());
+
+
+
+					//account_idがテーブルに存在するかチェック
+					List<String> error = new ArrayList<>();
+					S0011Service s0011service = new S0011Service();
+					boolean exist = s0011service.service(s0010form);
+
+					if(exist == true){
+						error.add("アカウントテーブルに存在しません。") ;
+
+						// S0010.htmlを再表示
+						session.setAttribute("error", error);
+						req.setAttribute("form", s0010form);
+
+						//accountsテーブルから情報を取得
+						S0010Service serv = new S0010Service();
+						List<S0010Form> s0010form1 = serv.select();
+						req.setAttribute("accounts", s0010form1);
+
+						getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+						session.removeAttribute("error");
+					}
+
+
+					// DBへ登録
+					S0010Service service = new S0010Service();
+
+					service.register(s0010form);
+
+					session.removeAttribute("form");
+
+
+					session.setAttribute("complete", "No" + service.Saleid(s0010form) + "の売上を登録しました");
+
+					//accountsテーブルから情報を取得
+					S0010Service s0010service = new S0010Service();
+					List<S0010Form> form = s0010service.select();
+					req.setAttribute("accounts", form);
+
+
+					getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+					session.removeAttribute("complete");
+					session.removeAttribute("allCategory");
+
+
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }

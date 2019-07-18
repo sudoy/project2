@@ -28,6 +28,8 @@ public class S0031Servlet extends HttpServlet {
 		//ログインチェック
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> loginerror = new ArrayList<>();
+
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -35,8 +37,11 @@ public class S0031Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			loginerror.add("ログインしてください。");
+			session.setAttribute("error", loginerror);
 			resp.sendRedirect("C0010.html");
+			session.removeAttribute("error");
+
 		} else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)

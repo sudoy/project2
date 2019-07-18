@@ -20,7 +20,14 @@ public class S0025Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
+		HttpSession session = req.getSession();
 
+		//渡されたidからアカウント情報の取得
+		S0025Service service = new S0025Service();
+		S0025Form form = service.select(req.getParameter("id"));
+		session.setAttribute("S0025Form", form);
+
+		System.out.println(form.getSaledate());
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0025.jsp").forward(req, resp);
 	}
@@ -45,17 +52,17 @@ public class S0025Servlet extends HttpServlet {
 			if (!checkauthority2.getAuthority().equals("10") && !checkauthority2.getAuthority().equals("11")) {
 				resp.sendRedirect("C0020.html");
 			} else {
-				String saledate = req.getParameter("saledate");
-				String accountid = req.getParameter("accountid");
-				String tradename = req.getParameter("tradename");
-
-				System.out.println(tradename);
-
-				S0025Form s0025form = new S0025Form(saledate, accountid, tradename);
-
-
-				S0025Service s0025service = new S0025Service();
-				String saleid = s0025service.Saleid(s0025form);
+//				String saledate = req.getParameter("saledate");
+//				String accountid = req.getParameter("accountid");
+//				String tradename = req.getParameter("tradename");
+//
+//				System.out.println(tradename);
+//
+//				S0025Form s0025form = new S0025Form(saledate, accountid, tradename);
+//
+//
+//				S0025Service s0025service = new S0025Service();
+//				String saleid = s0025service.Saleid(s0025form);
 
 
 //				S0025Form s0025form = (S0025Form) session.getAttribute("S0025Form");

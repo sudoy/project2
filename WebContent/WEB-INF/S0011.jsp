@@ -61,15 +61,15 @@
 	</div></td></tr>
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="${form.price}" disabled>
+	<input class="form-control" id="right" type="text" placeholder="${HTMLUtils.formatTotal(form.price)}" disabled>
 	</div></td></tr>
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="${form.salenumber}" disabled>
+	<input class="form-control" id="right" type="text" placeholder="${HTMLUtils.formatTotal(form.salenumber)}" disabled>
 	</div></td></tr>
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="${total}" disabled>
+	<input class="form-control" id="right" type="text" placeholder="${HTMLUtils.formatTotal(total)}" disabled>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
