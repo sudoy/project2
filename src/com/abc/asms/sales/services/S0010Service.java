@@ -63,7 +63,6 @@ public class S0010Service {
 
 			while (rs.next()) {
 				String categoryName = rs.getString("category_name");
-				System.out.println(categoryName);
 
 				list.add(categoryName);
 			}

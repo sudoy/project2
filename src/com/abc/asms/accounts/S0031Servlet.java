@@ -40,7 +40,6 @@ public class S0031Servlet extends HttpServlet {
 			loginerror.add("ログインしてください。");
 			session.setAttribute("error", loginerror);
 			resp.sendRedirect("C0010.html");
-			session.removeAttribute("error");
 
 		} else {
 
@@ -64,7 +63,7 @@ public class S0031Servlet extends HttpServlet {
 
 				S0031Form s0031form = new S0031Form(name, mail, password, check, sale, account);
 
-				//登録確認からキャンセル出戻った時にも使えるように
+				//登録確認からキャンセルで戻った時にも使えるように
 				session = req.getSession();
 				session.setAttribute("form", s0031form);
 

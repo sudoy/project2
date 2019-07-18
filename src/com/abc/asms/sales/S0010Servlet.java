@@ -24,10 +24,15 @@ public class S0010Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		HttpSession session = req.getSession();
+		//始めに消さないと使っている途中で遷移してきたときにエラーになる
+		session.removeAttribute("form");
+
 
 		//ログインチェック
-		HttpSession session = req.getSession();
+
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -35,14 +40,15 @@ public class S0010Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		}else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-			//		System.out.println(checkaccount1.getAuthority());
+			//System.out.println(checkaccount1.getAuthority());
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
 				session.setAttribute("error", "不正なアクセスです。" );
@@ -63,6 +69,7 @@ public class S0010Servlet extends HttpServlet {
 				session.removeAttribute("error");
 				session.removeAttribute("complete");
 
+
 				getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
 			}
 		}
@@ -76,6 +83,8 @@ public class S0010Servlet extends HttpServlet {
 		//ログインチェック
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error1 = new ArrayList<>();
+
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -83,7 +92,8 @@ public class S0010Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error1.add("ログインしてください。");
+			session.setAttribute("error", error1);
 			resp.sendRedirect("C0010.html");
 		}else {
 
@@ -110,18 +120,16 @@ public class S0010Servlet extends HttpServlet {
 					s0010form.setNote(s0011form.getNote());
 					s0010form.setAccountid(s0011form.getAccountid());
 
-
-
 					//account_idがテーブルに存在するかチェック
-					List<String> error = new ArrayList<>();
+					List<String> error2 = new ArrayList<>();
 					S0011Service s0011service = new S0011Service();
 					boolean exist = s0011service.service(s0010form);
 
 					if(exist == true){
-						error.add("アカウントテーブルに存在しません。") ;
+						error2.add("アカウントテーブルに存在しません。") ;
 
 						// S0010.htmlを再表示
-						session.setAttribute("error", error);
+						session.setAttribute("error", error2);
 						req.setAttribute("form", s0010form);
 
 						//accountsテーブルから情報を取得
@@ -132,7 +140,6 @@ public class S0010Servlet extends HttpServlet {
 						getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
 						session.removeAttribute("error");
 					}
-
 
 					// DBへ登録
 					S0010Service service = new S0010Service();

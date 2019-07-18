@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 	<%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -44,32 +45,17 @@
 	<tr><th>担当</th>
 	<td><div class="col-md-8">
 		<select class="form-control"  disabled>
-			<option>イチロー</option>
+			<option>${name}</option>
 		</select></div>
 	</td></tr>
 	<tr><th>商品カテゴリー</th>
 	<td><div class="col-md-7">
-		<label class="radio-inline">
-		<input type="radio" name="inlineRadioOptions" value="1" disabled checked> 食料品
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="inlineRadioOptions" value="2" disabled> 飲料
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="inlineRadioOptions" value="3" disabled> 雑誌
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="inlineRadioOptions" value="9" disabled> 酒類
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="inlineRadioOptions" value="6" disabled> 冷凍食品
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="inlineRadioOptions" value="10" disabled> たばこ
-		</label>
-		<label class="radio-inline">
-		<input type="radio" name="inlineRadioOptions" value="5" disabled> その他
-		</label></div>
+		<c:forEach items="${allCategory}" var="i">
+			<label class="radio-inline">
+			<input type="radio" name="categoryname" value="${i}"
+			${HTMLUtils.judgeCategoryChecked2(S0025Form.categoryname, i)} disabled> ${i}
+			</label>
+		</c:forEach></div>
 	</td></tr>
 
 	<tr><th>商品名</th>
@@ -79,17 +65,17 @@
 
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="単価" name="price" value="${S0025Form.unitprice}" disabled>
+	<input class="form-control" id="right" type="text" placeholder="単価" name="price" value="${HTMLUtils.formatTotal(S0025Form.unitprice)}" disabled>
 	</div></td></tr>
 
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="個数" name="salenumber" value="${S0025Form.salenumber}" disabled>
+	<input class="form-control" id="right" type="text" placeholder="個数" name="salenumber" value="${HTMLUtils.formatTotal(S0025Form.salenumber)}" disabled>
 	</div></td></tr>
 
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" value="${total}"  disabled>
+	<input class="form-control" id="right" value="${HTMLUtils.formatTotal(total)}"  disabled>
 	</div></td></tr>
 
 	<tr><th id="remarks">備考</th>
@@ -105,7 +91,7 @@
 
 		<button type="submit" class="btn btn-danger" id="touroku" onclick="location.href='index.html'">
 		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> O K</button>
-		<a class="btn btn-default" id="cancel" href="S0022.html">キャンセル</a>
+		<a class="btn btn-default" id="cancel" href="S0022.html?id=${S0025Form.id}">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>
