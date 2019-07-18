@@ -154,4 +154,97 @@ public class S0023Service {
 			DBUtils.close(con, ps, rs);
 		}
 	}
+
+	//アカウントテーブル存在チェック
+	public boolean accountexist(S0023Form form){
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+		boolean accountexist = false;
+
+		String id = null;
+
+		try{
+			//データベースの接続を確立
+			con = DBUtils.getConnection();
+
+			sql = "select account_id from accounts where name = ?";
+
+			// プレースホルダに値を設定
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, form.getId());
+
+			rs = ps.executeQuery();
+
+			rs.next();
+				id = rs.getString("account_id");
+
+
+			if(id == null){
+				accountexist = true;
+			}else {
+				accountexist = false;
+			}
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+
+			DBUtils.close(con,ps, rs);
+		}
+		return accountexist;
+
+	}
+
+	//カテゴリーテーブル存在チェック
+	public boolean categoryexist(S0023Form form){
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+		boolean categoryexist = false;
+
+		String id = null;
+
+		try{
+			//データベースの接続を確立
+			con = DBUtils.getConnection();
+
+			sql = "select category_id from categories where category_name = ? and enabled = 1";
+
+			// プレースホルダに値を設定
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, form.getCategoryname());
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				id = rs.getString("category_id");
+			};
+
+
+			if(id == null){
+				categoryexist = true;
+			}else {
+				categoryexist = false;
+			}
+
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+
+			DBUtils.close(con,ps, rs);
+		}
+		return categoryexist;
+
+
+	}
 }

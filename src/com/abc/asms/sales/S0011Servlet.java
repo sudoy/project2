@@ -120,7 +120,6 @@ public class S0011Servlet extends HttpServlet {
 		boolean categorytable = s0011service.service2(form);
 
 
-
 		String saledate = form.getSaledate();
 		String accountid = form.getAccountid();
 		String categoryname = form.getCategoryname();
@@ -153,7 +152,7 @@ public class S0011Servlet extends HttpServlet {
 		}else {
 			//category_idがテーブルに存在しない場合
 			if(categorytable == true){
-				error.add("商品カテゴリーテーブルに存在しません。") ;
+				error.add("商品カテゴリーテーブルに存在しません。");
 			}
 		}
 
