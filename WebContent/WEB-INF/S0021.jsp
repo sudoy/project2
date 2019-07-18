@@ -30,6 +30,8 @@
 
 	<h1>売上検索結果表示</h1>
 
+	<jsp:include page="message.jsp"/>
+
 	<table class="table">
 
 	<tr><th>操作</th><th>No</th><th>販売日</th><th>担当</th><th>商品カテゴリー</th><th>商品名</th><th>単価</th><th>個数</th><th>小計</th></tr>
