@@ -31,9 +31,15 @@ public class S0023Servlet extends HttpServlet {
 		//権限チェック
 
 		S0023Service service = new S0023Service();
-		S0023Form form = service.select(req.getParameter("id"));
 
-		session.setAttribute("S0023Form", form);
+		S0023Form form = service.select(req.getParameter("id"));
+		session.setAttribute("S0023Form", form);//前の画面の値を取得するためのもの
+
+		List<S0023Form> accounts = service.accounts();
+		session.setAttribute("accounts", accounts);//アカウントidと名前
+
+		List<String> categories = service.categories();
+		session.setAttribute("categories", categories);
 
 		getServletContext().getRequestDispatcher("/WEB-INF/S0023.jsp").forward(req, resp);
 
@@ -46,8 +52,11 @@ public class S0023Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
+		//入力した値を取得
 		String saledate = req.getParameter("saledate");//販売日
+		System.out.println(req.getParameter("saledate"));
 		String name = req.getParameter("name");//担当者名
+		System.out.println(req.getParameter("name"));
 		String categoryname = req.getParameter("categoryname");//商品カテゴリー名
 		String tradename = req.getParameter("tradename");//商品名
 		String price = req.getParameter("price");//単価
@@ -58,10 +67,25 @@ public class S0023Servlet extends HttpServlet {
 
 		session.setAttribute("S0023Form", form);
 
+		//入力チェック
 		List<String> error = validate(form);
 
-		getServletContext().getRequestDispatcher("/WEB-INF/S0023.jsp").forward(req, resp);
+		//エラー発生時はs0023を再表示
+		if(error.size() != 0) {
+			session.setAttribute("error",error);
+			session.setAttribute("S0023Form", form);//再表示するために値を保持
 
+			getServletContext().getRequestDispatcher("/WEB-INF/S0023.jsp").forward(req, resp);
+
+			session.removeAttribute("error");//エラーメッセージ消去
+		}else {
+
+			session.setAttribute("S0023Form", form);
+
+			//入力チェッククリア後、S0024に遷移
+			resp.sendRedirect("/WEB-INF/S0024.jsp");
+
+		}
 
 	}
 	private List<String> validate(S0023Form form) {
@@ -147,8 +171,8 @@ public class S0023Servlet extends HttpServlet {
 		//備考長さチェック(401文字以上の時エラー)
 		if(401<= note.length()) {
 			e.add("備考が長すぎます。");
-
 		}
+		//商品カテゴリー存在チェック
 
 		return e;
 	}

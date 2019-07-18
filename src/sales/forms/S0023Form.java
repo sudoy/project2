@@ -2,6 +2,7 @@ package sales.forms;
 
 public class S0023Form {
 
+	private String id;
 	private String saledate;
 	private String name;
 	private String categoryname;
@@ -11,10 +12,23 @@ public class S0023Form {
 	private String note;
 
 
-	public S0023Form(String id, String saledate, String name, String categoryname, String tradename, String price,
+	public S0023Form(String saledate, String name, String categoryname, String tradename, String price,
 			String salenumber, String note) {
 		super();
 
+		this.saledate = saledate;
+		this.name = name;
+		this.categoryname = categoryname;
+		this.tradename = tradename;
+		this.price = price;
+		this.salenumber = salenumber;
+		this.note = note;
+	}
+
+
+	public S0023Form(String id, String saledate, String name, String categoryname, String tradename, String price,
+			String salenumber, String note) {
+		super();
 		this.id = id;
 		this.saledate = saledate;
 		this.name = name;
@@ -26,10 +40,13 @@ public class S0023Form {
 	}
 
 
+	public S0023Form(String id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 
 
-
-	private String id;
 	public String getId() {
 		return id;
 	}
