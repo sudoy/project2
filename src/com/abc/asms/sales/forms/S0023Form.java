@@ -13,10 +13,11 @@ public class S0023Form {
 	private int total;
 
 
-	public S0023Form(String saledate, String name, String categoryname, String tradename, String price,
+	public S0023Form(String id, String saledate, String name, String categoryname, String tradename, String price,
 			String salenumber, String note, int total) {
 		super();
 
+		this.id = id;
 		this.saledate = saledate;
 		this.name = name;
 		this.categoryname = categoryname;
