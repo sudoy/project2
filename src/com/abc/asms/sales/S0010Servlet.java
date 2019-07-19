@@ -45,7 +45,6 @@ public class S0010Servlet extends HttpServlet {
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-			//System.out.println(checkaccount1.getAuthority());
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
 				session.setAttribute("error", "不正なアクセスです。" );
