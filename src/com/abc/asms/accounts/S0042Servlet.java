@@ -101,9 +101,6 @@ public class S0042Servlet extends HttpServlet {
 				String sale = req.getParameter("sale");
 				String account = req.getParameter("account");
 
-				System.out.println(sale);
-				System.out.println(account);
-
 				//saleとaccountの合計値をauthorityに入れることで権限の有無を判断
 				if(account != null && sale != null) {
 					authorityint = Integer.parseInt(account + sale);
