@@ -22,6 +22,7 @@ public class S0040Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		boolean login = false;
 		List<String> error = new ArrayList<>();
@@ -42,7 +43,7 @@ public class S0040Servlet extends HttpServlet {
 				session.removeAttribute("S0040Form");
 				session.removeAttribute("error");
 			}
-			req.setCharacterEncoding("UTF-8");
+
 			getServletContext().getRequestDispatcher("/WEB-INF/S0040.jsp").forward(req, resp);
 
 		}
