@@ -38,11 +38,6 @@ public class S0024Service {
 			ps.setString(7, form.getCategoryid());
 			ps.setString(8, form.getSaleid());
 
-
-			System.out.println(form.getSaledate());
-			System.out.println(form.getCategoryname());
-			System.out.println(form.getPrice());
-
 			//UPDATE命令の実行
 			ps.executeUpdate();
 

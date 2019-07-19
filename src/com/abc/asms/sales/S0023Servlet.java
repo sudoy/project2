@@ -52,7 +52,7 @@ public class S0023Servlet extends HttpServlet {
 				S0023Service service = new S0023Service();
 
 				S0023Form form = service.select(req.getParameter("id"));
-				session.setAttribute("S0023FormGet", form);//前の画面の値を表示させるためのもの(編集前の売上情報)
+				session.setAttribute("S0023FormGet", form);//前の画面の値を表示させるためのもの(編集前の売上情報) S0024でidをとる
 
 				//58～62行はjspで一覧を出すためのもの
 				List<S0023Form> accounts = service.accounts();
@@ -108,7 +108,7 @@ public class S0023Servlet extends HttpServlet {
 				String salenumber = req.getParameter("salenumber");//個数
 				String note = req.getParameter("note");//備考
 
-				if (!price.equals("") && !salenumber.equals("")) {
+				if (!price.equals("") && !salenumber.equals("")) {//NumberFormatException回避の為
 
 					intprice = Integer.parseInt(price);
 					intsalenumber = Integer.parseInt(salenumber);
@@ -202,8 +202,7 @@ public class S0023Servlet extends HttpServlet {
 			e.add("単価を入力して下さい。");
 		} else if (10 <= price.length()) {
 			e.add("単価が長すぎます。");
-		} else if (!price.equals("")) {
-			//整数かつ1以上
+		} else if (!price.equals("")) {//単価形式チェック(整数かつ1以上)
 			try {
 				Integer.parseInt(price);
 			} catch (NumberFormatException ne) {
@@ -225,7 +224,7 @@ public class S0023Servlet extends HttpServlet {
 				e.add("個数を正しく入力してください。");
 			}
 		} else if (Integer.parseInt(salenumber) <= 0) {
-			e.add("個数を正しく入力して下さい。");
+			e.add("個数を正しく入力してください。");
 		}
 		//備考長さチェック(401文字以上の時エラー)
 		if (401 <= note.length()) {
