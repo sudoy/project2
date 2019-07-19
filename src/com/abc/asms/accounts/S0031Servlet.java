@@ -88,7 +88,7 @@ public class S0031Servlet extends HttpServlet {
 
 
 	private List<String> validate(S0031Form form) throws UnsupportedEncodingException {
-		List<String> error = new ArrayList<String>();  //list add
+		List<String> error = new ArrayList<String>();
 		//メールアドレス重複確認
 		S0031Service s0031service = new S0031Service();
 		boolean exist = s0031service.service(form);

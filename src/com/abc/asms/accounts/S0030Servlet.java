@@ -114,7 +114,7 @@ public class S0030Servlet extends HttpServlet {
 					session.removeAttribute("S0031form");
 
 
-					session.setAttribute("complete", "No" + service.Accountid(s0030form) + "の売上を登録しました");
+					session.setAttribute("complete", "No" + service.Accountid(s0030form) + "のアカウントを登録しました");
 
 					getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp").forward(req, resp);
 					session.removeAttribute("complete");

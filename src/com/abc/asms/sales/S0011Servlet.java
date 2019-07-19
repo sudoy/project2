@@ -197,11 +197,6 @@ public class S0011Servlet extends HttpServlet {
 			error.add("備考が長すぎます。");
 		}
 
-
-
-
-
-
 		return error;
 
 	}

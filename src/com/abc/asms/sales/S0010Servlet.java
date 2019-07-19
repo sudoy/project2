@@ -144,8 +144,6 @@ public class S0010Servlet extends HttpServlet {
 					service.register(s0010form);
 
 					session.removeAttribute("form");
-
-
 					session.setAttribute("complete", "No" + service.Saleid(s0010form) + "の売上を登録しました");
 
 					//accountsテーブルから情報を取得
