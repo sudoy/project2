@@ -3,6 +3,8 @@ package com.abc.asms.sales.services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 
@@ -37,11 +39,6 @@ public class S0024Service {
 			ps.setString(6, form.getAccountid());
 			ps.setString(7, form.getCategoryid());
 			ps.setString(8, form.getSaleid());
-
-
-			System.out.println(form.getSaledate());
-			System.out.println(form.getCategoryname());
-			System.out.println(form.getPrice());
 
 			//UPDATE命令の実行
 			ps.executeUpdate();
@@ -137,6 +134,40 @@ public class S0024Service {
 		}
 
 	}
+	//商品カテゴリー名一覧取得
+	public List<String> categories() throws ServletException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+		String categoryName = null;
+
+		List<String> categories = new ArrayList<>();
+
+		try {
+			con = DBUtils.getConnection();
+			sql = "select category_name from categories order by category_id";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				categoryName = rs.getString("category_name");
+
+				categories.add(categoryName);
+			}
+
+			return categories;
+
+		} catch (Exception e) {
+			throw new ServletException(e);
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+	}
+
+
 
 
 }

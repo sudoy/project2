@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
+
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -50,10 +52,12 @@
 
 	<tr><th>商品カテゴリー</th>
 	<td><div class="col-md-7">
-		<label class="radio-inline">
-		<input type="radio" name="categoryname" value="${S0023FormPost.categoryname}" disabled checked>${S0023FormPost.categoryname}
-		</label>
-		</div>
+		<c:forEach items="${categories}" var="i">
+			<label class="radio-inline">
+			<input type="radio" name="categoryname" value="${i}"
+			 ${HTMLUtils.judgeCategoryChecked2(i, S0023FormPost.categoryname)} disabled checked> ${i}
+			</label>
+		</c:forEach></div>
 	</td></tr>
 
 	<tr><th>商品名</th>
@@ -62,19 +66,19 @@
 	</div></td></tr>
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" name="price" placeholder="単価" value="${HTMLUtils.formatTotal(S0023FormPost.price)}" disabled>
+	<input class="form-control"  class="right" type="text" name="price" placeholder="単価" value="${HTMLUtils.formatTotal(S0023FormPost.price)}" disabled>
 	</div></td></tr>
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" name="salenumber" placeholder="個数" value="${HTMLUtils.formatTotal(S0023FormPost.salenumber)}" disabled>
+	<input class="form-control"  class="right" type="text" name="salenumber" placeholder="個数" value="${HTMLUtils.formatTotal(S0023FormPost.salenumber)}" disabled>
 	</div></td></tr>
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" name="total" placeholder="小計" value="${HTMLUtils.formatTotal(S0023FormPost.total)}" disabled>
+	<input class="form-control"  class="right" type="text" name="total" placeholder="小計" value="${HTMLUtils.formatTotal(S0023FormPost.total)}" disabled>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="detail" rows="3" name="note" placeholder="備考" disabled>${S0023FormPost.note}</textarea>
+	<textarea class="form-control"  class="detail" rows="3" name="note" placeholder="備考" disabled>${S0023FormPost.note}</textarea>
 	</div></td>
 	</tr>
 
@@ -85,7 +89,7 @@
 
 		<button type="submit" class="btn btn-primary" id="touroku">
 		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
-		<a class="btn btn-default" id="cancel" href="S0023.html">キャンセル</a>
+		<a class="btn btn-default" class="cancel" href="S0023.html">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>
