@@ -43,8 +43,9 @@ public class S0041Service {
 
 			sql += authoritySQL;
 
+			sql += " order by account_id asc";
+
 			ps = con.prepareStatement(sql);
-			System.out.println(ps);
 
 			if (!name.equals("")) {//nameが入力されている
 				ps.setString(1, "%" + name + "%");

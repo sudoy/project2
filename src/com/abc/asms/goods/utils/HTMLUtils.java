@@ -2,6 +2,8 @@ package com.abc.asms.goods.utils;
 
 import java.text.NumberFormat;
 
+import com.abc.asms.sales.forms.S0020Form;
+
 public class HTMLUtils {
 
 	public static String formatDate(String date) {//日付の-を/に
@@ -135,6 +137,16 @@ public class HTMLUtils {
 		} else {
 			return "";
 		}
+	}
+
+	//S0020.jsp用　初期状態ならカテゴリーをすべてチェック
+	public static String judgeDefault(S0020Form form) {
+		if(form == null) {
+			return "checked";
+		}else {
+			return "";
+		}
+
 	}
 
 }
