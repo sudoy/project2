@@ -46,8 +46,6 @@ public class S0031Servlet extends HttpServlet {
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-			//		System.out.println(checkaccount1.getAuthority());
-
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
 				session.setAttribute("error", "不正なアクセスです。" );
 				resp.sendRedirect("C0020.html");
@@ -65,7 +63,7 @@ public class S0031Servlet extends HttpServlet {
 
 				//登録確認からキャンセルで戻った時にも使えるように
 				session = req.getSession();
-				session.setAttribute("form", s0031form);
+				session.setAttribute("S0031form", s0031form);
 
 
 				// バリデーションチェック
@@ -130,7 +128,6 @@ public class S0031Servlet extends HttpServlet {
 		if(exist == false){
 			error.add("メールアドレスが既に登録されています。") ;
 		}
-
 
 		if(password.equals("")) {
 			error.add("パスワードを入力して下さい。");

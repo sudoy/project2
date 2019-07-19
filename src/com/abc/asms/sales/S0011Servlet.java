@@ -3,6 +3,7 @@ package com.abc.asms.sales;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,6 @@ import com.abc.asms.sales.forms.S0010Form;
 import com.abc.asms.sales.forms.S0011Form;
 import com.abc.asms.sales.services.S0010Service;
 import com.abc.asms.sales.services.S0011Service;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 @WebServlet("/S0011.html")
 public class S0011Servlet extends HttpServlet {
@@ -45,8 +45,6 @@ public class S0011Servlet extends HttpServlet {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
-
-			//		System.out.println(checkaccount1.getAuthority());
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
 				session.setAttribute("error", "不正なアクセスです。" );
@@ -101,10 +99,10 @@ public class S0011Servlet extends HttpServlet {
 				//小計をだす
 				int pricenum = Integer.parseInt(price);
 				int salenumbernum = Integer.parseInt(salenumber);
-				int total = pricenum * salenumbernum;
-				req.setAttribute("total", total);
+				int totalnum = pricenum * salenumbernum;
 
-
+				String total = String.valueOf(totalnum);
+				s0011form.setTotal(total);
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0011.jsp").forward(req, resp);
 
@@ -116,7 +114,7 @@ public class S0011Servlet extends HttpServlet {
 	private List<String> validate(S0011Form form) throws UnsupportedEncodingException, ServletException {
 		List<String> error = new ArrayList<String>(); //list add
 		//日付チェック
-		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		DateFormat format = new SimpleDateFormat("yyyy/M/d");
 		format.setLenient(false);
 
 
@@ -139,7 +137,7 @@ public class S0011Servlet extends HttpServlet {
 		} else {
 			try {
 				format.parse(saledate);
-			} catch (ParseException | java.text.ParseException e) {
+			} catch (ParseException e) {
 				error.add("販売日を正しく入力して下さい。");
 			}
 		}

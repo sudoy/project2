@@ -1,6 +1,7 @@
 package com.abc.asms.sales;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -24,29 +25,32 @@ public class S0025Servlet extends HttpServlet {
 
 		//ログインチェック
 		boolean login = false;
+		List<String> error = new ArrayList<>();
+
 		if (session.getAttribute("login") != null) {
 			login = (boolean) session.getAttribute("login");
 		}
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
-			C0010Form checkauthority2 = (C0010Form) session.getAttribute("userinfo");
+			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-			if (!checkauthority2.getAuthority().equals("10") && !checkauthority2.getAuthority().equals("11")) {
+
+			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+				session.setAttribute("error", "不正なアクセスです。" );
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				//渡されたidのsales情報,category_nameの取得
+				//渡されたidのsalesテーブル, c.category_name, a.nameの取得
 				S0025Service service = new S0025Service();
 				S0025Form form = service.select(req.getParameter("id"));
 				session.setAttribute("S0025Form", form);
 
-				//nameを取得
-				String name = service.name(form.getAccountid());
-				req.setAttribute("name", name);
+
 
 				//全category_nameの取得
 				List<String> categoryList = service.category();
@@ -56,8 +60,10 @@ public class S0025Servlet extends HttpServlet {
 				//小計
 				int pricenum = Integer.parseInt(form.getUnitprice());
 				int salenumbernum = Integer.parseInt(form.getSalenumber());
-				int total = pricenum * salenumbernum;
-				req.setAttribute("total", total);
+				int totalnum = pricenum * salenumbernum;
+				String total = String.valueOf(totalnum);
+				form.setTotal(total);
+
 
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0025.jsp").forward(req, resp);
@@ -69,20 +75,23 @@ public class S0025Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
+
 
 		//ログインチェック
 		if (session.getAttribute("login") != null) {
 			login = (boolean) session.getAttribute("login");
 		}
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
-			C0010Form checkauthority2 = (C0010Form) session.getAttribute("userinfo");
-
-			if (!checkauthority2.getAuthority().equals("10") && !checkauthority2.getAuthority().equals("11")) {
+			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
+			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+				session.setAttribute("error", "不正なアクセスです。" );
 				resp.sendRedirect("C0020.html");
 			} else {
 

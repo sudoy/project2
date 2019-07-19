@@ -59,7 +59,7 @@
 		<c:forEach items="${allCategory}" var="i">
 			<label class="radio-inline">
 			<input type="radio" name="categoryname" value="${i}"
-			 ${HTMLUtils.judgeCategoryChecked2(i, form.categoryname)}> ${i}
+			 ${HTMLUtils.judgeCategorynameChecked(i, form.categoryname)}> ${i}
 			</label>
 		</c:forEach></div>
 	</td></tr>

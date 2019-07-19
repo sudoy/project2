@@ -13,7 +13,7 @@ import com.abc.asms.sales.forms.S0025Form;
 
 public class S0025Service {
 
-	//salesとcategoriesのcategory_name
+	//テーブル結合でsalesテーブルとc.category_nameとa.name取得
 	public S0025Form select(String num) {
 
 		Connection con = null;
@@ -30,6 +30,7 @@ public class S0025Service {
 		String salenumber = null;
 		String note = null;
 		String categoryname = null;
+		String name = null;
 
 		try {
 			//データベース接続
@@ -37,8 +38,10 @@ public class S0025Service {
 
 			//SQL
 			sql = "select s.sale_id, s.sale_date, s.account_id, s.category_id, s.trade_name, s.unit_price,"
-					+ " s.sale_number, note, c.category_name"
-					+ " from sales s join categories c on s.category_id = c.category_id"
+					+ " s.sale_number, note, c.category_name, a.name"
+					+ " from sales s "
+					+ " join accounts a on s.account_id = a.account_id"
+					+ " join categories c on s.category_id = c.category_id"
 					+ " where sale_id = ?"
 					+ " order by sale_id";
 
@@ -65,14 +68,17 @@ public class S0025Service {
 				salenumber = rs.getString("s.sale_number");
 				note = rs.getString("s.note");
 				categoryname = rs.getString("c.category_name");
+				name = rs.getString("a.name");
 
 
 			}
 			//ハイフンをスラッシュに変更
 			saledate = saledate.replace("-", "/");
 
+			System.out.println(note);
+
 			S0025Form form = new S0025Form(id, saledate, accountid, categoryid, tradename, unitprice,
-					salenumber, note, categoryname);
+					salenumber, note, categoryname, name);
 
 			return form;
 
@@ -164,7 +170,7 @@ public class S0025Service {
 
 		try {
 			con = DBUtils.getConnection();
-			sql = "select category_name from categories";
+			sql = "select category_name from categories order by category_name";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 

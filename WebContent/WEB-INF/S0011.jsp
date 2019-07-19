@@ -50,7 +50,7 @@
 		<c:forEach items="${allCategory}" var="i">
 			<label class="radio-inline">
 			<input type="radio" name="categoryname" value="${i}"
-			${HTMLUtils.judgeCategoryChecked2(form.categoryname, i)} disabled> ${i}
+			${HTMLUtils.judgeCategorynameChecked(form.categoryname, i)} disabled> ${i}
 			</label>
 		</c:forEach></div>
 	</td></tr>
@@ -69,7 +69,7 @@
 	</div></td></tr>
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="${HTMLUtils.formatTotal(total)}" disabled>
+	<input class="form-control" id="right" type="text" placeholder="${HTMLUtils.formatTotal(form.total)}" disabled>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
