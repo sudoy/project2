@@ -176,7 +176,7 @@ public class S0023Service {
 			// プレースホルダに値を設定
 			ps = con.prepareStatement(sql);
 
-			ps.setString(1, form.getId());
+			ps.setString(1, form.getName());
 
 			rs = ps.executeQuery();
 
@@ -216,7 +216,7 @@ public class S0023Service {
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
 
-			sql = "select category_id from categories where category_name = ? and enabled = 1";
+			sql = "select category_id from categories where category_name = ? and enable = 1";
 
 			// プレースホルダに値を設定
 			ps = con.prepareStatement(sql);

@@ -75,6 +75,10 @@ public class S0023Servlet extends HttpServlet {
 		boolean login = false;
 		List<String> error = new ArrayList<>();
 
+		int intprice = 0;
+		int intsalenumber = 0;
+		int total = 0;
+
 		//ログインチェック
 		if (session.getAttribute("login") != null) {
 			login = (boolean) session.getAttribute("login");
@@ -104,14 +108,14 @@ public class S0023Servlet extends HttpServlet {
 				String salenumber = req.getParameter("salenumber");//個数
 				String note = req.getParameter("note");//備考
 
+				if (!price.equals("") && !salenumber.equals("")) {
 
-					int intprice = Integer.parseInt(price);
-					int intsalenumber = Integer.parseInt(salenumber);
-					int total = intprice * intsalenumber;
-
+					intprice = Integer.parseInt(price);
+					intsalenumber = Integer.parseInt(salenumber);
+					total = intprice * intsalenumber;
+				}
 
 				S0023Form form = new S0023Form(saledate, name, categoryname, tradename, price, salenumber, note, total);
-
 
 				//入力チェック
 				error = validate(form);
@@ -119,7 +123,7 @@ public class S0023Servlet extends HttpServlet {
 				//エラー発生時はs0023を再表示
 				if (error.size() != 0) {
 					session.setAttribute("error", error);
-					session.setAttribute("S0023Form", form);//再表示するために値を保持
+					session.setAttribute("S0023Form", form);//再表示するためのもの(入力した値)
 
 					getServletContext().getRequestDispatcher("/WEB-INF/S0023.jsp").forward(req, resp);
 
@@ -131,7 +135,6 @@ public class S0023Servlet extends HttpServlet {
 					//入力チェッククリア後、S0024に遷移
 					resp.sendRedirect("S0024.html");
 				}
-
 			}
 		}
 
@@ -153,7 +156,7 @@ public class S0023Servlet extends HttpServlet {
 		String saledate = form.getSaledate();
 		String name = form.getName();
 		String categoryname = form.getCategoryname();
-		String tradename = form.getCategoryname();
+		String tradename = form.getTradename();
 		String price = form.getPrice();
 		String salenumber = form.getSalenumber();
 		String note = form.getNote();
@@ -173,67 +176,61 @@ public class S0023Servlet extends HttpServlet {
 		//担当必須入力チェック
 		if (name == null) {
 			e.add("担当が未選択です。");
-		}
-		if(accountexist == true) {
-			e.add("アカウントテーブルに存在しません。");
+		}else {
+			if (accountexist == true) {
+				e.add("アカウントテーブルに存在しません。");
+			}
 		}
 		//商品カテゴリー必須入力チェック
-		if (categoryname == null) {
+		if (categoryname == null || categoryname.equals("")) {
 			e.add("商品カテゴリーが未選択です。");
+		}else {//商品カテゴリーテーブル存在チェック
+			if(categoryexist == true){
+				e.add("商品カテゴリーテーブルに存在しません。");
+			}
 		}
-		if(categoryexist == true) {
-			e.add("商品カテゴリーテーブルに存在しません。");
-		}
+
 		//商品名必須入力チェック
-		if (categoryname.equals("")) {
+		if (tradename.equals("")) {
 			e.add("商品名を入力して下さい。");
-		}
-		//商品名長さチェック(101文字以上の時エラー)
-		if (101 <= tradename.length()) {
+		}else if(101 <= tradename.length()) {//商品名長さチェック
 			e.add("商品名が長すぎます。");
 		}
+
 		//単価必須入力チェック
 		if (price.equals("")) {
 			e.add("単価を入力して下さい。");
-		}
-		//単価長さチェック
-		if (10 <= price.length()) {
+		} else if (10 <= price.length()) {
 			e.add("単価が長すぎます。");
-			//単価型式チェック
-			if (!price.equals("")) {
-				try {
-					Integer.parseInt(price);
-				} catch (NumberFormatException ne) {
-					e.add("単価を正しく入力して下さい。");
-				}
-			}
-			if (Integer.parseInt(price) <= 0) {
+		} else if (!price.equals("")) {
+			//整数かつ1以上
+			try {
+				Integer.parseInt(price);
+			} catch (NumberFormatException ne) {
 				e.add("単価を正しく入力して下さい。");
 			}
-			//個数必須入力チェック
-			if (salenumber.equals("")) {
-				e.add("個数を入力して下さい。");
-			}
-			//個数形式チェック
-			if (!salenumber.equals("")) {
-				try {
-					Integer.parseInt(salenumber);
-				} catch (NumberFormatException ne) {
-					e.add("個数を正しく入力して下さい。");
-				}
-			}
-			e.add("個数を正しく入力して下さい。");
+		} else if (Integer.parseInt(price) <= 0) {
+			e.add("単価を正しく入力して下さい。");
 		}
-		//個数長さチェック(10文字以上の時エラー)
-		if (10 <= salenumber.length()) {
 
+		//個数必須入力チェック
+		if (salenumber.equals("")) {
+			e.add("個数を入力してください。");
+		} else if (10 <= salenumber.length()) {//個数長さチェック
+			e.add("個数が長すぎます。");
+		} else if (!price.equals("")) {//個数形式チェック(整数かつ1以上)
+			try {
+				Integer.parseInt(salenumber);
+			} catch (NumberFormatException ne) {
+				e.add("個数を正しく入力してください。");
+			}
+		} else if (Integer.parseInt(salenumber) <= 0) {
+			e.add("個数を正しく入力して下さい。");
 		}
 		//備考長さチェック(401文字以上の時エラー)
 		if (401 <= note.length()) {
 			e.add("備考が長すぎます。");
 		}
-		//商品カテゴリー存在チェック
-
 		return e;
 	}
 
