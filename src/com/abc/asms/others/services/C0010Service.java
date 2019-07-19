@@ -19,7 +19,6 @@ public class C0010Service {
 		String id = null;
 		String name = null;
 		String mail = null;
-//		String password = null;
 		String authority = null;
 
 		try {
@@ -37,7 +36,6 @@ public class C0010Service {
 				id = rs.getString("account_id");
 				name = rs.getString("name");
 				mail = rs.getString("mail");
-//				password = rs.getString("password");//ここでpasswordだけ取得できないということはありえる…?ありえないなら消す
 				authority = rs.getString("authority");
 
 				login = true;//１件も取れていなければifの中に入らないのでloginはfalseのまま
