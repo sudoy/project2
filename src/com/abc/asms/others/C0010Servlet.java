@@ -38,6 +38,7 @@ public class C0010Servlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);
 
 			session.removeAttribute("error");
+			session.removeAttribute("complete");
 		}
 	}
 
