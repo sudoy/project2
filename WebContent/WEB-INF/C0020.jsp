@@ -16,10 +16,8 @@
 
 	<body>
 
-
 	<jsp:include page="header.jsp">
-		<jsp:param name="bar"
-		value='<li class="active"><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
+		<jsp:param name="bar" value='<li class="active"><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
 		<li><a href="S0010.html">売上登録</a></li>
 		<li><a href="S0020.html">売上検索</a></li>
 		<li><a href="S0030.html">アカウント登録</a></li>
@@ -133,18 +131,18 @@
 		<table class="table">
 		<tr><th>No</th><th>販売日</th><th>商品カテゴリー</th><th>商品名</th><th>単価</th><th>個数</th><th>小計</th></tr>
 		<c:forEach items="${C0020Form}" var="i">
-			<tr><td id="right">${i.saleId}</td><td>${HTMLUtils.formatDate(i.saleDate)}</td><td>${i.categoryName}</td>
-			<td>${i.tradeName}</td><td id="right">${HTMLUtils.formatTotal(i.unitPrice)}</td>
-			<td id="right">${HTMLUtils.formatTotal(i.saleNumber)}</td><td id="right">${HTMLUtils.formatTotal(i.total)}</td></tr>
+			<tr><td class="right">${i.saleId}</td><td>${HTMLUtils.formatDate(i.saleDate)}</td><td>${i.categoryName}</td>
+			<td>${i.tradeName}</td><td class="right">${HTMLUtils.formatTotal(i.unitPrice)}</td>
+			<td class="right">${HTMLUtils.formatTotal(i.saleNumber)}</td><td class="right">${HTMLUtils.formatTotal(i.total)}</td></tr>
 		</c:forEach>
-		<tr><td colspan="5"></td><td id="right">合計</td><td id="right">${HTMLUtils.formatTotal(variousForm.individualTotal)}</td></tr>
+		<tr><td colspan="5"></td><td class="right">合計</td><td class="right">${HTMLUtils.formatTotal(variousForm.individualTotal)}</td></tr>
 
 		</table>
 		</div>
 
-	</div><!--comtainer-->
+	</div><!--container-->
 
 
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="js/jquery-3.4.1.min.js"></script>
 	<script	src="js/bootstrap.min.js"></script>
 	</body>

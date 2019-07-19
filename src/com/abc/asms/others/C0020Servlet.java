@@ -2,6 +2,7 @@ package com.abc.asms.others;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -23,6 +24,7 @@ public class C0020Servlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
 		boolean login = false;
+		List<String> error = new ArrayList<>();
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -30,14 +32,18 @@ public class C0020Servlet extends HttpServlet {
 		}
 
 		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
+			error.add("ログインしてください。");
+			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {//以下ログイン状態にあるときの処理
 
+			LocalDate today = null;
+
 			C0010Form userInfo = (C0010Form) session.getAttribute("userinfo");
+			C0020Service serv = new C0020Service();
 
 			String value = req.getParameter("value");
-			LocalDate today = null;
+
 			if (value == null) {//value==nullなら今日の日付を取得して代入
 				today = LocalDate.now();
 
@@ -45,42 +51,20 @@ public class C0020Servlet extends HttpServlet {
 				today = (LocalDate) session.getAttribute("today");
 			}
 
+			C0020Form dateForm = serv.getDate(value, today);//今日の日付と今月の始まりの日と終わりの日を取得
+
 			//DBからなんやかんやして一覧を取得
+			List<C0020Form> form = serv.service(userInfo.getId(), dateForm);
 
-			C0020Service serv = new C0020Service();
-			List<C0020Form> form = serv.service(userInfo.getMail(), value, today);
-
-			session.setAttribute("C0020Form", form);
+			req.setAttribute("C0020Form", form);
 
 			//年月、今月の売上合計、前月の売上合計、前月比、ログインしている人の今月の売上合計、今月、前月
-			C0020Form variousForm = serv.returnVariousForm(userInfo.getId());
+			C0020Form variousForm = serv.returnVariousForm(userInfo.getId(), dateForm);
 
-			req.setAttribute("variousForm", variousForm);
-			session.setAttribute("today", C0020Service.today);//todayの値の保持
+			req.setAttribute("variousForm", variousForm);//reqで大丈夫でした
 
-			getServletContext().getRequestDispatcher("/WEB-INF/C0020.jsp").forward(req, resp);
-
-			session.removeAttribute("error");
-		}
-
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		req.setCharacterEncoding("UTF-8");
-		HttpSession session = req.getSession();
-		boolean login = false;
-
-		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
-			//loginがtrue(ログイン状態にある)じゃないと入れないように
-			login = (boolean) session.getAttribute("login");
-		}
-
-		if (login == false) {
-			session.setAttribute("error", "ログインしてください。");
-			resp.sendRedirect("C0010.html");
-		} else {//以下ログイン状態にあるときの処理
+			//ここsessionじゃないとtodayの取得でぬるぽ
+			session.setAttribute("today", dateForm.getToday());//dateFormのtodayの値の保持
 
 			getServletContext().getRequestDispatcher("/WEB-INF/C0020.jsp").forward(req, resp);
 

@@ -1,6 +1,12 @@
 package com.abc.asms.others.forms;
 
+import java.time.LocalDate;
+
 public class C0020Form {
+
+	private LocalDate today;
+	private LocalDate startDay;
+	private LocalDate lastDay;
 
 	private String saleId;
 	private String saleDate;
@@ -19,7 +25,15 @@ public class C0020Form {
 	private String thisM;
 	private String lastM;
 
+	//getDate()で使う
+	public C0020Form(LocalDate today, LocalDate startDay, LocalDate lastDay) {
+		super();
+		this.today = today;
+		this.startDay = startDay;
+		this.lastDay = lastDay;
+	}
 
+	//returnVariousForm()で使う
 	public C0020Form(String yearMonth, String thisMonthTotal, String lastMonthTotal, String ratio,
 			String individualTotal,String thisM, String lastM) {
 		super();
@@ -32,6 +46,8 @@ public class C0020Form {
 		this.lastM = lastM;
 	}
 
+
+	//service()で使う
 	public C0020Form(String saleId, String saleDate, String name, String categoryName, String tradeName,
 			String unitPrice, String saleNumber, String total) {
 		super();
@@ -43,6 +59,7 @@ public class C0020Form {
 		this.unitPrice = unitPrice;
 		this.saleNumber = saleNumber;
 		this.total = total;
+
 	}
 	public String getSaleId() {
 		return saleId;
@@ -143,7 +160,29 @@ public class C0020Form {
 		this.lastM = lastM;
 	}
 
+	public LocalDate getToday() {
+		return today;
+	}
 
+	public void setToday(LocalDate today) {
+		this.today = today;
+	}
+
+	public LocalDate getStartDay() {
+		return startDay;
+	}
+
+	public void setStartDay(LocalDate startDay) {
+		this.startDay = startDay;
+	}
+
+	public LocalDate getLastDay() {
+		return lastDay;
+	}
+
+	public void setLastDay(LocalDate lastDay) {
+		this.lastDay = lastDay;
+	}
 
 
 

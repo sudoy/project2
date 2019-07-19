@@ -66,7 +66,6 @@ public class S0040Servlet extends HttpServlet {
 			error.add("ログインしてください。");
 			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
-			session.removeAttribute("error");//送ったら削除
 		} else {
 
 			String name = req.getParameter("name");

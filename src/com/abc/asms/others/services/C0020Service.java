@@ -15,45 +15,44 @@ import com.abc.asms.others.forms.C0020Form;
 
 public class C0020Service {
 
-	public static LocalDate today = null;//C0020Servletで参照するので
-	private static LocalDate startDay = null;
-	private static LocalDate lastDay = null;
-
-	//現在の日付を取得して月始まりと月終わりも取得
-	//DBからなんやかんやして一覧を取得
-	public List<C0020Form> service(String userMail, String value, LocalDate todayArg) throws ServletException {
+	//日付の取得
+	public C0020Form getDate(String value, LocalDate today) {
 
 		if (value == null) {//今月
-
-			today = todayArg;
-			startDay = today.withDayOfMonth(1);
-			lastDay = today.plusMonths(1).withDayOfMonth(1).minusDays(1);
-
+			//何もしない
 		} else if (value.equals("-y1")) {//前年
 
-			today = todayArg.minusYears(1);
-			startDay = today.withDayOfMonth(1);
-			lastDay = today.plusMonths(1).withDayOfMonth(1).minusDays(1);
+			today = today.minusYears(1);
 
 		} else if (value.equals("-M1")) {//前月
 
-			today = todayArg.minusMonths(1);
-			startDay = today.withDayOfMonth(1);
-			lastDay = today.plusMonths(1).withDayOfMonth(1).minusDays(1);
+			today = today.minusMonths(1);
 
 		} else if (value.equals("y1")) {//翌年
 
-			today = todayArg.plusYears(1);
-			startDay = today.withDayOfMonth(1);
-			lastDay = today.plusMonths(1).withDayOfMonth(1).minusDays(1);
+			today = today.plusYears(1);
 
 		} else if (value.equals("M1")) {//翌月
 
-			today = todayArg.plusMonths(1);
-			startDay = today.withDayOfMonth(1);
-			lastDay = today.plusMonths(1).withDayOfMonth(1).minusDays(1);
+			today = today.plusMonths(1);
 
 		}
+
+		LocalDate startDay = today.withDayOfMonth(1);
+		LocalDate lastDay = today.plusMonths(1).withDayOfMonth(1).minusDays(1);
+
+		C0020Form form = new C0020Form(today, startDay, lastDay);
+
+		return form;
+
+	}
+
+	//現在の日付を取得して月始まりと月終わりも取得
+	//DBからなんやかんやして一覧を取得
+	public List<C0020Form> service(String userId, C0020Form date) throws ServletException {
+
+		LocalDate startDay = date.getStartDay();
+		LocalDate lastDay = date.getLastDay();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -68,12 +67,13 @@ public class C0020Service {
 					+ " s.unit_price, s.sale_number, s.unit_price * s.sale_number as total , s.note"
 					+ " from sales s join categories c on s.category_id = c.category_id"
 					+ " join accounts a on s.account_id = a.account_id"
-					+ " where ? <= sale_date and sale_date <= ? and a.mail = ?";
+					+ " where ? <= sale_date and sale_date <= ? and a.account_id = ?"
+					+ " order by s.sale_id asc";
 
 			ps = con.prepareStatement(sql);
 			ps.setString(1, startDay.toString());
 			ps.setString(2, lastDay.toString());
-			ps.setString(3, userMail);
+			ps.setString(3, userId);
 
 			rs = ps.executeQuery();
 
@@ -103,7 +103,10 @@ public class C0020Service {
 
 	}
 
-	public C0020Form returnVariousForm(String accountId) throws ServletException {
+	public C0020Form returnVariousForm(String accountId, C0020Form date) throws ServletException {
+
+		LocalDate startDay = date.getStartDay();
+		LocalDate lastDay = date.getLastDay();
 
 		//yy年M月
 		DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("yyyy年M月");
@@ -194,7 +197,7 @@ public class C0020Service {
 		try {
 			con = DBUtils.getConnection();
 			sql = "select sum(unit_price * sale_number) as total from sales where ? <="
-					+ " sale_date and sale_date <= ? and account_id = ? group by account_id";
+					+ " sale_date and sale_date <= ? and account_id = ?";
 
 			ps = con.prepareStatement(sql);
 			ps.setString(1, startDay.toString());

@@ -40,13 +40,14 @@
 	<tr><td class="col-sm-1"><a class="btn btn-primary" href="S0022.html?id=${i.saleId}" role="button">
 	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
 	<td class="right">${i.saleId}</td><td>${HTMLUtils.formatDate(i.saleDate)}</td><td>${i.staff}</td><td>${i.categoryName}</td><td>${i.productName}</td>
-	<td>${i.unitPrice}</td><td>${i.saleNumber}</td><td>${HTMLUtils.formatTotal(i.total)}</td></tr>
+	<td class="right">${HTMLUtils.formatTotal(i.unitPrice)}</td><td class="right">${HTMLUtils.formatTotal(i.saleNumber)}</td>
+	<td class="right">${HTMLUtils.formatTotal(i.total)}</td></tr>
 	</c:forEach>
 	</table>
 
 	</div><!-- /.container-fluid -->
 
 
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="js/jquery-3.4.1.min.js"></script>
 	<script	src="js/bootstrap.min.js"></script>
 	</body>
