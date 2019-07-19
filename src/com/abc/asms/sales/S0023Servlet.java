@@ -2,6 +2,7 @@ package com.abc.asms.sales;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,6 @@ import javax.servlet.http.HttpSession;
 import com.abc.asms.others.forms.C0010Form;
 import com.abc.asms.sales.forms.S0023Form;
 import com.abc.asms.sales.services.S0023Service;
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 @WebServlet("/S0023.html")
 public class S0023Servlet extends HttpServlet {
@@ -52,14 +52,14 @@ public class S0023Servlet extends HttpServlet {
 				S0023Service service = new S0023Service();
 
 				S0023Form form = service.select(req.getParameter("id"));
-				session.setAttribute("S0023FormGet", form);//前の画面の値を表示させるためのもの(編集前の売上情報) S0024でidをとる
+				req.setAttribute("S0023Form", form);//前の画面の値を表示させるためのもの(編集前の売上情報)
 
-				//58～62行はjspで一覧を出すためのもの
+				//jspで一覧を出すためのもの
 				List<S0023Form> accounts = service.accounts();
-				session.setAttribute("accounts", accounts);//アカウント情報一覧(idとname)
+				req.setAttribute("accounts", accounts);//アカウント情報一覧(idとname)
 
 				List<String> categories = service.categories();
-				session.setAttribute("categories", categories);//商品カテゴリー名一覧
+				req.setAttribute("categories", categories);//商品カテゴリー名一覧
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0023.jsp").forward(req, resp);
 			}
@@ -90,7 +90,7 @@ public class S0023Servlet extends HttpServlet {
 			resp.sendRedirect("C0010.html");
 		} else {
 
-			//権限チェック(権限が無い場合はダッシュボードへ遷移) 売り上げに未変更
+			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority2 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority2.getAuthority().equals("1") && !checkauthority2.getAuthority().equals("11")) {
@@ -100,6 +100,7 @@ public class S0023Servlet extends HttpServlet {
 			} else {
 
 				//入力した値を取得
+				String id = req.getParameter("id");//id
 				String saledate = req.getParameter("saledate");//販売日
 				String name = req.getParameter("name");//担当者名
 				String categoryname = req.getParameter("categoryname");//商品カテゴリー名
@@ -115,7 +116,7 @@ public class S0023Servlet extends HttpServlet {
 					total = intprice * intsalenumber;
 				}
 
-				S0023Form form = new S0023Form(saledate, name, categoryname, tradename, price, salenumber, note, total);
+				S0023Form form = new S0023Form(id, saledate, name, categoryname, tradename, price, salenumber, note, total);
 
 				//入力チェック
 				error = validate(form);
@@ -123,7 +124,7 @@ public class S0023Servlet extends HttpServlet {
 				//エラー発生時はs0023を再表示
 				if (error.size() != 0) {
 					session.setAttribute("error", error);
-					session.setAttribute("S0023Form", form);//再表示するためのもの(入力した値)
+					req.setAttribute("S0023Form", form);//再表示するためのもの(編集前の値)
 
 					getServletContext().getRequestDispatcher("/WEB-INF/S0023.jsp").forward(req, resp);
 
@@ -145,7 +146,7 @@ public class S0023Servlet extends HttpServlet {
 		List<String> e = new ArrayList<>();
 
 		//日付チェック
-		DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		DateFormat format = new SimpleDateFormat("yyyy/M/d");
 		format.setLenient(false);
 
 		S0023Service service = new S0023Service();
@@ -169,7 +170,7 @@ public class S0023Servlet extends HttpServlet {
 		if (!saledate.equals("")) {
 			try {
 				format.parse(saledate);
-			} catch (ParseException | java.text.ParseException pe) {
+			} catch (ParseException pe) {
 				e.add("販売日を正しく入力して下さい。");
 			}
 		}

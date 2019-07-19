@@ -90,7 +90,7 @@ public class S0023Service {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select account_id, name from accounts";
+			sql = "select account_id, name from accounts order by account_id";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
@@ -135,7 +135,7 @@ public class S0023Service {
 
 		try {
 			con = DBUtils.getConnection();
-			sql = "select category_name from categories";
+			sql = "select category_name from categories order by category_id";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 
@@ -156,7 +156,7 @@ public class S0023Service {
 	}
 
 	//アカウントテーブル存在チェック
-	public boolean accountexist(S0023Form form){
+	public boolean accountexist(S0023Form form) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -167,7 +167,7 @@ public class S0023Service {
 
 		String id = null;
 
-		try{
+		try {
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
 
@@ -181,28 +181,27 @@ public class S0023Service {
 			rs = ps.executeQuery();
 
 			rs.next();
-				id = rs.getString("account_id");
 
+			id = rs.getString("account_id");
 
-			if(id == null){
+			if (id == null) {
 				accountexist = true;
-			}else {
+			} else {
 				accountexist = false;
 			}
 
-
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 
-			DBUtils.close(con,ps, rs);
+			DBUtils.close(con, ps, rs);
 		}
 		return accountexist;
 
 	}
 
 	//カテゴリーテーブル存在チェック
-	public boolean categoryexist(S0023Form form){
+	public boolean categoryexist(S0023Form form) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -212,7 +211,7 @@ public class S0023Service {
 
 		String id = null;
 
-		try{
+		try {
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
 
@@ -225,26 +224,24 @@ public class S0023Service {
 
 			rs = ps.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 				id = rs.getString("category_id");
-			};
+			}
+			;
 
-
-			if(id == null){
+			if (id == null) {
 				categoryexist = true;
-			}else {
+			} else {
 				categoryexist = false;
 			}
 
-
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 
-			DBUtils.close(con,ps, rs);
+			DBUtils.close(con, ps, rs);
 		}
 		return categoryexist;
-
 
 	}
 }

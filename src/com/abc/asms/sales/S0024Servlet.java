@@ -47,6 +47,12 @@ public class S0024Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
+				//jspに表示する為の商品カテゴリー一覧
+				S0024Service service = new S0024Service();
+				List<String> categories = service.categories();
+
+				req.setAttribute("categories", categories );
+
 				getServletContext().getRequestDispatcher("/WEB-INF/S0024.jsp").forward(req, resp);
 			}
 
@@ -82,10 +88,9 @@ public class S0024Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				S0023Form formid = (S0023Form) session.getAttribute("S0023FormGet");//S0022から渡された編集前の値
 				S0023Form forminput = (S0023Form) session.getAttribute("S0023FormPost");//S0023で入力した値
 
-				String saleid = formid.getId();
+				String saleid = forminput.getId();
 				String saledate = forminput.getSaledate();
 				String name = forminput.getName();
 				String categoryname = forminput.getCategoryname();
@@ -106,11 +111,11 @@ public class S0024Servlet extends HttpServlet {
 				//更新
 				service.update(updateform);
 
-				session.removeAttribute("S0023FormGet");
+				//入力した値の消去
 				session.removeAttribute("S0023FormPost");
 
 				//成功メッセージ
-				session.setAttribute("complete", "No" + updateform.getSaleid() + "のアカウントを更新しました。");
+				session.setAttribute("complete", "No" + updateform.getSaleid() + "の売上を更新しました。");
 
 				//更新完了後、S0021へ遷移(遷移先で成功メッセージを表示)
 				resp.sendRedirect("S0021.html");
