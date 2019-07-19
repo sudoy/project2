@@ -21,8 +21,6 @@ public class S0030Servlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
-		//始めに消さないと売上登録確認から遷移してきたときにエラーになる。
-		session.removeAttribute("form");
 
 		req.setCharacterEncoding("UTF-8");
 		boolean login = false;
@@ -43,8 +41,6 @@ public class S0030Servlet extends HttpServlet {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
-
-			//		System.out.println(checkaccount1.getAuthority());
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
 				session.setAttribute("error", "不正なアクセスです。" );
@@ -87,7 +83,7 @@ public class S0030Servlet extends HttpServlet {
 			}else {
 
 				try {
-					S0031Form s0031form = (S0031Form) session.getAttribute("form");
+					S0031Form s0031form = (S0031Form) session.getAttribute("S0031form");
 					String sale = s0031form.getSale();
 					String account = s0031form.getAccount();
 					String authority = null;
@@ -115,7 +111,7 @@ public class S0030Servlet extends HttpServlet {
 					S0030Service service = new S0030Service();
 					service.register(s0030form);
 
-					session.removeAttribute("form");
+					session.removeAttribute("S0031form");
 
 
 					session.setAttribute("complete", "No" + service.Accountid(s0030form) + "の売上を登録しました");

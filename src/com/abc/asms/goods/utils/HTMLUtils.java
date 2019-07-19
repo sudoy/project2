@@ -130,7 +130,7 @@ public class HTMLUtils {
 		return judge;
 	}
 
-	public static String judgeCategoryChecked2(String categoryid, String i) {
+	public static String judgeCategorynameChecked(String categoryid, String i) {
 
 		if (categoryid.equals(i)) {
 			return "checked";

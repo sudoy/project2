@@ -30,7 +30,7 @@
 	    <label for="text" class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
 		    <fieldset disabled>
-		    	<input type="text" class="form-control" name="name" value="${form.name}">
+		    	<input type="text" class="form-control" name="name" value="${S0031form.name}">
 		    </fieldset>
 	    </div>
 	</div>
@@ -38,7 +38,7 @@
 	    <label for="inputEmail3" class="col-sm-3 control-label">メールアドレス <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
 	      <fieldset disabled>
-	    	<input type="text"  class="form-control" name="mail" value="${form.mail}">
+	    	<input type="text"  class="form-control" name="mail" value="${S0031form.mail}">
 	      </fieldset>
 	    </div>
 	</div>
@@ -46,7 +46,7 @@
 	    <label for="inputPassword3" class="col-sm-3 control-label">パスワード <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
 	      <fieldset disabled>
-	    	<input type="password" class="form-control" name="password" value="${form.password}" >
+	    	<input type="password" class="form-control" name="password" value="${S0031form.password}" >
 	      </fieldset>
 	    </div>
 	</div>
@@ -54,7 +54,7 @@
 	    <label for="inputPasswordCheck3" class="col-sm-3 control-label">パスワード(確認) <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
 	      <fieldset disabled>
-	    	<input type="password" class="form-control" name="password" value="${form.check}">
+	    	<input type="password" class="form-control" name="password" value="${S0031form.check}">
 	      </fieldset>
 	    </div>
 	</div>
@@ -64,10 +64,10 @@
 		<label  class="col-sm-3 control-label">売上登録権限 <span class="badge badge-default"> 必須 </span></label>
 		<div class="col-sm-9">
 		<label class="radio-inline">
-			<input type="radio"  name="sale" <c:if test="${form.sale == '0'}">checked</c:if> value="0" > 権限なし
+			<input type="radio"  name="sale" <c:if test="${S0031form.sale == '0'}">checked</c:if> value="0" > 権限なし
 		</label>
 			<label class="radio-inline">
-			<input type="radio"  name="sale" <c:if test="${form.sale == '1'}">checked</c:if>  value="1" > 権限あり
+			<input type="radio"  name="sale" <c:if test="${S0031form.sale == '1'}">checked</c:if>  value="1" > 権限あり
 		</label>
 		</div>
 	</div>
@@ -76,10 +76,10 @@
 		<label  class="col-sm-3 control-label">アカウント登録確認 <span class="badge badge-default">必須</span></label>
 		<div class="col-sm-9">
 		<label class="radio-inline">
-			<input type="radio" name="account" <c:if test="${form.account == '0'}">checked</c:if> value="0" > 権限なし
+			<input type="radio" name="account" <c:if test="${S0031form.account == '0'}">checked</c:if> value="0" > 権限なし
 		</label>
 			<label class="radio-inline">
-			<input type="radio" name="account" <c:if test="${form.account == '1'}">checked</c:if> value="1" > 権限あり
+			<input type="radio" name="account" <c:if test="${S0031form.account == '1'}">checked</c:if> value="1" > 権限あり
 		</label>
 		</div>
 	</div>

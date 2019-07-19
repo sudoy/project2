@@ -25,9 +25,6 @@ public class S0010Servlet extends HttpServlet {
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		HttpSession session = req.getSession();
-		//始めに消さないと使っている途中で遷移してきたときにエラーになる
-		session.removeAttribute("form");
-
 
 		//ログインチェック
 

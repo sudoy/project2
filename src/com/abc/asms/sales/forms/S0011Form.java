@@ -9,7 +9,9 @@ public class S0011Form {
 	private String price;
 	private String salenumber;
 	private String note;
-	public  String name;
+	private String name;
+	private String total;
+
 
 
 	public S0011Form(String saledate, String accountid, String categoryid, String categoryname, String tradename,
@@ -26,6 +28,13 @@ public class S0011Form {
 		this.name = name;
 
 
+	}
+	public String getTotal() {
+		return total;
+	}
+
+	public void setTotal(String total) {
+		this.total = total;
 	}
 
 	public S0011Form(String saledate2, String accountid2, String categoryid2, String price2, String salenumber2,
