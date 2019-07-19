@@ -39,22 +39,21 @@ public class S0025Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				//渡されたidからアカウント情報の取得
+				//渡されたidのsales情報,category_nameの取得
 				S0025Service service = new S0025Service();
 				S0025Form form = service.select(req.getParameter("id"));
 				session.setAttribute("S0025Form", form);
 
 				//nameを取得
-				String name = service.select2(form.getAccountid());
+				String name = service.name(form.getAccountid());
 				req.setAttribute("name", name);
 
-				//商品カテゴリーの取得
+				//全category_nameの取得
 				List<String> categoryList = service.category();
 				req.setAttribute("allCategory", categoryList);
 
 
-
-				//小計をだす
+				//小計
 				int pricenum = Integer.parseInt(form.getUnitprice());
 				int salenumbernum = Integer.parseInt(form.getSalenumber());
 				int total = pricenum * salenumbernum;
@@ -93,13 +92,11 @@ public class S0025Servlet extends HttpServlet {
 				S0025Service service = new S0025Service();
 				service.delete(s0025form);
 
-				//取得したアカウント情報を破棄
 				session.removeAttribute("S0025Form");
 
 				//成功メッセージ
 				session.setAttribute("complete", "No" + s0025form.getId() + "のアカウントを削除しました。");
 
-				//削除完了後、S0021.jspに遷移
 				resp.sendRedirect("S0021.html");
 			}
 		}

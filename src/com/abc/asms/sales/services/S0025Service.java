@@ -12,6 +12,8 @@ import com.abc.asms.goods.utils.DBUtils;
 import com.abc.asms.sales.forms.S0025Form;
 
 public class S0025Service {
+
+	//salesとcategoriesのcategory_name
 	public S0025Form select(String num) {
 
 		Connection con = null;
@@ -49,7 +51,7 @@ public class S0025Service {
 
 			//SELECT命令の実行
 			rs = ps.executeQuery();
-			System.out.println(rs);
+
 
 			//結果セットの内容を出力(DBから抽出したデータ)
 			while(rs.next()) {
@@ -64,12 +66,10 @@ public class S0025Service {
 				note = rs.getString("s.note");
 				categoryname = rs.getString("c.category_name");
 
-				System.out.println(id);
 
 			}
 			//ハイフンをスラッシュに変更
 			saledate = saledate.replace("-", "/");
-			System.out.println(saledate);
 
 			S0025Form form = new S0025Form(id, saledate, accountid, categoryid, tradename, unitprice,
 					salenumber, note, categoryname);
@@ -115,7 +115,9 @@ public class S0025Service {
 		}
 
 	}
-	public String select2(String accountid) throws ServletException {
+
+	//name
+	public String name(String accountid) throws ServletException {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -137,8 +139,6 @@ public class S0025Service {
 			//SELECT命令の実行
 			rs = ps.executeQuery();
 
-
-
 			rs.next();
 			String name = rs.getString("name");
 
@@ -152,6 +152,8 @@ public class S0025Service {
 		}
 
 	}
+
+	//category_name
 	public List<String> category() throws ServletException{
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -168,7 +170,6 @@ public class S0025Service {
 
 			while (rs.next()) {
 				String categoryName = rs.getString("category_name");
-				System.out.println(categoryName);
 
 				list.add(categoryName);
 			}
