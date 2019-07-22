@@ -2,7 +2,6 @@ package com.abc.asms.sales;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -54,11 +53,6 @@ public class S0024Servlet extends HttpServlet {
 
 				req.setAttribute("categories", categories );
 
-				Enumeration e = session.getAttributeNames();
-				while (e.hasMoreElements()) {
-					String key = (String) e.nextElement();
-					System.out.println(key + "：" + session.getAttribute(key) + "<br>");
-				}
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0024.jsp").forward(req, resp);
 			}
@@ -115,11 +109,6 @@ public class S0024Servlet extends HttpServlet {
 
 				S0024Form updateform = new S0024Form( accountid, categoryid,  saleid, saledate, tradename, price, salenumber, note);
 
-				Enumeration e = session.getAttributeNames();
-				while (e.hasMoreElements()) {
-					String key = (String) e.nextElement();
-					System.out.println(key + "：" + session.getAttribute(key) + "<br>");
-				}
 
 				//更新
 				service.update(updateform);

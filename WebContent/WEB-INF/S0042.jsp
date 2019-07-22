@@ -70,7 +70,7 @@
 				<div class="col-sm-9">
 					<label class="radio-inline"> <input type="radio"
 						name="sale" value="0"
-						<c:if test="${S0042Form.authority.equals('0') || S0042Form.authority.equals('10') }"></c:if>>
+						<c:if test="${S0042Form.authority.equals('0') || S0042Form.authority.equals('10') }">checked</c:if>>
 						権限なし
 					</label> <label class="radio-inline"> <input type="radio"
 						name="sale" value="1"
