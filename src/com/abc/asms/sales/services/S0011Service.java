@@ -36,10 +36,11 @@ public class S0011Service {
 			//SELECT命令の実行
 			rs = ps.executeQuery();
 
+			String name = null;
+			if(rs.next()) {
+				name = rs.getString("name");
+			};
 
-
-			rs.next();
-			String name = rs.getString("name");
 
 			return name;
 
@@ -153,7 +154,7 @@ public class S0011Service {
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
 		//sql
-			sql = "SELECT category_id From categories WHERE category_id = ? and enabled = 1";
+			sql = "SELECT category_id From categories WHERE category_id = ? and active_flg = 1";
 
 			// プレースホルダに値を設定
 			ps = con.prepareStatement(sql);

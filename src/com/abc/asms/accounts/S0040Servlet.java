@@ -46,6 +46,7 @@ public class S0040Servlet extends HttpServlet {
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0040.jsp").forward(req, resp);
 
+
 		}
 	}
 
@@ -92,6 +93,7 @@ public class S0040Servlet extends HttpServlet {
 				getServletContext().getRequestDispatcher("/WEB-INF/S0040.jsp").forward(req, resp);//検索入力画面を再表示
 
 				session.removeAttribute("error");//送ったら削除
+
 			}
 		}
 	}

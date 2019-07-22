@@ -1,6 +1,7 @@
 package com.abc.asms.sales;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +54,12 @@ public class S0010Servlet extends HttpServlet {
 				List<S0010Form> form = service.select();
 
 				req.setAttribute("accounts", form);
+
+				//今日の日付を取得
+				String today = LocalDate.now().toString();
+				S0010Form S0010f = new S0010Form(today);
+
+				req.setAttribute("todayForm", S0010f);
 
 				//商品カテゴリーの取得
 				List<String> categoryList = service.category();
@@ -131,6 +138,25 @@ public class S0010Servlet extends HttpServlet {
 
 						getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
 						session.removeAttribute("error");
+
+					} else {
+
+						// DBへ登録
+						S0010Service service = new S0010Service();
+
+						service.register(s0010form);
+
+						session.removeAttribute("form");
+						session.setAttribute("complete", "No" + service.Saleid(s0010form) + "の売上を登録しました");
+
+						//accountsテーブルから情報を取得
+						S0010Service s0010service = new S0010Service();
+						List<S0010Form> form = s0010service.select();
+						req.setAttribute("accounts", form);
+
+						getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+						session.removeAttribute("complete");
+						session.removeAttribute("allCategory");
 					}
 
 					// DBへ登録
