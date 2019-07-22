@@ -11,6 +11,15 @@ public class S0010Form {
 	private String note;
 	private String saleid;
 
+	private String today;
+
+	public S0010Form() {
+		super();
+	}
+	public S0010Form(String today) {
+		super();
+		this.today = today;
+	}
 	public String getSaleid() {
 		return saleid;
 	}
@@ -66,6 +75,13 @@ public class S0010Form {
 	public void setNote(String note) {
 		this.note = note;
 	}
+	public String getToday() {
+		return today;
+	}
+	public void setToday(String today) {
+		this.today = today;
+	}
+
 
 
 }

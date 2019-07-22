@@ -35,7 +35,7 @@ td{
 	padding-left: 100px;
 }
 
-#remarks{
+#remarks1, #remarks2{
 	padding-top: 10px;
 	vertical-align: top;
 }
@@ -44,7 +44,7 @@ textarea.form-control {
     resize: vertical;
     height: 150px;
 }
-#right{
+#right1, #right2{
 	text-align: right;
 }
 

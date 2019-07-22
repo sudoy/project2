@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 
 <%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
 
@@ -36,7 +37,8 @@
 	<tr><th>販売日 <span class="badge">必須</span></th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" placeholder="販売日" name="saledate"  value="${form.saledate}">
+		<input type="text" class="form-control" placeholder="販売日" name="saledate"
+		value="<c:if test="${form == null}">${HTMLUtils.formatDate(todayForm.today)}</c:if><c:if test="${form != null}">${form.saledate}</c:if>">
 		</div>
 		</td>
 	</tr>
@@ -48,7 +50,7 @@
 
 			<c:forEach items="${accounts}" var="i">
 				<option value ="${i.accountid}"
-				 ${HTMLUtils.judgeStaffSelected(i.name, form.name)}>${i.name}</option>
+				 ${HTMLUtils.judgeStaffSelected(StringEscapeUtils.escapeHtml4(i.name), StringEscapeUtils.escapeHtml4(form.name))}>${StringEscapeUtils.escapeHtml4(i.name)}</option>
 			</c:forEach>
 
 		</select></div>
@@ -59,26 +61,27 @@
 		<c:forEach items="${allCategory}" var="i">
 			<label class="radio-inline">
 			<input type="radio" name="categoryname" value="${i}"
-			 ${HTMLUtils.judgeCategorynameChecked(i, form.categoryname)}> ${i}
+			 ${HTMLUtils.judgeCategorynameChecked(StringEscapeUtils.escapeHtml4(i), StringEscapeUtils.escapeHtml4(form.categoryname))}> ${StringEscapeUtils.escapeHtml4(i)}
 			</label>
 		</c:forEach></div>
 	</td></tr>
 
 	<tr><th>商品名 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" placeholder="商品名" name="tradename" value="${form.tradename}">
+	<input class="form-control" type="text" placeholder="商品名" name="tradename" value="${StringEscapeUtils.escapeHtml4(form.tradename)}">
 	</div></td></tr>
 	<tr><th>単価 <span class="badge">必須</span></th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="単価" name="price" value="${form.price}">
+	<input class="form-control" id="right1" type="text" placeholder="単価" name="price" value="${form.price}">
 	</div></td></tr>
 	<tr><th>個数 <span class="badge">必須</span></th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="個数" name="salenumber" value="${form.salenumber}">
+	<input class="form-control" id="right2" type="text" placeholder="個数" name="salenumber" value="${form.salenumber}">
 	</div></td></tr>
-	<tr><th id="remarks">備考</th>
+	<tr><th id="remarks1">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="remarks" rows="3" placeholder="備考" name="note">${form.note}</textarea>
+	<textarea class="form-control" id="remarks2" rows="3"
+	placeholder="備考" name="note">${StringEscapeUtils.escapeHtml4(form.note)}</textarea>
 	</div></td>
 	</tr>
 

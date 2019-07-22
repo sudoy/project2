@@ -1,6 +1,7 @@
 package com.abc.asms.sales;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,10 +18,9 @@ import com.abc.asms.sales.forms.S0011Form;
 import com.abc.asms.sales.services.S0010Service;
 import com.abc.asms.sales.services.S0011Service;
 
-
 @WebServlet("/S0010.html")
 public class S0010Servlet extends HttpServlet {
-@Override
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -40,22 +40,31 @@ public class S0010Servlet extends HttpServlet {
 			error.add("ログインしてください。");
 			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
-		}else {
+		} else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+<<<<<<< HEAD
 				error.add("不正なアクセスです。");
 				session.setAttribute("error", error);
+=======
+				session.setAttribute("error", "不正なアクセスです。");
+>>>>>>> branch 'master' of https://github.com/sudoy/project2.git
 				resp.sendRedirect("C0020.html");
-			}else {
+			} else {
 				//accountsテーブルから情報を取得
 				S0010Service service = new S0010Service();
 				List<S0010Form> form = service.select();
 
 				req.setAttribute("accounts", form);
+
+				//今日の日付を取得
+				String today = LocalDate.now().toString();
+				S0010Form S0010f = new S0010Form(today);
+
+				req.setAttribute("todayForm", S0010f);
 
 				//商品カテゴリーの取得
 				List<String> categoryList = service.category();
@@ -66,14 +75,12 @@ public class S0010Servlet extends HttpServlet {
 				session.removeAttribute("error");
 				session.removeAttribute("complete");
 
-
 				getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
 			}
 		}
 	}
 
-
-@Override
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 
@@ -81,7 +88,6 @@ public class S0010Servlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		boolean login = false;
 		List<String> error1 = new ArrayList<>();
-
 
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
@@ -92,7 +98,7 @@ public class S0010Servlet extends HttpServlet {
 			error1.add("ログインしてください。");
 			session.setAttribute("error", error1);
 			resp.sendRedirect("C0010.html");
-		}else {
+		} else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
@@ -100,10 +106,14 @@ public class S0010Servlet extends HttpServlet {
 			//		System.out.println(checkaccount1.getAuthority());
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+<<<<<<< HEAD
 				error1.add("不正なアクセスです。");
 				session.setAttribute("error", error1);
+=======
+				session.setAttribute("error", "不正なアクセスです。");
+>>>>>>> branch 'master' of https://github.com/sudoy/project2.git
 				resp.sendRedirect("C0020.html");
-			}else {
+			} else {
 				try {
 					S0011Form s0011form = (S0011Form) session.getAttribute("form");
 
@@ -123,8 +133,8 @@ public class S0010Servlet extends HttpServlet {
 					S0011Service s0011service = new S0011Service();
 					boolean exist = s0011service.service(s0010form);
 
-					if(exist == true){
-						error2.add("アカウントテーブルに存在しません。") ;
+					if (exist == true) {
+						error2.add("アカウントテーブルに存在しません。");
 
 						// S0010.htmlを再表示
 						session.setAttribute("error", error2);
@@ -137,28 +147,28 @@ public class S0010Servlet extends HttpServlet {
 
 						getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
 						session.removeAttribute("error");
+
+					} else {
+
+						// DBへ登録
+						S0010Service service = new S0010Service();
+
+						service.register(s0010form);
+
+						session.removeAttribute("form");
+						session.setAttribute("complete", "No" + service.Saleid(s0010form) + "の売上を登録しました");
+
+						//accountsテーブルから情報を取得
+						S0010Service s0010service = new S0010Service();
+						List<S0010Form> form = s0010service.select();
+						req.setAttribute("accounts", form);
+
+						getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+						session.removeAttribute("complete");
+						session.removeAttribute("allCategory");
 					}
 
-					// DBへ登録
-					S0010Service service = new S0010Service();
-
-					service.register(s0010form);
-
-					session.removeAttribute("form");
-					session.setAttribute("complete", "No" + service.Saleid(s0010form) + "の売上を登録しました");
-
-					//accountsテーブルから情報を取得
-					S0010Service s0010service = new S0010Service();
-					List<S0010Form> form = s0010service.select();
-					req.setAttribute("accounts", form);
-
-
-					getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
-					session.removeAttribute("complete");
-					session.removeAttribute("allCategory");
-
-
-				}catch(Exception e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

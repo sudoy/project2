@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,7 @@
 			</td>
 			<td class="right">${i.id}</td>
 			<td>${i.name}</td>
-			<td class="col-sm-3">${i.mail}</td>
+			<td class="col-sm-3">${StringEscapeUtils.escapeHtml4(i.mail)}</td>
 			<td>${i.authority}</td>
 		</tr>
 	</c:forEach>

@@ -31,7 +31,6 @@ public class S0011Servlet extends HttpServlet {
 		boolean login = false;
 		List<String> loginerror = new ArrayList<>();
 
-
 		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
 			//loginがtrue(ログイン状態にある)じゃないと入れないように
 			login = (boolean) session.getAttribute("login");
@@ -41,16 +40,20 @@ public class S0011Servlet extends HttpServlet {
 			loginerror.add("ログインしてください。");
 			session.setAttribute("error", loginerror);
 			resp.sendRedirect("C0010.html");
-		}else {
+		} else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+<<<<<<< HEAD
 				loginerror.add("不正なアクセスです。");
 				session.setAttribute("error", loginerror);
+=======
+				session.setAttribute("error", "不正なアクセスです。");
+>>>>>>> branch 'master' of https://github.com/sudoy/project2.git
 				resp.sendRedirect("C0020.html");
-			}else {
+			} else {
 				String saledate = req.getParameter("saledate");
 				String accountid = req.getParameter("accountid");
 				String categoryname = req.getParameter("categoryname");
@@ -64,7 +67,7 @@ public class S0011Servlet extends HttpServlet {
 				S0011Service service = new S0011Service();
 
 				//担当選択しているときのみDBからname呼び出し
-				if(!accountid.equals("0")) {
+				if (!accountid.equals("0")) {
 					name = service.select2(accountid);
 				}
 
@@ -96,7 +99,6 @@ public class S0011Servlet extends HttpServlet {
 				}
 				//エラーがない場合
 
-
 				//小計をだす
 				int pricenum = Integer.parseInt(price);
 				int salenumbernum = Integer.parseInt(salenumber);
@@ -106,7 +108,6 @@ public class S0011Servlet extends HttpServlet {
 				s0011form.setTotal(total);
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0011.jsp").forward(req, resp);
-
 
 			}
 		}
@@ -118,11 +119,9 @@ public class S0011Servlet extends HttpServlet {
 		DateFormat format = new SimpleDateFormat("yyyy/M/d");
 		format.setLenient(false);
 
-
 		S0011Service s0011service = new S0011Service();
 		boolean exist = s0011service.service1(form);
 		boolean categorytable = s0011service.service2(form);
-
 
 		String saledate = form.getSaledate();
 		String accountid = form.getAccountid();
@@ -131,7 +130,6 @@ public class S0011Servlet extends HttpServlet {
 		String price = form.getPrice();
 		String salenumber = form.getSalenumber();
 		String note = form.getNote();
-
 
 		if (saledate.equals("")) {
 			error.add("販売日を入力して下さい。");
@@ -144,25 +142,25 @@ public class S0011Servlet extends HttpServlet {
 		}
 		if (accountid.equals("0")) {
 			error.add("担当が未選択です。");
-		}else {
+		} else {
 			//account_idがテーブルに存在しない場合
-			if(exist == true){
-				error.add("アカウントテーブルに存在しません。") ;
+			if (exist == true) {
+				error.add("アカウントテーブルに存在しません。");
 			}
 		}
 
 		if (categoryname == null || categoryname.isEmpty()) {
 			error.add("商品カテゴリーが未選択です。");
-		}else {
+		} else {
 			//category_idがテーブルに存在しない場合
-			if(categorytable == true){
+			if (categorytable == true) {
 				error.add("商品カテゴリーテーブルに存在しません。");
 			}
 		}
 
 		if (tradename.equals("")) {
 			error.add("商品名を入力して下さい。");
-		}else if(101 <= tradename.length()) {
+		} else if (101 <= tradename.length()) {
 			error.add("商品名が長すぎます。");
 		}
 
@@ -173,12 +171,13 @@ public class S0011Servlet extends HttpServlet {
 		} else if (!price.equals("")) {
 			//数字かどうか
 			try {
-				Integer.parseInt(price);
+				int intPrice = Integer.parseInt(price);
+				if (intPrice <= 0) {
+					error.add("単価を正しく入力して下さい。");
+				}
 			} catch (NumberFormatException e) {
 				error.add("単価を正しく入力して下さい。");
 			}
-		} else if (Integer.parseInt(price) <= 0) {
-			error.add("単価を正しく入力して下さい。");
 		}
 
 		if (salenumber.equals("")) {
@@ -187,13 +186,15 @@ public class S0011Servlet extends HttpServlet {
 			error.add("個数が長すぎます。");
 		} else if (!price.equals("")) {
 			try {
-				Integer.parseInt(salenumber);
+				int intSaleNumber = Integer.parseInt(salenumber);
+				if (intSaleNumber <= 0) {
+					error.add("個数を正しく入力して下さい。");
+				}
 			} catch (NumberFormatException e) {
 				error.add("個数を正しく入力してください。");
 			}
-		} else if (Integer.parseInt(salenumber) <= 0) {
-			error.add("個数を正しく入力して下さい。");
 		}
+
 		if (400 <= note.length()) {
 			error.add("備考が長すぎます。");
 		}

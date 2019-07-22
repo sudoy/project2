@@ -1,15 +1,21 @@
 package com.abc.asms.goods.utils;
 
 import java.text.NumberFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import com.abc.asms.sales.forms.S0020Form;
 
 public class HTMLUtils {
 
 	public static String formatDate(String date) {//日付の-を/に
-		String slashDate = date;
+		LocalDate dateL = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String slashDate = null;
 		if (date != null) {
-			slashDate = date.replace("-", "/");
+
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/M/d");
+			slashDate = dtf.format(dateL);
+
 		}
 		return slashDate;
 	}

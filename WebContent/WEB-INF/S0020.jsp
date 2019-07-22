@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -49,7 +50,8 @@
 			<option disabled <c:if test="${S0020Form.name == null}">selected</c:if>>
 			選択してください</option>
 			<c:forEach items="${allName}" var="i">
-				<option value="${i.accountName}" ${HTMLUtils.judgeStaffSelected(i.accountName, S0020Form.name)}>${i.accountName}</option>
+				<option value="${StringEscapeUtils.escapeHtml4(i.accountName)}" ${HTMLUtils.judgeStaffSelected(i.accountName, StringEscapeUtils.escapeHtml4(S0020Form.name))}>
+				${StringEscapeUtils.escapeHtml4(i.accountName)}</option>
 			</c:forEach>
 		</select></div>
 	</td></tr>
