@@ -47,7 +47,8 @@ public class S0031Servlet extends HttpServlet {
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
-				session.setAttribute("error", "不正なアクセスです。" );
+				loginerror.add("不正なアクセスです。");
+				session.setAttribute("error", loginerror);
 				resp.sendRedirect("C0020.html");
 
 			}else {

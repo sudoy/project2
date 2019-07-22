@@ -30,3 +30,9 @@ values(6, '小林彩夏', 'kobayashi.ayaka@mail.tokyosystem.co.jp', md5('0000'),
 
 insert into accounts(account_id, name, mail, password, authority)
 values(7, '藤ノ木祥真', 'fujinoki.syoma@mail.tokyosystem.co.jp', md5('0000'), 1);
+
+insert into accounts(account_id, name, mail, password, authority)
+values(13, "<script>alert('xss');</script>", 'fujinoki.syoma@mail.tokyosystem.co.jp', md5('0000'), 1);
+
+insert into accounts(account_id, name, mail, password, authority)
+values(14, 'test2', "<script>alert('xss');</script>", md5('0000'), 1);

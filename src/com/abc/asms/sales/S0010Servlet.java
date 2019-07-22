@@ -47,7 +47,8 @@ public class S0010Servlet extends HttpServlet {
 
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
-				session.setAttribute("error", "不正なアクセスです。" );
+				error.add("不正なアクセスです。");
+				session.setAttribute("error", error);
 				resp.sendRedirect("C0020.html");
 			}else {
 				//accountsテーブルから情報を取得
@@ -99,7 +100,8 @@ public class S0010Servlet extends HttpServlet {
 			//		System.out.println(checkaccount1.getAuthority());
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
-				session.setAttribute("error", "不正なアクセスです。" );
+				error1.add("不正なアクセスです。");
+				session.setAttribute("error", error1);
 				resp.sendRedirect("C0020.html");
 			}else {
 				try {

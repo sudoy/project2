@@ -71,3 +71,6 @@ insert into sales(sale_id, sale_date, account_id, category_id, trade_name, unit_
 values(26, '2019/6/5', 7, 1, '【小針水産】特大無頭 開き縞ホッケ 5枚', 2750, 582);
 insert into sales(sale_id, sale_date, account_id, category_id, trade_name, unit_price, sale_number)
 values(27, '2019/6/5', 7, 1, '川口水産　特大国産 うなぎ の蒲焼き（170g）5尾セット（タレ、山椒付き)', 16600, 231);
+
+
+
