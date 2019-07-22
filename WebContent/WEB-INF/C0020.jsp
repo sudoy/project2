@@ -28,6 +28,8 @@
 
 	<h1>ダッシュボード</h1>
 
+	<jsp:include page="message.jsp"/>
+
 <div class="row">
 	<div class="col-md-4" id="hidari">
 	<nav aria-label="Page navigation">

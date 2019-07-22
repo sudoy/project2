@@ -39,6 +39,7 @@ public class C0010Servlet extends HttpServlet {
 
 			session.removeAttribute("error");
 			session.removeAttribute("complete");
+
 		}
 	}
 
@@ -76,6 +77,7 @@ public class C0010Servlet extends HttpServlet {
 
 					session.setAttribute("userinfo", userinfo);
 					resp.sendRedirect("C0020.html");
+
 				} else {
 					error.add("メールアドレス、パスワードを正しく入力して下さい。");
 					session.setAttribute("error", error);
