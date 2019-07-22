@@ -3,6 +3,7 @@ package com.abc.asms.accounts;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -65,6 +66,12 @@ public class S0031Servlet extends HttpServlet {
 				//登録確認からキャンセルで戻った時にも使えるように
 				session = req.getSession();
 				session.setAttribute("S0031form", s0031form);
+
+				Enumeration e = session.getAttributeNames();
+				while (e.hasMoreElements()) {
+					String key = (String) e.nextElement();
+					System.out.println(key + "：" + session.getAttribute(key) + "<br>");
+				}
 
 
 				// バリデーションチェック

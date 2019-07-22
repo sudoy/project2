@@ -76,6 +76,7 @@ public class S0010Servlet extends HttpServlet {
 				session.removeAttribute("complete");
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+
 			}
 		}
 	}
@@ -167,6 +168,23 @@ public class S0010Servlet extends HttpServlet {
 						session.removeAttribute("complete");
 						session.removeAttribute("allCategory");
 					}
+
+					// DBへ登録
+					S0010Service service = new S0010Service();
+
+					service.register(s0010form);
+
+					session.removeAttribute("form");
+					session.setAttribute("complete", "No" + service.Saleid(s0010form) + "の売上を登録しました");
+
+					//accountsテーブルから情報を取得
+					S0010Service s0010service = new S0010Service();
+					List<S0010Form> form = s0010service.select();
+					req.setAttribute("accounts", form);
+
+					getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+					session.removeAttribute("complete");
+					session.removeAttribute("allCategory");
 
 				} catch (Exception e) {
 					e.printStackTrace();
