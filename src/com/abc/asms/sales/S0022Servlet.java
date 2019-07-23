@@ -2,7 +2,6 @@ package com.abc.asms.sales;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -40,12 +39,6 @@ public class S0022Servlet extends HttpServlet {
 
 			S0022Service serv = new S0022Service();
 			S0022Form form = serv.service(id);
-
-			Enumeration e = session.getAttributeNames();
-			while (e.hasMoreElements()) {
-				String key = (String) e.nextElement();
-				System.out.println(key + "：" + session.getAttribute(key) + "<br>");
-			}
 
 			session.setAttribute("S0022Form", form);
 

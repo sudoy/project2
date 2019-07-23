@@ -15,12 +15,22 @@ import com.abc.asms.sales.forms.S0021Form;
 public class S0021Service {
 	public List<S0021Form> service(S0020Form form) throws ServletException {
 
-		String dateBegin = form.getDateBegin();
-		String dateEnd = form.getDateEnd();
-		String name = form.getName();
-		String[] categoryname = form.getCateName();
-		String tradeName = form.getTradeName();
-		String note = form.getNote();
+		String dateBegin = "";
+		String dateEnd = "" ;
+		String name = "";
+		String[] categoryname = null;
+		String tradeName = "";
+		String note = "";
+
+		if(form != null) {//ぬるぽ対策
+
+			dateBegin = form.getDateBegin();
+			dateEnd = form.getDateEnd();
+			name = form.getName();
+			categoryname = form.getCateName();
+			tradeName = form.getTradeName();
+			note = form.getNote();
+		}
 
 		if (name == null) {//ぬるぽ対策（選択してくださいのままだとnullが入ってくるので）
 			name = "";
@@ -37,8 +47,8 @@ public class S0021Service {
 			con = DBUtils.getConnection();
 			sql = "select s.sale_id, s.sale_date, a.name, c.category_name, s.trade_name,"
 					+ " s.unit_price, s.sale_number, s.unit_price * s.sale_number as total , s.note"
-					+ " from sales s join categories c on s.category_id = c.category_id "
-					+ "join accounts a on s.account_id = a.account_id where 1 = 1";
+					+ " from sales s left join categories c on s.category_id = c.category_id "
+					+ "left join accounts a on s.account_id = a.account_id where 1 = 1";
 
 			if (!(dateBegin.equals(""))) {//開始日が入力されている
 				sql += " and ? <= s.sale_date";

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
+
 <!DOCTYPE html>
 <html>
 
@@ -39,7 +41,9 @@
 	<c:forEach items="${S0021Form}" var="i">
 	<tr><td class="col-sm-1"><a class="btn btn-primary" href="S0022.html?id=${i.saleId}" role="button">
 	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 詳細</a></td>
-	<td class="right">${i.saleId}</td><td>${HTMLUtils.formatDate(i.saleDate)}</td><td>${i.staff}</td><td>${i.categoryName}</td><td>${i.productName}</td>
+	<td class="right">${i.saleId}</td><td>${HTMLUtils.formatDate(i.saleDate)}</td><td>${StringEscapeUtils.escapeHtml4(i.staff)}</td>
+	<td>${StringEscapeUtils.escapeHtml4(i.categoryName)}</td>
+	<td>${StringEscapeUtils.escapeHtml4(i.productName)}</td>
 	<td class="right">${HTMLUtils.formatTotal(i.unitPrice)}</td><td class="right">${HTMLUtils.formatTotal(i.saleNumber)}</td>
 	<td class="right">${HTMLUtils.formatTotal(i.total)}</td></tr>
 	</c:forEach>

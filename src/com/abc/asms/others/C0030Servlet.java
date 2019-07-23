@@ -18,11 +18,13 @@ public class C0030Servlet extends HttpServlet {
 		HttpSession session = req.getSession();
 
 		session.invalidate();
+
 		session = req.getSession();
 //		session.setAttribute("login", false);
-		session.setAttribute("complete", "ログアウトしました。");
-		resp.sendRedirect("C0010.html");
 
+		session.setAttribute("complete", "ログアウトしました。");
+
+		resp.sendRedirect("C0010.html");
 	}
 
 }

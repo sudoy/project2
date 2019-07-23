@@ -16,12 +16,20 @@ import com.abc.asms.goods.utils.HTMLUtils;
 public class S0041Service {
 	public List<S0041Form> service(S0040Form form) throws ServletException {
 
-		String name = form.getName();
-		String mail = form.getMail();
-		String sale = form.getSale();
-		String account = form.getAccount();
+		String name = "";
+		String mail = "";
+		String sale = "";
+		String account = "";
+		String authoritySQL = "";
 
-		String authoritySQL = HTMLUtils.formatAuthority(sale, account);
+		if (form != null) {
+			name = form.getName();
+			mail = form.getMail();
+			sale = form.getSale();
+			account = form.getAccount();
+
+			authoritySQL = HTMLUtils.formatAuthority(sale, account);
+		}
 
 		Connection con = null;
 		PreparedStatement ps = null;

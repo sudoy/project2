@@ -1,14 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:if test="${sessionScope.complete != null}">
+<c:if test="${complete != null}">
 <div class="alert alert-success alert-dismissible" role="alert">
 	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">
 	&times;</span></button>
 	<h4><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 	<strong>完了しました！</strong></h4>
 	<ul>
-	 <li>${sessionScope.complete}</li>
+	 <li>${complete}</li>
 	 </ul>
 </div>
 </c:if>
