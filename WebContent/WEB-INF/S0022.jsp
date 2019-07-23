@@ -50,13 +50,13 @@
 	<td><div class="col-md-8"><p>${StringEscapeUtils.escapeHtml4(S0022Form.tradeName)}</p>
 	</div></td></tr>
 	<tr><th>単価</th>
-	<td><div class="col-md-3"><p id="right">${S0022Form.unitPrice}</p>
+	<td><div class="col-md-3"><p id="right1">${S0022Form.unitPrice}</p>
 	</div></td></tr>
 	<tr><th>個数</th>
-	<td><div class="col-md-3"><p id="right">${S0022Form.saleNumber}</p>
+	<td><div class="col-md-3"><p id="right2">${S0022Form.saleNumber}</p>
 	</div></td></tr>
 	<tr><th>小計</th>
-	<td><div class="col-md-3"><p id="right">${HTMLUtils.formatTotal(S0022Form.total)}</p>
+	<td><div class="col-md-3"><p id="right3">${S0022Form.total}</p>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div><p>${StringEscapeUtils.escapeHtml4(S0022Form.note)}</p></div></td>
@@ -67,12 +67,12 @@
 	<td id="canto">
 	<div class="form-group">
 		<c:if test="${(userinfo.authority == '1') || (userinfo.authority == '11')}">
-			<a type="button" class="btn btn-primary" id="edit" href="S0023.html?id=${S0022Form.saleId}">
+			<a class="btn btn-primary" id="edit" href="S0023.html?id=${S0022Form.saleId}">
 			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 編　集</a>
-			<a type="button" class="btn btn-danger" id="delete" href="S0025.html?id=${S0022Form.saleId}">
+			<a class="btn btn-danger" id="delete" href="S0025.html?id=${S0022Form.saleId}">
 			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削　除</a>
 		</c:if>
-		<a type="button" class="btn btn-default" id="cancel" href="S0021.html">キャンセル</a>
+		<a class="btn btn-default" id="cancel" href="S0021.html">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>

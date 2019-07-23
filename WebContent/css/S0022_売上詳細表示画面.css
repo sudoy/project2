@@ -40,7 +40,7 @@ textarea.form-control {
     resize: vertical;
     height: 150px;
 }
-#right{
+#right1, #right2, #right3{
 	text-align: right;
 }
 

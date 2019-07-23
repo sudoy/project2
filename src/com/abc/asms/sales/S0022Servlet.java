@@ -42,6 +42,8 @@ public class S0022Servlet extends HttpServlet {
 
 			session.setAttribute("S0022Form", form);
 
+			
+
 			getServletContext().getRequestDispatcher("/WEB-INF/S0022.jsp").forward(req, resp);
 		}
 	}
