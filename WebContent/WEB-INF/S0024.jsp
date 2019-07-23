@@ -81,7 +81,7 @@
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control"  class="detail" rows="3" name="note" placeholder="備考" disabled>${S0023FormPost.note}</textarea>
+	<textarea class="form-control"  id="detail" rows="3" name="note" placeholder="備考" disabled>${S0023FormPost.note}</textarea>
 	</div></td>
 	</tr>
 
@@ -92,7 +92,7 @@
 
 		<button type="submit" class="btn btn-primary" id="touroku">
 		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
-		<a class="btn btn-default" class="cancel" href="S0023.html">キャンセル</a>
+		<a class="btn btn-default" id="cancel" href="S0023.html">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>
