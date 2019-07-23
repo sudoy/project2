@@ -57,7 +57,7 @@ public class S0010Service {
 
 		try {
 			con = DBUtils.getConnection();
-			sql = "select category_name from categories";
+			sql = "select category_name from categories where active_flg = 1";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 

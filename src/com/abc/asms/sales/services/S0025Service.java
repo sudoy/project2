@@ -40,8 +40,8 @@ public class S0025Service {
 			sql = "select s.sale_id, s.sale_date, s.account_id, s.category_id, s.trade_name, s.unit_price,"
 					+ " s.sale_number, note, c.category_name, a.name"
 					+ " from sales s "
-					+ " join accounts a on s.account_id = a.account_id"
-					+ " join categories c on s.category_id = c.category_id"
+					+ " left join accounts a on s.account_id = a.account_id"
+					+ " left join categories c on s.category_id = c.category_id"
 					+ " where sale_id = ?"
 					+ " order by sale_id";
 
@@ -69,7 +69,6 @@ public class S0025Service {
 				note = rs.getString("s.note");
 				categoryname = rs.getString("c.category_name");
 				name = rs.getString("a.name");
-
 
 			}
 			//ハイフンをスラッシュに変更
