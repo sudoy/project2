@@ -46,7 +46,12 @@ public class S0010Servlet extends HttpServlet {
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+<<<<<<< HEAD
+				error.add("不正なアクセスです。");
+				session.setAttribute("error", error);
+=======
 				session.setAttribute("error", "不正なアクセスです。");
+>>>>>>> branch 'master' of https://github.com/sudoy/project2.git
 				resp.sendRedirect("C0020.html");
 			} else {
 				//accountsテーブルから情報を取得
@@ -102,7 +107,12 @@ public class S0010Servlet extends HttpServlet {
 			//		System.out.println(checkaccount1.getAuthority());
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+<<<<<<< HEAD
+				error1.add("不正なアクセスです。");
+				session.setAttribute("error", error1);
+=======
 				session.setAttribute("error", "不正なアクセスです。");
+>>>>>>> branch 'master' of https://github.com/sudoy/project2.git
 				resp.sendRedirect("C0020.html");
 			} else {
 				try {

@@ -46,7 +46,12 @@ public class S0011Servlet extends HttpServlet {
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+<<<<<<< HEAD
+				loginerror.add("不正なアクセスです。");
+				session.setAttribute("error", loginerror);
+=======
 				session.setAttribute("error", "不正なアクセスです。");
+>>>>>>> branch 'master' of https://github.com/sudoy/project2.git
 				resp.sendRedirect("C0020.html");
 			} else {
 				String saledate = req.getParameter("saledate");

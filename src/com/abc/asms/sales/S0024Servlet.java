@@ -53,6 +53,7 @@ public class S0024Servlet extends HttpServlet {
 
 				req.setAttribute("categories", categories );
 
+
 				getServletContext().getRequestDispatcher("/WEB-INF/S0024.jsp").forward(req, resp);
 			}
 
@@ -107,6 +108,7 @@ public class S0024Servlet extends HttpServlet {
 
 
 				S0024Form updateform = new S0024Form( accountid, categoryid,  saleid, saledate, tradename, price, salenumber, note);
+
 
 				//更新
 				service.update(updateform);
