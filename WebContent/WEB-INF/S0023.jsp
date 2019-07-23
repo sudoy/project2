@@ -51,7 +51,7 @@
 	<tr><th>担当 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
 		<select class="form-control" name="name">
-			<option disabled <c:if test="${S0023Form.name == null}">selected</c:if>>
+			<option  <c:if test="${S0023Form.name == null}">selected</c:if>>
 			選択してください</option>
 			<c:forEach items="${accounts}" var="i">
 				<option value ="${StringEscapeUtils.escapeHtml4(i.name)}"

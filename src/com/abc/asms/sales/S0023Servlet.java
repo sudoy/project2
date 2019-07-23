@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,15 +53,18 @@ public class S0023Servlet extends HttpServlet {
 
 				S0023Service service = new S0023Service();
 
-				S0023Form form = service.select(req.getParameter("id"));
-				req.setAttribute("S0023Form", form);//前の画面の値を表示させるためのもの(編集前の売上情報)
+				if (req.getParameter("id") != null) {
+					S0023Form form = service.select(req.getParameter("id"));
+					session.setAttribute("S0023Form", form);//前の画面の値を表示させるためのもの(編集前の売上情報)
 
-				//jspで一覧を出すためのもの
-				List<S0023Form> accounts = service.accounts();
-				session.setAttribute("accounts", accounts);//アカウント情報一覧(idとname)
 
-				List<String> categories = service.categories();
-				session.setAttribute("categories", categories);//商品カテゴリー名一覧
+					//jspで一覧を出すためのもの
+					List<S0023Form> accounts = service.accounts();
+					session.setAttribute("accounts", accounts);//アカウント情報一覧(idとname)
+
+					List<String> categories = service.categories();
+					session.setAttribute("categories", categories);//商品カテゴリー名一覧
+				}
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0023.jsp").forward(req, resp);
 			}
@@ -109,8 +114,14 @@ public class S0023Servlet extends HttpServlet {
 				String salenumber = req.getParameter("salenumber");//個数
 				String note = req.getParameter("note");//備考
 
-				if (!price.equals("") && !salenumber.equals("")) {//NumberFormatException回避の為
+				//NumberFormatException回避 正規表現で半角数字以外をはじく
+			      Pattern p = Pattern.compile("^[0-9]*$");
+			        Matcher mp = p.matcher(price);
+			        Matcher ms = p.matcher(salenumber);
+			        boolean bp = mp.matches();
+			        boolean bs =  ms.matches();
 
+				if (!price.equals("") && !salenumber.equals("") && bp && bs) {
 					intprice = Integer.parseInt(price);
 					intsalenumber = Integer.parseInt(salenumber);
 					total = intprice * intsalenumber;
@@ -132,7 +143,7 @@ public class S0023Servlet extends HttpServlet {
 					session.removeAttribute("error");//エラーメッセージ消去
 				} else {
 
-					session.setAttribute("S0023FormPost", form);//入力した値
+					session.setAttribute("S0023Form", form);//入力した値
 
 					//入力チェッククリア後、S0024に遷移
 					resp.sendRedirect("S0024.html");
@@ -204,16 +215,17 @@ public class S0023Servlet extends HttpServlet {
 			e.add("単価を入力して下さい。");
 		} else if (10 <= price.length()) {
 			e.add("単価が長すぎます。");
-		} else if (!price.equals("")) {//単価形式チェック(整数かつ1以上)
+		} else if (!price.equals("")) {
+			//数字かどうか
 			try {
-				Integer.parseInt(price);
+				int intPrice = Integer.parseInt(price);
+				if (intPrice <= 0) {
+					e.add("単価を正しく入力して下さい。");
+				}
 			} catch (NumberFormatException ne) {
 				e.add("単価を正しく入力して下さい。");
 			}
-		} else if (Integer.parseInt(price) <= 0) {
-			e.add("単価を正しく入力して下さい。");
 		}
-
 		//個数必須入力チェック
 		if (salenumber.equals("")) {
 			e.add("個数を入力してください。");

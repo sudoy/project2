@@ -39,7 +39,7 @@
 	<tr><th>販売日</th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" name="saledate" value="${S0023FormPost.saledate}" placeholder="販売日" disabled>
+		<input type="text" class="form-control" name="saledate" value="${S0023Form.saledate}" placeholder="販売日" disabled>
 		</div>
 		</td>
 	</tr>
@@ -47,7 +47,7 @@
 	<tr><th>担当</th>
 	<td><div class="col-md-8">
 		<select class="form-control" disabled>
-			<option>${S0023FormPost.name}</option>
+			<option>${S0023Form.name}</option>
 		</select></div>
 
 	</td></tr>
@@ -57,7 +57,7 @@
 		<c:forEach items="${categories}" var="i">
 			<label class="radio-inline">
 			<input type="radio" name="categoryname" value="${StringEscapeUtils.escapeHtml4(i)}"
-			 ${HTMLUtils.judgeCategorynameChecked(StringEscapeUtils.escapeHtml4(i), StringEscapeUtils.escapeHtml4(S0023FormPost.categoryname))} disabled> ${StringEscapeUtils.escapeHtml4(i)}
+			 ${HTMLUtils.judgeCategorynameChecked(StringEscapeUtils.escapeHtml4(i), StringEscapeUtils.escapeHtml4(S0023Form.categoryname))} disabled> ${StringEscapeUtils.escapeHtml4(i)}
 			</label>
 		</c:forEach></div>
 	</td></tr>
@@ -65,23 +65,23 @@
 	<tr><th>商品名</th>
 	<td><div class="col-md-8">
 
-	<input class="form-control" type="text" name="tradename" placeholder="商品" value="${S0023FormPost.tradename}" disabled>
+	<input class="form-control" type="text" name="tradename" placeholder="商品" value="${S0023Form.tradename}" disabled>
 	</div></td></tr>
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control"  id="right1" type="text" name="price" placeholder="単価" value="${HTMLUtils.formatTotal(S0023FormPost.price)}" disabled>
+	<input class="form-control"  id="right1" type="text" name="price" placeholder="単価" value="${HTMLUtils.formatTotal(S0023Form.price)}" disabled>
 	</div></td></tr>
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control"  id="right2" type="text" name="salenumber" placeholder="個数" value="${HTMLUtils.formatTotal(S0023FormPost.salenumber)}" disabled>
+	<input class="form-control"  id="right2" type="text" name="salenumber" placeholder="個数" value="${HTMLUtils.formatTotal(S0023Form.salenumber)}" disabled>
 	</div></td></tr>
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
-	<input class="form-control"  id="right3" type="text" name="total" placeholder="小計" value="${HTMLUtils.formatTotal(S0023FormPost.total)}" disabled>
+	<input class="form-control"  id="right3" type="text" name="total" placeholder="小計" value="${HTMLUtils.formatTotal(S0023Form.total)}" disabled>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control"  id="detail" rows="3" name="note" placeholder="備考" disabled>${S0023FormPost.note}</textarea>
+	<textarea class="form-control"  id="detail" rows="3" name="note" placeholder="備考" disabled>${S0023Form.note}</textarea>
 	</div></td>
 	</tr>
 
