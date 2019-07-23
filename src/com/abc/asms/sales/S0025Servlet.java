@@ -109,11 +109,15 @@ public class S0025Servlet extends HttpServlet {
 				service.delete(s0025form);
 
 				session.removeAttribute("S0025Form");
+				session.removeAttribute("allCategory");
+				session.removeAttribute("allName");
+				session.removeAttribute("S0022Form");
 
 				//成功メッセージ
 				session.setAttribute("complete", "No" + s0025form.getId() + "のアカウントを削除しました。");
 
 				resp.sendRedirect("S0021.html");
+
 			}
 		}
 	}

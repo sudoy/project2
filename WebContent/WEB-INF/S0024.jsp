@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
+	<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -55,8 +56,8 @@
 	<td><div class="col-md-7">
 		<c:forEach items="${categories}" var="i">
 			<label class="radio-inline">
-			<input type="radio" name="categoryname" value="${i}"
-			 ${HTMLUtils.judgeCategorynameChecked(i, S0023FormPost.categoryname)} disabled checked> ${i}
+			<input type="radio" name="categoryname" value="${StringEscapeUtils.escapeHtml4(i)}"
+			 ${HTMLUtils.judgeCategorynameChecked(StringEscapeUtils.escapeHtml4(i), StringEscapeUtils.escapeHtml4(S0023FormPost.categoryname))} disabled checked> ${StringEscapeUtils.escapeHtml4(i)}
 			</label>
 		</c:forEach></div>
 	</td></tr>
@@ -68,15 +69,15 @@
 	</div></td></tr>
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control"  class="right" type="text" name="price" placeholder="単価" value="${HTMLUtils.formatTotal(S0023FormPost.price)}" disabled>
+	<input class="form-control"  id="right1" type="text" name="price" placeholder="単価" value="${HTMLUtils.formatTotal(S0023FormPost.price)}" disabled>
 	</div></td></tr>
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control"  class="right" type="text" name="salenumber" placeholder="個数" value="${HTMLUtils.formatTotal(S0023FormPost.salenumber)}" disabled>
+	<input class="form-control"  id="right2" type="text" name="salenumber" placeholder="個数" value="${HTMLUtils.formatTotal(S0023FormPost.salenumber)}" disabled>
 	</div></td></tr>
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
-	<input class="form-control"  class="right" type="text" name="total" placeholder="小計" value="${HTMLUtils.formatTotal(S0023FormPost.total)}" disabled>
+	<input class="form-control"  id="right3" type="text" name="total" placeholder="小計" value="${HTMLUtils.formatTotal(S0023FormPost.total)}" disabled>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">

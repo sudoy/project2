@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 
 
 
@@ -76,11 +77,11 @@
 	</div></td></tr>
 	<tr><th>単価 <span class="badge">必須</span></th>
 	<td><div class="col-md-3">
-	<input class="form-control" class="right" type="text" name="price" placeholder="単価" value="${S0023Form.price}">
+	<input class="form-control" id="right1" type="text" name="price" placeholder="単価" value="${S0023Form.price}">
 	</div></td></tr>
 	<tr><th>個数 <span class="badge">必須</span></th>
 	<td><div class="col-md-3">
-	<input class="form-control"  class="right" type="text" name="salenumber" placeholder="個数" value="${S0023Form.salenumber}">
+	<input class="form-control"  id="right2" type="text" name="salenumber" placeholder="個数" value="${S0023Form.salenumber}">
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
