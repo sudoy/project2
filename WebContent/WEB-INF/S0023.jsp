@@ -51,7 +51,7 @@
 	<tr><th>担当 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
 		<select class="form-control" name="name">
-			<option  <c:if test="${S0023Form.name == null}">selected</c:if>>
+			<option  value="0" <c:if test="${S0023Form.name == null}">selected</c:if>>
 			選択してください</option>
 			<c:forEach items="${accounts}" var="i">
 				<option value ="${StringEscapeUtils.escapeHtml4(i.name)}"
@@ -85,7 +85,7 @@
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" class="detail" rows="3" name="note" placeholder="備考">${StringEscapeUtils.escapeHtml4(S0023Form.note)}</textarea>
+	<textarea class="form-control"  rows="3" name="note" placeholder="備考">${StringEscapeUtils.escapeHtml4(S0023Form.note)}</textarea>
 	</div></td>
 	</tr>
 
@@ -96,7 +96,7 @@
 
 		<button type="submit" class="btn btn-primary" id="touroku">
 		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 更　新</button>
-		<a class="btn btn-default" class="cancel" href="S0022.html?id=${S0023Form.id}">キャンセル</a>
+		<a class="btn btn-default"  href="S0022.html?id=${S0023Form.id}">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>
