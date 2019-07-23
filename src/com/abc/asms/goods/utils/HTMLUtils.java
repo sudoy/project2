@@ -33,23 +33,34 @@ public class HTMLUtils {
 
 		String authoritySQL;
 
-		if (sale.equals("1")) {
-			if (account.equals("1")) {
+		if (sale == null) {
+
+			if (account != null && account.equals("1")) {
+				authoritySQL = " and (authority = 10 or authority = 11)";
+			} else if (account != null && account.equals("0")) {
+				authoritySQL = " and(authority = 0 or authority = 1)";
+			} else {
+				authoritySQL = "";
+
+			}
+
+		} else if (sale.equals("1")) {
+
+			if (account != null && account.equals("1")) {
 				authoritySQL = " and authority = 11";
 
-			} else if (account.equals("0")) {
+			} else if (account != null &&  account.equals("0")) {
 				authoritySQL = " and authority = 1";
-
 			} else {
 				authoritySQL = " and (authority = 1 or authority = 11)";
 
 			}
 
 		} else if (sale.equals("0")) {
-			if (account.equals("1")) {
+			if (account != null && account.equals("1")) {
 				authoritySQL = " and authority = 10";
 
-			} else if (account.equals("0")) {
+			} else if (account != null && account.equals("0")) {
 				authoritySQL = " and authority = 0";
 
 			} else {
@@ -58,10 +69,10 @@ public class HTMLUtils {
 			}
 
 		} else {
-			if (account.equals("1")) {
+			if (account != null && account.equals("1")) {
 				authoritySQL = " and authority = 10 or authority = 11";
 
-			} else if (account.equals("0")) {
+			} else if (account != null && account.equals("0")) {
 				authoritySQL = " and (authority = 0 or authority = 1)";
 
 			} else {
@@ -147,9 +158,9 @@ public class HTMLUtils {
 
 	//S0020.jsp用　初期状態ならカテゴリーをすべてチェック
 	public static String judgeDefault(S0020Form form) {
-		if(form == null) {
+		if (form == null) {
 			return "checked";
-		}else {
+		} else {
 			return "";
 		}
 
