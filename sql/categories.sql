@@ -51,3 +51,5 @@ insert into categories(category_id, category_name, active_flg)
 values(21, 'チルド', 0);
 insert into categories(category_id, category_name, active_flg)
 values(22, '冷凍食品', 0);
+insert into categories(category_id, category_name, active_flg)
+values(23, "<script>alert('xss');</script>", 0);

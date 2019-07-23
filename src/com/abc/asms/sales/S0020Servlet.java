@@ -50,6 +50,7 @@ public class S0020Servlet extends HttpServlet {
 			if (req.getParameter("clear") != null) {//クリアボタンが押された場合
 				session.removeAttribute("S0020Form");
 				session.removeAttribute("error");
+
 			}
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0020.jsp").forward(req, resp);
