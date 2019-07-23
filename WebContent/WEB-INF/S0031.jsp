@@ -13,9 +13,9 @@
 <jsp:include page="header.jsp">
 <jsp:param name="bar"
 		value='<li><a href="c0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
-		<li><a href="S0010.html">売上登録</a></li>
+		${HTMLUtils.judgeSale(userinfo.authority, "S3")}
 		<li><a href="S0020.html">売上検索</a></li>
-		<li class="active"><a href="S0030.html">アカウント登録</a></li>
+		${HTMLUtils.judgeAccount(userinfo.authority, "S3")}
 		<li><a href="S0040.html">アカウント検索</a></li>'/>
 </jsp:include>
 <div class="container">
