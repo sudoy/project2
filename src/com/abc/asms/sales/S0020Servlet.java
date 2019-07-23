@@ -43,6 +43,14 @@ public class S0020Servlet extends HttpServlet {
 			List<S0020Form> staffList = disp.staff();
 			List<String> categoryList = disp.category();
 
+			//今日の日付を取得
+//			if (session.getAttribute("S0020Form") == null) {
+//				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/M/d");
+//				String today = dtf.format(LocalDate.now()).toString();
+//				S0020Form todayForm = new S0020Form(today, today);
+//				req.setAttribute("S0020Form", todayForm);
+//			}
+
 			//sessionに入れる（session名 allName）
 			session.setAttribute("allName", staffList);
 			session.setAttribute("allCategory", categoryList);
@@ -52,9 +60,6 @@ public class S0020Servlet extends HttpServlet {
 				session.removeAttribute("error");
 
 			}
-
-
-
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0020.jsp").forward(req, resp);
 		}
@@ -139,8 +144,8 @@ public class S0020Servlet extends HttpServlet {
 		}
 		//開始日が終了日より前の日付になっているかチェック
 		if (!(dateBegin.equals("")) && !(dateEnd.equals("")) && (begin != null) && (end != null)) {
-			boolean isBefore = begin.isBefore(end);
-			if (isBefore == false) {
+			int judgement = begin.compareTo(end);
+			if (judgement > 0) {
 				error.add("販売日（検索開始日）が販売日（検索終了日）より後の日付となっています。");
 			}
 		}

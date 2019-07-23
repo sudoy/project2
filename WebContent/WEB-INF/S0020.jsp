@@ -35,11 +35,11 @@
 	<tr><th>販売日</th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" name="dateBegin" value="${S0020Form.dateBegin}" placeholder="販売日(検索開始日)">
+		<input type="text" class="form-control" name="dateBegin" value="${HTMLUtils.S0020today(S0020Form)}${S0020Form.dateBegin}" placeholder="販売日(検索開始日)">
 		</div>
 		<div class="col-md-2">～</div>
 		<div class="col-md-3">
-		<input type="text" class="form-control" name="dateEnd" value="${S0020Form.dateEnd}" placeholder="販売日(検索終了日)">
+		<input type="text" class="form-control" name="dateEnd" value="${HTMLUtils.S0020today(S0020Form)}${S0020Form.dateEnd}" placeholder="販売日(検索終了日)">
 		</div>
 		</td>
 	</tr>

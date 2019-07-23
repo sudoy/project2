@@ -25,15 +25,15 @@ public class S0020Service {
 
 		try {
 			con = DBUtils.getConnection();
-			sql = "select account_id, name from accounts";
+			sql = "select name from accounts";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String accountId = rs.getString("account_id");
+//				String accountId = rs.getString("account_id");
 				String accountName = rs.getString("name");
 
-				S0020Form f = new S0020Form(accountId, accountName);
+				S0020Form f = new S0020Form(accountName);
 				list.add(f);
 			}
 			return list;
