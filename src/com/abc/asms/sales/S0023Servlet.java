@@ -116,7 +116,8 @@ public class S0023Servlet extends HttpServlet {
 					total = intprice * intsalenumber;
 				}
 
-				S0023Form form = new S0023Form(id, saledate, name, categoryname, tradename, price, salenumber, note, total);
+				S0023Form form = new S0023Form(id, saledate, name, categoryname, tradename, price, salenumber, note,
+						total);
 
 				//入力チェック
 				error = validate(form);
@@ -177,7 +178,7 @@ public class S0023Servlet extends HttpServlet {
 		//担当必須入力チェック
 		if (name == null) {
 			e.add("担当が未選択です。");
-		}else {
+		} else {
 			if (accountexist == true) {
 				e.add("アカウントテーブルに存在しません。");
 			}
@@ -185,8 +186,8 @@ public class S0023Servlet extends HttpServlet {
 		//商品カテゴリー必須入力チェック
 		if (categoryname == null || categoryname.equals("")) {
 			e.add("商品カテゴリーが未選択です。");
-		}else {//商品カテゴリーテーブル存在チェック
-			if(categoryexist == true){
+		} else {//商品カテゴリーテーブル存在チェック
+			if (categoryexist == true) {
 				e.add("商品カテゴリーテーブルに存在しません。");
 			}
 		}
@@ -194,7 +195,7 @@ public class S0023Servlet extends HttpServlet {
 		//商品名必須入力チェック
 		if (tradename.equals("")) {
 			e.add("商品名を入力して下さい。");
-		}else if(101 <= tradename.length()) {//商品名長さチェック
+		} else if (101 <= tradename.length()) {//商品名長さチェック
 			e.add("商品名が長すぎます。");
 		}
 
