@@ -127,6 +127,8 @@ public class C0010Servlet extends HttpServlet {
 			}
 		}
 
+
+
 		//passwordが入力されていない
 		if (form.getPassword().equals("")) {
 			error.add("パスワードを入力して下さい。");

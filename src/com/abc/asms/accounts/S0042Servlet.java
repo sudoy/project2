@@ -58,6 +58,7 @@ public class S0042Servlet extends HttpServlet {
 					session.setAttribute("password", form.getPassword());
 				}
 
+
 				this.getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
 			}
 		}
@@ -110,6 +111,7 @@ public class S0042Servlet extends HttpServlet {
 				}
 
 				S0042Form form = new S0042Form(id, name, mail, password, check, sale, account, authority);
+
 
 				//入力チェック
 				error = validate(form);

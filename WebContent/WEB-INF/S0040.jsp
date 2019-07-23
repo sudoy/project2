@@ -26,13 +26,13 @@
 
 <form class="form-horizontal" action="S0040.html" method="post">
 	<div class="form-group">
-	    <label for="text" class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 部分一致 </span></label>
+	    <label  class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 部分一致 </span></label>
 	    <div class="col-sm-5">
 	      <input type="text" class="form-control" placeholder="氏名" name="name" value="${S0040Form.name}">
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="inputEmail3" class="col-sm-3 control-label">メールアドレス </label>
+	    <label  class="col-sm-3 control-label">メールアドレス </label>
 	    <div class="col-sm-5">
 	      <input type="email" class="form-control" placeholder="メールアドレス" name ="mail" value="${S0040Form.mail}">
 	    </div>

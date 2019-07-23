@@ -48,6 +48,7 @@
 		<select class="form-control" disabled>
 			<option>${S0023FormPost.name}</option>
 		</select></div>
+
 	</td></tr>
 
 	<tr><th>商品カテゴリー</th>
@@ -62,6 +63,7 @@
 
 	<tr><th>商品名</th>
 	<td><div class="col-md-8">
+
 	<input class="form-control" type="text" name="tradename" placeholder="商品" value="${S0023FormPost.tradename}" disabled>
 	</div></td></tr>
 	<tr><th>単価</th>
@@ -96,6 +98,7 @@
 </form>
 
 </div><!--/container-->
+${key}
 
 	<script src="js/jquery-3.4.1.min.js"></script>
 	<script	src="js/bootstrap.min.js"></script>

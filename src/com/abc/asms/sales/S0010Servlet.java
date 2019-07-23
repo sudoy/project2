@@ -46,7 +46,8 @@ public class S0010Servlet extends HttpServlet {
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
 			if (!checkauthority1.getAuthority().equals("1") && !checkauthority1.getAuthority().equals("11")) {
-				session.setAttribute("error", "不正なアクセスです。");
+				error.add("不正なアクセスです。");
+				session.setAttribute("error", error);
 				resp.sendRedirect("C0020.html");
 			} else {
 				//accountsテーブルから情報を取得
@@ -71,6 +72,7 @@ public class S0010Servlet extends HttpServlet {
 				session.removeAttribute("complete");
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+
 			}
 		}
 	}
@@ -101,7 +103,8 @@ public class S0010Servlet extends HttpServlet {
 			//		System.out.println(checkaccount1.getAuthority());
 
 			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
-				session.setAttribute("error", "不正なアクセスです。");
+				error1.add("不正なアクセスです。");
+				session.setAttribute("error", error1);
 				resp.sendRedirect("C0020.html");
 			} else {
 				try {
@@ -157,6 +160,23 @@ public class S0010Servlet extends HttpServlet {
 						session.removeAttribute("complete");
 						session.removeAttribute("allCategory");
 					}
+
+					// DBへ登録
+					S0010Service service = new S0010Service();
+
+					service.register(s0010form);
+
+					session.removeAttribute("form");
+					session.setAttribute("complete", "No" + service.Saleid(s0010form) + "の売上を登録しました");
+
+					//accountsテーブルから情報を取得
+					S0010Service s0010service = new S0010Service();
+					List<S0010Form> form = s0010service.select();
+					req.setAttribute("accounts", form);
+
+					getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
+					session.removeAttribute("complete");
+					session.removeAttribute("allCategory");
 
 				} catch (Exception e) {
 					e.printStackTrace();
