@@ -9,6 +9,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import com.abc.asms.goods.utils.DBUtils;
+import com.abc.asms.goods.utils.HTMLUtils;
 import com.abc.asms.sales.forms.S0023Form;
 
 public class S0023Service {
@@ -51,7 +52,7 @@ public class S0023Service {
 			while (rs.next()) {
 
 				id = rs.getString("s.sale_id");
-				saledate = rs.getString("s.sale_date");
+				saledate = HTMLUtils.formatDate(rs.getString("s.sale_date"));
 				name = rs.getString("a.name");
 				categoryname = rs.getString("c.category_name");
 				tradename = rs.getString("s.trade_name");

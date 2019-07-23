@@ -57,7 +57,7 @@
 		<c:forEach items="${categories}" var="i">
 			<label class="radio-inline">
 			<input type="radio" name="categoryname" value="${StringEscapeUtils.escapeHtml4(i)}"
-			 ${HTMLUtils.judgeCategorynameChecked(StringEscapeUtils.escapeHtml4(i), StringEscapeUtils.escapeHtml4(S0023FormPost.categoryname))} disabled checked> ${StringEscapeUtils.escapeHtml4(i)}
+			 ${HTMLUtils.judgeCategorynameChecked(StringEscapeUtils.escapeHtml4(i), StringEscapeUtils.escapeHtml4(S0023FormPost.categoryname))} disabled> ${StringEscapeUtils.escapeHtml4(i)}
 			</label>
 		</c:forEach></div>
 	</td></tr>

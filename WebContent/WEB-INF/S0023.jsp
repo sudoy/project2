@@ -43,7 +43,7 @@
 	<tr><th>販売日 <span class="badge">必須</span></th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" name="saledate" value="${HTMLUtils.formatDate(S0023Form.saledate)}" placeholder="販売日">
+		<input type="text" class="form-control" name="saledate" value="${S0023Form.saledate}" placeholder="販売日">
 		</div>
 		</td>
 	</tr>
@@ -54,8 +54,8 @@
 			<option disabled <c:if test="${S0023Form.name == null}">selected</c:if>>
 			選択してください</option>
 			<c:forEach items="${accounts}" var="i">
-				<option value ="${i.name}"
-				 ${HTMLUtils.judgeStaffSelected(i.name, S0023Form.name)}>${i.name}</option>
+				<option value ="${StringEscapeUtils.escapeHtml4(i.name)}"
+				 ${HTMLUtils.judgeStaffSelected(StringEscapeUtils.escapeHtml4(i.name), StringEscapeUtils.escapeHtml4(S0023Form.name))}>${StringEscapeUtils.escapeHtml4(i.name)}</option>
 			</c:forEach>
 
 		</select></div>
@@ -65,15 +65,15 @@
 	<td><div class="col-md-8">
 		<c:forEach items="${categories}" var="i">
 			<label class="radio-inline">
-			<input type="radio" name="categoryname" value="${i}"
-			 ${HTMLUtils.judgeCategorynameChecked(i, S0023Form.categoryname)}> ${i}
+			<input type="radio" name="categoryname" value="${StringEscapeUtils.escapeHtml4(i)}"
+			 ${HTMLUtils.judgeCategorynameChecked(StringEscapeUtils.escapeHtml4(i), StringEscapeUtils.escapeHtml4(S0023Form.categoryname))}> ${i}
 			</label>
 		</c:forEach></div>
 	</td></tr>
 
 	<tr><th>商品名 <span class="badge">必須</span></th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" name="tradename" placeholder="商品" value="${S0023Form.tradename}">
+	<input class="form-control" type="text" name="tradename" placeholder="商品" value="${StringEscapeUtils.escapeHtml4(S0023Form.tradename)}">
 	</div></td></tr>
 	<tr><th>単価 <span class="badge">必須</span></th>
 	<td><div class="col-md-3">
@@ -85,7 +85,7 @@
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" class="detail" rows="3" name="note" placeholder="備考">${S0023Form.note}</textarea>
+	<textarea class="form-control" class="detail" rows="3" name="note" placeholder="備考">${StringEscapeUtils.escapeHtml4(S0023Form.note)}</textarea>
 	</div></td>
 	</tr>
 

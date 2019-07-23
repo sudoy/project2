@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 <!DOCTYPE html>
 <html lang="ja">
 	<head>
@@ -39,14 +40,14 @@
 	</tr>
 
 	<tr><th>担当</th>
-	<td><div class="col-md-8"><p>${S0022Form.name}</P></div>
+	<td><div class="col-md-8"><p>${StringEscapeUtils.escapeHtml4(S0022Form.name)}</P></div>
 	</td></tr>
 	<tr><th>商品カテゴリー</th>
-	<td><div class="col-md-8"><p>${S0022Form.categoryName}</p></div>
+	<td><div class="col-md-8"><p>${StringEscapeUtils.escapeHtml4(S0022Form.categoryName)}</p></div>
 	</td></tr>
 
 	<tr><th>商品名</th>
-	<td><div class="col-md-8"><p>${S0022Form.tradeName}</p>
+	<td><div class="col-md-8"><p>${StringEscapeUtils.escapeHtml4(S0022Form.tradeName)}</p>
 	</div></td></tr>
 	<tr><th>単価</th>
 	<td><div class="col-md-3"><p id="right">${S0022Form.unitPrice}</p>
@@ -58,7 +59,7 @@
 	<td><div class="col-md-3"><p id="right">${HTMLUtils.formatTotal(S0022Form.total)}</p>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
-	<td><div><p>${S0022Form.note}</p></div></td>
+	<td><div><p>${StringEscapeUtils.escapeHtml4(S0022Form.note)}</p></div></td>
 	</tr>
 
 
