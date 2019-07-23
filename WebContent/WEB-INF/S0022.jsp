@@ -59,8 +59,10 @@
 	<td><div class="col-md-3"><p id="right3">${S0022Form.total}</p>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
-	<td><div><p>${StringEscapeUtils.escapeHtml4(S0022Form.note)</p></div></td>
 
+
+
+	<td><div><pre><p>${StringEscapeUtils.escapeHtml4(S0022Form.note)}</p></pre></div></td>
 	</tr>
 
 

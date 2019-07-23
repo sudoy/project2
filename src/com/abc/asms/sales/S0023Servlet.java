@@ -194,7 +194,7 @@ public class S0023Servlet extends HttpServlet {
 			}
 		}
 		//担当必須入力チェック
-		if (name == null) {
+		if (name.equals("0")) {
 			e.add("担当が未選択です。");
 		} else {
 			if (accountexist == true) {

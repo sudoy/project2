@@ -47,3 +47,8 @@ textarea.form-control {
 p{
 margin-top: 5px;
 }
+
+pre{
+	background-color: white;
+	border: white;
+}

@@ -3,7 +3,6 @@ package com.abc.asms.others;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -71,11 +70,6 @@ public class C0020Servlet extends HttpServlet {
 
 			session.removeAttribute("error");
 
-			Enumeration e = session.getAttributeNames();
-			while (e.hasMoreElements()) {
-				String key = (String) e.nextElement();
-				System.out.println(key + "：" + session.getAttribute(key) + "<br>");
-			}
 
 		}
 
