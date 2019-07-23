@@ -81,7 +81,7 @@
 	<tr><th id="remarks1">備考</th>
 	<td><div class="col-md-8">
 	<textarea class="form-control" id="remarks2" rows="3"
-	placeholder="備考" name="note">${StringEscapeUtils.escapeHtml4(form.note)}</textarea>
+	placeholder="備考" name="note" wrap="hard">${StringEscapeUtils.escapeHtml4(form.note)}</textarea>
 	</div></td>
 	</tr>
 
