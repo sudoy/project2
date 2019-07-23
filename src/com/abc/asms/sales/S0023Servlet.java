@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -145,6 +146,12 @@ public class S0023Servlet extends HttpServlet {
 
 					session.setAttribute("S0023Form", form);//入力した値
 
+					Enumeration e = session.getAttributeNames();
+					while (e.hasMoreElements()) {
+						String key = (String) e.nextElement();
+						System.out.println(key + "：" + session.getAttribute(key) + "<br>");
+					}
+
 					//入力チェッククリア後、S0024に遷移
 					resp.sendRedirect("S0024.html");
 				}
@@ -229,16 +236,17 @@ public class S0023Servlet extends HttpServlet {
 		//個数必須入力チェック
 		if (salenumber.equals("")) {
 			e.add("個数を入力してください。");
-		} else if (10 <= salenumber.length()) {//個数長さチェック
+		} else if (10 <= salenumber.length()) {
 			e.add("個数が長すぎます。");
-		} else if (!price.equals("")) {//個数形式チェック(整数かつ1以上)
+		} else if (!price.equals("")) {
 			try {
-				Integer.parseInt(salenumber);
+				int intSaleNumber = Integer.parseInt(salenumber);
+				if (intSaleNumber <= 0) {
+					e.add("個数を正しく入力して下さい。");
+				}
 			} catch (NumberFormatException ne) {
 				e.add("個数を正しく入力してください。");
 			}
-		} else if (Integer.parseInt(salenumber) <= 0) {
-			e.add("個数を正しく入力してください。");
 		}
 		//備考長さチェック(401文字以上の時エラー)
 		if (401 <= note.length()) {
