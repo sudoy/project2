@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -26,35 +27,35 @@
 
 
 			<div class="form-group">
-				<label for="text" class="col-sm-3 control-label">氏名</label>
+				<label class="col-sm-3 control-label">氏名</label>
 				<div class="col-sm-5">
 					<fieldset disabled>
-						<input type="text" class="form-control" value="${S0044Form.name}" name="name">
+						<input type="text" class="form-control" value="${StringEscapeUtils.escapeHtml4(S0044Form.name)}" name="name">
 					</fieldset>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-3 control-label">メールアドレス</label>
+				<label class="col-sm-3 control-label">メールアドレス</label>
 				<div class="col-sm-5">
 					<fieldset disabled>
-						<input type="text" class="form-control" value="${S0044Form.mail}"
+						<input type="text" class="form-control" value="${StringEscapeUtils.escapeHtml4(S0044Form.mail)}"
 							name="mail">
 					</fieldset>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputPassword3" class="col-sm-3 control-label">パスワード</label>
+				<label class="col-sm-3 control-label">パスワード</label>
 				<div class="col-sm-5">
 					<fieldset disabled>
-						<input type="password" class="form-control" name="password">
+						<input type="password" class="form-control" name="password" placeholder="パスワード">
 					</fieldset>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputPasswordCheck3" class="col-sm-3 control-label">パスワード(確認)</label>
+				<label class="col-sm-3 control-label">パスワード(確認)</label>
 				<div class="col-sm-5">
 					<fieldset disabled>
-						<input type="password" class="form-control" name="check">
+						<input type="password" class="form-control" name="check" placeholder="パスワード(確認)">
 					</fieldset>
 				</div>
 			</div>

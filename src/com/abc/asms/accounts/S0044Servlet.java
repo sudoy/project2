@@ -49,10 +49,14 @@ public class S0044Servlet extends HttpServlet {
 				S0044Service service = new S0044Service();
 
 				//アカウント情報の取得
-				S0044Form form = service.select(req.getParameter("id"));
-				session.setAttribute("S0044Form", form);//reqに修正→sessionに戻した
+				if (req.getParameter("id") != null) {
+					S0044Form form = service.select(req.getParameter("id"));
+					session.setAttribute("S0044Form", form);//reqに修正→sessionに戻した
 
-				getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
+					getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
+				} else {
+					resp.sendRedirect("S0040.html");
+				}
 			}
 		}
 	}
