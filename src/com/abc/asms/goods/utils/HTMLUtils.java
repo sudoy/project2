@@ -166,4 +166,37 @@ public class HTMLUtils {
 
 	}
 
+	//権限ごとに売上登録の表示を切り替える
+	public static String judgeSale(String authority) {
+
+		String judge = "";
+
+		if(authority.equals("1") || authority.equals("11")) {
+			judge = "<li><a href=\"S0010.html\">売上登録</a></li>";
+		}else {
+			return  "";
+		}
+
+		return judge;
+
+
+	}
+
+	//権限ごとにアカウント登録の表示を切り替える
+	public static String judgeAccount(String authority) {
+
+		String judge = "";
+
+		if(authority.equals("10") || authority.equals("11")  ) {
+			judge = "<li><a href=\"S0030.html\">アカウント登録</a></li>";
+		}else {
+			return "";
+		}
+		return judge;
+
+
+	}
+
+
+
 }
