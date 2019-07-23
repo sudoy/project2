@@ -23,8 +23,8 @@ public class S0022Service {
 
 			sql = "select s.sale_id, s.sale_date, a.name, c.category_name, s.trade_name," +
 					" s.unit_price, s.sale_number, s.unit_price * s.sale_number as total , s.note" +
-					" from sales s join categories c on s.category_id = c.category_id" +
-					" join accounts a on s.account_id = a.account_id where s.sale_id = ?";
+					" from sales s left join categories c on s.category_id = c.category_id" +
+					" left join accounts a on s.account_id = a.account_id where s.sale_id = ?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, id);
 

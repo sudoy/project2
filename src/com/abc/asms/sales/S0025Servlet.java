@@ -46,6 +46,11 @@ public class S0025Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
+				if(req.getParameter("id") == null) {
+					resp.sendRedirect("C0020.html");
+					return;
+				}
+
 				//渡されたidのsalesテーブル, c.category_name, a.nameの取得
 				S0025Service service = new S0025Service();
 				S0025Form form = service.select(req.getParameter("id"));

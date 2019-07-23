@@ -51,7 +51,6 @@ public class S0025Service {
 
 			ps.setString(1, num);
 
-
 			//SELECT命令の実行
 			rs = ps.executeQuery();
 
@@ -73,8 +72,6 @@ public class S0025Service {
 			}
 			//ハイフンをスラッシュに変更
 			saledate = saledate.replace("-", "/");
-
-			System.out.println(note);
 
 			S0025Form form = new S0025Form(id, saledate, accountid, categoryid, tradename, unitprice,
 					salenumber, note, categoryname, name);
