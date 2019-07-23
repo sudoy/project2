@@ -20,6 +20,13 @@ public class S0020Form {
 	private String saleNumber;
 	private String total;
 
+	//最初に今日の日付表示する用
+	public S0020Form(String dateBegin, String dateEnd) {
+		super();
+		this.dateBegin = dateBegin;
+		this.dateEnd = dateEnd;
+	}
+
 	//普通に使うやつ
 	public S0020Form(String dateBegin, String dateEnd, String name, String[] cateName, String tradeName,
 			String note) {
@@ -33,9 +40,8 @@ public class S0020Form {
 	}
 
 	//検索画面表示時の担当者を表示するためのやつ
-	public S0020Form(String accountId, String accountName) {
+	public S0020Form(String accountName) {
 		super();
-		this.accountId = accountId;
 		this.accountName = accountName;
 	}
 
@@ -57,6 +63,7 @@ public class S0020Form {
 	public String getId() {
 		return accountId;
 	}
+
 	public void setId(String accountId) {
 		this.accountId = accountId;
 	}
@@ -72,36 +79,47 @@ public class S0020Form {
 	public String getDateBegin() {
 		return dateBegin;
 	}
+
 	public void setDateBegin(String dateBegin) {
 		this.dateBegin = dateBegin;
 	}
+
 	public String getDateEnd() {
 		return dateEnd;
 	}
+
 	public void setDateEnd(String dateEnd) {
 		this.dateEnd = dateEnd;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String[] getCateName() {
 		return cateName;
 	}
+
 	public void setCateName(String[] cateName) {
 		this.cateName = cateName;
 	}
+
 	public String getTradeName() {
 		return tradeName;
 	}
+
 	public void setTradeName(String tradeName) {
 		this.tradeName = tradeName;
 	}
+
 	public String getNote() {
 		return note;
 	}
+
 	public void setNote(String note) {
 		this.note = note;
 	}
@@ -177,6 +195,5 @@ public class S0020Form {
 	public void setTotal(String total) {
 		this.total = total;
 	}
-
 
 }

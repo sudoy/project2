@@ -8,6 +8,16 @@ import com.abc.asms.sales.forms.S0020Form;
 
 public class HTMLUtils {
 
+	//S0020用 S0020Formがnullだったら今日の日付を返す
+	public static String S0020today(S0020Form form) {
+		if (form == null) {
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/M/d");
+			String today = dtf.format(LocalDate.now()).toString();
+			return today;
+		}
+		return "";
+	}
+
 	public static String formatDate(String date) {//日付の-を/に
 		LocalDate dateL = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 		String slashDate = null;
@@ -49,7 +59,7 @@ public class HTMLUtils {
 			if (account != null && account.equals("1")) {
 				authoritySQL = " and authority = 11";
 
-			} else if (account != null &&  account.equals("0")) {
+			} else if (account != null && account.equals("0")) {
 				authoritySQL = " and authority = 1";
 			} else {
 				authoritySQL = " and (authority = 1 or authority = 11)";
@@ -171,14 +181,13 @@ public class HTMLUtils {
 
 		String judge = "";
 
-		if(authority.equals("1") || authority.equals("11")) {
+		if (authority.equals("1") || authority.equals("11")) {
 			judge = "<li><a href=\"S0010.html\">売上登録</a></li>";
-		}else {
-			return  "";
+		} else {
+			return "";
 		}
 
 		return judge;
-
 
 	}
 
@@ -187,16 +196,13 @@ public class HTMLUtils {
 
 		String judge = "";
 
-		if(authority.equals("10") || authority.equals("11")  ) {
+		if (authority.equals("10") || authority.equals("11")) {
 			judge = "<li><a href=\"S0030.html\">アカウント登録</a></li>";
-		}else {
+		} else {
 			return "";
 		}
 		return judge;
 
-
 	}
-
-
 
 }

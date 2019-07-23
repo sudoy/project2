@@ -89,7 +89,7 @@ public class S0024Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				S0023Form forminput = (S0023Form) session.getAttribute("S0023FormPost");//S0023で入力した値
+				S0023Form forminput = (S0023Form) session.getAttribute("S0023Form");//S0023で入力した値
 
 				String saleid = forminput.getId();
 				String saledate = forminput.getSaledate();
@@ -114,7 +114,7 @@ public class S0024Servlet extends HttpServlet {
 				service.update(updateform);
 
 				//入力した値の消去
-				session.removeAttribute("S0023FormPost");
+				session.removeAttribute("S0023Form");
 
 				//成功メッセージ
 				session.setAttribute("complete", "No" + updateform.getSaleid() + "の売上を更新しました。");
