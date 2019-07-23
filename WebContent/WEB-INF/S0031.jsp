@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -27,34 +28,34 @@
 
 	<form class="form-horizontal" action="S0030.html" method="post">
 	<div class="form-group">
-	    <label for="text" class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 必須 </span></label>
+	    <label class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
 		    <fieldset disabled>
-		    	<input type="text" class="form-control" name="name" value="${S0031form.name}">
+		    	<input type="text" class="form-control" name="name" value="${StringEscapeUtils.escapeHtml4(S0031form.name)}">
 		    </fieldset>
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="inputEmail3" class="col-sm-3 control-label">メールアドレス <span class="badge badge-default"> 必須 </span></label>
+	    <label class="col-sm-3 control-label">メールアドレス <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
 	      <fieldset disabled>
-	    	<input type="text"  class="form-control" name="mail" value="${S0031form.mail}">
+	    	<input type="text"  class="form-control" name="mail" value="${StringEscapeUtils.escapeHtml4(S0031form.mail)}">
 	      </fieldset>
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="inputPassword3" class="col-sm-3 control-label">パスワード <span class="badge badge-default"> 必須 </span></label>
+	    <label class="col-sm-3 control-label">パスワード <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
 	      <fieldset disabled>
-	    	<input type="password" class="form-control" name="password" value="${S0031form.password}" >
+	    	<input type="password" class="form-control" name="password" value="${StringEscapeUtils.escapeHtml4(S0031form.password)}" >
 	      </fieldset>
 	    </div>
 	</div>
 	<div class="form-group">
-	    <label for="inputPasswordCheck3" class="col-sm-3 control-label">パスワード(確認) <span class="badge badge-default"> 必須 </span></label>
+	    <label class="col-sm-3 control-label">パスワード(確認) <span class="badge badge-default"> 必須 </span></label>
 	    <div class="col-sm-5">
 	      <fieldset disabled>
-	    	<input type="password" class="form-control" name="password" value="${S0031form.check}">
+	    	<input type="password" class="form-control" name="password" value="${StringEscapeUtils.escapeHtml4(S0031form.check)}">
 	      </fieldset>
 	    </div>
 	</div>

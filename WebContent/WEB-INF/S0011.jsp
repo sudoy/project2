@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
+<%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -41,7 +42,7 @@
 	<tr><th>担当</th>
 	<td><div class="col-md-8">
 		<select class="form-control" name="accountid" disabled>
-			<option>${form.name}</option>
+			<option>${StringEscapeUtils.escapeHtml4(form.name)}</option>
 		</select></div>
 	</td></tr>
 
@@ -49,31 +50,31 @@
 	<td><div class="col-md-8">
 		<c:forEach items="${allCategory}" var="i">
 			<label class="radio-inline">
-			<input type="radio" name="categoryname" value="${i}"
-			${HTMLUtils.judgeCategorynameChecked(form.categoryname, i)} disabled> ${i}
+			<input type="radio" name="categoryname" value="${StringEscapeUtils.escapeHtml4(i)}"
+			${HTMLUtils.judgeCategorynameChecked(StringEscapeUtils.escapeHtml4(form.categoryname), StringEscapeUtils.escapeHtml4(i))} disabled> ${StringEscapeUtils.escapeHtml4(i)}
 			</label>
 		</c:forEach></div>
 	</td></tr>
 
 	<tr><th>商品名</th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" placeholder="${form.tradename}" disabled>
+	<input class="form-control" type="text" placeholder="${StringEscapeUtils.escapeHtml4(form.tradename)}" disabled>
 	</div></td></tr>
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="${HTMLUtils.formatTotal(form.price)}" disabled>
+	<input class="form-control" id="right1" type="text" placeholder="${HTMLUtils.formatTotal(form.price)}" disabled>
 	</div></td></tr>
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="${HTMLUtils.formatTotal(form.salenumber)}" disabled>
+	<input class="form-control" id="right2" type="text" placeholder="${HTMLUtils.formatTotal(form.salenumber)}" disabled>
 	</div></td></tr>
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right" type="text" placeholder="${HTMLUtils.formatTotal(form.total)}" disabled>
+	<input class="form-control" id="right3" type="text" placeholder="${HTMLUtils.formatTotal(form.total)}" disabled>
 	</div></td></tr>
 	<tr><th id="remarks">備考</th>
 	<td><div class="col-md-8">
-	<textarea class="form-control" id="detail" rows="3" name="note" disabled>${form.note}</textarea>
+	<textarea class="form-control" id="detail" rows="3" name="note" placeholder="備考" disabled>${StringEscapeUtils.escapeHtml4(form.note)}</textarea>
 	</div></td>
 	</tr>
 

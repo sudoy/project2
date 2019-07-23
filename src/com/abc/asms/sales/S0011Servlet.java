@@ -45,7 +45,7 @@ public class S0011Servlet extends HttpServlet {
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("userinfo");
 
-			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+			if (!checkauthority1.getAuthority().equals("1") && !checkauthority1.getAuthority().equals("11")) {
 				session.setAttribute("error", "不正なアクセスです。");
 				resp.sendRedirect("C0020.html");
 			} else {
@@ -106,6 +106,29 @@ public class S0011Servlet extends HttpServlet {
 
 			}
 		}
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
+		HttpSession session = req.getSession();
+		boolean login = false;
+		List<String> loginerror = new ArrayList<>();
+
+		if (session.getAttribute("login") != null) {//そもそもsessionが存在してないとエラーになるので
+			//loginがtrue(ログイン状態にある)じゃないと入れないように
+			login = (boolean) session.getAttribute("login");
+		}
+
+		if (login == false) {
+			loginerror.add("ログインしてください。");
+			session.setAttribute("error", loginerror);
+			resp.sendRedirect("C0010.html");
+		} else {
+			resp.sendRedirect("S0010.html");
+		}
+
 	}
 
 	private List<String> validate(S0011Form form) throws UnsupportedEncodingException, ServletException {

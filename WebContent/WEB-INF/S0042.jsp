@@ -32,7 +32,7 @@
 				type="hidden" name="authority" value="${S0042Form.authority}">
 
 			<div class="form-group">
-				<label for="text" class="col-sm-3 control-label">氏名 <span
+				<label class="col-sm-3 control-label">氏名 <span
 					class="badge badge-default"> 必須 </span></label>
 				<div class="col-sm-5">
 					<input type="text" class="form-control" placeholder="氏名"
@@ -40,7 +40,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputEmail3" class="col-sm-3 control-label">メールアドレス
+				<label class="col-sm-3 control-label">メールアドレス
 					<span class="badge badge-default"> 必須 </span>
 				</label>
 				<div class="col-sm-5">
@@ -49,16 +49,16 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputPassword3" class="col-sm-3 control-label">パスワード</label>
+				<label class="col-sm-3 control-label">パスワード</label>
 				<div class="col-sm-5">
-					<input type="password" class="form-control" name="password"
+					<input type="password" class="form-control" name="password" placeholder="パスワード"
 						value="">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="inputPasswordCheck3" class="col-sm-3 control-label">パスワード(確認)</label>
+				<label class="col-sm-3 control-label">パスワード(確認)</label>
 				<div class="col-sm-5">
-					<input type="password" class="form-control" name="check"
+					<input type="password" class="form-control" name="check" placeholder="パスワード(確認)"
 						value="${check}">
 				</div>
 			</div>
