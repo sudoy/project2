@@ -5,6 +5,7 @@ public class S0023Form {
 	private String id;
 	private String saledate;
 	private String name;
+	private String categoryid;
 	private String categoryname;
 	private String tradename;
 	private String price;
@@ -13,19 +14,30 @@ public class S0023Form {
 	private int total;
 
 
-	public S0023Form(String id, String saledate, String name, String categoryname, String tradename, String price,
+	public S0023Form(String id, String saledate, String name, String categoryid, String categoryname, String tradename, String price,
 			String salenumber, String note, int total) {
 		super();
 
 		this.id = id;
 		this.saledate = saledate;
 		this.name = name;
+		this.categoryid = categoryid;
 		this.categoryname = categoryname;
 		this.tradename = tradename;
 		this.price = price;
 		this.salenumber = salenumber;
 		this.note = note;
 		this.total = total;
+	}
+
+
+	public String getCategoryid() {
+		return categoryid;
+	}
+
+
+	public void setCategoryid(String categoryid) {
+		this.categoryid = categoryid;
 	}
 
 

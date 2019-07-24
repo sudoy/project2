@@ -5,7 +5,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -115,6 +114,10 @@ public class S0023Servlet extends HttpServlet {
 				String salenumber = req.getParameter("salenumber");//個数
 				String note = req.getParameter("note");//備考
 
+				//categoryidの取得
+				S0023Service service1 = new S0023Service();
+				String categoryid = service1.selectCategoryid(categoryname);
+
 				//NumberFormatException回避 正規表現で半角数字以外をはじく
 			      Pattern p = Pattern.compile("^[0-9]*$");
 			        Matcher mp = p.matcher(price);
@@ -128,7 +131,7 @@ public class S0023Servlet extends HttpServlet {
 					total = intprice * intsalenumber;
 				}
 
-				S0023Form form = new S0023Form(id, saledate, name, categoryname, tradename, price, salenumber, note,
+				S0023Form form = new S0023Form(id, saledate, name, categoryid, categoryname, tradename, price, salenumber, note,
 						total);
 
 				//入力チェック
@@ -146,12 +149,6 @@ public class S0023Servlet extends HttpServlet {
 
 					session.setAttribute("S0023Form", form);//入力した値
 
-					Enumeration e = session.getAttributeNames();
-					while (e.hasMoreElements()) {
-						String key = (String) e.nextElement();
-						System.out.println(key + "：" + session.getAttribute(key) + "<br>");
-					}
-
 					//入力チェッククリア後、S0024に遷移
 					resp.sendRedirect("S0024.html");
 				}
@@ -168,10 +165,10 @@ public class S0023Servlet extends HttpServlet {
 		DateFormat format = new SimpleDateFormat("yyyy/M/d");
 		format.setLenient(false);
 
-		S0023Service service = new S0023Service();
+		S0023Service service2 = new S0023Service();
 
-		boolean accountexist = service.accountexist(form);
-		boolean categoryexist = service.categoryexist(form);
+		boolean accountexist = service2.accountexist(form);
+		boolean categoryexist = service2.categoryexist(form);
 
 		String saledate = form.getSaledate();
 		String name = form.getName();

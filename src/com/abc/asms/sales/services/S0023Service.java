@@ -156,6 +156,42 @@ public class S0023Service {
 		}
 	}
 
+	//カテゴリーidの取得
+	public String selectCategoryid(String categoryname) throws ServletException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+		try {
+			//データベース接続
+			con = DBUtils.getConnection();
+
+			//SQL
+			sql = "select category_id from categories where category_name = ?";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, categoryname);
+
+			//SELECT命令の実行
+			rs = ps.executeQuery();
+			String categoryid = null;
+
+			while (rs.next()) {
+				categoryid = rs.getString("category_id");
+			}
+			return categoryid;
+
+		} catch (Exception e) {
+			throw new ServletException(e);
+
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+	}
+
 	//アカウントテーブル存在チェック
 	public boolean accountexist(S0023Form form) {
 
@@ -164,7 +200,7 @@ public class S0023Service {
 		String sql = null;
 		ResultSet rs = null;
 
-		boolean accountexist = false;
+		boolean accountexist = true;
 
 		String id = null;
 
@@ -172,24 +208,22 @@ public class S0023Service {
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
 
-			sql = "select account_id from accounts where name = ?";
+			sql = "select account_id from accounts where account_id = ?";
 
 			// プレースホルダに値を設定
 			ps = con.prepareStatement(sql);
 
-			ps.setString(1, form.getName());
+			ps.setString(1, form.getId());
 
 			rs = ps.executeQuery();
 
-			rs.next();
+			if(rs.next()) {//値が取れたら
 
-			id = rs.getString("account_id");
+				id = rs.getString("account_id");
 
-			if (id == null) {
-				accountexist = true;
-			} else {
 				accountexist = false;
 			}
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -208,7 +242,7 @@ public class S0023Service {
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
-		boolean categoryexist = false;
+		boolean categoryexist = true;
 
 		String id = null;
 
@@ -216,25 +250,22 @@ public class S0023Service {
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
 
-			sql = "select category_id from categories where category_name = ? and enable = 1";
+			sql = "select category_id from categories where category_id = ? and active_flg = 1";
 
 			// プレースホルダに値を設定
 			ps = con.prepareStatement(sql);
 
-			ps.setString(1, form.getCategoryname());
+			ps.setString(1, form.getCategoryid());
 
 			rs = ps.executeQuery();
 
-			while (rs.next()) {
-				id = rs.getString("category_id");
-			}
-			;
+			 if(rs.next()) {
 
-			if (id == null) {
-				categoryexist = true;
-			} else {
+				id = rs.getString("category_id");
+
 				categoryexist = false;
 			}
+			;
 
 		} catch (Exception e) {
 			e.printStackTrace();
