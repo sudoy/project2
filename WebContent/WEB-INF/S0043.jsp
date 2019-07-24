@@ -54,7 +54,7 @@
 	    <label class="col-sm-3 control-label">パスワード</label>
 	    <div class="col-sm-5">
 	      <fieldset disabled>
-	    	<input type="password" class="form-control" value="${StringEscapeUtils.escapeHtml4(S0042Form.password)}" name="password">
+	    	<input type="password" class="form-control" value="${StringEscapeUtils.escapeHtml4(S0042Form.password)}" name="password" placeholder="パスワード">
 	      </fieldset>
 	    </div>
 	</div>
@@ -62,7 +62,7 @@
 	    <label class="col-sm-3 control-label">パスワード(確認)</label>
 	    <div class="col-sm-5">
 	      <fieldset disabled>
-	    	<input type="password" class="form-control" value="${StringEscapeUtils.escapeHtml4(S0042Form.check)}" name="check">
+	    	<input type="password" class="form-control" value="${StringEscapeUtils.escapeHtml4(S0042Form.check)}" name="check" placeholder="パスワード(確認)">
 	      </fieldset>
 	    </div>
 	</div>
