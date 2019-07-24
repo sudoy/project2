@@ -20,9 +20,9 @@
 	<jsp:include page="header.jsp">
 		<jsp:param name="bar"
 		value='<li><a href="C0020.html">ダッシュボード</a></li>
-		${HTMLUtils.judgeSale(userinfo.authority, "S2")}
+		${HTMLUtils.judgeSale(accounts.authority, "S2")}
 		<li class="active"><a href="S0020.html">売上検索<span class="sr-only">(current)</span></a></li>
-		${HTMLUtils.judgeAccount(userinfo.authority, "S2")}
+		${HTMLUtils.judgeAccount(accounts.authority, "S2")}
 		<li><a href="S0040.html">アカウント検索</a></li>'/>
 	</jsp:include>
 

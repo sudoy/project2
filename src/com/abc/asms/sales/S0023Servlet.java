@@ -43,7 +43,7 @@ public class S0023Servlet extends HttpServlet {
 		} else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移) 売り上げに未変更
-			C0010Form checkauthority = (C0010Form) session.getAttribute("userinfo");
+			C0010Form checkauthority = (C0010Form) session.getAttribute("accounts");
 
 			if (!checkauthority.getAuthority().equals("1") && !checkauthority.getAuthority().equals("11")) {
 				error.add("不正なアクセスです。");
@@ -96,7 +96,7 @@ public class S0023Servlet extends HttpServlet {
 		} else {
 
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
-			C0010Form checkauthority = (C0010Form) session.getAttribute("userinfo");
+			C0010Form checkauthority = (C0010Form) session.getAttribute("accounts");
 
 			if (!checkauthority.getAuthority().equals("1") && !checkauthority.getAuthority().equals("11")) {
 				error.add("不正なアクセスです。");
