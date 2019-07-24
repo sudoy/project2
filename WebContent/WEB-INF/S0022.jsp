@@ -62,7 +62,7 @@
 
 
 
-	<td><div><pre><p>${StringEscapeUtils.escapeHtml4(S0022Form.note)}</p></pre></div></td>
+	<td><div><pre>${StringEscapeUtils.escapeHtml4(S0022Form.note)}</pre></div></td>
 	</tr>
 
 
