@@ -19,9 +19,9 @@
 	<jsp:include page="header.jsp">
 		<jsp:param name="bar" value='<li class="active"><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
 
-		${HTMLUtils.judgeSale(userinfo.authority, "C2")}
+		${HTMLUtils.judgeSale(accounts.authority, "C2")}
 		<li><a href="S0020.html">売上検索</a></li>
-		${HTMLUtils.judgeAccount(userinfo.authority, "C2")}
+		${HTMLUtils.judgeAccount(accounts.authority, "C2")}
 		<li><a href="S0040.html">アカウント検索</a></li>'/>
 	</jsp:include>
 
@@ -129,7 +129,7 @@
 
 		<div class="panel panel-default">
 		<!-- Default panel contents -->
-		<div class="panel-heading"><h2>今月の${userinfo.name}さんの売上</h2></div>
+		<div class="panel-heading"><h2>今月の${accounts.name}さんの売上</h2></div>
 
 		<table class="table">
 		<tr><th>No</th><th>販売日</th><th>商品カテゴリー</th><th>商品名</th><th>単価</th><th>個数</th><th>小計</th></tr>

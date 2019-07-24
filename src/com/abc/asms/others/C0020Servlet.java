@@ -39,7 +39,7 @@ public class C0020Servlet extends HttpServlet {
 
 			LocalDate today = null;
 
-			C0010Form userInfo = (C0010Form) session.getAttribute("userinfo");
+			C0010Form userInfo = (C0010Form) session.getAttribute("accounts");
 			C0020Service serv = new C0020Service();
 
 			String value = req.getParameter("value");
