@@ -214,7 +214,7 @@ public class S0011Servlet extends HttpServlet {
 			}
 		}
 
-		if (400 <= note.length()) {
+		if (400 < note.length()) {
 			error.add("備考が長すぎます。");
 		}
 
