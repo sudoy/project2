@@ -47,7 +47,7 @@ public class S0043Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				getServletContext().getRequestDispatcher("/WEB-INF/S0040.jsp").forward(req, resp);
+				getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
 			}
 		}
 	}
