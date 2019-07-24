@@ -8,7 +8,6 @@ create table sales(
 	unit_price int not null,
 	sale_number int not null,
 	note text default null
-
 );
 
 
