@@ -87,7 +87,7 @@ public class S0011Servlet extends HttpServlet {
 					S0010Service serv = new S0010Service();
 					List<S0010Form> s0010form = serv.select();
 
-					req.setAttribute("accounts", s0010form);
+					req.setAttribute("accountsInfo", s0010form);
 
 					getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
 					session.removeAttribute("error");

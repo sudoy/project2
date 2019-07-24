@@ -48,7 +48,7 @@
 		<select class="form-control" name="accountid">
 			<option value="0">選択してください</option>
 
-			<c:forEach items="${accounts}" var="i">
+			<c:forEach items="${accountsInfo}" var="i">
 				<option value ="${i.accountid}"
 				 ${HTMLUtils.judgeStaffSelected(StringEscapeUtils.escapeHtml4(i.name), StringEscapeUtils.escapeHtml4(form.name))}>${StringEscapeUtils.escapeHtml4(i.name)}</option>
 			</c:forEach>

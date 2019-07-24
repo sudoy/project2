@@ -54,7 +54,7 @@ public class S0010Servlet extends HttpServlet {
 				S0010Service service = new S0010Service();
 				List<S0010Form> form = service.select();
 
-				req.setAttribute("accounts", form);
+				req.setAttribute("accountsInfo", form);
 
 				//今日の日付を取得
 				String today = LocalDate.now().toString();
