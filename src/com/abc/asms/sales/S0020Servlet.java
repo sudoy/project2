@@ -43,14 +43,6 @@ public class S0020Servlet extends HttpServlet {
 			List<S0020Form> staffList = disp.staff();
 			List<String> categoryList = disp.category();
 
-			//今日の日付を取得
-//			if (session.getAttribute("S0020Form") == null) {
-//				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/M/d");
-//				String today = dtf.format(LocalDate.now()).toString();
-//				S0020Form todayForm = new S0020Form(today, today);
-//				req.setAttribute("S0020Form", todayForm);
-//			}
-
 			//sessionに入れる（session名 allName）
 			session.setAttribute("allName", staffList);
 			session.setAttribute("allCategory", categoryList);

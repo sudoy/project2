@@ -86,7 +86,7 @@ public class S0011Servlet extends HttpServlet {
 					//accountsテーブルから情報を取得
 					S0010Service serv = new S0010Service();
 					List<S0010Form> s0010form = serv.select();
-					session.setAttribute("accounts", s0010form);
+
 					req.setAttribute("accounts", s0010form);
 
 					getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);

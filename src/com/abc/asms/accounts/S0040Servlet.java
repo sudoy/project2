@@ -102,13 +102,13 @@ public class S0040Servlet extends HttpServlet {
 
 		List<String> error = new ArrayList<>();
 
-		//nameが入力されており且バイト数が21以上
+		//nameが入力されており且文字数が21以上
 		if (!(form.getName().equals("")) &&
 				(21 <= form.getName().length())) {
 			error.add("氏名の指定が長すぎます。");
 		}
 
-		//mailが入力されており且バイト数が101以上
+		//mailが入力されており且文字数が101以上
 		if (!(form.getMail().equals("")) &&
 				(101 <= form.getMail().length())) {//kigenが空じゃない時
 			error.add("メールアドレスの指定が長すぎます。");
@@ -117,7 +117,7 @@ public class S0040Servlet extends HttpServlet {
 		//「＠」が含まれていること。先頭は「a-zA-Z0-9」で、2文字目以降はさらに「._-」の文字が許容される。
 		//「＠」以降は「a-zA-Z0-9._-」が1文字以上続き、必ず「.」が含まれていること
 		if (!(form.getMail().equals("")) &&
-				(form.getMail().getBytes("UTF-8").length) < 101) {//mailが入力されており且101バイトより小さい
+				(form.getMail().length()) < 101) {//mailが入力されており且101文字より小さい
 			String mailFormat = "^\\w+([-_.]\\w+)*@\\w+([-_.]\\w+)*\\.\\w+([-_.]\\w+)*$";
 			Pattern pattern = Pattern.compile(mailFormat);
 			Matcher matcher = pattern.matcher(form.getMail());

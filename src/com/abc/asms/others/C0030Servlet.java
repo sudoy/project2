@@ -20,7 +20,6 @@ public class C0030Servlet extends HttpServlet {
 		session.invalidate();
 
 		session = req.getSession();
-//		session.setAttribute("login", false);
 
 		session.setAttribute("complete", "ログアウトしました。");
 
