@@ -19,9 +19,9 @@
 	<jsp:include page="header.jsp">
 		<jsp:param name="bar"
 		value='<li><a href="C0020.html">ダッシュボード</a></li>
-		${HTMLUtils.judgeSale(userinfo.authority, "S4")}
+		${HTMLUtils.judgeSale(accounts.authority, "S4")}
 		<li><a href="S0020.html">売上検索</a></li>
-		${HTMLUtils.judgeAccount(userinfo.authority, "S4")}
+		${HTMLUtils.judgeAccount(accounts.authority, "S4")}
 		<li class="active"><a href="S0040.html">アカウント検索<span class="sr-only">(current)</span></a></li>'/>
 	</jsp:include>
 
@@ -39,7 +39,7 @@
 
 		<tr>
 			<td class="col-sm-2">
-			<c:if test="${(userinfo.authority == '10') || (userinfo.authority == '11')}">
+			<c:if test="${(accounts.authority == '10') || (accounts.authority == '11')}">
 			<a class="btn btn-primary" href="S0042.html?id=${i.id}" role="button">
 			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 編集</a>
 			<a class="btn btn-danger" href="S0044.html?id=${i.id}" role="button">
