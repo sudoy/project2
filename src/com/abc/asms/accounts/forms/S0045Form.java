@@ -1,4 +1,4 @@
-package com.abc.asms.accounts;
+package com.abc.asms.accounts.forms;
 
 public class S0045Form {
 	private String mail;

@@ -60,7 +60,7 @@ public class S0023Servlet extends HttpServlet {
 
 					//jspで一覧を出すためのもの
 					List<S0023Form> accounts = service.accounts();
-					session.setAttribute("accounts", accounts);//アカウント情報一覧(idとname)
+					session.setAttribute("accountsinfo", accounts);//アカウント情報一覧(idとname)
 
 					List<String> categories = service.categories();
 					session.setAttribute("categories", categories);//商品カテゴリー名一覧

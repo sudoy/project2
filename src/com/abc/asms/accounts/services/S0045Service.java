@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.abc.asms.accounts.S0045Form;
+import com.abc.asms.accounts.forms.S0045Form;
 import com.abc.asms.goods.utils.DBUtils;
 
 public class S0045Service {
