@@ -200,7 +200,7 @@ public class S0023Service {
 		String sql = null;
 		ResultSet rs = null;
 
-		boolean accountexist = true;
+		boolean accountexist = false;
 
 		String id = null;
 
@@ -217,13 +217,12 @@ public class S0023Service {
 
 			rs = ps.executeQuery();
 
-			if(rs.next()) {//値が取れたら
+			if (rs.next()) {//値が取れたら
 
 				id = rs.getString("account_id");
 
-				accountexist = false;
+				accountexist = true;
 			}
-
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -259,13 +258,12 @@ public class S0023Service {
 
 			rs = ps.executeQuery();
 
-			 if(rs.next()) {
+			if (rs.next()) {
 
 				id = rs.getString("category_id");
 
 				categoryexist = false;
 			}
-			;
 
 		} catch (Exception e) {
 			e.printStackTrace();

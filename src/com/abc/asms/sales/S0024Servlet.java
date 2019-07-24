@@ -47,12 +47,17 @@ public class S0024Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
+				S0023Form form = (S0023Form)session.getAttribute("S0023Form");
+				if(form == null) {
+					resp.sendRedirect("C0020.html");
+					return;
+				}
+
 				//jspに表示する為の商品カテゴリー一覧
 				S0024Service service = new S0024Service();
 				List<String> categories = service.categories();
 
 				req.setAttribute("categories", categories );
-
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0024.jsp").forward(req, resp);
 			}
