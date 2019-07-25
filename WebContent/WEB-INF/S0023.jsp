@@ -53,7 +53,8 @@
 		<select class="form-control" name="name">
 			<option  value="0" <c:if test="${S0023Form.name == null}">selected</c:if>>
 			選択してください</option>
-			<c:forEach items="${accounts}" var="i">
+
+			<c:forEach items="${accountsinfo}" var="i">
 				<option value ="${StringEscapeUtils.escapeHtml4(i.name)}"
 				 ${HTMLUtils.judgeStaffSelected(StringEscapeUtils.escapeHtml4(i.name), StringEscapeUtils.escapeHtml4(S0023Form.name))}>${StringEscapeUtils.escapeHtml4(i.name)}</option>
 			</c:forEach>

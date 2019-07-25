@@ -106,11 +106,18 @@ public class S0023Service {
 				id = rs.getString("account_id");
 				name = rs.getString("name");
 
+
+
 				S0023Form form = new S0023Form(id, name);
 
 				accounts.add(form);
 
+
 			}
+
+			System.out.println(accounts);
+
+
 
 			return accounts;
 

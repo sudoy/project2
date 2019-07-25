@@ -61,9 +61,12 @@ public class S0031Servlet extends HttpServlet {
 
 				S0031Form s0031form = new S0031Form(name, mail, password, check, sale, account);
 
+
 				//登録確認からキャンセルで戻った時にも使えるように
-				session = req.getSession();
-				session.setAttribute("S0031form", s0031form);
+//				session = req.getSession();
+//				session.setAttribute("S0031form", s0031form);
+//修正中
+				req.setAttribute("S0031form", s0031form);
 
 				// バリデーションチェック
 				List<String> error = validate(s0031form);
