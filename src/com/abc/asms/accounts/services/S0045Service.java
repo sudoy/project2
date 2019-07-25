@@ -82,7 +82,7 @@ public class S0045Service {
 			});
 
 			// toアドレス
-			InternetAddress toAddress = new InternetAddress("mail");
+			InternetAddress toAddress = new InternetAddress(mail);
 			// fromアドレス
 			InternetAddress fromAddress = new InternetAddress("sie.tsd2018@gmail.com", "物品売上管理システム");
 

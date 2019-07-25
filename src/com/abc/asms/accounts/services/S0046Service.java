@@ -73,7 +73,8 @@ public class S0046Service {
 			ps = con.prepareStatement(sql);
 
 			//UPDATE命令にポストデータの内容をセット
-			ps.setString(1, form.getMail());
+			ps.setString(1, form.getPassword());
+			ps.setString(2, form.getMail());
 
 
 			//UPDATE命令の実行

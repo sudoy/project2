@@ -72,7 +72,7 @@ public class S0046Servlet extends HttpServlet {
 
 		List<String> error = new ArrayList<>();
 
-		String mail = form.getMail();
+//		String mail = form.getMail();
 		String password = form.getPassword();
 		String check = form.getCheck();
 
