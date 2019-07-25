@@ -84,7 +84,7 @@ public class S0045Servlet extends HttpServlet {
 		//「＠」以降は「a-zA-Z0-9._-」が1文字以上続き、必ず「.」が含まれていること
 		if (!(s0045form.getMail().equals("")) &&
 				(s0045form.getMail().getBytes("UTF-8").length) < 101) {//mailが入力されており且101バイトより小さい
-			String mailFormat = "^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$";
+			String mailFormat = "^\\w+([-_.]\\w+)*@\\w+([-_.]\\w+)*\\.\\w+([-_.]\\w+)*$";
 			Pattern pattern = Pattern.compile(mailFormat);
 			Matcher matcher = pattern.matcher(s0045form.getMail());
 			if (!matcher.find()) {
