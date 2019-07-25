@@ -64,13 +64,14 @@ public class S0042Service {
 
 	}
 
+	//メールアドレス存在チェック
 	public boolean mailexist(S0042Form form) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
-		boolean exist = true;//被りがない
+		boolean exist = true;
 
 		String mail = null;
 
