@@ -115,10 +115,6 @@ public class S0023Service {
 
 			}
 
-			System.out.println(accounts);
-
-
-
 			return accounts;
 
 		} catch (Exception e) {
