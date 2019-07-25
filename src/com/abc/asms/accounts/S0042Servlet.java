@@ -58,7 +58,6 @@ public class S0042Servlet extends HttpServlet {
 					session.setAttribute("password", form.getPassword());
 				}
 
-
 				this.getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
 			}
 		}
@@ -112,7 +111,6 @@ public class S0042Servlet extends HttpServlet {
 
 				S0042Form form = new S0042Form(id, name, mail, password, check, sale, account, authority);
 
-
 				//入力チェック
 				error = validate(form);
 
@@ -140,6 +138,8 @@ public class S0042Servlet extends HttpServlet {
 	private List<String> validate(S0042Form form) {
 
 		List<String> e = new ArrayList<>();
+		S0042Service service = new S0042Service();
+		boolean exist = service.mailexist(form);//メールアドレスが登録済みのものと被らないかチェック
 
 		String name = form.getName();
 		String mail = form.getMail();
@@ -164,6 +164,8 @@ public class S0042Servlet extends HttpServlet {
 			e.add("メールアドレスを入力して下さい。");
 		} else if (101 <= form.getMail().length()) {//メールアドレス長さチェック(101文字以上でエラー)
 			e.add("メールアドレスが長すぎます。");
+		} else if (exist == false) {
+			e.add("メールアドレスが既に登録されています。");
 		}
 
 		//メールアドレス形式チェック

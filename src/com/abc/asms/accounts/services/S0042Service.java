@@ -37,12 +37,11 @@ public class S0042Service {
 
 			ps.setString(1, num);
 
-
 			//SELECT命令の実行
 			rs = ps.executeQuery();
 
 			//結果セットの内容を出力(DBから抽出したデータ)
-			while(rs.next()) {
+			while (rs.next()) {
 
 				id = rs.getString("account_id");
 				name = rs.getString("name");
@@ -65,12 +64,47 @@ public class S0042Service {
 
 	}
 
-		public S0042Form mailexist() {
+	public boolean mailexist(S0042Form form) {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+		boolean exist = true;//被りがない
+
+		String mail = null;
+
+		try {
+			//データベースの接続を確立
+			con = DBUtils.getConnection();
+			//sql
+			sql = "SELECT mail From accounts WHERE mail = ?";
+
+			// プレースホルダに値を設定
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, form.getMail());
+
+			rs = ps.executeQuery();
+
+			while(rs.next()) {
+				mail = rs.getString("mail");
+			};
 
 
+			if(mail == null){
+				exist = true;
+			}else {
+				exist = false;
+			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 
-			return null;
-
+			DBUtils.close(con, ps, rs);
 		}
+		return exist;
+
+	}
 }
