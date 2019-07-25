@@ -85,7 +85,8 @@
 
 		<button type="submit" class="btn btn-primary" id="entry">
 		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
-		<a class="btn btn-default" href="S0010.html">キャンセル</a>
+		<a class="btn btn-default" href="S0010.html?saledate=${form.saledate}&accountid=${form.name}&categoryname=${form.categoryname}
+		&tradename=${form.tradename}&price=${form.price}&salenumber=${form.salenumber}&note=${form.note}">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>

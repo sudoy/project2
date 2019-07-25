@@ -72,8 +72,9 @@ public class S0011Servlet extends HttpServlet {
 
 				S0011Form s0011form = new S0011Form(saledate, accountid, categoryid, categoryname, tradename, price,
 						salenumber, note, name);
-
-				session.setAttribute("form", s0011form);
+//修正中
+				//session.setAttribute("form", s0011form);
+				req.setAttribute("form", s0011form);
 
 				// バリデーションチェック
 				List<String> error = validate(s0011form);
@@ -104,6 +105,7 @@ public class S0011Servlet extends HttpServlet {
 				s0011form.setTotal(total);
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0011.jsp").forward(req, resp);
+
 
 			}
 		}
