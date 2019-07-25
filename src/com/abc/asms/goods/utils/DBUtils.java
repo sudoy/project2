@@ -41,4 +41,84 @@ public class DBUtils {
 		}
 	}
 
+	//account_id照合
+	public boolean checkAccountId(String accountId) {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+		boolean accountExist = false;
+
+		try {
+			//データベースの接続を確立
+			con = getConnection();
+
+			sql = "select account_id from accounts where account_id = ?";
+
+			// プレースホルダに値を設定
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, accountId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {//値が取れたら
+
+				rs.getString("account_id");
+
+				accountExist = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			DBUtils.close(con, ps, rs);
+		}
+		return accountExist;
+
+	}
+
+	//sale_id照合
+	public boolean checkSaleId(String saleId) {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+		boolean saleExist = false;
+
+		try {
+			//データベースの接続を確立
+			con = getConnection();
+
+			sql = "select sale_id from sales where sale_id = ?";
+
+			// プレースホルダに値を設定
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, saleId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {//値が取れたら
+
+				rs.getString("sale_id");
+
+				saleExist = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+
+			DBUtils.close(con, ps, rs);
+		}
+		return saleExist;
+
+	}
+
 }
