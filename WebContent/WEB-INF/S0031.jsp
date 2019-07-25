@@ -92,7 +92,8 @@
 	      <button type="submit" class="btn btn-primary">
 	      	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K
 	      </button>
-	      <a  class="btn btn-default" href="S0030.html">キャンセル</a>
+	      <a  class="btn btn-default" href="S0030.html?name=${S0031form.name}&mail=${S0031form.mail}
+	      &sale=${S0031form.sale}&account=${S0031form.account}">キャンセル</a>
 	    </div>
 	</div>
 </form>

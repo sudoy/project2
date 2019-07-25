@@ -5,6 +5,7 @@ public class S0010Form {
 	private String saledate;
 	private String accountid;
 	private String categoryid;
+	private String categoryname;
 	private String tradename;
 	private String price;
 	private String salenumber;
@@ -13,14 +14,25 @@ public class S0010Form {
 
 	private String today;
 
-	public S0010Form(String saledate, String accountid, String categoryname, String tradename, String price, String salenumber, String note) {
-		super();
 
-
-	}
 	public S0010Form(String today) {
 		super();
 		this.today = today;
+	}
+	public S0010Form(String saledate, String accountid, String categoryname, String tradename, String price,
+			String salenumber, String note, String name) {
+		super();
+		this.saledate = saledate;
+		this.accountid = accountid;
+		this.categoryname = categoryname;
+		this.tradename = tradename;
+		this.price = price;
+		this.salenumber = salenumber;
+		this.note = note;
+		this.name = name;
+	}
+	public S0010Form() {
+		super();
 	}
 	public String getSaleid() {
 		return saleid;
@@ -82,6 +94,12 @@ public class S0010Form {
 	}
 	public void setToday(String today) {
 		this.today = today;
+	}
+	public String getCategoryname() {
+		return categoryname;
+	}
+	public void setCategoryname(String categoryname) {
+		this.categoryname = categoryname;
 	}
 
 

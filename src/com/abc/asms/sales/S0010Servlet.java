@@ -50,6 +50,20 @@ public class S0010Servlet extends HttpServlet {
 				session.setAttribute("error", error);
 				resp.sendRedirect("C0020.html");
 			} else {
+				//キャンセルされて戻ってきた値
+				String saledate = req.getParameter("saledate");
+				String accountid = req.getParameter("accountid");
+				String categoryname = req.getParameter("categoryname");
+				String tradename = req.getParameter("tradename");
+				String price = req.getParameter("price");
+				String salenumber = req.getParameter("salenumber");
+				String note = req.getParameter("note");
+				String name = req.getParameter("name");
+
+				S0010Form s0010form = new S0010Form(saledate, accountid, categoryname, tradename, price,
+						salenumber, note, name);
+
+
 				//accountsテーブルから情報を取得
 				S0010Service service = new S0010Service();
 				List<S0010Form> form = service.select();
@@ -71,24 +85,10 @@ public class S0010Servlet extends HttpServlet {
 				session.removeAttribute("error");
 				session.removeAttribute("complete");
 
-//
-				String saledate = req.getParameter("saledate");
-				String accountid = req.getParameter("accountid");
-				String categoryname = req.getParameter("categoryname");
-				String tradename = req.getParameter("tradename");
-				String price = req.getParameter("price");
-				String salenumber = req.getParameter("salenumber");
-				String note = req.getParameter("note");
-
-				S0010Form s0010form = new S0010Form(saledate, accountid, categoryname, tradename, price,
-						salenumber, note);
-
-				System.out.println(s0010form.getSaledate());
+				//確認画面から他の画面に行って戻ってきたときに空になるように
+				session.removeAttribute("form");
 
 				req.setAttribute("form", s0010form);
-
-
-
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
 
@@ -139,6 +139,8 @@ public class S0010Servlet extends HttpServlet {
 					s0010form.setSalenumber(s0011form.getSalenumber());
 					s0010form.setNote(s0011form.getNote());
 					s0010form.setAccountid(s0011form.getAccountid());
+
+
 
 					//account_idがテーブルに存在するかチェック
 					List<String> error2 = new ArrayList<>();

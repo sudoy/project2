@@ -41,7 +41,7 @@
 		<td>
 		<div class="col-md-3">
 		<input type="text" class="form-control" placeholder="販売日" name="saledate"
-		value="<c:if test="${form == null}">${HTMLUtils.formatDate(todayForm.today)}</c:if><c:if test="${form != null}">${form.saledate}</c:if>">
+		value="<c:if test="${form.saledate == null}">${HTMLUtils.formatDate(todayForm.today)}</c:if><c:if test="${form != null}">${form.saledate}</c:if>">
 		</div>
 		</td>
 	</tr>

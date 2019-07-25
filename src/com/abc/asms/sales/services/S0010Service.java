@@ -190,7 +190,41 @@ public class S0010Service {
 			DBUtils.close(con, ps, rs);
 		}
 	}
+	public String selectname(S0010Form form) throws ServletException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
 
 
+		try {
+			//データベース接続
+			con = DBUtils.getConnection();
+
+			//SQL
+			sql = "select name from accounts where account_id = ?";
+
+			//SELECT命令の準備
+			ps = con.prepareStatement(sql);
+
+			ps.setString(1, form.getAccountid());
+
+			//SELECT命令の実行
+			rs = ps.executeQuery();
+			String name = null;
+
+
+			while(rs.next()) {
+				name = rs.getString("name");
+			}
+			return name;
+
+		}catch(Exception e){
+			throw new ServletException(e);
+
+		} finally {
+			DBUtils.close(con, ps, rs);
+		}
+	}
 }
 

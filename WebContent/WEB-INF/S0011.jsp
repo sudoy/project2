@@ -34,7 +34,7 @@
 	<tr><th>販売日</th>
 		<td>
 		<div class="col-md-3">
-		<input type="text" class="form-control" value="${form.saledate}" placeholder="販売日" disabled>
+		<input type="text" class="form-control" name="saledate" value="${form.saledate}" placeholder="販売日" disabled>
 		</div>
 		</td>
 	</tr>
@@ -58,15 +58,15 @@
 
 	<tr><th>商品名</th>
 	<td><div class="col-md-8">
-	<input class="form-control" type="text" placeholder="${StringEscapeUtils.escapeHtml4(form.tradename)}" disabled>
+	<input class="form-control" type="text" name="tradename" placeholder="${StringEscapeUtils.escapeHtml4(form.tradename)}" disabled>
 	</div></td></tr>
 	<tr><th>単価</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right1" type="text" placeholder="${HTMLUtils.formatTotal(form.price)}" disabled>
+	<input class="form-control" id="right1" type="text" name="price" placeholder="${HTMLUtils.formatTotal(form.price)}" disabled>
 	</div></td></tr>
 	<tr><th>個数</th>
 	<td><div class="col-md-3">
-	<input class="form-control" id="right2" type="text" placeholder="${HTMLUtils.formatTotal(form.salenumber)}" disabled>
+	<input class="form-control" id="right2" type="text" name="salenumber" placeholder="${HTMLUtils.formatTotal(form.salenumber)}" disabled>
 	</div></td></tr>
 	<tr><th>小計</th>
 	<td><div class="col-md-3">
@@ -83,10 +83,13 @@
 	<td id="canto">
 	<div class="form-group">
 
+<!-- キャンセルのときだけ送るため -->
+	<input type="hidden" name="name" value="${form.name}">
+
 		<button type="submit" class="btn btn-primary" id="entry">
 		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
 		<a class="btn btn-default" href="S0010.html?saledate=${form.saledate}&accountid=${form.name}&categoryname=${form.categoryname}
-		&tradename=${form.tradename}&price=${form.price}&salenumber=${form.salenumber}&note=${form.note}">キャンセル</a>
+		&tradename=${form.tradename}&price=${form.price}&salenumber=${form.salenumber}&note=${form.note}&name=${form.name}">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>

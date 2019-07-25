@@ -51,6 +51,18 @@ public class S0030Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			}else {
 
+				//確認画面から他の画面に行った後に残らないように
+				session.removeAttribute("S0031form");
+
+				//キャンセルされてもどってきたとき
+				String name = req.getParameter("name");
+				String mail = req.getParameter("mail");
+				String sale = req.getParameter("sale");
+				String account = req.getParameter("account");
+
+				S0030Form s0030f = new S0030Form(name, mail, sale, account);
+				req.setAttribute("S0030form", s0030f);
+
 				getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp").forward(req, resp);
 				session.removeAttribute("error");
 
