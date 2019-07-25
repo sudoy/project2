@@ -49,6 +49,7 @@ public class S0021Servlet extends HttpServlet {
 
 				resp.sendRedirect("S0020.html");
 
+
 			} else {
 				session.setAttribute("S0021Form", list);//sessionに格納
 
