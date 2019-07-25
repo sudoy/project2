@@ -30,6 +30,7 @@
 		<button type="submit" class="btn btn-primary">ログイン</button>
 		</div>
 		</form>
+		<a href="S0045.html">パスワードを忘れた方はこちら</a>
 
 
 		</div>
