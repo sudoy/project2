@@ -39,6 +39,9 @@ public class S0030Servlet extends HttpServlet {
 
 		}else {
 
+			//アカウント検索画面で出たエラーメッセージを消す
+			session.removeAttribute("error");
+
 			//権限チェック(権限が無い場合はダッシュボードへ遷移)
 			C0010Form checkauthority1 = (C0010Form) session.getAttribute("accounts");
 

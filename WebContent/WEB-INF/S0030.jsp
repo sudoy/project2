@@ -22,10 +22,10 @@
 
 <div class="container">
 
-<jsp:include page="message.jsp"/>
-
 
 <h1>アカウント登録</h1>
+
+	<jsp:include page="message.jsp"/>
 
 	<form class="form-horizontal" action="S0031.html" method="post">
 		<div class="form-group">

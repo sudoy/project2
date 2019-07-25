@@ -27,9 +27,10 @@
 
 <div class="container">
 
-<jsp:include page="message.jsp"/>
 
 <h1>売上登録</h1>
+
+	<jsp:include page="message.jsp"/>
 
 <form class="form-horizontal" method="POST" action="S0011.html">
 	<table>

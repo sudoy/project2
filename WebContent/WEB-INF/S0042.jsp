@@ -22,10 +22,9 @@
 
 	<div class="container">
 
-	<jsp:include page="message.jsp"/>
-
-
 		<h1>アカウント編集</h1>
+
+		<jsp:include page="message.jsp"/>
 
 		<form class="form-horizontal" action="S0042.html" method="post">
 

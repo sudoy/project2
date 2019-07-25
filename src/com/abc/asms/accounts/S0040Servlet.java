@@ -39,6 +39,9 @@ public class S0040Servlet extends HttpServlet {
 
 		} else {
 
+			//アカウント検索画面で出たエラーメッセージを消す
+			session.removeAttribute("error");
+
 			if (req.getParameter("clear") != null) {//クリアボタンが押された場合
 				session.removeAttribute("S0040Form");
 				session.removeAttribute("error");

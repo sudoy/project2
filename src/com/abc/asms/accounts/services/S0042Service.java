@@ -64,4 +64,13 @@ public class S0042Service {
 		return null;
 
 	}
+
+		public S0042Form mailexist() {
+
+
+
+
+			return null;
+
+		}
 }
