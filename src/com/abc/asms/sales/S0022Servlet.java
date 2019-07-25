@@ -35,7 +35,14 @@ public class S0022Servlet extends HttpServlet {
 			session.setAttribute("error", error);
 			resp.sendRedirect("C0010.html");
 		} else {//以下ログイン状態にあるときの処理
+
 			String id = req.getParameter("id");
+			if(id == null) {
+				resp.sendRedirect("C0020.html");
+				return;
+			}else if(true) {
+
+			}
 
 			S0022Service serv = new S0022Service();
 			S0022Form form = serv.service(id);

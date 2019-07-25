@@ -42,7 +42,7 @@ public class DBUtils {
 	}
 
 	//account_id照合
-	public boolean checkAccountId(String accountId) {
+	public static boolean checkAccountId(String accountId) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -82,7 +82,7 @@ public class DBUtils {
 	}
 
 	//sale_id照合
-	public boolean checkSaleId(String saleId) {
+	public static boolean checkSaleId(String saleId) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
