@@ -102,7 +102,7 @@ public class S0010Servlet extends HttpServlet {
 
 			//		System.out.println(checkaccount1.getAuthority());
 
-			if (!checkauthority1.getAuthority().equals("10") && !checkauthority1.getAuthority().equals("11")) {
+			if (!checkauthority1.getAuthority().equals("1") && !checkauthority1.getAuthority().equals("11")) {
 				error1.add("不正なアクセスです。");
 				session.setAttribute("error", error1);
 				resp.sendRedirect("C0020.html");
@@ -136,7 +136,7 @@ public class S0010Servlet extends HttpServlet {
 						//accountsテーブルから情報を取得
 						S0010Service serv = new S0010Service();
 						List<S0010Form> s0010form1 = serv.select();
-						req.setAttribute("accounts", s0010form1);
+						req.setAttribute("accountsInfo", s0010form1);
 
 						getServletContext().getRequestDispatcher("/WEB-INF/S0010.jsp").forward(req, resp);
 						session.removeAttribute("error");
@@ -154,7 +154,7 @@ public class S0010Servlet extends HttpServlet {
 						//accountsテーブルから情報を取得
 						S0010Service s0010service = new S0010Service();
 						List<S0010Form> form = s0010service.select();
-						req.setAttribute("accounts", form);
+						req.setAttribute("accountsInfo", form);
 
 						//今日の日付を取得
 						String today = LocalDate.now().toString();
