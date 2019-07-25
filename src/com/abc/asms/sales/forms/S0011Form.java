@@ -29,6 +29,19 @@ public class S0011Form {
 
 
 	}
+
+	public S0011Form(String saledate, String accountid, String categoryid, String tradename, String price,
+			String salenumber, String note) {
+		super();
+		this.saledate = saledate;
+		this.accountid = accountid;
+		this.categoryid = categoryid;
+		this.tradename = tradename;
+		this.price = price;
+		this.salenumber = salenumber;
+		this.note = note;
+	}
+
 	public String getTotal() {
 		return total;
 	}
@@ -37,9 +50,7 @@ public class S0011Form {
 		this.total = total;
 	}
 
-	public S0011Form(String saledate2, String accountid2, String categoryid2, String price2, String salenumber2,
-			String note2, String name2) {
-	}
+
 
 	public String getSaledate() {
 		return saledate;

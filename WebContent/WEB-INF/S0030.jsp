@@ -31,13 +31,13 @@
 		<div class="form-group">
 		    <label class="col-sm-3 control-label">氏名 <span class="badge badge-default"> 必須 </span></label>
 		    <div class="col-sm-5">
-		      <input type="text" class="form-control" placeholder="氏名" name="name" value="${StringEscapeUtils.escapeHtml4(S0031form.name)}">
+		      <input type="text" class="form-control" placeholder="氏名" name="name" value="${StringEscapeUtils.escapeHtml4(S0030form.name)}">
 		    </div>
 		</div>
 		<div class="form-group">
 		    <label class="col-sm-3 control-label">メールアドレス <span class="badge badge-default"> 必須 </span></label>
 		    <div class="col-sm-5">
-		      <input type="email" class="form-control" placeholder="メールアドレス" name ="mail" value="${StringEscapeUtils.escapeHtml4(S0031form.mail)}">
+		      <input type="email" class="form-control" placeholder="メールアドレス" name ="mail" value="${StringEscapeUtils.escapeHtml4(S0030form.mail)}">
 		    </div>
 		</div>
 		<div class="form-group">
@@ -56,10 +56,10 @@
 			<label  class="col-sm-3 control-label">売上登録権限 <span class="badge badge-default"> 必須 </span></label>
 			<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="sale" value="0" <c:if test="${S0031form.sale == '0'}">checked</c:if>> 権限なし
+				<input type="radio" name="sale" value="0" <c:if test="${S0030form.sale == '0'}">checked</c:if>> 権限なし
 			</label>
 				<label class="radio-inline">
-				<input type="radio" name="sale" value="1" <c:if test="${S0031form.sale == '1'}">checked</c:if>> 権限あり
+				<input type="radio" name="sale" value="1" <c:if test="${S0030form.sale == '1'}">checked</c:if>> 権限あり
 			</label>
 			</div>
 		</div>
@@ -69,10 +69,10 @@
 
 			<div class="col-sm-9">
 			<label class="radio-inline">
-				<input type="radio" name="account" value="0" <c:if test="${S0031form.account == '0'}">checked</c:if>> 権限なし
+				<input type="radio" name="account" value="0" <c:if test="${S0030form.account == '0'}">checked</c:if>> 権限なし
 			</label>
 				<label class="radio-inline">
-				<input type="radio" name="account" value="1" <c:if test="${S0031form.account == '1'}">checked</c:if>> 権限あり
+				<input type="radio" name="account" value="1" <c:if test="${S0030form.account == '1'}">checked</c:if>> 権限あり
 			</label>
 			</div>
 		</div>
