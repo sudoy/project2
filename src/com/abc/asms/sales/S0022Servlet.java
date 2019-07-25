@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.asms.goods.utils.DBUtils;
 import com.abc.asms.sales.forms.S0022Form;
 import com.abc.asms.sales.services.S0022Service;
 
@@ -37,10 +38,15 @@ public class S0022Servlet extends HttpServlet {
 		} else {//以下ログイン状態にあるときの処理
 
 			String id = req.getParameter("id");
-			if(id == null) {
+			if (id == null) {
 				resp.sendRedirect("C0020.html");
 				return;
-			}else if(true) {
+			} else {
+				boolean judge = DBUtils.checkSaleId(id);
+				if (judge == false) {
+					resp.sendRedirect("C0020.html");
+					return;
+				}
 
 			}
 
@@ -49,14 +55,11 @@ public class S0022Servlet extends HttpServlet {
 
 			session.setAttribute("S0022Form", form);
 
-
-
 			getServletContext().getRequestDispatcher("/WEB-INF/S0022.jsp").forward(req, resp);
 
 			session.removeAttribute("allCategory");
 			session.removeAttribute("allName");
 		}
 	}
-
 
 }

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.asms.goods.utils.DBUtils;
 import com.abc.asms.others.forms.C0010Form;
 import com.abc.asms.sales.forms.S0023Form;
 import com.abc.asms.sales.services.S0023Service;
@@ -51,20 +52,30 @@ public class S0023Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				S0023Service service = new S0023Service();
-
-				if (req.getParameter("id") != null) {
-					S0023Form form = service.select(req.getParameter("id"));
-					session.setAttribute("S0023Form", form);//前の画面の値を表示させるためのもの(編集前の売上情報)
-
-
-					//jspで一覧を出すためのもの
-					List<S0023Form> accounts = service.accounts();
-					session.setAttribute("accountsinfo", accounts);//アカウント情報一覧(idとname)
-
-					List<String> categories = service.categories();
-					session.setAttribute("categories", categories);//商品カテゴリー名一覧
+				String id = req.getParameter("id");
+				if (id == null) {
+					resp.sendRedirect("C0020.html");
+					return;
+				} else {
+					boolean judge = DBUtils.checkSaleId(id);
+					if (judge == false) {
+						resp.sendRedirect("C0020.html");
+						return;
+					}
 				}
+
+				S0023Service service = new S0023Service();
+				//				if (req.getParameter("id") != null) {
+				S0023Form form = service.select(req.getParameter("id"));
+				session.setAttribute("S0023Form", form);//前の画面の値を表示させるためのもの(編集前の売上情報)
+
+				//jspで一覧を出すためのもの
+				List<S0023Form> accounts = service.accounts();
+				session.setAttribute("accountsinfo", accounts);//アカウント情報一覧(idとname)
+
+				List<String> categories = service.categories();
+				session.setAttribute("categories", categories);//商品カテゴリー名一覧
+				//				}
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0023.jsp").forward(req, resp);
 			}
@@ -119,11 +130,11 @@ public class S0023Servlet extends HttpServlet {
 				String categoryid = service1.selectCategoryid(categoryname);
 
 				//NumberFormatException回避 正規表現で半角数字以外をはじく
-			      Pattern p = Pattern.compile("^[0-9]*$");
-			        Matcher mp = p.matcher(price);
-			        Matcher ms = p.matcher(salenumber);
-			        boolean bp = mp.matches();
-			        boolean bs =  ms.matches();
+				Pattern p = Pattern.compile("^[0-9]*$");
+				Matcher mp = p.matcher(price);
+				Matcher ms = p.matcher(salenumber);
+				boolean bp = mp.matches();
+				boolean bs = ms.matches();
 
 				if (!price.equals("") && !salenumber.equals("") && bp && bs) {
 					intprice = Integer.parseInt(price);
@@ -131,7 +142,8 @@ public class S0023Servlet extends HttpServlet {
 					total = intprice * intsalenumber;
 				}
 
-				S0023Form form = new S0023Form(id, saledate, name, categoryid, categoryname, tradename, price, salenumber, note,
+				S0023Form form = new S0023Form(id, saledate, name, categoryid, categoryname, tradename, price,
+						salenumber, note,
 						total);
 
 				//入力チェック

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.abc.asms.goods.utils.DBUtils;
 import com.abc.asms.others.forms.C0010Form;
 import com.abc.asms.sales.forms.S0025Form;
 import com.abc.asms.sales.services.S0025Service;
@@ -46,9 +47,17 @@ public class S0025Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				if(req.getParameter("id") == null) {
+				String id = req.getParameter("id");
+				if (id == null) {
 					resp.sendRedirect("C0020.html");
 					return;
+				} else {
+					boolean judge = DBUtils.checkSaleId(id);
+					if (judge == false) {
+						resp.sendRedirect("C0020.html");
+						return;
+					}
+
 				}
 
 				//渡されたidのsalesテーブル, c.category_name, a.nameの取得
@@ -114,7 +123,7 @@ public class S0025Servlet extends HttpServlet {
 				session.removeAttribute("S0022Form");
 
 				//成功メッセージ
-				session.setAttribute("complete", "No" + s0025form.getId() + "のアカウントを削除しました。");
+				session.setAttribute("complete", "No" + s0025form.getId() + "の売上を削除しました。");
 
 				resp.sendRedirect("S0021.html");
 
