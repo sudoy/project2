@@ -49,7 +49,8 @@ public class S0043Servlet extends HttpServlet {
 			} else {
 
 				//idが存在しない場合はダッシュボードに遷移
-				String id = req.getParameter("id");
+				S0042Form form = (S0042Form) session.getAttribute("S0042Form");
+				String id = form.getId();
 				if (id == null) {
 					resp.sendRedirect("C0020.html");
 					return;
