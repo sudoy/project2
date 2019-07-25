@@ -66,7 +66,7 @@ public class S0046Service {
 			//データベース接続
 			con = DBUtils.getConnection();
 
-			sql = "update accounts set password = ? "
+			sql = "update accounts set password = md5(?) "
 					+ "where mail= ?";
 
 			//UPDATE命令の準備
@@ -75,6 +75,9 @@ public class S0046Service {
 			//UPDATE命令にポストデータの内容をセット
 			ps.setString(1, form.getPassword());
 			ps.setString(2, form.getMail());
+
+			System.out.println(ps);
+			System.out.println(form.getPassword());
 
 
 			//UPDATE命令の実行
