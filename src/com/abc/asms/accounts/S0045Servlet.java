@@ -50,7 +50,8 @@ public class S0045Servlet extends HttpServlet {
 
 		}else {
 			//メール送信
-
+			S0045Service serv = new S0045Service();
+			serv.sendMail(mail);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0045.jsp").forward(req, resp);
 		}
