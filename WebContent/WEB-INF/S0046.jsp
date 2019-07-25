@@ -13,10 +13,11 @@
 </head>
 	<body>
 	<div class="container">
-		<jsp:include page="message.jsp"/>
+
 	</div>
 		<div class="center">
 		<h2>物品売上管理システム</h2>
+		<jsp:include page="message.jsp"/>
 		<h3>新パスワード入力</h3>
 
 		<form action="S0046.html" method="post">

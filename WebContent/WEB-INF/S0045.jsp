@@ -15,11 +15,12 @@
 </head>
 	<body>
 	<div class="container" id="color">
-		<jsp:include page="message.jsp"/>
-	</div>
+
+
 
 		<div class="center">
 		<h2>物品売上管理システム</h2>
+		<jsp:include page="message.jsp"/>
 		<h3>パスワード再設定</h3>
 
 		<form action="S0045.html" method="post">
@@ -37,7 +38,7 @@
 
 		</div><!--center-->
 
-
+	</div>
 
 	<script src="js/jquery-3.4.1.min.js"></script>
 	<script	src="js/bootstrap.min.js"></script>
