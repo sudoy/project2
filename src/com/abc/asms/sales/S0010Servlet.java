@@ -72,20 +72,21 @@ public class S0010Servlet extends HttpServlet {
 				session.removeAttribute("complete");
 
 //
-//				String saledate = req.getParameter("saledate");
-//				String accountid = req.getParameter("accountid");
-//				String categoryname = req.getParameter("categoryname");
-//				String tradename = req.getParameter("tradename");
-//				String price = req.getParameter("price");
-//				String salenumber = req.getParameter("salenumber");
-//				String note = req.getParameter("note");
-//
-//				S0011Form s0011form = new S0011Form(saledate, accountid, categoryname, tradename, price,
-//						salenumber, note);
-//
-//				System.out.println(s0011form.getSaledate());
-//
-//				req.setAttribute("form", s0011form);
+				String saledate = req.getParameter("saledate");
+				String accountid = req.getParameter("accountid");
+				String categoryname = req.getParameter("categoryname");
+				String tradename = req.getParameter("tradename");
+				String price = req.getParameter("price");
+				String salenumber = req.getParameter("salenumber");
+				String note = req.getParameter("note");
+
+				S0010Form s0010form = new S0010Form(saledate, accountid, categoryname, tradename, price,
+						salenumber, note);
+
+				System.out.println(s0010form.getSaledate());
+
+				req.setAttribute("form", s0010form);
+
 
 
 

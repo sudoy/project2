@@ -13,8 +13,10 @@ public class S0010Form {
 
 	private String today;
 
-	public S0010Form() {
+	public S0010Form(String saledate, String accountid, String categoryname, String tradename, String price, String salenumber, String note) {
 		super();
+
+
 	}
 	public S0010Form(String today) {
 		super();
