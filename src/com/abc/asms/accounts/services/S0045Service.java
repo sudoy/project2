@@ -25,7 +25,7 @@ public class S0045Service {
 		ResultSet rs = null;
 		boolean exist = false;
 
-		String s = null;
+//		String s = null;
 
 		try{
 			//データベースの接続を確立
@@ -40,16 +40,15 @@ public class S0045Service {
 
 			rs = ps.executeQuery();
 
-			while(rs.next()) {
-				s = rs.getString("mail");
-			};
-
-
-			if(s == null){
+			if(rs.next()) {
+//				s = rs.getString("mail");
 				exist = true;
-			}else {
-				exist = false;
 			}
+//			if(s == null){
+//
+//			}else {
+//				exist = false;
+//			}
 
 
 		}catch(Exception e){

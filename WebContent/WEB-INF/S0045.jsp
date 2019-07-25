@@ -27,7 +27,7 @@
 
 		<div class="form-group">
 			<label for="exampleInputEmail1"></label>
-			<input type="email" class=" form-control" name="mail" value=""  placeholder="メールアドレス">
+			<input type="email" class=" form-control" name="mail" value="${S0045Form.mail}"  placeholder="メールアドレス">
 
 		</div>
 		<div class="form-group">
