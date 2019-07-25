@@ -18,10 +18,10 @@
 <body>
 <jsp:include page="header.jsp">
 <jsp:param name="bar"
-		value='<li><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
+		value='<li><a href="C0020.html">ダッシュボード</a></li>
 		${HTMLUtils.judgeSale(accounts.authority, "S1")}
 		<li><a href="S0020.html">売上検索</a></li>
-		${HTMLUtils.judgeAccount(accounts.authority, "C2")}
+		${HTMLUtils.judgeAccount(accounts.authority, "S1")}
 		<li><a href="S0040.html">アカウント検索</a></li>'/>
 </jsp:include>
 
@@ -30,7 +30,9 @@
 
 <h1>売上登録</h1>
 
-	<jsp:include page="message.jsp"/>
+
+<jsp:include page="message.jsp"/>
+
 
 <form class="form-horizontal" method="POST" action="S0011.html">
 	<table>
