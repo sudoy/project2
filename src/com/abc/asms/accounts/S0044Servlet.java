@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.asms.accounts.forms.S0044Form;
 import com.abc.asms.accounts.services.S0044Service;
+import com.abc.asms.goods.utils.DBUtils;
 import com.abc.asms.others.forms.C0010Form;
 
 @WebServlet("/S0044.html")
@@ -46,17 +47,30 @@ public class S0044Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
+				String id = req.getParameter("id");
+				if (id == null) {
+					resp.sendRedirect("C0020.html");
+					return;
+				} else {
+					boolean judge = DBUtils.checkAccountId(id);
+					if (judge == false) {
+						resp.sendRedirect("C0020.html");
+						return;
+					}
+
+				}
+
 				S0044Service service = new S0044Service();
 
 				//アカウント情報の取得
-				if (req.getParameter("id") != null) {
-					S0044Form form = service.select(req.getParameter("id"));
-					session.setAttribute("S0044Form", form);//reqに修正→sessionに戻した
+				//				if (req.getParameter("id") != null) {
+				S0044Form form = service.select(req.getParameter("id"));
+				session.setAttribute("S0044Form", form);//reqに修正→sessionに戻した
 
-					getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
-				} else {
-					resp.sendRedirect("S0040.html");
-				}
+				getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
+				//				} else {
+				//				resp.sendRedirect("S0040.html");
+				//				}
 			}
 		}
 	}
