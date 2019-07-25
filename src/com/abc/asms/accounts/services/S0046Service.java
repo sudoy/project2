@@ -15,7 +15,7 @@ public class S0046Service {
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
-
+		S0046Form existmail = null;
 
 		String mail = null;
 
@@ -26,33 +26,31 @@ public class S0046Service {
 			//SQL
 			sql = "select mail "
 					+ "from accounts "
-					+ "where male = ?";
+					+ "where mail = ?";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, form.getId());
 
-
 			//SELECT命令の実行
 			rs = ps.executeQuery();
 
 			//結果セットの内容を出力(DBから抽出したデータ)
-			while(rs.next()) {
+			while (rs.next()) {
 
-			mail = rs.getString("mail");
+				mail = rs.getString("mail");
 
 			}
 
-			S0046Form existmail = new S0046Form(mail);
+			existmail = new S0046Form(mail);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBUtils.close(con, ps, rs);
 		}
-		return form;
-
+		return existmail;
 	}
 
 	//パスワードの更新
@@ -78,7 +76,6 @@ public class S0046Service {
 
 			System.out.println(ps);
 			System.out.println(form.getPassword());
-
 
 			//UPDATE命令の実行
 			ps.executeUpdate();
