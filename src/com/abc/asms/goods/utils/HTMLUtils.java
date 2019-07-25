@@ -33,7 +33,7 @@ public class HTMLUtils {
 	public static String formatTotal(String total) {//totalをカンマ区切りに
 		if (total != null && !(total.equals(""))) {
 			NumberFormat nf = NumberFormat.getNumberInstance();
-			return nf.format(Integer.parseInt(total));
+			return nf.format(Long.parseLong(total));
 		} else {
 			return total;
 		}

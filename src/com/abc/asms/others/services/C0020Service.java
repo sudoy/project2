@@ -124,19 +124,19 @@ public class C0020Service {
 		String individualTotal = returnIndividualTotal(startDay.toString(), lastDay.toString(), accountId);
 
 		//値が取得できたらparseInt
-		int thisMonthInt = 0;
-		int lastMonthInt = 0;
+		long thisMonthlong = 0;
+		long lastMonthlong = 0;
 		if (thisMonth != null) {
-			thisMonthInt = Integer.parseInt(thisMonth);
+			thisMonthlong = Long.parseLong(thisMonth);
 		}
 		if (lastMonth != null) {
-			lastMonthInt = Integer.parseInt(lastMonth);
+			lastMonthlong = Long.parseLong(lastMonth);
 		}
 
 		//前月比
 		double ratio = 0;
-		if (thisMonthInt != 0 && lastMonthInt != 0) {
-			ratio = ((double) thisMonthInt / (double) lastMonthInt) * 100.0;
+		if (thisMonthlong != 0 && lastMonthlong != 0) {
+			ratio = ((double) thisMonthlong / (double) lastMonthlong) * 100.0;
 		}
 		String stringRatio = String.format("%.2f", ratio);//小数第２位までにする
 
@@ -146,7 +146,7 @@ public class C0020Service {
 		//前月の月
 		String lastM = dtf2.format(lastMonthStartDay);
 
-		C0020Form variousList = new C0020Form(yearMonth, String.valueOf(thisMonthInt), String.valueOf(lastMonthInt),
+		C0020Form variousList = new C0020Form(yearMonth, String.valueOf(thisMonthlong), String.valueOf(lastMonthlong),
 				stringRatio, individualTotal, thisM, lastM);
 
 		return variousList;
