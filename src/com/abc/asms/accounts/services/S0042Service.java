@@ -73,13 +73,16 @@ public class S0042Service {
 		ResultSet rs = null;
 		boolean exist = true;
 
-		String mail = null;
+		String formid = form.getId();//編集後のid
+		String formmail = form.getMail();//編集後のメール
+		String id = null;//DBからとったid
+		String mail = null;//DBからとったメール
 
 		try {
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
 			//sql
-			sql = "SELECT mail From accounts WHERE mail = ?";
+			sql = "SELECT account_id, mail From accounts WHERE mail = ?";
 
 			// プレースホルダに値を設定
 			ps = con.prepareStatement(sql);
@@ -88,16 +91,16 @@ public class S0042Service {
 
 			rs = ps.executeQuery();
 
-			while(rs.next()) {
+			if (rs.next()) {
+
+				id = rs.getString("account_id");
 				mail = rs.getString("mail");
-			};
 
-
-			if(mail == null){
-				exist = true;
-			}else {
-				exist = false;
+				if (formmail.equals(mail) && !formid.equals(id)) {
+					exist = false;//被りあり
+				}
 			}
+			;
 
 		} catch (Exception e) {
 			e.printStackTrace();
