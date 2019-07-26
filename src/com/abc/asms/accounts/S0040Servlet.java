@@ -39,9 +39,6 @@ public class S0040Servlet extends HttpServlet {
 
 		} else {
 
-			//アカウント検索画面で出たエラーメッセージを消す
-			session.removeAttribute("error");
-
 			if (req.getParameter("clear") != null) {//クリアボタンが押された場合
 				session.removeAttribute("S0040Form");
 				session.removeAttribute("error");
@@ -49,6 +46,8 @@ public class S0040Servlet extends HttpServlet {
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0040.jsp").forward(req, resp);
 
+			session.removeAttribute("error");
+			session.removeAttribute("complete");
 
 		}
 	}
