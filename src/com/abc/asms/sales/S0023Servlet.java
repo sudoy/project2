@@ -52,22 +52,31 @@ public class S0023Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
+				S0023Form checkForm = (S0023Form) session.getAttribute("S0023Form");
 				String id = req.getParameter("id");
-				if (id == null) {
-					resp.sendRedirect("C0020.html");
-					return;
-				} else {
-					boolean judge = DBUtils.checkSaleId(id);
-					if (judge == false) {
+				boolean judge = false;
+				S0023Service service = new S0023Service();
+				if (checkForm == null) {//23の画面に入ったことがない
+					if (id == null) {//22から23	に飛んでいない
 						resp.sendRedirect("C0020.html");
 						return;
+					} else {
+						judge = DBUtils.checkSaleId(id);
+						if (judge == false) {//URLにくっついてきたidが存在しない
+							resp.sendRedirect("C0020.html");
+							return;
+						} else {
+							S0023Form form = service.select(req.getParameter("id"));
+							session.setAttribute("S0023Form", form);//前の画面の値を表示させるためのもの(編集前の売上情報)
+						}
+					}
+				} else {//23Formに値が入ったまま
+					judge = DBUtils.checkSaleId(id);
+					if (id != null && judge == true) {//22から23に正しいidを渡して入っている
+						S0023Form form = service.select(req.getParameter("id"));
+						session.setAttribute("S0023Form", form);//前の画面の値を表示させるためのもの(編集前の売上情報)
 					}
 				}
-
-				S0023Service service = new S0023Service();
-				//				if (req.getParameter("id") != null) {
-				S0023Form form = service.select(req.getParameter("id"));
-				session.setAttribute("S0023Form", form);//前の画面の値を表示させるためのもの(編集前の売上情報)
 
 				//jspで一覧を出すためのもの
 				List<S0023Form> accounts = service.accounts();
