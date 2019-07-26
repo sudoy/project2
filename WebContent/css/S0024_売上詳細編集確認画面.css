@@ -48,3 +48,7 @@ textarea.form-control {
 #right1, #right2, #right3, p{
 	text-align: right;
 }
+
+.form-horizontal .checkbox, .form-horizontal .checkbox-inline, .form-horizontal .radio, .form-horizontal .radio-inline {
+	margin: 0px 5px;
+}

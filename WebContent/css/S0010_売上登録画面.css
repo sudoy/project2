@@ -52,3 +52,6 @@ textarea.form-control {
 .none{
    display: none;
 }
+.form-horizontal .checkbox, .form-horizontal .checkbox-inline, .form-horizontal .radio, .form-horizontal .radio-inline {
+	margin: 0px 5px;
+}
