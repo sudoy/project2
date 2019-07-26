@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
 <%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
+<%@ page import="java.net.*" %>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -89,7 +90,7 @@
 		<button type="submit" class="btn btn-primary" id="entry">
 		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K</button>
 		<a class="btn btn-default" href="S0010.html?saledate=${form.saledate}&accountid=${form.name}&categoryname=${form.categoryname}
-		&tradename=${form.tradename}&price=${form.price}&salenumber=${form.salenumber}&note=${form.note}&name=${form.name}">キャンセル</a>
+		&tradename=${URLEncoder.encode(form.tradename,'UTF-8')}&price=${form.price}&salenumber=${form.salenumber}&note=${URLEncoder.encode(form.note,'UTF-8')}&name=${form.name}">キャンセル</a>
 	</div>
 	</td></tr>
 	</table>
