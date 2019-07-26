@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import com.abc.asms.accounts.forms.S0042Form;
 import com.abc.asms.accounts.forms.S0043Form;
 import com.abc.asms.accounts.services.S0043Service;
-import com.abc.asms.goods.utils.DBUtils;
 import com.abc.asms.others.forms.C0010Form;
 
 @WebServlet("/S0043.html")
@@ -49,24 +48,30 @@ public class S0043Servlet extends HttpServlet {
 			} else {
 
 				//idが存在しない場合はダッシュボードに遷移
-				S0042Form form = (S0042Form) session.getAttribute("S0042Form");
-				String id = form.getId();
-				if (id == null) {
-					resp.sendRedirect("C0020.html");
-					return;
-				} else {
-					boolean judge = DBUtils.checkAccountId(id);
-					if (judge == false) {
-						resp.sendRedirect("C0020.html");
-						return;
-					}
 
-				}
+//				S0042Form form = (S0042Form) session.getAttribute("S0042Form");
+//				try {
+//					String id = form.getId();
+//
+//					boolean judge = DBUtils.checkAccountId(id);
+//					if (judge == false) {
+//						resp.sendRedirect("C0020.html");
+//						return;
+//					}
+//				} catch (NullPointerException e) {
+//					resp.sendRedirect("C0020.html");
+//					return;
+//				}
 
-				getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
+				resp.sendRedirect("C0020.html");
+
 			}
+
+			getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
 		}
 	}
+
+
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
