@@ -97,9 +97,9 @@ public class S0011Servlet extends HttpServlet {
 				//エラーがない場合
 
 				//小計をだす
-				int pricenum = Integer.parseInt(price);
-				int salenumbernum = Integer.parseInt(salenumber);
-				int totalnum = pricenum * salenumbernum;
+				long pricenum = Long.parseLong(price);
+				long salenumbernum =Long.parseLong(salenumber);
+				long totalnum = pricenum * salenumbernum;
 
 				String total = String.valueOf(totalnum);
 				s0011form.setTotal(total);
@@ -151,6 +151,8 @@ public class S0011Servlet extends HttpServlet {
 		String price = form.getPrice();
 		String salenumber = form.getSalenumber();
 		String note = form.getNote();
+
+
 
 		if (saledate.equals("")) {
 			error.add("販売日を入力して下さい。");

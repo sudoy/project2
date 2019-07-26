@@ -135,7 +135,7 @@
 		<tr><th>No</th><th>販売日</th><th>商品カテゴリー</th><th>商品名</th><th>単価</th><th>個数</th><th>小計</th></tr>
 		<c:forEach items="${C0020Form}" var="i">
 			<tr><td class="right">${i.saleId}</td><td>${HTMLUtils.formatDate(i.saleDate)}</td><td>${i.categoryName}</td>
-			<td>${i.tradeName}</td><td class="right">${HTMLUtils.formatTotal(i.unitPrice)}</td>
+			<td>${StringEscapeUtils.escapeHtml4(i.tradeName)}</td><td class="right">${HTMLUtils.formatTotal(i.unitPrice)}</td>
 			<td class="right">${HTMLUtils.formatTotal(i.saleNumber)}</td><td class="right">${HTMLUtils.formatTotal(i.total)}</td></tr>
 		</c:forEach>
 		<tr><td colspan="5"></td><td class="right">合計</td><td class="right">${HTMLUtils.formatTotal(variousForm.individualTotal)}</td></tr>
