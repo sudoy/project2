@@ -25,30 +25,24 @@ public class S0045Service {
 		ResultSet rs = null;
 		boolean exist = false;
 
-//		String s = null;
-
 		try{
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
 		//sql
-			sql = "SELECT mail From accounts WHERE mail = ?";
+			sql = "select mail from accounts where mail = ?";
 
 			// プレースホルダに値を設定
 			ps = con.prepareStatement(sql);
 
 			ps.setString(1, form.getMail());
 
+			System.out.println(ps);
+
 			rs = ps.executeQuery();
 
 			if(rs.next()) {
-//				s = rs.getString("mail");
 				exist = true;
 			}
-//			if(s == null){
-//
-//			}else {
-//				exist = false;
-//			}
 
 
 		}catch(Exception e){
@@ -57,6 +51,7 @@ public class S0045Service {
 
 			DBUtils.close(con,ps, rs);
 		}
+		System.out.println(exist);
 		return exist;
 
 

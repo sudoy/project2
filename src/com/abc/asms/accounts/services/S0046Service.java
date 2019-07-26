@@ -9,47 +9,41 @@ import com.abc.asms.goods.utils.DBUtils;
 
 public class S0046Service {
 
-	public S0046Form selectmail(S0046Form form) {
+	//メールアドレスの存在チェック
+	public boolean selectmail(String mail) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
 		ResultSet rs = null;
-		S0046Form existmail = null;
-
-		String mail = null;
+		boolean existmail = false;
 
 		try {
 			//データベース接続
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select mail "
-					+ "from accounts "
-					+ "where mail = ?";
+			sql = "select mail from accounts where mail = ?";
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
 
-			ps.setString(1, form.getId());
+			ps.setString(1, mail);
 
 			//SELECT命令の実行
 			rs = ps.executeQuery();
 
 			//結果セットの内容を出力(DBから抽出したデータ)
-			while (rs.next()) {
+			if (rs.next()) {
 
-				mail = rs.getString("mail");
-
+				existmail = true;
 			}
-
-			existmail = new S0046Form(mail);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBUtils.close(con, ps, rs);
 		}
+
 		return existmail;
 	}
 

@@ -55,11 +55,10 @@ public class S0045Servlet extends HttpServlet {
 			S0045Service serv = new S0045Service();
 			serv.sendMail(mail);
 
-			session.setAttribute("complete","パスワード再設定メールを送信しました。");
+			session.setAttribute("complete", "パスワード再設定メールを送信しました。");
 
-			getServletContext().getRequestDispatcher("/WEB-INF/S0045.jsp").forward(req, resp);
+			resp.sendRedirect("C0010.html");//送信に成功したらログイン画面に遷移
 
-			session.removeAttribute("complete");
 		}
 	}
 
@@ -88,8 +87,10 @@ public class S0045Servlet extends HttpServlet {
 			if (!matcher.find()) {
 				error.add("メールアドレスを正しく入力して下さい。");
 			}
-			//メールアドレスが存在しない場合
-		} else if (exist == false) {
+
+		}
+		//メールアドレスが存在しない場合
+		if (exist == false) {
 			error.add("メールアドレスを正しく入力して下さい。");
 		}
 
