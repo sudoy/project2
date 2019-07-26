@@ -11,11 +11,11 @@ public class S0023Form {
 	private String price;
 	private String salenumber;
 	private String note;
-	private int total;
+	private long total;
 
 
 	public S0023Form(String id, String saledate, String name, String categoryid, String categoryname, String tradename, String price,
-			String salenumber, String note, int total) {
+			String salenumber, String note, long total) {
 		super();
 
 		this.id = id;
@@ -123,12 +123,12 @@ public class S0023Form {
 	public void setNote(String note) {
 		this.note = note;
 	}
-	public int getTotal() {
+	public long getTotal() {
 		return total;
 	}
 
 
-	public void setTotal(int total) {
+	public void setTotal(long total) {
 		this.total = total;
 	}
 
