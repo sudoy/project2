@@ -68,9 +68,6 @@ public class S0046Service {
 			ps.setString(1, form.getPassword());
 			ps.setString(2, form.getMail());
 
-			System.out.println(ps);
-			System.out.println(form.getPassword());
-
 			//UPDATE命令の実行
 			ps.executeUpdate();
 

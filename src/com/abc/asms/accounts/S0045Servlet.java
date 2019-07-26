@@ -35,7 +35,6 @@ public class S0045Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 		session = req.getSession();
-		session.setAttribute("s0045form", s0045form);
 
 		//入力チェック
 		List<String> error = validate(s0045form);
@@ -43,7 +42,7 @@ public class S0045Servlet extends HttpServlet {
 		//エラー時はS0045.jspを再表示
 		if (error.size() != 0) {
 			session.setAttribute("error", error);
-			session.setAttribute("S0045Form", s0045form);
+			req.setAttribute("S0045Form", s0045form);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0045.jsp").forward(req, resp);
 
@@ -53,11 +52,21 @@ public class S0045Servlet extends HttpServlet {
 		} else {
 			//メール送信
 			S0045Service serv = new S0045Service();
-			serv.sendMail(mail);
+			error = serv.sendMail(mail);
+			if (error.size() == 0) {
+				session.setAttribute("complete", "パスワード再設定メールを送信しました。");
 
-			session.setAttribute("complete", "パスワード再設定メールを送信しました。");
+				getServletContext().getRequestDispatcher("/WEB-INF/S0045.jsp").forward(req, resp);
+				session.removeAttribute("complete");
+			}else {//メールが送信できなかったら
+				session.setAttribute("error", error);
+				req.setAttribute("S0045Form", s0045form);
 
-			resp.sendRedirect("C0010.html");//送信に成功したらログイン画面に遷移
+				getServletContext().getRequestDispatcher("/WEB-INF/S0045.jsp").forward(req, resp);
+
+				//errorメッセージ除去
+				session.removeAttribute("error");
+			}
 
 		}
 	}
@@ -68,8 +77,6 @@ public class S0045Servlet extends HttpServlet {
 		boolean exist = s0045service.service(s0045form);
 
 		String mail = s0045form.getMail();
-
-		System.out.println(mail);
 
 		if (mail.equals("")) {
 			error.add("メールアドレスを入力して下さい。");

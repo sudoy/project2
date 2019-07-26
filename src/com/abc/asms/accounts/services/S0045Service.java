@@ -1,8 +1,12 @@
 package com.abc.asms.accounts.services;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -17,7 +21,7 @@ import com.abc.asms.goods.utils.DBUtils;
 
 public class S0045Service {
 
-	public boolean service(S0045Form form){
+	public boolean service(S0045Form form) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -25,10 +29,10 @@ public class S0045Service {
 		ResultSet rs = null;
 		boolean exist = false;
 
-		try{
+		try {
 			//データベースの接続を確立
 			con = DBUtils.getConnection();
-		//sql
+			//sql
 			sql = "select mail from accounts where mail = ?";
 
 			// プレースホルダに値を設定
@@ -36,28 +40,27 @@ public class S0045Service {
 
 			ps.setString(1, form.getMail());
 
-			System.out.println(ps);
-
 			rs = ps.executeQuery();
 
-			if(rs.next()) {
+			if (rs.next()) {
 				exist = true;
 			}
 
-
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 
-			DBUtils.close(con,ps, rs);
+			DBUtils.close(con, ps, rs);
 		}
-		System.out.println(exist);
 		return exist;
-
 
 	}
 
-	public void sendMail(String mail) {
+	public List<String> sendMail(String mail) {
+
+		String ip = getIp();//ipアドレス取得
+
+		List<String> error = new ArrayList<>();
 		try {
 			// GmailのSMTPを使用する
 			Properties property = new Properties();
@@ -70,7 +73,6 @@ public class S0045Service {
 
 			Session session = Session.getInstance(property, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
-//					return new PasswordAuthentication("sie.tsd2018@gmail.com", "!sie.tsd2018");
 					return new PasswordAuthentication("sie.tsd2018@gmail.com", "yuwoycimzylymdag");
 				}
 			});
@@ -86,13 +88,26 @@ public class S0045Service {
 			mimeMessage.setSubject("【物品売上管理システム】パスワード再設定", "ISO-2022-JP");
 			mimeMessage.setText("パスワードの再設定を行います。\r\n"
 					+ "以下のURLより新パスワードの入力・変更を行って下さい。\r\n"
-					+ "http://192.168.3.61:8080/project2/S0046.html?user=" + mail, "ISO-2022-JP");
+					+ "http://" + ip + ":8080/project2/S0046.html?user=" + mail, "ISO-2022-JP");
 
 			Transport.send(mimeMessage);
 
-			System.out.println("メールを送信しました。");
 		} catch (Exception e) {
 			e.printStackTrace();
+			error.add("予期しないエラーが発生しました。");
 		}
+		return error;
+	}
+
+	public String getIp() {
+		//IPアドレスを取得
+		String ip = null;
+		try {
+			InetAddress addr = InetAddress.getLocalHost();
+			ip = addr.getHostAddress();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		return ip;
 	}
 }

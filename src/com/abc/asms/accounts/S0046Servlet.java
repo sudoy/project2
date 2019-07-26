@@ -25,24 +25,23 @@ public class S0046Servlet extends HttpServlet {
 
 		String mail = req.getParameter("user");//受信メール内のURL末尾にあるメールアドレスの情報を取得
 
-		System.out.println(mail);
-
-		if(mail == null) {//userが取得できなければ
+		if (mail == null) {//userが取得できなければ(URL直打ちで入ってくるときなど)
 			resp.sendRedirect("C0010.html");
 			return;
 		}
 
-		//メール存在チェック(パラメーターで渡されたメールアドレスが存在しない場合はエラー)
-		S0046Service serv = new S0046Service();
-		boolean mailExist = serv.selectmail(mail);
-
-		if(mailExist == false) {
-			error.add("メールアドレスが存在しません。");
+		error = validate2(mail);
+		if (error.size() != 0) {
 			session.setAttribute("error", error);
+
+			getServletContext().getRequestDispatcher("/WEB-INF/S0046.jsp").forward(req, resp);
+
+			//errorメッセージ除去
+			session.removeAttribute("error");
+			return;
 		}
 
-		session.setAttribute("receivedEmail", mail);
-
+		req.setAttribute("receivedEmail", mail);
 		getServletContext().getRequestDispatcher("/WEB-INF/S0046.jsp").forward(req, resp);
 
 		//errorメッセージ除去
@@ -55,17 +54,18 @@ public class S0046Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-		String mail = (String) session.getAttribute("receivedEmail");
+		String mail = req.getParameter("receivedEmail");
 		String password = req.getParameter("password");
 		String check = req.getParameter("check");
 
 		S0046Form form = new S0046Form(mail, password, check);
 
 		//入力チェック
-		List<String> error = validate(form);
+		List<String> error = validate1(form);
 
 		//エラー時はS0046.jspを再表示
 		if (error.size() != 0) {
+			req.setAttribute("receivedEmail", mail);
 			session.setAttribute("error", error);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0046.jsp").forward(req, resp);
@@ -79,7 +79,6 @@ public class S0046Servlet extends HttpServlet {
 			service.updatepassword(form);
 
 			//パスワード更新後はC0010へ遷移
-			session.removeAttribute("S0046Form");
 			session.setAttribute("complete", "パスワードを再設定しました。");
 			resp.sendRedirect("C0010.html");
 
@@ -87,7 +86,7 @@ public class S0046Servlet extends HttpServlet {
 	}
 
 	//入力チェック
-	private List<String> validate(S0046Form form) {
+	private List<String> validate1(S0046Form form) {
 
 		List<String> error = new ArrayList<>();
 
@@ -99,7 +98,7 @@ public class S0046Servlet extends HttpServlet {
 		S0046Service serv = new S0046Service();
 		boolean mailExist = serv.selectmail(mail);
 
-		if(mailExist == false) {
+		if (mailExist == false) {
 			error.add("メールアドレスが存在しません。");
 		}
 
@@ -120,6 +119,24 @@ public class S0046Servlet extends HttpServlet {
 		//新パスワード一致チェック
 		if (!password.equals(check)) {
 			error.add("新パスワードとパスワード(確認)が一致していません。");
+		}
+		return error;
+	}
+
+	private List<String> validate2(String mail) {
+
+		List<String> error = new ArrayList<>();
+		//メール存在チェック(パラメーターで渡されたメールアドレスが存在しない場合はエラー)
+		if (mail == null) {
+			error.add("メールアドレスが存在しません。");
+		} else {
+
+			S0046Service serv = new S0046Service();
+			boolean mailExist = serv.selectmail(mail);
+
+			if (mailExist == false) {
+				error.add("メールアドレスが存在しません。");
+			}
 		}
 		return error;
 	}
