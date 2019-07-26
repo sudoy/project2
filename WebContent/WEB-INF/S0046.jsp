@@ -25,9 +25,9 @@
 
 		<div class="form-group">
 			<label for="exampleInputPassword1"></label>
-			<input type="password" class=" form-control" name="password" value="${S0046Form.password}"  placeholder="新パスワード">
+			<input type="password" class=" form-control" name="password" placeholder="新パスワード">
 			<label for="exampleInputPassword2"></label>
-			<input type="password" class="form-control" name="check" value="${S0046Form.check}" placeholder="新パスワード確認">
+			<input type="password" class="form-control" name="check" placeholder="新パスワード確認">
 		</div>
 		<div class="form-group">
 			<button type="submit" class="btn btn-primary">変更</button>

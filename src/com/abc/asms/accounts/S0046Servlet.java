@@ -48,7 +48,6 @@ public class S0046Servlet extends HttpServlet {
 		//エラー時はS0046.jspを再表示
 		if(error.size() != 0) {
 			session.setAttribute("error", error );
-			session.setAttribute("S0046Form", form);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0046.jsp").forward(req, resp);
 
@@ -62,10 +61,10 @@ public class S0046Servlet extends HttpServlet {
 
 
 			//パスワード更新後はC0010へ遷移
-			session.setAttribute("S0046Form", form);//?
 			session.setAttribute("complete","パスワードを再設定しました。" );
 			getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);
 
+			session.removeAttribute("S0046Form");
 			session.removeAttribute("complete");
 
 		}
