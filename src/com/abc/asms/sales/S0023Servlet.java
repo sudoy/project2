@@ -1,9 +1,8 @@
 package com.abc.asms.sales;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -183,8 +182,7 @@ public class S0023Servlet extends HttpServlet {
 		List<String> e = new ArrayList<>();
 
 		//日付チェック
-		DateFormat format = new SimpleDateFormat("yyyy/M/d");
-		format.setLenient(false);
+				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/M/d");
 
 		S0023Service service2 = new S0023Service();
 
@@ -206,8 +204,8 @@ public class S0023Servlet extends HttpServlet {
 		//販売日形式チェック
 		if (!saledate.equals("")) {
 			try {
-				format.parse(saledate);
-			} catch (ParseException pe) {
+				LocalDate date = LocalDate.parse(saledate, dtf);
+			} catch (Exception e1) {
 				e.add("販売日を正しく入力して下さい。");
 			}
 		}
