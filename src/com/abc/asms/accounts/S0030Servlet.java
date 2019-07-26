@@ -61,7 +61,7 @@ public class S0030Servlet extends HttpServlet {
 				String account = req.getParameter("account");
 
 				S0030Form s0030f = new S0030Form(name, mail, sale, account);
-				req.setAttribute("S0030form", s0030f);
+				req.setAttribute("S0031form", s0030f);
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0030.jsp").forward(req, resp);
 				session.removeAttribute("error");
