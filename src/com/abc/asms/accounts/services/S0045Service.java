@@ -91,7 +91,7 @@ public class S0045Service {
 			mimeMessage.setSubject("【物品売上管理システム】パスワード再設定", "ISO-2022-JP");
 			mimeMessage.setText("パスワードの再設定を行います。\r\n"
 					+ "以下のURLより新パスワードの入力・変更を行って下さい。\r\n"
-					+ "http://192.168.3.61:8080/project2/S0046.html?user=" + mail, "ISO-2022-JP");
+					+ "http://192.168.3.61/project2/S0046.html?user=" + mail, "ISO-2022-JP");
 //			mimeMessage.setText("以下のURLより新パスワードの入力・変更を行って下さい。", "ISO-2022-JP");
 //			mimeMessage.setText("http://192.168.3.61:8080/project2/S0046.html?user=" + mail, "ISO-2022-JP");
 

@@ -55,7 +55,11 @@ public class S0045Servlet extends HttpServlet {
 			S0045Service serv = new S0045Service();
 			serv.sendMail(mail);
 
+			session.setAttribute("complete","パスワード再設定メールを送信しました。");
+
 			getServletContext().getRequestDispatcher("/WEB-INF/S0045.jsp").forward(req, resp);
+
+			session.removeAttribute("complete");
 		}
 	}
 

@@ -63,7 +63,11 @@ public class S0046Servlet extends HttpServlet {
 
 			//パスワード更新後はC0010へ遷移
 			session.setAttribute("S0046Form", form);//?
+			session.setAttribute("complete","パスワードを再設定しました。" );
 			getServletContext().getRequestDispatcher("/WEB-INF/C0010.jsp").forward(req, resp);
+
+			session.removeAttribute("complete");
+
 		}
 	}
 
