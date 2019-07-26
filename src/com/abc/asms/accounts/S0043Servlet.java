@@ -67,7 +67,6 @@ public class S0043Servlet extends HttpServlet {
 
 			}
 
-			getServletContext().getRequestDispatcher("/WEB-INF/S0043.jsp").forward(req, resp);
 		}
 	}
 
