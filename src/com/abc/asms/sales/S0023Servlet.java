@@ -204,7 +204,7 @@ public class S0023Servlet extends HttpServlet {
 		//販売日形式チェック
 		if (!saledate.equals("")) {
 			try {
-				LocalDate date = LocalDate.parse(saledate, dtf);
+				LocalDate.parse(saledate, dtf);
 			} catch (Exception e1) {
 				e.add("販売日を正しく入力して下さい。");
 			}

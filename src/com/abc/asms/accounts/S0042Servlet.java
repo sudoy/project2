@@ -50,27 +50,33 @@ public class S0042Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				//idが存在しない場合はダッシュボードに遷移
+				S0042Service service = new S0042Service();
+				S0042Form checkForm = (S0042Form) session.getAttribute("S0042Form");
 				String id = req.getParameter("id");
-				if (id == null) {
-					resp.sendRedirect("C0020.html");
-					return;
-				} else {
-					boolean judge = DBUtils.checkAccountId(id);
-					if (judge == false) {
+				boolean judge = false;
+
+				//idが存在しない場合はダッシュボードに遷移
+				if (checkForm == null) {//43の画面に入ったことがない
+					if (id == null) {//42から43	に飛んでいない
 						resp.sendRedirect("C0020.html");
 						return;
+					} else {
+						judge = DBUtils.checkAccountId(id);
+						if (judge == false) {//43に入ったが、URLのidが存在しない
+							resp.sendRedirect("C0020.html");
+							return;
+						} else {
+							S0042Form form = service.select(req.getParameter("id"));
+							session.setAttribute("S0042Form", form);
+						}
 					}
-
-				}
-
-				S0042Service service = new S0042Service();
-
-				//アカウント情報の取得(キャンセルで飛んでくると値が取れないのでifで囲んでいる)
-				if (req.getParameter("id") != null) {
-					S0042Form form = service.select(req.getParameter("id"));
-					session.setAttribute("S0042Form", form);
-					session.setAttribute("password", form.getPassword());
+				} else {//S0042Formに値が入っている場合
+					judge = DBUtils.checkAccountId(id);
+					if (id != null && judge == true) {//42から43に正しいidを渡して入っている
+						S0042Form form = service.select(req.getParameter("id"));
+						session.setAttribute("S0042Form", form);//編集後の売上情報
+						session.setAttribute("password", form.getPassword());
+					}
 				}
 
 				this.getServletContext().getRequestDispatcher("/WEB-INF/S0042.jsp").forward(req, resp);
@@ -109,7 +115,6 @@ public class S0042Servlet extends HttpServlet {
 				session.setAttribute("error", error);
 				resp.sendRedirect("C0020.html");
 			} else {
-
 
 				//編集後の値
 				String id = req.getParameter("id");

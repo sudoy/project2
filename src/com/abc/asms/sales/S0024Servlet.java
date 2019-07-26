@@ -47,8 +47,8 @@ public class S0024Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				S0023Form form = (S0023Form)session.getAttribute("S0023Form");
-				if(form == null) {
+				S0023Form form = (S0023Form) session.getAttribute("S0023Form");
+				if (form == null) {
 					resp.sendRedirect("C0020.html");
 					return;
 				}
@@ -57,7 +57,7 @@ public class S0024Servlet extends HttpServlet {
 				S0024Service service = new S0024Service();
 				List<String> categories = service.categories();
 
-				req.setAttribute("categories", categories );
+				req.setAttribute("categories", categories);
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0024.jsp").forward(req, resp);
 			}
@@ -111,9 +111,8 @@ public class S0024Servlet extends HttpServlet {
 				String accountid = service.selectid(name);
 				String categoryid = service.selectcategoryid(categoryname);
 
-
-				S0024Form updateform = new S0024Form( accountid, categoryid,  saleid, saledate, tradename, price, salenumber, note);
-
+				S0024Form updateform = new S0024Form(accountid, categoryid, saleid, saledate, tradename, price,
+						salenumber, note);
 
 				//更新
 				service.update(updateform);
