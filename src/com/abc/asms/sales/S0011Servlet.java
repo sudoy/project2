@@ -2,9 +2,8 @@ package com.abc.asms.sales;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,8 +136,7 @@ public class S0011Servlet extends HttpServlet {
 	private List<String> validate(S0011Form form) throws UnsupportedEncodingException, ServletException {
 		List<String> error = new ArrayList<String>(); //list add
 		//日付チェック
-		DateFormat format = new SimpleDateFormat("yyyy/M/d");
-		format.setLenient(false);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/M/d");
 
 		S0011Service s0011service = new S0011Service();
 		boolean exist = s0011service.service1(form);
@@ -153,13 +151,12 @@ public class S0011Servlet extends HttpServlet {
 		String note = form.getNote();
 
 
-
 		if (saledate.equals("")) {
 			error.add("販売日を入力して下さい。");
 		} else {
 			try {
-				format.parse(saledate);
-			} catch (ParseException e) {
+				LocalDate date = LocalDate.parse(saledate, dtf);//ここで変換できればok
+			} catch (Exception e) {
 				error.add("販売日を正しく入力して下さい。");
 			}
 		}
