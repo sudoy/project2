@@ -10,7 +10,7 @@ import com.abc.asms.goods.utils.DBUtils;
 public class S0046Service {
 
 	//メールアドレスの存在チェック
-	public boolean selectmail(String mail) {
+	public boolean selectMail(String mail) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -48,7 +48,7 @@ public class S0046Service {
 	}
 
 	//パスワードの更新
-	public void updatepassword(S0046Form form) {
+	public void updatePassword(S0046Form form) {
 
 		Connection con = null;
 		PreparedStatement ps = null;

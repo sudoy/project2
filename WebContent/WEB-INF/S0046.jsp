@@ -21,7 +21,7 @@
 		<h3>新パスワード入力</h3>
 
 		<form action="S0046.html" method="post">
-		<input type="hidden" name="receivedEmail" value="${receivedEmail}">
+		<input type="hidden" name="receivedEmail" value="${receivedEmail.mail}">
 
 		<div class="form-group">
 			<label for="exampleInputPassword1"></label>

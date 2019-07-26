@@ -1,7 +1,5 @@
 package com.abc.asms.accounts.services;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -56,9 +54,9 @@ public class S0045Service {
 
 	}
 
-	public List<String> sendMail(String mail) {
+	public List<String> sendMail(String mail,String headerInformation) {
 
-		String ip = getIp();//ipアドレス取得
+//		String ip = getIp();//ipアドレス取得
 
 		List<String> error = new ArrayList<>();
 		try {
@@ -88,7 +86,7 @@ public class S0045Service {
 			mimeMessage.setSubject("【物品売上管理システム】パスワード再設定", "ISO-2022-JP");
 			mimeMessage.setText("パスワードの再設定を行います。\r\n"
 					+ "以下のURLより新パスワードの入力・変更を行って下さい。\r\n"
-					+ "http://" + ip + ":8080/project2/S0046.html?user=" + mail, "ISO-2022-JP");
+					+ headerInformation + "/S0046.html?user=" + mail, "ISO-2022-JP");
 
 			Transport.send(mimeMessage);
 
@@ -99,15 +97,15 @@ public class S0045Service {
 		return error;
 	}
 
-	public String getIp() {
-		//IPアドレスを取得
-		String ip = null;
-		try {
-			InetAddress addr = InetAddress.getLocalHost();
-			ip = addr.getHostAddress();
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
-		return ip;
-	}
+//	public String getIp() {
+//		//IPアドレスを取得
+//		String ip = null;
+//		try {
+//			InetAddress addr = InetAddress.getLocalHost();
+//			ip = addr.getHostAddress();
+//		} catch (UnknownHostException e) {
+//			e.printStackTrace();
+//		}
+//		return ip;
+//	}
 }

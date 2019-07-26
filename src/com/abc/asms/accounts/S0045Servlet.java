@@ -52,7 +52,10 @@ public class S0045Servlet extends HttpServlet {
 		} else {
 			//メール送信
 			S0045Service serv = new S0045Service();
-			error = serv.sendMail(mail);
+			String headerInformation = req.getScheme() + "://" + req.getRemoteHost() + ":" + req.getServerPort()
+							+ req.getContextPath();
+
+			error = serv.sendMail(mail, headerInformation);
 			if (error.size() == 0) {
 				session.setAttribute("complete", "パスワード再設定メールを送信しました。");
 
@@ -93,13 +96,14 @@ public class S0045Servlet extends HttpServlet {
 			Matcher matcher = pattern.matcher(s0045form.getMail());
 			if (!matcher.find()) {
 				error.add("メールアドレスを正しく入力して下さい。");
+
+				//メールアドレスが存在しない場合
+			}else if (exist == false) {
+				error.add("メールアドレスを正しく入力して下さい。");
 			}
 
 		}
-		//メールアドレスが存在しない場合
-		if (exist == false) {
-			error.add("メールアドレスを正しく入力して下さい。");
-		}
+
 
 		return error;
 

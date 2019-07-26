@@ -29,8 +29,8 @@ public class S0046Servlet extends HttpServlet {
 			resp.sendRedirect("C0010.html");
 			return;
 		}
-
-		error = validate2(mail);
+		S0046Form receivedEmail = new S0046Form(mail);
+		error = validate2(receivedEmail);
 		if (error.size() != 0) {
 			session.setAttribute("error", error);
 
@@ -41,7 +41,7 @@ public class S0046Servlet extends HttpServlet {
 			return;
 		}
 
-		req.setAttribute("receivedEmail", mail);
+		req.setAttribute("receivedEmail", receivedEmail);
 		getServletContext().getRequestDispatcher("/WEB-INF/S0046.jsp").forward(req, resp);
 
 		//errorメッセージ除去
@@ -65,7 +65,8 @@ public class S0046Servlet extends HttpServlet {
 
 		//エラー時はS0046.jspを再表示
 		if (error.size() != 0) {
-			req.setAttribute("receivedEmail", mail);
+			S0046Form receivedEmail = new S0046Form(mail);
+			req.setAttribute("receivedEmail", receivedEmail);
 			session.setAttribute("error", error);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/S0046.jsp").forward(req, resp);
@@ -76,7 +77,7 @@ public class S0046Servlet extends HttpServlet {
 
 			//入力チェック完了後パスワード更新
 			S0046Service service = new S0046Service();
-			service.updatepassword(form);
+			service.updatePassword(form);
 
 			//パスワード更新後はC0010へ遷移
 			session.setAttribute("complete", "パスワードを再設定しました。");
@@ -96,7 +97,7 @@ public class S0046Servlet extends HttpServlet {
 
 		//メール存在チェック //登録してあるメールアドレスと一致するかどうか
 		S0046Service serv = new S0046Service();
-		boolean mailExist = serv.selectmail(mail);
+		boolean mailExist = serv.selectMail(mail);
 
 		if (mailExist == false) {
 			error.add("メールアドレスが存在しません。");
@@ -123,16 +124,16 @@ public class S0046Servlet extends HttpServlet {
 		return error;
 	}
 
-	private List<String> validate2(String mail) {
+	private List<String> validate2(S0046Form mail) {
 
 		List<String> error = new ArrayList<>();
 		//メール存在チェック(パラメーターで渡されたメールアドレスが存在しない場合はエラー)
-		if (mail == null) {
+		if (mail.getMail() == null) {
 			error.add("メールアドレスが存在しません。");
 		} else {
 
 			S0046Service serv = new S0046Service();
-			boolean mailExist = serv.selectmail(mail);
+			boolean mailExist = serv.selectMail(mail.getMail());
 
 			if (mailExist == false) {
 				error.add("メールアドレスが存在しません。");
