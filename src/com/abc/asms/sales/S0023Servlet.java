@@ -100,9 +100,9 @@ public class S0023Servlet extends HttpServlet {
 		boolean login = false;
 		List<String> error = new ArrayList<>();
 
-		int intprice = 0;
-		int intsalenumber = 0;
-		int total = 0;
+		long intprice = 0;
+		long intsalenumber = 0;
+		long total = 0;
 
 		//ログインチェック
 		if (session.getAttribute("login") != null) {
@@ -146,8 +146,8 @@ public class S0023Servlet extends HttpServlet {
 				boolean bs = ms.matches();
 
 				if (!price.equals("") && !salenumber.equals("") && bp && bs) {
-					intprice = Integer.parseInt(price);
-					intsalenumber = Integer.parseInt(salenumber);
+					intprice = Long.parseLong(price);
+					intsalenumber = Long.parseLong(salenumber);
 					total = intprice * intsalenumber;
 				}
 
