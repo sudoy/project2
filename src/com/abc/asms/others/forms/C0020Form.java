@@ -1,6 +1,7 @@
 package com.abc.asms.others.forms;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class C0020Form {
 
@@ -24,6 +25,21 @@ public class C0020Form {
 	private String individualTotal;
 	private String thisM;
 	private String lastM;
+
+	List<String> thisGraph;
+	List<String> lastGraph;
+	private String thisYear;
+	private String lastYear;
+
+
+	//グラフ用のデータを入れる
+	public C0020Form(List<String> thisGraph, List<String> lastGraph, String thisYear, String lastYear) {
+		super();
+		this.thisGraph = thisGraph;
+		this.lastGraph = lastGraph;
+		this.thisYear = thisYear;
+		this.lastYear = lastYear;
+	}
 
 	//getDate()で使う
 	public C0020Form(LocalDate today, LocalDate startDay, LocalDate lastDay) {
@@ -184,6 +200,37 @@ public class C0020Form {
 		this.lastDay = lastDay;
 	}
 
+	public List<String> getThisGraph() {
+		return thisGraph;
+	}
+
+	public void setThisGraph(List<String> thisGraph) {
+		this.thisGraph = thisGraph;
+	}
+
+	public List<String> getLastGraph() {
+		return lastGraph;
+	}
+
+	public void setLastGraph(List<String> lastGraph) {
+		this.lastGraph = lastGraph;
+	}
+
+	public String getThisYear() {
+		return thisYear;
+	}
+
+	public void setThisYear(String thisYear) {
+		this.thisYear = thisYear;
+	}
+
+	public String getLastYear() {
+		return lastYear;
+	}
+
+	public void setLastYear(String lastYear) {
+		this.lastYear = lastYear;
+	}
 
 
 }

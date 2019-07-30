@@ -220,4 +220,61 @@ public class C0020Service {
 		}
 	}
 
+	//月ごとの売上合計を取得してListに入れる（グラフ用）
+	public List<String> getMonthlyTotal2(LocalDate newYearsDay, LocalDate today) throws ServletException {
+
+		LocalDate newYearsDayLast = newYearsDay.plusMonths(1).minusDays(1);
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		String sql = null;
+		ResultSet rs = null;
+
+		List<String> list = new ArrayList<>();
+
+		for (int i = 1; i <= 12; i++) {//1月～12月まで
+
+			if(newYearsDay.isAfter(today)) {//今日の日付を超えたら終わり
+				break;
+			}
+
+			try {
+				con = DBUtils.getConnection();
+				sql = "select sum(unit_price * sale_number) as total from sales"
+						+ " where ? <= sale_date and sale_date <= ?";
+
+				ps = con.prepareStatement(sql);
+				ps.setString(1, newYearsDay.toString());
+				ps.setString(2, newYearsDayLast.toString());
+
+				rs = ps.executeQuery();
+
+				String total = null;
+				rs.next();
+				if (rs.getString("total") == null) {//売上が一件も登録されていないとき
+					total = "0";
+				} else {//売上が一件以上登録されているとき
+					total = rs.getString("total");
+					//合計の千の位を四捨五入して××万円で表記するための操作
+					double doubleTotal = Double.parseDouble(total);
+					doubleTotal /= 10000;
+					doubleTotal = Math.round(doubleTotal);
+					total = String.valueOf(doubleTotal);
+				}
+				list.add(total);
+
+			} catch (Exception e) {
+				throw new ServletException(e);
+			} finally {
+				DBUtils.close(con, ps, rs);
+			}
+
+			newYearsDay = newYearsDay.plusMonths(1);//次の月の初日に
+			newYearsDayLast = newYearsDay.plusMonths(1).minusDays(1);//次の月の最終日に
+
+		}
+		return list;
+
+	}
+
 }

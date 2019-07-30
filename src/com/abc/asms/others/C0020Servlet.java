@@ -61,6 +61,21 @@ public class C0020Servlet extends HttpServlet {
 			//年月、今月の売上合計、前月の売上合計、前月比、ログインしている人の今月の売上合計、今月、前月
 			C0020Form variousForm = serv.returnVariousForm(userInfo.getId(), dateForm);
 
+			//グラフ用のデータを取得（基準年月の今年と昨年それぞれの月ごとの売上合計）
+			LocalDate startDay = dateForm.getStartDay();
+			LocalDate thisNewYearsDay = startDay.withDayOfYear(1);//今年の元旦
+			LocalDate lastNewYearsDay = startDay.withDayOfYear(1).minusYears(1);//昨年の元旦
+
+			LocalDate tdy = LocalDate.now();
+			List<String> thisGraph = serv.getMonthlyTotal2(thisNewYearsDay, tdy);
+			List<String> lastGraph = serv.getMonthlyTotal2(lastNewYearsDay, tdy);
+
+			String thisYear = String.valueOf(dateForm.getToday().getYear()) + "年";
+			String lastYear = String.valueOf(dateForm.getToday().minusYears(1).getYear()) + "年";
+
+			C0020Form graphList = new C0020Form(thisGraph, lastGraph, thisYear, lastYear);
+
+			req.setAttribute("graphList", graphList);
 			req.setAttribute("variousForm", variousForm);//reqで大丈夫でした
 
 			//ここsessionじゃないとtodayの取得でぬるぽ
@@ -69,7 +84,7 @@ public class C0020Servlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/WEB-INF/C0020.jsp").forward(req, resp);
 
 			session.removeAttribute("error");
-
+			session.removeAttribute("complete");
 
 		}
 
