@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="com.abc.asms.goods.utils.HTMLUtils" %>
 <%@ page import="org.apache.commons.lang3.StringEscapeUtils" %>
+
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -18,8 +21,10 @@
 		<li><a href="S0020.html">売上検索</a></li>
 		${HTMLUtils.judgeAccount(accounts.authority, "S5")}
 		<li><a href="S0040.html">アカウント検索</a></li>
+		${HTMLUtils.judgeCategory50(accounts.authority, "S5")}
+		<li><a href="S0060.html">商品カテゴリー一覧</a></li>
 		${HTMLUtils.judgeCategory(accounts.authority, "S5")}
-		<li><a href="S0060.html">カテゴリー一覧</a></li>'/>
+		<li><a href="S0070.html">商品カテゴリー一覧</a></li>'/>
 
 </jsp:include>
 

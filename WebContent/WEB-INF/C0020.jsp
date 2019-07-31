@@ -19,13 +19,16 @@
 
 	<jsp:include page="header.jsp">
 		<jsp:param name="bar"
-			value='<li class="active"><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
-
-		${HTMLUtils.judgeSale(accounts.authority, "C2")}
+		value='<li class="active"><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
 		<li><a href="S0020.html">売上検索</a></li>
-		${HTMLUtils.judgeAccount(accounts.authority, "C2")}
-		<li><a href="S0040.html">アカウント検索</a></li>' />
-	</jsp:include>
+		${HTMLUtils.judgeAccount(accounts.authority, "S3")}
+		<li><a href="S0040.html">アカウント検索</a></li>
+		${HTMLUtils.judgeCategory50(accounts.authority, "S3")}
+		<li><a href="S0060.html">商品カテゴリー一覧</a></li>
+		${HTMLUtils.judgeCategory(accounts.authority, "S3")}
+		<li><a href="S0070.html">商品カテゴリー一覧</a></li>'/>
+
+</jsp:include>
 
 	<div class="container">
 

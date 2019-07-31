@@ -17,14 +17,21 @@
 	<body>
 <jsp:include page="header.jsp">
 
-<jsp:param name="bar"
-		value='<li><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
-		${HTMLUtils.judgeSale(accounts.authority, "S2")}
-		<li  class="active"><a href="S0020.html">売上検索</a></li>
-		${HTMLUtils.judgeAccount(accounts.authority, "S2")}
-		<li><a href="S0040.html">アカウント検索</a></li>'/>
-</jsp:include>
 
+<body>
+<jsp:include page="header.jsp">
+<jsp:param name="bar"
+		value='<li><a href="c0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
+		${HTMLUtils.judgeSale(accounts.authority, "S2")}
+		<li><a href="S0020.html">売上検索</a></li>
+		${HTMLUtils.judgeAccount(accounts.authority, "S2")}
+		<li><a href="S0040.html">アカウント検索</a></li>
+		${HTMLUtils.judgeCategory50(accounts.authority, "S2")}
+		<li><a href="S0060.html">商品カテゴリー一覧</a></li>
+		${HTMLUtils.judgeCategory(accounts.authority, "S2")}
+		<li><a href="S0070.html">商品カテゴリー一覧</a></li>'/>
+
+</jsp:include>
 
 <h1>売上を削除してよろしいですか？</h1>
 
