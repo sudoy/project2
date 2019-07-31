@@ -208,5 +208,33 @@ public class HTMLUtils {
 		return judge;
 
 	}
+	//0,1を有効/無効の表示に変更(S0080で使用)
+	public static String expressActiveflg(String num) {
+		if (num.equals("0")) {
+			return "無効";
+
+		} else if (num.equals("1")) {
+			return "有効";
+		}
+		return num;
+
+	}
+
+	//権限ごとに商品カテゴリー登録の表示を切り替える
+		public static String judgeCategory(String authority, String current) {
+
+			String judge = "";
+
+			if ((authority.equals("1") || authority.equals("11")) && !(current.equals("S7"))) {
+				judge = "<li><a href=\"S0070.html\">商品カテゴリー登録</a></li>";
+			} else if((authority.equals("1") || authority.equals("11")) && (current.equals("S7"))){
+				judge = "<li class=\"active\"><a href=\"S0070.html\">売上登録<span class=\"sr-only\">(current)</span></a></li>";
+			}else {
+				judge = "";
+			}
+
+			return judge;
+
+		}
 
 }
