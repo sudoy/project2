@@ -13,12 +13,12 @@
 	<jsp:include page="header.jsp">
 		<jsp:param name="bar"
 			value='<li><a href="C0020_.html">ダッシュボード</a></li>
-		<li><a href="S0010_.html">売上登録 <span class="sr-only">(current)</span></a></li>
-		<li><a href="S0020_.html">売上検索</a></li>
-		<li><a href="S0030_.html">アカウント登録</a></li>
-		<li><a href="S0040_.html">アカウント検索</a></li>
-		<li><a href="S0050_.html">商品カテゴリー登録</a></li>
-		<li><a href="S0060_.html">商品カテゴリー一覧</a></li>
+		<li><a href="S0010.html">売上登録 <span class="sr-only">(current)</span></a></li>
+		<li><a href="S0020.html">売上検索</a></li>
+		<li><a href="S0030.html">アカウント登録</a></li>
+		<li><a href="S0040.html">アカウント検索</a></li>
+		<li><a href="S0050.html">商品カテゴリー登録</a></li>
+		<li><a href="S0060.html">商品カテゴリー一覧</a></li>
 		${HTMLUtils.judgeCategory(accounts.authority, "S7")}
 		<li><a href="S0080.html">商品カテゴリー一覧</a></li>' />
 	</jsp:include>
