@@ -48,7 +48,7 @@
 	<tr><c:if test="${(accounts.authority == '1') || (accounts.authority == '11')}">
 	<td class="col-sm-2"><a class="btn btn-primary" href="S0061.html?id=${i.categoryid}&name=${i.name}&flg=${i.activeflg}" role="button">
 	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 編集</a>
-	<a class="btn btn-danger" href="S0063.html?id=${i.categoryid}&name=${i.name}&flg=${i.activeflg}" role="button">
+	<a class="btn btn-danger right" href="S0063.html?id=${i.categoryid}&name=${i.name}&flg=${i.activeflg}" role="button">
 	<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削除</a></td>
 	</c:if>
 
