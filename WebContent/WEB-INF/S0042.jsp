@@ -33,8 +33,9 @@
 
 		<form class="form-horizontal" action="S0042.html" method="post">
 
-			<input type="hidden" name="id" value="${S0042Form.id}"> <input
-				type="hidden" name="authority" value="${S0042Form.authority}">
+			<input type="hidden" name="id" value="${S0042Form.id}">
+			<input type="hidden" name="authority" value="${S0042Form.authority}">
+			<input type="hidden" name="version" value="${S0042Form.version}">
 
 			<div class="form-group">
 				<label class="col-sm-3 control-label">氏名 <span

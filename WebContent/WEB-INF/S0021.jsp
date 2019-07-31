@@ -38,6 +38,9 @@
 
 	<jsp:include page="message.jsp"/>
 
+	<div id="download"><button type="button" class="btn btn-primary">
+	<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> ダウンロード</button></div>
+
 	<table class="table">
 
 	<tr><th>操作</th><th>No</th><th>販売日</th><th>担当</th><th>商品カテゴリー</th><th>商品名</th><th>単価</th><th>個数</th><th>小計</th></tr>
