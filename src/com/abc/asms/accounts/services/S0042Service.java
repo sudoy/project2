@@ -21,13 +21,14 @@ public class S0042Service {
 		String mail = null;
 		String password = null;
 		String authority = null;
+		String version = null;
 
 		try {
 			//データベース接続
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select account_id, name, mail, password, authority "
+			sql = "select account_id, name, mail, password, authority, version "
 					+ "from accounts "
 					+ "where account_id = ? "
 					+ "order by account_id";
@@ -48,10 +49,11 @@ public class S0042Service {
 				mail = rs.getString("mail");
 				password = rs.getString("password");
 				authority = rs.getString("authority");
+				version = rs.getString("version");
 
 			}
 
-			S0042Form edit = new S0042Form(id, name, mail, password, authority);
+			S0042Form edit = new S0042Form(id, name, mail, password, authority, version);
 
 			return edit;
 
@@ -100,7 +102,6 @@ public class S0042Service {
 					exist = false;//被りあり
 				}
 			}
-			;
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,4 +112,5 @@ public class S0042Service {
 		return exist;
 
 	}
+
 }

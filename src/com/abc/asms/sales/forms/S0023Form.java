@@ -12,12 +12,12 @@ public class S0023Form {
 	private String salenumber;
 	private String note;
 	private long total;
+	private String version;
 
 
 	public S0023Form(String id, String saledate, String name, String categoryid, String categoryname, String tradename, String price,
-			String salenumber, String note, long total) {
+			String salenumber, String note, long total, String version) {
 		super();
-
 		this.id = id;
 		this.saledate = saledate;
 		this.name = name;
@@ -28,21 +28,11 @@ public class S0023Form {
 		this.salenumber = salenumber;
 		this.note = note;
 		this.total = total;
+		this.version = version;
 	}
-
-
-	public String getCategoryid() {
-		return categoryid;
-	}
-
-
-	public void setCategoryid(String categoryid) {
-		this.categoryid = categoryid;
-	}
-
 
 	public S0023Form(String id, String saledate, String name, String categoryname, String tradename, String price,
-			String salenumber, String note) {
+			String salenumber, String note, String version) {
 		super();
 		this.id = id;
 		this.saledate = saledate;
@@ -52,8 +42,8 @@ public class S0023Form {
 		this.price = price;
 		this.salenumber = salenumber;
 		this.note = note;
+		this.version = version;
 	}
-
 
 	public S0023Form(String id, String name) {
 		super();
@@ -61,6 +51,14 @@ public class S0023Form {
 		this.name = name;
 	}
 
+	public String getCategoryid() {
+		return categoryid;
+	}
+
+
+	public void setCategoryid(String categoryid) {
+		this.categoryid = categoryid;
+	}
 
 	public String getId() {
 		return id;
@@ -130,6 +128,14 @@ public class S0023Form {
 
 	public void setTotal(long total) {
 		this.total = total;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 

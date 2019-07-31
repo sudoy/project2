@@ -7,7 +7,8 @@ create table sales(
 	trade_name varchar(100) not null,
 	unit_price int not null,
 	sale_number int not null,
-	note text default null
+	note text default null,
+	version int default 0 not null
 );
 
 

@@ -13,9 +13,10 @@ public class S0024Form {
 	private String salenumber;
 	private String note;
 	private String total;
+	private String version;
 
 	public S0024Form(String accountid,String categoryid, String saleid, String saledate, String tradename, String price,
-			String salenumber, String note) {
+			String salenumber, String note, String version) {
 		super();
 
 		this.accountid = accountid;
@@ -26,6 +27,7 @@ public class S0024Form {
 		this.price = price;
 		this.salenumber = salenumber;
 		this.note = note;
+		this.version = version;
 	}
 
 	public String getCategoryid() {
@@ -114,6 +116,14 @@ public class S0024Form {
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 

@@ -173,39 +173,36 @@
 
 
 $(function ()
-		{
-				const config = {
-						type: 'line',
-						data: barChartData
-						}
+	{
+		const config = {
+			type: 'line',
+			data: barChartData
+		}
 
-				const context = jQuery("#chart")
-				const chart = new Chart(context,config)
-		});
+		const context = jQuery("#chart")
+		const chart = new Chart(context,config)
+	});
 
-		// ----------------------------------------------------------------------
-		const barChartData = {
-				labels : ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
-				datasets : [
-						{
-						label: '${graphList.thisYear}',
-						lineTension: 0,
-						data : ${graphList.thisGraph},
-						backgroundColor: 'rgba(255, 166, 163, 0.3)',
-						borderColor: 'rgba(255, 166, 163, 0.8)'
-						},
-						{
-						label: '${graphList.lastYear}',
-						lineTension: 0,
-						data : ${graphList.lastGraph},
-						backgroundColor: 'rgba(105, 146, 179, 0.3)',
-						borderColor: 'rgba(105, 146, 179, 0.8)'
-						}
-				]
-
+	// ----------------------------------------------------------------------
+	const barChartData = {
+		labels : ["1月","2月","3月","4月","5月","6月","7月","8月","9月","10月","11月","12月"],
+		datasets : [
+			{
+				label: '${graphList.thisYear}',
+				lineTension: 0,
+				data : ${graphList.thisGraph},
+				backgroundColor: 'rgba(255, 166, 163, 0.3)',
+				borderColor: 'rgba(255, 166, 163, 0.8)'
+			},
+			{
+				label: '${graphList.lastYear}',
+				lineTension: 0,
+				data : ${graphList.lastGraph},
+				backgroundColor: 'rgba(105, 146, 179, 0.3)',
+				borderColor: 'rgba(105, 146, 179, 0.8)'
+			}
+		]
 	}
-
-
 
 
 

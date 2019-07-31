@@ -67,11 +67,8 @@ public class S0043Servlet extends HttpServlet {
 
 			}
 
-
 		}
 	}
-
-
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -108,30 +105,37 @@ public class S0043Servlet extends HttpServlet {
 				String mail = form.getMail();
 				String password = form.getPassword();
 				String authority = form.getAuthority();
+				String version = form.getVersion();
 
 				S0043Form updateform;
 
 				//パスワードが未入力の場合は前のパスワードのまま更新(この時ハッシュ化はしない)
 				if (password.equals("")) {
 					String oldpassword = (String) session.getAttribute("password");
-					updateform = new S0043Form(id, name, mail, oldpassword, password, authority);
+					updateform = new S0043Form(id, name, mail, oldpassword, password, authority, version);
 
 					//パスワード入力時はそのまま更新
 				} else {
-					updateform = new S0043Form(id, name, mail, password, authority);
+					updateform = new S0043Form(id, name, mail, password, authority, version);
 				}
 
 				//更新
 				S0043Service service = new S0043Service();
-				service.update(updateform);
+				error = service.update(updateform);//updateに失敗するとエラーメッセージが返ってくる
+
+				//updateに失敗したら（他のユーザーと被ったら）
+				if (error.size() != 0) {
+					session.setAttribute("error", error);
+
+				} else {//成功したら
+					//成功メッセージ
+					session.setAttribute("complete", "No" + updateform.getId() + "のアカウントを更新しました。");
+				}
 
 				session.removeAttribute("S0042Form");
 				session.removeAttribute("password");
 
-				//成功メッセージ
-				session.setAttribute("complete", "No" + updateform.getId() + "のアカウントを更新しました。");
-
-				//更新完了後、S0041へ遷移(遷移先で成功メッセージを表示)
+				//成功失敗どちらにせよ検索結果一覧に遷移しメッセージを表示
 				resp.sendRedirect("S0041.html");
 			}
 

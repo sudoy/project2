@@ -10,6 +10,8 @@ public class S0022Form {
 	private String saleNumber;
 	private String total;
 	private String note;
+
+
 	public S0022Form(String saleId, String saleDate, String name, String categoryName, String tradeName,
 			String unitPrice, String saleNumber, String total, String note) {
 		super();
@@ -77,6 +79,5 @@ public class S0022Form {
 	public void setNote(String note) {
 		this.note = note;
 	}
-
 
 }

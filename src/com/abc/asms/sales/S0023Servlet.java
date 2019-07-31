@@ -133,6 +133,10 @@ public class S0023Servlet extends HttpServlet {
 				String salenumber = req.getParameter("salenumber");//個数
 				String note = req.getParameter("note");//備考
 
+				//sessionからversionを取得
+				S0023Form f = (S0023Form) session.getAttribute("S0023Form");
+				String version = f.getVersion();
+
 				//categoryidの取得
 				S0023Service service1 = new S0023Service();
 				String categoryid = service1.selectCategoryid(categoryname);
@@ -151,8 +155,7 @@ public class S0023Servlet extends HttpServlet {
 				}
 
 				S0023Form form = new S0023Form(id, saledate, name, categoryid, categoryname, tradename, price,
-						salenumber, note,
-						total);
+						salenumber, note, total, version);
 
 				//入力チェック
 				error = validate(form);

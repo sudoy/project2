@@ -13,10 +13,11 @@ public class S0025Form {
 	private String note;
 	private String total;
 	private String name;
+	private String version;
 
 
 	public S0025Form(String id, String saledate, String accountid, String categoryid, String tradename,
-			String unitprice, String salenumber, String note, String categoryname, String name) {
+			String unitprice, String salenumber, String note, String categoryname, String name, String version) {
 		super();
 		this.id = id;
 		this.saledate = saledate;
@@ -28,7 +29,7 @@ public class S0025Form {
 		this.note = note;
 		this.categoryname = categoryname;
 		this.name = name;
-
+		this.version = version;
 
 	}
 
@@ -123,6 +124,16 @@ public class S0025Form {
 	}
 	public void setTotal(String total) {
 		this.total = total;
+	}
+
+
+	public String getVersion() {
+		return version;
+	}
+
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 

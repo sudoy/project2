@@ -14,18 +14,21 @@ import com.abc.asms.sales.forms.S0024Form;
 public class S0024Service {
 
 	//データ更新
-	public void update(S0024Form form) {
+	public List<String> update(S0024Form form) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
 
+		List<String> error = new ArrayList<>();
+
 		try {
 			//データベース接続
 			con = DBUtils.getConnection();
 
-			sql = "update sales set sale_date=?, trade_name = ?, "
-					+ "unit_price = ?, sale_number = ?, note = ?, account_id = ?, category_id = ? where sale_id = ?";
+			sql = "update sales set sale_date=?, trade_name = ?, unit_price = ?, sale_number = ?,"
+					+ " note = ?, account_id = ?, category_id = ?, version = version + 1"
+					+ " where sale_id = ? and version = ?";
 
 			//UPDATE命令の準備
 			ps = con.prepareStatement(sql);
@@ -39,15 +42,19 @@ public class S0024Service {
 			ps.setString(6, form.getAccountid());
 			ps.setString(7, form.getCategoryid());
 			ps.setString(8, form.getSaleid());
+			ps.setString(9, form.getVersion());
 
 			//UPDATE命令の実行
-			ps.executeUpdate();
+			if (ps.executeUpdate() == 0) {//更新した行数が返ってくるので
+				error.add("No." + form.getSaleid() + "の売上を編集できませんでした。");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBUtils.close(con, ps, null);
 		}
+		return error;
 
 	}
 
@@ -134,6 +141,7 @@ public class S0024Service {
 		}
 
 	}
+
 	//商品カテゴリー名一覧取得
 	public List<String> categories() throws ServletException {
 		Connection con = null;
@@ -166,8 +174,5 @@ public class S0024Service {
 			DBUtils.close(con, ps, rs);
 		}
 	}
-
-
-
 
 }

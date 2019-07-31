@@ -31,6 +31,7 @@ public class S0025Service {
 		String note = null;
 		String categoryname = null;
 		String name = null;
+		String version = null;
 
 		try {
 			//データベース接続
@@ -38,7 +39,7 @@ public class S0025Service {
 
 			//SQL
 			sql = "select s.sale_id, s.sale_date, s.account_id, s.category_id, s.trade_name, s.unit_price,"
-					+ " s.sale_number, note, c.category_name, a.name"
+					+ " s.sale_number, note, c.category_name, a.name, s.version"
 					+ " from sales s "
 					+ " left join accounts a on s.account_id = a.account_id"
 					+ " left join categories c on s.category_id = c.category_id"
@@ -68,13 +69,14 @@ public class S0025Service {
 				note = rs.getString("s.note");
 				categoryname = rs.getString("c.category_name");
 				name = rs.getString("a.name");
+				version = rs.getString("s.version");
 
 			}
 			//ハイフンをスラッシュに変更
 			saledate = saledate.replace("-", "/");
 
 			S0025Form form = new S0025Form(id, saledate, accountid, categoryid, tradename, unitprice,
-					salenumber, note, categoryname, name);
+					salenumber, note, categoryname, name, version);
 
 			return form;
 
@@ -88,33 +90,39 @@ public class S0025Service {
 	}
 
 	//データの削除
-	public void delete(S0025Form form) {
+	public List<String> delete(S0025Form form) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
+
+		List<String> error = new ArrayList<>();
 
 		try {
 			//データベース接続
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "delete from sales where sale_id = ?";
+			sql = "delete from sales where sale_id = ? and version = ?";
 
 			//DELETE命令の準備
 			ps = con.prepareStatement(sql);
 
 			//DELETE命令にポストデータの内容をセット
 			ps.setString(1, form.getId());
+			ps.setString(2, form.getVersion());
 
 			//DELETEE命令の実行
-			ps.executeUpdate();
+			if(ps.executeUpdate() == 0) {//削除に成功した行数が返ってくるので
+				error.add("No." + form.getId() + "の売上を削除できませんでした。");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBUtils.close(con, ps);
 		}
+		return error;
 
 	}
 

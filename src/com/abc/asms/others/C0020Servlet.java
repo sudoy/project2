@@ -67,11 +67,11 @@ public class C0020Servlet extends HttpServlet {
 			LocalDate lastNewYearsDay = startDay.withDayOfYear(1).minusYears(1);//昨年の元旦
 
 			LocalDate tdy = LocalDate.now();
-			List<String> thisGraph = serv.getMonthlyTotal2(thisNewYearsDay, tdy);
-			List<String> lastGraph = serv.getMonthlyTotal2(lastNewYearsDay, tdy);
+			List<String> thisGraph = serv.getMonthlyTotal(thisNewYearsDay, tdy);
+			List<String> lastGraph = serv.getMonthlyTotal(lastNewYearsDay, tdy);
 
-			String thisYear = String.valueOf(dateForm.getToday().getYear()) + "年";
-			String lastYear = String.valueOf(dateForm.getToday().minusYears(1).getYear()) + "年";
+			String thisYear = String.valueOf(thisNewYearsDay.getYear()) + "年";
+			String lastYear = String.valueOf(lastNewYearsDay.getYear()) + "年";
 
 			C0020Form graphList = new C0020Form(thisGraph, lastGraph, thisYear, lastYear);
 

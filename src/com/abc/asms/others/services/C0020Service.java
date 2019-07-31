@@ -221,9 +221,10 @@ public class C0020Service {
 	}
 
 	//月ごとの売上合計を取得してListに入れる（グラフ用）
-	public List<String> getMonthlyTotal2(LocalDate newYearsDay, LocalDate today) throws ServletException {
+	public List<String> getMonthlyTotal(LocalDate newYearsDay, LocalDate today) throws ServletException {
 
-		LocalDate newYearsDayLast = newYearsDay.plusMonths(1).minusDays(1);
+		LocalDate first = newYearsDay;
+		LocalDate last = first.plusMonths(1).minusDays(1);
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -234,7 +235,7 @@ public class C0020Service {
 
 		for (int i = 1; i <= 12; i++) {//1月～12月まで
 
-			if(newYearsDay.isAfter(today)) {//今日の日付を超えたら終わり
+			if(first.isAfter(today)) {//今日の日付を超えたら終わり
 				break;
 			}
 
@@ -244,8 +245,8 @@ public class C0020Service {
 						+ " where ? <= sale_date and sale_date <= ?";
 
 				ps = con.prepareStatement(sql);
-				ps.setString(1, newYearsDay.toString());
-				ps.setString(2, newYearsDayLast.toString());
+				ps.setString(1, first.toString());
+				ps.setString(2, last.toString());
 
 				rs = ps.executeQuery();
 
@@ -269,8 +270,8 @@ public class C0020Service {
 				DBUtils.close(con, ps, rs);
 			}
 
-			newYearsDay = newYearsDay.plusMonths(1);//次の月の初日に
-			newYearsDayLast = newYearsDay.plusMonths(1).minusDays(1);//次の月の最終日に
+			first = first.plusMonths(1);//次の月の初日に
+			last = first.plusMonths(1).minusDays(1);//次の月の最終日に
 
 		}
 		return list;

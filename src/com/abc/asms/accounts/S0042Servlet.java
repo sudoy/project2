@@ -68,6 +68,7 @@ public class S0042Servlet extends HttpServlet {
 						} else {
 							S0042Form form = service.select(req.getParameter("id"));
 							session.setAttribute("S0042Form", form);
+							session.setAttribute("password", form.getPassword());
 						}
 					}
 				} else {//S0042Formに値が入っている場合
@@ -125,13 +126,17 @@ public class S0042Servlet extends HttpServlet {
 				String sale = req.getParameter("sale");
 				String account = req.getParameter("account");
 
+				//sessionからversionを取得
+				S0042Form f = (S0042Form) session.getAttribute("S0042Form");
+				String version = f.getVersion();
+
 				//saleとaccountの合計値をauthorityに入れることで権限の有無を判断
 				if (account != null && sale != null) {
 					authorityint = Integer.parseInt(account + sale);
 					authority = String.valueOf(authorityint);
 				}
 
-				S0042Form form = new S0042Form(id, name, mail, password, check, sale, account, authority);
+				S0042Form form = new S0042Form(id, name, mail, password, check, sale, account, authority, version);
 
 				//入力チェック
 				error = validate(form);

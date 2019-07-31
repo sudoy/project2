@@ -9,9 +9,10 @@ public class S0043Form{
 	private String password;
 	private String newpassword;
 	private String authority;
+	private String version;
 
 	//パスワード入力時
-	public S0043Form(String id, String name, String mail, String password,String authority) {
+	public S0043Form(String id, String name, String mail, String password, String authority, String version) {
 		super();
 
 		this.id = id;
@@ -19,10 +20,12 @@ public class S0043Form{
 		this.mail = mail;
 		this.password = password;
 		this.authority = authority;
+		this.version = version;
 	}
 
 	//パスワード未入力時
-	public S0043Form(String id, String name, String mail, String oldpassword, String newpassword, String authority) {
+	public S0043Form(String id, String name, String mail, String oldpassword, String newpassword,
+			String authority, String version) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -30,6 +33,7 @@ public class S0043Form{
 		this.password = oldpassword;
 		this.newpassword = newpassword;
 		this.authority = authority;
+		this.version = version;
 	}
 
 
@@ -82,6 +86,14 @@ public class S0043Form{
 
 	public void setAuthority(String authority) {
 		this.authority = authority;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 

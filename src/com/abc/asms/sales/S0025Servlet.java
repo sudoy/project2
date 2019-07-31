@@ -65,12 +65,9 @@ public class S0025Servlet extends HttpServlet {
 				S0025Form form = service.select(req.getParameter("id"));
 				session.setAttribute("S0025Form", form);
 
-
-
 				//全category_nameの取得
 				List<String> categoryList = service.category();
 				req.setAttribute("allCategory", categoryList);
-
 
 				//小計
 				int pricenum = Integer.parseInt(form.getUnitprice());
@@ -115,16 +112,21 @@ public class S0025Servlet extends HttpServlet {
 
 				//削除
 				S0025Service service = new S0025Service();
-				service.delete(s0025form);
+				error = service.delete(s0025form);
+
+				//削除に失敗したら
+				if(error.size() != 0) {
+					session.setAttribute("error", error);
+				}else {//成功したら
+					session.setAttribute("complete", "No" + s0025form.getId() + "の売上を削除しました。");
+				}
 
 				session.removeAttribute("S0025Form");
 				session.removeAttribute("allCategory");
 				session.removeAttribute("allName");
 				session.removeAttribute("S0022Form");
 
-				//成功メッセージ
-				session.setAttribute("complete", "No" + s0025form.getId() + "の売上を削除しました。");
-
+				//成功失敗どちらにせよ検索結果一覧に遷移してメッセージを表示
 				resp.sendRedirect("S0021.html");
 
 			}

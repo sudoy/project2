@@ -29,6 +29,7 @@ public class S0023Service {
 		String price = null;
 		String salenumber = null;
 		String note = null;
+		String version = null;
 
 		try {
 			//データベース接続
@@ -36,7 +37,7 @@ public class S0023Service {
 
 			//SQL
 			sql = "select s.sale_id, s.sale_date, a.name, c.category_name, s.trade_name,"
-					+ " s.unit_price, s.sale_number, s.unit_price * s.sale_number as total , s.note"
+					+ " s.unit_price, s.sale_number, s.unit_price * s.sale_number as total , s.note, s.version"
 					+ " from sales s left join categories c on s.category_id = c.category_id "
 					+ " left join accounts a on s.account_id = a.account_id where sale_id = ?";
 
@@ -59,10 +60,12 @@ public class S0023Service {
 				price = rs.getString("s.unit_price");
 				salenumber = rs.getString("s.sale_number");
 				note = rs.getString("s.note");
+				version = rs.getString("s.version");
 
 			}
 
-			S0023Form form = new S0023Form(id, saledate, name, categoryname, tradename, price, salenumber, note);
+			S0023Form form = new S0023Form(id, saledate, name, categoryname, tradename, price, salenumber, note,
+					version);
 
 			return form;
 
@@ -106,12 +109,9 @@ public class S0023Service {
 				id = rs.getString("account_id");
 				name = rs.getString("name");
 
-
-
 				S0023Form form = new S0023Form(id, name);
 
 				accounts.add(form);
-
 
 			}
 

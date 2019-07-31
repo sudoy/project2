@@ -3,6 +3,8 @@ package com.abc.asms.accounts.services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.abc.asms.accounts.forms.S0044Form;
 import com.abc.asms.goods.utils.DBUtils;
@@ -21,13 +23,14 @@ public class S0044Service {
 		String mail = null;
 		String password = null;
 		String authority = null;
+		String version = null;
 
 		try {
 			//データベース接続
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select account_id, name, mail, password, authority "
+			sql = "select account_id, name, mail, password, authority, version "
 					+ "from accounts "
 					+ "where account_id = ? "
 					+ "order by account_id";
@@ -49,10 +52,11 @@ public class S0044Service {
 				mail = rs.getString("mail");
 				password = rs.getString("password");
 				authority = rs.getString("authority");
+				version = rs.getString("version");
 
 			}
 
-			S0044Form list = new S0044Form(id, name, mail, password, authority);
+			S0044Form list = new S0044Form(id, name, mail, password, authority, version);
 
 			return list;
 
@@ -66,33 +70,39 @@ public class S0044Service {
 	}
 
 	//データの削除
-	public void delete(S0044Form form) {
+	public List<String> delete(S0044Form form) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
+
+		List<String> error = new ArrayList<>();
 
 		try {
 			//データベース接続
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "delete from accounts where account_id = ?";
+			sql = "delete from accounts where account_id = ? and version = ?";
 
 			//DELETE命令の準備
 			ps = con.prepareStatement(sql);
 
 			//DELETE命令にポストデータの内容をセット
 			ps.setString(1, form.getId());
+			ps.setString(2, form.getVersion());
 
 			//DELETEE命令の実行
-			ps.executeUpdate();
+			if(ps.executeUpdate() == 0) {//削除に成功した行数が返ってくるので
+				error.add("No." + form.getId() + "のアカウントを削除できませんでした。");
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			DBUtils.close(con, ps);
 		}
+		return error;
 
 	}
 

@@ -68,9 +68,7 @@ public class S0044Servlet extends HttpServlet {
 				session.setAttribute("S0044Form", form);//reqに修正→sessionに戻した
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0044.jsp").forward(req, resp);
-				//				} else {
-				//				resp.sendRedirect("S0040.html");
-				//				}
+
 			}
 		}
 	}
@@ -106,15 +104,18 @@ public class S0044Servlet extends HttpServlet {
 
 				//削除
 				S0044Service service = new S0044Service();
-				service.delete(deleteform);
+				error = service.delete(deleteform);
+				//削除に失敗したら
+				if (error.size() != 0) {
+					session.setAttribute("error", error);
+				} else {//成功したら
+					session.setAttribute("complete", "No" + deleteform.getId() + "のアカウントを削除しました。");
+				}
 
 				//取得したアカウント情報を破棄
 				session.removeAttribute("S0044Form");
 
-				//成功メッセージ
-				session.setAttribute("complete", "No" + deleteform.getId() + "のアカウントを削除しました。");
-
-				//削除完了後、S0041.jspに遷移
+				//成功失敗どちらにせよ検索結果一覧に遷移してメッセージを表示
 				resp.sendRedirect("S0041.html");
 			}
 		}

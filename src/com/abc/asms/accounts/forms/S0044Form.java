@@ -7,14 +7,16 @@ public class S0044Form {
 	private String mail;
 	private String password;
 	private String authority;
+	private String version;
 
-	public S0044Form(String id, String name, String mail, String password, String authority) {
+	public S0044Form(String id, String name, String mail, String password, String authority, String version) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.mail = mail;
 		this.password = password;
 		this.authority = authority;
+		this.version = version;
 	}
 
 	public String getId() {
@@ -55,6 +57,14 @@ public class S0044Form {
 
 	public void setAuthority(String authority) {
 		this.authority = authority;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 
 }

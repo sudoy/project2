@@ -7,11 +7,12 @@ public class S0042Form {
 	private String mail;
 	private String password;
 	private String authority;
+	private String version;
 	private String check;
 	private String sale;
 	private String account;
 
-	public S0042Form(String id, String name, String mail, String password, String authority) {
+	public S0042Form(String id, String name, String mail, String password, String authority, String version) {
 		super();
 
 		this.id = id;
@@ -19,10 +20,11 @@ public class S0042Form {
 		this.mail = mail;
 		this.password = password;
 		this.authority = authority;
+		this.version = version;
 	}
 
 	public S0042Form(String id, String name, String mail, String password, String check, String sale,
-			String account, String authority) {
+			String account, String authority, String version) {
 		super();
 
 		this.id = id;
@@ -33,6 +35,7 @@ public class S0042Form {
 		this.sale = sale;
 		this.account = account;
 		this.setAuthority(authority);
+		this.version = version;
 	}
 
 
@@ -97,6 +100,14 @@ public class S0042Form {
 	}
 	public void setAuthority(String authority) {
 		this.authority = authority;
+	}
+
+	public String getVersion() {
+		return version;
+	}
+
+	public void setVersion(String version) {
+		this.version = version;
 	}
 }
 

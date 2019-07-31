@@ -5,7 +5,8 @@ create table accounts(
 	name varchar(20) not null,
 	mail varchar(100) not null,
 	password varchar(32) not null,
-	authority int default 0 not null
+	authority int default 0 not null,
+	version int default 0 not null
 
 );
 

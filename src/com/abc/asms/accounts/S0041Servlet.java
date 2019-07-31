@@ -55,6 +55,7 @@ public class S0041Servlet extends HttpServlet {
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0041.jsp").forward(req, resp);//遷移
 				session.removeAttribute("complete");
+				session.removeAttribute("error");
 
 			}
 

@@ -104,6 +104,7 @@ public class S0024Servlet extends HttpServlet {
 				String price = forminput.getPrice();
 				String salenumber = forminput.getSalenumber();
 				String note = forminput.getNote();
+				String version = forminput.getVersion();
 
 				//nameをaccount_idに、categorynameをcategoryidに変換(salesテーブルにname, categorynameが存在しない為)
 				S0024Service service = new S0024Service();
@@ -112,18 +113,22 @@ public class S0024Servlet extends HttpServlet {
 				String categoryid = service.selectcategoryid(categoryname);
 
 				S0024Form updateform = new S0024Form(accountid, categoryid, saleid, saledate, tradename, price,
-						salenumber, note);
+						salenumber, note, version);
 
 				//更新
-				service.update(updateform);
+				error = service.update(updateform);
 
+				//更新に失敗したら
+				if (error.size() != 0) {
+					session.setAttribute("error", error);
+				} else {//成功したら
+						//成功メッセージ
+					session.setAttribute("complete", "No" + updateform.getSaleid() + "の売上を更新しました。");
+				}
 				//入力した値の消去
 				session.removeAttribute("S0023Form");
 
-				//成功メッセージ
-				session.setAttribute("complete", "No" + updateform.getSaleid() + "の売上を更新しました。");
-
-				//更新完了後、S0021へ遷移(遷移先で成功メッセージを表示)
+				//成功失敗どちらにせよ検索結果一覧に遷移しメッセージを表示
 				resp.sendRedirect("S0021.html");
 			}
 
