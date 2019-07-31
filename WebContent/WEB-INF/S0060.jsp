@@ -14,8 +14,7 @@
 
 		<title>商品カテゴリー一覧画面|物品管理システム</title>
 		<link	href="css/bootstrap.min.css"	rel="stylesheet">
-		<link href="css/S0060_商品カテゴリー一覧.css" rel="stylesheet">
-
+		<link href="css/S0041_アカウント検索結果表示画面.css" rel="stylesheet">
 </head>
 
 <body>
@@ -30,7 +29,7 @@
 		${HTMLUtils.judgeCategory50(accounts.authority, "S6")}
 		<li class="active"><a href="S0060.html">商品カテゴリー一覧<span class="sr-only">(current)</span></a></li>
 		${HTMLUtils.judgeCategory(accounts.authority, "S6")}
-		<li><a href="S0070.html">商品カテゴリー一覧</a></li>'/>
+		<li><a href="S0080.html">商品カテゴリー一覧</a></li>'/>
 
 </jsp:include>
 <div class="container-fluid">

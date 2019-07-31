@@ -26,7 +26,7 @@
 		${HTMLUtils.judgeCategory50(accounts.authority, "S1")}
 		<li><a href="S0060.html">商品カテゴリー一覧</a></li>
 		${HTMLUtils.judgeCategory(accounts.authority, "S1")}
-		<li><a href="S0070.html">商品カテゴリー一覧</a></li>'/>
+		<li><a href="S0080.html">商品カテゴリー一覧</a></li>'/>
 
 </jsp:include>
 <div class="container">
