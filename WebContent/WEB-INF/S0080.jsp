@@ -42,10 +42,14 @@
 
 	<c:forEach items="${S0080Form}" var="i">
 
-		<tr><td class="col-sm-2"><a class="btn btn-primary" href="S0081.html?categoryid=${i.categoryid}" role="button">
+		<tr><td class="col-sm-2">
+		<c:if test="${(accounts.authority == '1') || (accounts.authority == '11')}">
+		<a class="btn btn-primary" href="S0081.html?categoryid=${i.categoryid}" role="button">
 			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 編集</a>
-		<a class="btn btn-danger" href="S0083.html?id=${i.categoryid}" role="button">
-			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削除</a></td>
+		<a class="btn btn-danger" href="S0083.html?categoryid=${i.categoryid}" role="button">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> 削除</a>
+		</c:if></td>
+
 
 		<td class="right">${i.categoryid}</td><td>${i.categoryname}</td>
 		<td> ${HTMLUtils.expressActiveflg(i.active)}</td></tr>

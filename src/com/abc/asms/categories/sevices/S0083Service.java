@@ -21,7 +21,7 @@ public class S0083Service {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "delete from categoriess where category_id = ?";
+			sql = "delete from categories where category_id = ?";
 
 			//DELETE命令の準備
 			ps = con.prepareStatement(sql);

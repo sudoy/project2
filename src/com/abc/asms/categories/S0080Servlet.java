@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.asms.categories.forms.S0080Form;
 import com.abc.asms.categories.sevices.S0080Service;
-import com.abc.asms.others.forms.C0010Form;
 
 @WebServlet("/S0080.html")
 public class S0080Servlet extends HttpServlet {
@@ -37,25 +36,17 @@ public class S0080Servlet extends HttpServlet {
 			resp.sendRedirect("C0010.html");
 		} else {
 
-			//権限チェック(権限が無い場合はダッシュボードへ遷移)
-			C0010Form checkauthority = (C0010Form) session.getAttribute("accounts");
+			List<S0080Form> list = new ArrayList<>();
+			S0080Service service = new S0080Service();
 
-			if (!checkauthority.getAuthority().equals("1") && !checkauthority.getAuthority().equals("11")) {
-				error.add("不正なアクセスです。");
-				session.setAttribute("error", error);
-				resp.sendRedirect("C0020.html");
-			} else {
+			//一覧の取得
+			list = service.select();
 
-				List<S0080Form> list = new ArrayList<>();
-				S0080Service service = new S0080Service();
+			session.setAttribute("S0080Form", list);
 
-				//一覧の取得
-				list = service.select();
+			getServletContext().getRequestDispatcher("/WEB-INF/S0080.jsp").forward(req, resp);
+			session.removeAttribute("complete");
 
-				req.setAttribute("S0080Form", list);
-
-				getServletContext().getRequestDispatcher("/WEB-INF/S0080.jsp").forward(req, resp);
-			}
 		}
 
 	}

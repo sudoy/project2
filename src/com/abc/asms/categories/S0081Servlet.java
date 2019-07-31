@@ -123,7 +123,7 @@ public class S0081Servlet extends HttpServlet {
 
 		if (categoryname.equals("")) {
 			error.add("カテゴリー名を入力してください。");
-		} else if (50 <= categoryname.length()) {
+		} else if (51 <= categoryname.length()) {
 			error.add("カテゴリー名が長すぎます。");
 		} else if (exist == false) {
 			error.add("カテゴリー名が重複しています。");

@@ -17,6 +17,7 @@ public class S0083Servlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 
 		S0083Service service = new S0083Service();
 		S0083Form form = service.select(req.getParameter("categoryid"));
@@ -29,8 +30,10 @@ public class S0083Servlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
+
 
 		String categoryid = req.getParameter("categoryid");
 
@@ -40,12 +43,9 @@ public class S0083Servlet extends HttpServlet {
 		service.delete(form);
 
 		//成功メッセージ
-		session.setAttribute("complete", "No" + form.getCategoryid() + "の商品カテゴリーを更新しました。");
+		session.setAttribute("complete", "No" + form.getCategoryid() + "の商品カテゴリーを削除しました。");
 
 		resp.sendRedirect("S0080.html");
-
-
-
 
 	}
 

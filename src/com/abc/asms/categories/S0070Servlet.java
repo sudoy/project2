@@ -47,6 +47,7 @@ public class S0070Servlet extends HttpServlet {
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0070.jsp").forward(req, resp);
 				session.removeAttribute("error");
+				session.removeAttribute("complete");
 			}
 		}
 
@@ -92,7 +93,7 @@ public class S0070Servlet extends HttpServlet {
 
 		if (categoryname.equals("")) {
 			error.add("カテゴリー名を入力してください。");
-		} else if (50 <= categoryname.length()) {
+		} else if (51 <= categoryname.length()) {
 			error.add("カテゴリー名が長すぎます。");
 		} else if (exist == false) {
 			error.add("カテゴリー名が重複しています。");

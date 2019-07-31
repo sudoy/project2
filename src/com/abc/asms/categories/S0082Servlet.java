@@ -21,6 +21,7 @@ public class S0082Servlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 
 		//ログインチェック
 		HttpSession session = req.getSession();
@@ -54,6 +55,7 @@ public class S0082Servlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 
 		HttpSession session = req.getSession();
 
@@ -73,6 +75,7 @@ public class S0082Servlet extends HttpServlet {
 		session.setAttribute("complete", "No" + form.getCategoryid() + "の商品カテゴリーを更新しました。");
 
 		resp.sendRedirect("S0080.html");
+
 
 
 	}
