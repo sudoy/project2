@@ -236,5 +236,22 @@ public class HTMLUtils {
 			return judge;
 
 		}
+		//権限ごとに商品カテゴリー登録の表示を切り替える　s0050
+		public static String judgeCategory50(String authority, String current) {
+
+			String judge = "";
+
+			if ((authority.equals("1") || authority.equals("11")) && !(current.equals("S5"))) {
+				judge = "<li><a href=\"S0050.html\">カテゴリー登録</a></li>";
+			} else if((authority.equals("1") || authority.equals("11")) && (current.equals("S5"))){
+				judge = "<li class=\"active\"><a href=\"S0050.html\">カテゴリー登録<span class=\"sr-only\">(current)</span></a></li>";
+			}else {
+				judge = "";
+			}
+
+			return judge;
+
+		}
+
 
 }
