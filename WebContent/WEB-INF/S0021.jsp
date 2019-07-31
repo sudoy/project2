@@ -22,7 +22,7 @@
 <jsp:param name="bar"
 		value='<li><a href="c0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
 		${HTMLUtils.judgeSale(accounts.authority, "S2")}
-		<li class="active"><li><a href="S0020.html">売上検索<span class="sr-only">(current)</span></a></li>
+		<li><a href="S0020.html">売上検索</a></li>
 		${HTMLUtils.judgeAccount(accounts.authority, "S2")}
 		<li><a href="S0040.html">アカウント検索</a></li>
 		${HTMLUtils.judgeCategory50(accounts.authority, "S2")}

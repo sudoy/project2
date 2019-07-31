@@ -17,7 +17,7 @@
 		${HTMLUtils.judgeSale(accounts.authority, "S4")}
 		<li><a href="S0020.html">売上検索</a></li>
 		${HTMLUtils.judgeAccount(accounts.authority, "S4")}
-		<li><a href="S0040.html">アカウント検索</a></li>
+		<li class="active"><li><a href="S0040.html">アカウント検索<span class="sr-only">(current)</span></a></li>
 		${HTMLUtils.judgeCategory50(accounts.authority, "S4")}
 		<li><a href="S0060.html">商品カテゴリー一覧</a></li>
 		${HTMLUtils.judgeCategory(accounts.authority, "S4")}
