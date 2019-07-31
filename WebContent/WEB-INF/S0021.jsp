@@ -38,7 +38,7 @@
 
 	<jsp:include page="message.jsp"/>
 
-	<div id="download"><button type="button" class="btn btn-primary">
+	<div id="download"><button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/csvDownload'">
 	<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> ダウンロード</button></div>
 
 	<table class="table">
