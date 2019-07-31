@@ -13,7 +13,7 @@
 <body>
 		<jsp:include page="header.jsp">
 		<jsp:param name="bar"
-			value='<li><a href="C0020_.html">ダッシュボード</a></li>
+			value='<li><a href="C0020.html">ダッシュボード</a></li>
 		<li><a href="S0010.html">売上登録 <span class="sr-only">(current)</span></a></li>
 		<li><a href="S0020.html">売上検索</a></li>
 		<li><a href="S0030.html">アカウント登録</a></li>
