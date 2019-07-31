@@ -14,7 +14,7 @@
 <body>
 <jsp:include page="header.jsp">
 <jsp:param name="bar"
-		value='<li><a href="c0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
+		value='<li><a href="C0020.html">ダッシュボード</a></li>
 		<li><a href="S0020.html">売上検索</a></li>
 		${HTMLUtils.judgeAccount(accounts.authority, "S3")}
 		<li><a href="S0040.html">アカウント検索</a></li>

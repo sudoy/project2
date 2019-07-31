@@ -242,9 +242,9 @@ public class HTMLUtils {
 			String judge = "";
 
 			if ((authority.equals("1") || authority.equals("11")) && !(current.equals("S5"))) {
-				judge = "<li><a href=\"S0050.html\">カテゴリー登録</a></li>";
+				judge = "<li><a href=\"S0050.html\">商品カテゴリー登録</a></li>";
 			} else if((authority.equals("1") || authority.equals("11")) && (current.equals("S5"))){
-				judge = "<li class=\"active\"><a href=\"S0050.html\">カテゴリー登録<span class=\"sr-only\">(current)</span></a></li>";
+				judge = "<li class=\"active\"><a href=\"S0050.html\">商品カテゴリー登録<span class=\"sr-only\">(current)</span></a></li>";
 			}else {
 				judge = "";
 			}
