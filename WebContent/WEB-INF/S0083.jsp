@@ -15,11 +15,11 @@
 	<jsp:include page="header.jsp">
 		<jsp:param name="bar"
 			value='<li><a href="C0020.html">ダッシュボード</a></li>
-		<li><a href="S0010.html">売上登録 <span class="sr-only">(current)</span></a></li>
+		${HTMLUtils.judgeSale(accounts.authority, "S8")}
 		<li><a href="S0020.html">売上検索</a></li>
-		<li><a href="S0030.html">アカウント登録</a></li>
+		${HTMLUtils.judgeAccount(accounts.authority, "S8")}
 		<li><a href="S0040.html">アカウント検索</a></li>
-		<li><a href="S0050.html">商品カテゴリー登録</a></li>
+		${HTMLUtils.judgeCategory50(accounts.authority, "S8")}
 		<li><a href="S0060.html">商品カテゴリー一覧</a></li>
 		${HTMLUtils.judgeCategory(accounts.authority, "S8")}
 		<li class="active"><a href="S0080.html">商品カテゴリー一覧</a></li>'/>
