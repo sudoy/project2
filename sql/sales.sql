@@ -7,9 +7,11 @@ create table sales(
 	trade_name varchar(100) not null,
 	unit_price int not null,
 	sale_number int not null,
-	note text default null,
-	version int default 0 not null
+	note text default null
+
 );
+
+alter table sales add version int default 0 not null;
 
 insert into sales(sale_id, sale_date, account_id, category_id, trade_name, unit_price, sale_number)
 values(1, '2019/6/1', 1, 22, 'あけぼの『新中華街 あおり炒めの焼豚炒飯』 450gX12袋', 4500, 10);

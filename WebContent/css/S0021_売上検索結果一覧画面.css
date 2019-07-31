@@ -2,3 +2,7 @@
 .right{
 	text-align: right;
 }
+#download{
+	float: right;
+	margin-bottom: 5px;
+}

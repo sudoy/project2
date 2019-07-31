@@ -36,6 +36,7 @@
 	<jsp:include page="message.jsp"/>
 
 	<input type="hidden" name="id" value="${S0023Form.id}">
+	<input type="hidden" name="version" value="${S0023Form.version}">
 
 
 	<table>

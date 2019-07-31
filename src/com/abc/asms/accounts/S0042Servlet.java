@@ -125,10 +125,7 @@ public class S0042Servlet extends HttpServlet {
 				String check = req.getParameter("check");
 				String sale = req.getParameter("sale");
 				String account = req.getParameter("account");
-
-				//sessionからversionを取得
-				S0042Form f = (S0042Form) session.getAttribute("S0042Form");
-				String version = f.getVersion();
+				String version =req.getParameter("version");
 
 				//saleとaccountの合計値をauthorityに入れることで権限の有無を判断
 				if (account != null && sale != null) {

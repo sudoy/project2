@@ -132,10 +132,7 @@ public class S0023Servlet extends HttpServlet {
 				String price = req.getParameter("price");//単価
 				String salenumber = req.getParameter("salenumber");//個数
 				String note = req.getParameter("note");//備考
-
-				//sessionからversionを取得
-				S0023Form f = (S0023Form) session.getAttribute("S0023Form");
-				String version = f.getVersion();
+				String version = req.getParameter("version");//バージョン
 
 				//categoryidの取得
 				S0023Service service1 = new S0023Service();
