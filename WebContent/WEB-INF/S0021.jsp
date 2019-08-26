@@ -20,7 +20,7 @@
 <body>
 <jsp:include page="header.jsp">
 <jsp:param name="bar"
-		value='<li><a href="c0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
+		value='<li><a href="C0020.html">ダッシュボード<span class="sr-only">(current)</span></a></li>
 		${HTMLUtils.judgeSale(accounts.authority, "S2")}
 		<li><a href="S0020.html">売上検索</a></li>
 		${HTMLUtils.judgeAccount(accounts.authority, "S2")}
@@ -38,8 +38,10 @@
 
 	<jsp:include page="message.jsp"/>
 
-	<div id="download"><button type="button" class="btn btn-primary" onclick="location.href='${pageContext.request.contextPath}/csvDownload'">
+	<form action="S0021.html" method="POST">
+	<div id="download"><button type="submit" class="btn btn-primary">
 	<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span> ダウンロード</button></div>
+	</form>
 
 	<table class="table">
 

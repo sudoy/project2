@@ -65,7 +65,7 @@
 		<c:forEach items="${allCategory}" var="i">
 			<label class="checkbox-inline">
 			<input type="checkbox" name="categoryName" value="${i}"
-			 ${HTMLUtils.judgeCategoryChecked(i, S0020Form.cateName)}${HTMLUtils.judgeDefault(S0020Form)}> ${i}
+			 ${StringEscapeUtils.escapeHtml4(HTMLUtils.judgeCategoryChecked(i, S0020Form.cateName))}${StringEscapeUtils.escapeHtml4(HTMLUtils.judgeDefault(S0020Form))}> ${StringEscapeUtils.escapeHtml4(i)}
 			</label>
 		</c:forEach>
 	</div>
