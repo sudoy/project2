@@ -14,9 +14,6 @@
 		<link href="css/bootstrap.min.css" rel="stylesheet">
 		<link href="css/S0025_売上詳細削除確認画面.css" rel="stylesheet">
 	</head>
-	<body>
-<jsp:include page="header.jsp">
-
 
 <body>
 <jsp:include page="header.jsp">
