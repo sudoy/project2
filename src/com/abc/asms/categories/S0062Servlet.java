@@ -44,7 +44,6 @@ public class S0062Servlet extends HttpServlet {
 				session.setAttribute("error", loginerror);
 				resp.sendRedirect("C0020.html");
 			} else {
-				//DBにインサート
 				String name = req.getParameter("name");
 				String flg1 = req.getParameter("flg1");
 				String flg0 = req.getParameter("flg0");

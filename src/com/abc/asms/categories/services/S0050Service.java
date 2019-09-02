@@ -9,7 +9,7 @@ import javax.servlet.ServletException;
 import com.abc.asms.goods.utils.DBUtils;
 
 public class S0050Service {
-	public boolean service(String category){
+	public boolean exist(String category){
 
 		Connection con = null;
 		PreparedStatement ps = null;

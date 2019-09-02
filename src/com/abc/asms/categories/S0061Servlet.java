@@ -49,12 +49,12 @@ public class S0061Servlet extends HttpServlet {
 
 				session.setAttribute("id",id);
 
+				//s0062jspからキャンセルしたとき
 				if(flg.equals("1")) {
 					flg = flg.replace("1", "可");
 				}else if(flg.equals("0")) {
 					flg = flg.replace("0", "不可");
 				}
-
 
 				S0061Form s0061form = new S0061Form(name, flg,id);
 				req.setAttribute("s0061form", s0061form);

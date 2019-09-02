@@ -85,9 +85,6 @@ public class S0050Servlet extends HttpServlet {
 				//キャンセルしたときに値を使いたいから
 				session.setAttribute("s0050form", s0050form);
 
-				//途中
-				req.setAttribute("category",category);
-
 
 				// バリデーションチェック
 				List<String> error = validate(category);
@@ -108,7 +105,7 @@ public class S0050Servlet extends HttpServlet {
 	}
 	private List<String> validate(String category) {
 		S0050Service s0050service = new S0050Service();
-		boolean exist = s0050service.service(category);
+		boolean exist = s0050service.exist(category);
 
 		List<String> error = new ArrayList<String>();
 		if (category.equals("")) {

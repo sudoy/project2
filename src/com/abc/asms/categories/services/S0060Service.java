@@ -25,7 +25,7 @@ public class S0060Service {
 			con = DBUtils.getConnection();
 
 			//SQL
-			sql = "select category_id, category_name, active_flg from categories";
+			sql = "select category_id, category_name, active_flg from categories";//orderbyie
 
 			//SELECT命令の準備
 			ps = con.prepareStatement(sql);
@@ -43,13 +43,13 @@ public class S0060Service {
 
 				String activeflg = null;
 				if(rs.getString("active_flg").equals("1")) {
-					activeflg = rs.getString("active_flg").replace("1", "可");
+					activeflg =  "可";
 				}else if(rs.getString("active_flg").equals("0")) {
-					activeflg = rs.getString("active_flg").replace("0", "不可");				}
+					activeflg = "不可";
+				}
 				form.setActiveflg(activeflg);
 				categories.add(form);
 			}
-			System.out.println(categories);
 			return categories;
 
 		}catch(Exception e){

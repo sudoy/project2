@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import com.abc.asms.categories.services.S0050Service;
 import com.abc.asms.others.forms.C0010Form;
 @WebServlet("/S0051.html")
+
+
+
 public class S0051Servlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
@@ -44,8 +47,10 @@ public class S0051Servlet extends HttpServlet {
 				getServletContext().getRequestDispatcher("/WEB-INF/S0051.jsp").forward(req, resp);
 			}
 		}
-
 	}
+
+
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -92,4 +97,8 @@ public class S0051Servlet extends HttpServlet {
 			}
 		}
 	}
+
+
+
 }
+

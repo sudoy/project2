@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import com.abc.asms.categories.forms.S0061Form;
 import com.abc.asms.categories.forms.S0063Form;
-import com.abc.asms.categories.forms.S0063Service;
+import com.abc.asms.categories.services.S0063Service;
 import com.abc.asms.others.forms.C0010Form;
 @WebServlet("/S0063.html")
 
@@ -84,9 +84,7 @@ public class S0063Servlet extends HttpServlet {
 				session.setAttribute("error", loginerror);
 				resp.sendRedirect("C0020.html");
 			} else {
-				//DBにインサート
 				String id = req.getParameter("id");
-
 
 				S0063Form s0063form = new S0063Form(id);
 

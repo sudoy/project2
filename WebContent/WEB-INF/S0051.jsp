@@ -37,7 +37,7 @@
 		    <label for="text" class="col-sm-3 control-label">カテゴリー名 <span class="badge badge-default"> 必須 </span></label>
 		    <div class="col-sm-5">
 		        <input type="text" class="form-control" placeholder="カテゴリー名 " value="${s0050form.category}" disabled>
-				<input type="hidden" name="category" value="${category}">
+				<input type="hidden" name="category" value="${s0050form.category}">
 		    </div>
 		</div>
 
