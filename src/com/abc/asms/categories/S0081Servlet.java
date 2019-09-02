@@ -48,7 +48,6 @@ public class S0081Servlet extends HttpServlet {
 
 				String categoryname = req.getParameter("categoryname");
 				String active = req.getParameter("active");
-				System.out.println(categoryname);
 
 				if (categoryname == null && active == null ) {
 
