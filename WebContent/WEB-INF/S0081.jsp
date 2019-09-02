@@ -33,7 +33,9 @@
 
 		<form class="form-horizontal" action="S0081.html" method="post">
 
-		<input type="hidden" name="categoryid" value="${S0081Form.categoryid}">
+ 	<input type="hidden" name="categoryid" value="${S0081Form.categoryid}">
+
+
 
 		<div class="form-group">
 		    <label for="text" class="col-sm-3 control-label">カテゴリー名 <span class="badge badge-default"> 必須 </span></label>

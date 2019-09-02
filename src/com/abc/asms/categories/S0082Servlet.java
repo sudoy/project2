@@ -59,7 +59,7 @@ public class S0082Servlet extends HttpServlet {
 
 		HttpSession session = req.getSession();
 
-		S0081Form S0082Form = (S0081Form) session.getAttribute("S0082Form");
+		S0081Form S0082Form = (S0081Form) session.getAttribute("S0081Form");
 
 		String categoryid = S0082Form.getCategoryid();
 		String categoryname = S0082Form.getCategoryname();

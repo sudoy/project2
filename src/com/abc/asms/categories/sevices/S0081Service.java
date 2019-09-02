@@ -58,7 +58,7 @@ public class S0081Service {
 
 	}
 
-	public boolean categoryexist(S0081Form form) {
+	public boolean categoryExist(S0081Form form) {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -67,8 +67,8 @@ public class S0081Service {
 		boolean exist = true;
 
 		//編集後の値
-		String categoryid = form.getCategoryid() ;
-		String categoryname = form.getCategoryname();
+		String categoryId = form.getCategoryid() ;
+		String categoryName = form.getCategoryname();
 		//DBから取った値
 		String dbId = null;
 		String dbName = null;
@@ -88,14 +88,14 @@ public class S0081Service {
 
 			if (rs.next()) {
 
-				categoryname = rs.getString("category_name");
+				dbId = rs.getString("category_id");
+				dbName= rs.getString("category_name");
 
-				if(categoryname.equals("dbName") && !categoryid.equals("dbId")) {
+				if(categoryName.equals(dbName) && !categoryId.equals(dbId)) {
 					exist = false;
 
 				}
 			}
-			;
 
 		} catch (Exception e) {
 			e.printStackTrace();

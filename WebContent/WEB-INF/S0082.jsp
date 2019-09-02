@@ -30,13 +30,14 @@
 
 	<form class="form-horizontal" action="S0082.html" method="post">
 
-	<input type="hidden" name="categoryid" value="${S0082Form.categoryid}">
+	<input type="hidden" name="categoryid" value="${S0081Form.categoryid}">
+
 
 		<div class="form-group">
 		    <label for="text" class="col-sm-3 control-label">カテゴリー名 </label>
 		    <div class="col-sm-5">
 		     <fieldset disabled>
-		      <input type="text" class="form-control" placeholder="商品カテゴリー" value="${S0082Form.categoryname}" name="categoryname">
+		      <input type="text" class="form-control" placeholder="商品カテゴリー" value="${S0081Form.categoryname}" name="categoryname">
 		     </fieldset>
 		    </div>
 		</div>
@@ -47,10 +48,10 @@
 
 				<div class="col-sm-9">
 				<label class="radio-inline">
-					<input type="radio" name="active" value="1" <c:if test="${S0082Form.active == '1'}">checked </c:if> > 有効
+					<input type="radio" name="active" value="1" <c:if test="${S0081Form.active == '1'}">checked </c:if> > 有効
 				</label>
 					<label class="radio-inline">
-					<input type="radio" name="active" value="0"  <c:if test="${S0082Form.active == '0'}">checked </c:if> > 無効
+					<input type="radio" name="active" value="0"  <c:if test="${S0081Form.active == '0'}">checked </c:if> > 無効
 				</label>
 				</div>
 			</div>
@@ -61,7 +62,7 @@
 		      <button type="submit" class="btn btn-primary">
 		      	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> O K
 		      </button>
-		      	<a type="button" class="btn btn-default" href="S0081.html">キャンセル</a>
+		      	<a type="button" class="btn btn-default" href="S0081.html?categoryid=${S0081Form.categoryid}&categoryname=${S0081Form.categoryname}&active=${S0081Form.active}">キャンセル</a>
 		    </div>
 		</div>
 	</form>

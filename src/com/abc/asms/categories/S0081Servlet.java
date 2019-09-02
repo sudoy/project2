@@ -46,13 +46,22 @@ public class S0081Servlet extends HttpServlet {
 				resp.sendRedirect("C0020.html");
 			} else {
 
-				S0081Service service = new S0081Service();
-				S0081Form form = service.select(req.getParameter("categoryid"));
+				String categoryname = req.getParameter("categoryname");
+				String active = req.getParameter("active");
+				System.out.println(categoryname);
 
-				req.setAttribute("S0081Form", form);
+				if (categoryname == null && active == null ) {
+
+					S0081Service service = new S0081Service();
+					S0081Form form = service.select(req.getParameter("categoryid"));
+
+					req.setAttribute("S0081Form", form);
+
+				}
 
 				getServletContext().getRequestDispatcher("/WEB-INF/S0081.jsp").forward(req, resp);
 			}
+
 		}
 
 	}
@@ -103,7 +112,7 @@ public class S0081Servlet extends HttpServlet {
 					session.removeAttribute("error");
 
 				} else {
-					session.setAttribute("S0082Form", form);//編集後の値
+					session.setAttribute("S0081Form", form);//編集後の値
 					getServletContext().getRequestDispatcher("/WEB-INF/S0082.jsp").forward(req, resp);
 				}
 			}
@@ -116,7 +125,7 @@ public class S0081Servlet extends HttpServlet {
 
 		List<String> error = new ArrayList<>();
 		S0081Service service = new S0081Service();
-		boolean exist = service.categoryexist(form);
+		boolean exist = service.categoryExist(form);
 
 		String categoryname = form.getCategoryname();
 		String active = form.getActive();
